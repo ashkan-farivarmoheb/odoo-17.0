@@ -88,25 +88,19 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
-COPY ./odoo-${ENVIRONMENT}.conf /etc/odoo/odoo.conf
+COPY ./odoo*.conf /etc/odoo/
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo.conf \
-    && mkdir -p /mnt/{extra-addons,sources}
+    && mkdir -p /mnt/{extra-addons}
 
 RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt
-
-# Install extra python dependencies
-ADD sources/pip.txt /mnt/sources/pip.txt
-RUN pip3 install -r /mnt/sources/pip.txt
-
-# ADD addons/session_redis /mnt/extra-addons/session_redis
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
 
 # Set the default config file
-ENV ODOO_RC /etc/odoo/odoo.conf
+ENV ODOO_RC /etc/odoo/odoo-${ENVIRONMENT}.conf
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
@@ -114,4 +108,4 @@ COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 USER odoo
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["odoo"]
+CMD ["odoo", "-c", "/etc/odoo/odoo-${ENVIRONMENT}.conf"]
