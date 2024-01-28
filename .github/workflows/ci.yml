@@ -47,12 +47,11 @@ jobs:
         ports:
           - 5432:5432
       redis:
-        image: redis:6.2-alpine
+        image: redis
         env:
           REDIS_PASSWORD: ${{ matrix.redis-password }}
         options: >-
           --health-cmd "redis-cli -a $REDIS_PASSWORD ping"
-          --vm-overcommit yes
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
