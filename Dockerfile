@@ -1,5 +1,5 @@
 FROM ubuntu:jammy
-MAINTAINER Odoo S.A. <info@odoo.com>
+MAINTAINER Ashkan Farivarmoheb <ashkan.farivarmoheb@gmail.com>
 
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
