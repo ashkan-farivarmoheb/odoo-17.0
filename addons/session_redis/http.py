@@ -123,7 +123,7 @@ def purge_fs_sessions(path):
 
 # if is_true(os.environ.get("ODOO_SESSION_REDIS")): # if gets from env
 if is_true(config_option.get("session_redis")):
-    _logger.debug("ODOO_SESSION_REDIS is activated sentinel_host %s,host %s,port %s,prefix %s,url %s,password %s,expiration %s,anon_expiration %s ",sentinel_host,host,port,prefix,url,password,expiration,anon_expiration)
+    _logger.debug("SESSION_REDIS is activated sentinel_host %s,host %s,port %s,prefix %s,url %s,password %s,expiration %s,anon_expiration %s ",sentinel_host,host,port,prefix,url,password,expiration,anon_expiration)
     _logger.debug("config_option: %s", config_option)
     
     if sentinel_host:

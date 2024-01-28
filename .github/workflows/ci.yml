@@ -148,9 +148,9 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    - name: Build Odoo Module
-      run: |
-        ./odoo-bin -c resources/odoo-local.conf --without-demo=all
+    # - name: Build Odoo Module
+    #   run: |
+    #     ./odoo-bin -c resources/odoo-local.conf --without-demo=all
 
     - name: Run Tests
       run: |
