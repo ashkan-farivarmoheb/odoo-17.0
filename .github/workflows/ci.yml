@@ -148,9 +148,9 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    # - name: Build Odoo Module
-    #   run: |
-    #     ./odoo-bin -c resources/odoo-local.conf -d db --without-demo=all
+    - name: Build Odoo Module
+      run: |
+        ./odoo-bin -c resources/odoo-local.conf --without-demo=all
 
     - name: Run Tests
       run: |
@@ -177,14 +177,14 @@ jobs:
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
 
-    - name: Build, tag, and push image to Amazon ECR
-      id: build-image
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: ${{ env.REPOSITORY_NAME }}
-        TAG: '${{ env.BRANCH }}-${{ env.TAG }}'
-        IMAGE_TAG: '${{ env.BRANCH }}-${{github.sha}}'
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+    # - name: Build, tag, and push image to Amazon ECR
+    #   id: build-image
+    #   env:
+    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+    #     ECR_REPOSITORY: ${{ env.REPOSITORY_NAME }}
+    #     TAG: '${{ env.BRANCH }}-${{ env.TAG }}'
+    #     IMAGE_TAG: '${{ env.BRANCH }}-${{github.sha}}'
+    #   run: |
+    #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+    #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+    #     echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
