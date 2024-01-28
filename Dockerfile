@@ -9,9 +9,6 @@ ENV LANG en_US.UTF-8
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
 
-# Retrieve environment
-ARG ENVIRONMENT
-
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 
 RUN apt-get update && \
@@ -88,10 +85,10 @@ RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/od
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
-COPY ./odoo*.conf /etc/odoo/
+ADD resources /etc/odoo/
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
-RUN chown odoo /etc/odoo/odoo.conf \
+RUN chown odoo /etc/odoo/odoo*.conf \
     && mkdir -p /mnt/{extra-addons}
 
 RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt
@@ -100,7 +97,7 @@ RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt
 EXPOSE 8069 8071 8072
 
 # Set the default config file
-ENV ODOO_RC /etc/odoo/odoo-${ENVIRONMENT}.conf
+ENV ODOO_RC /etc/odoo/odoo-local.conf
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
@@ -108,4 +105,4 @@ COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 USER odoo
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["odoo", "-c", "/etc/odoo/odoo-${ENVIRONMENT}.conf"]
+CMD ["odoo"]

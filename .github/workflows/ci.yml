@@ -18,6 +18,20 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:15
+        options: &gt;-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -42,78 +56,78 @@ jobs:
       env:
         AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
 
-    # - name: Install some deps
-    #   run: |
-    #     sudo apt-get update && \
-    #     DEBIAN_FRONTEND=noninteractive \
-    #     sudo apt-get install -y --no-install-recommends \
-    #         nfs-common \
-    #         ca-certificates \
-    #         curl \
-    #         dirmngr \
-    #         fonts-noto-cjk \
-    #         gnupg \
-    #         python3-dev \
-    #         libxml2-dev \
-    #         libxslt1-dev \
-    #         zlib1g-dev \
-    #         libsasl2-dev \
-    #         libldap2-dev \
-    #         build-essential \
-    #         libffi-dev \
-    #         libmysqlclient-dev \
-    #         libjpeg-dev \
-    #         libpq-dev \
-    #         libjpeg8-dev \
-    #         liblcms2-dev \
-    #         libblas-dev \
-    #         libatlas-base-dev \
-    #         libssl-dev \
-    #         node-less \
-    #         npm \
-    #         python3-magic \
-    #         python3-num2words \
-    #         python3-odf \
-    #         python3-pdfminer \
-    #         python3-pip \
-    #         python3-phonenumbers \
-    #         python3-pyldap \
-    #         python3-qrcode \
-    #         python3-renderpm \
-    #         python3-setuptools \
-    #         python3-slugify \
-    #         python3-vobject \
-    #         python3-watchdog \
-    #         python3-xlrd \
-    #         python3-xlwt \
-    #         python3-stdeb \
-    #         fakeroot \
-    #         python3-all \
-    #         xz-utils && \
-    #     if [ -z "${TARGETARCH}" ]; then \
-    #         TARGETARCH="$(dpkg --print-architecture)"; \
-    #     fi; \
-    #     WKHTMLTOPDF_ARCH=${TARGETARCH} && \
-    #     case ${TARGETARCH} in \
-    #     "amd64") WKHTMLTOPDF_ARCH=amd64 && WKHTMLTOPDF_SHA=967390a759707337b46d1c02452e2bb6b2dc6d59  ;; \
-    #     "arm64")  WKHTMLTOPDF_SHA=90f6e69896d51ef77339d3f3a20f8582bdf496cc  ;; \
-    #     "ppc64le" | "ppc64el") WKHTMLTOPDF_ARCH=ppc64el && WKHTMLTOPDF_SHA=5312d7d34a25b321282929df82e3574319aed25c  ;; \
-    #     esac \
-    #     && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
-    #     && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
-    #     && sudo apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-    #     && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+    - name: Install some deps
+      run: |
+        sudo apt-get update && \
+        DEBIAN_FRONTEND=noninteractive \
+        sudo apt-get install -y --no-install-recommends \
+            nfs-common \
+            ca-certificates \
+            curl \
+            dirmngr \
+            fonts-noto-cjk \
+            gnupg \
+            python3-dev \
+            libxml2-dev \
+            libxslt1-dev \
+            zlib1g-dev \
+            libsasl2-dev \
+            libldap2-dev \
+            build-essential \
+            libffi-dev \
+            libmysqlclient-dev \
+            libjpeg-dev \
+            libpq-dev \
+            libjpeg8-dev \
+            liblcms2-dev \
+            libblas-dev \
+            libatlas-base-dev \
+            libssl-dev \
+            node-less \
+            npm \
+            python3-magic \
+            python3-num2words \
+            python3-odf \
+            python3-pdfminer \
+            python3-pip \
+            python3-phonenumbers \
+            python3-pyldap \
+            python3-qrcode \
+            python3-renderpm \
+            python3-setuptools \
+            python3-slugify \
+            python3-vobject \
+            python3-watchdog \
+            python3-xlrd \
+            python3-xlwt \
+            python3-stdeb \
+            fakeroot \
+            python3-all \
+            xz-utils && \
+        if [ -z "${TARGETARCH}" ]; then \
+            TARGETARCH="$(dpkg --print-architecture)"; \
+        fi; \
+        WKHTMLTOPDF_ARCH=${TARGETARCH} && \
+        case ${TARGETARCH} in \
+        "amd64") WKHTMLTOPDF_ARCH=amd64 && WKHTMLTOPDF_SHA=967390a759707337b46d1c02452e2bb6b2dc6d59  ;; \
+        "arm64")  WKHTMLTOPDF_SHA=90f6e69896d51ef77339d3f3a20f8582bdf496cc  ;; \
+        "ppc64le" | "ppc64el") WKHTMLTOPDF_ARCH=ppc64el && WKHTMLTOPDF_SHA=5312d7d34a25b321282929df82e3574319aed25c  ;; \
+        esac \
+        && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
+        && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
+        && sudo apt-get install -y --no-install-recommends ./wkhtmltox.deb \
+        && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
 
-    # - name: Install dependencies
-    #   run: |
-    #     pip install -r requirements.txt
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
     
     # - name: Start containers
     #   run: docker-compose -f "docker/test/docker-compose.yml" up -d --build
 
-    # - name: Build Odoo Module
-    #   run: |
-    #     ./odoo-bin -c odoo-local.conf --without-demo=all
+    - name: Build Odoo Module
+      run: |
+        ./odoo-bin -c resources/odoo-local.conf -d db --without-demo=all
 
     # - name: Run Tests
     #   run: |
@@ -123,15 +137,15 @@ jobs:
     #   if: always()
     #   run: docker-compose -f "docker/test/docker-compose.yml" down
 
-    # - name: Create .deb Package
-    #   run: |
-    #     python3 setup.py sdist
-    #     cd dist
-    #     tar -xzf odoo-17.0.tar.gz
-    #     mkdir odoo-17.0/DEBIAN
-    #     touch odoo-17.0/DEBIAN/control 
-    #     echo -e 'Package: odoo-17.0\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
-    #     dpkg-deb --build odoo-17.0
+    - name: Create .deb Package
+      run: |
+        python3 setup.py sdist
+        cd dist
+        tar -xzf odoo-17.0.tar.gz
+        mkdir odoo-17.0/DEBIAN
+        touch odoo-17.0/DEBIAN/control 
+        echo -e 'Package: odoo-17.0\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
+        dpkg-deb --build odoo-17.0
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -152,6 +166,6 @@ jobs:
         TAG: '${{ env.BRANCH }}-${{ env.TAG }}'
         IMAGE_TAG: '${{ env.BRANCH }}-${{github.sha}}'
       run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg ENVIRONMENT=${{inputs.environment}} .
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
