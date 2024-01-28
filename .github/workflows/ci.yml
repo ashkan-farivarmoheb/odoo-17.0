@@ -147,21 +147,14 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
-    
-    # - name: Start containers
-    #   run: docker-compose -f "docker/test/docker-compose.yml" up -d --build
 
-    - name: Build Odoo Module
-      run: |
-        ./odoo-bin -c resources/odoo-local.conf -d db --without-demo=all
+    # - name: Build Odoo Module
+    #   run: |
+    #     ./odoo-bin -c resources/odoo-local.conf -d db --without-demo=all
 
     - name: Run Tests
       run: |
-        ./odoo-bin -c odoo-local.conf -d db --test-enable --log-level=test --stop-after-init
-    
-    # - name: Stop containers
-    #   if: always()
-    #   run: docker-compose -f "docker/test/docker-compose.yml" down
+        ./odoo-bin -c odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
 
     - name: Create .deb Package
       run: |
