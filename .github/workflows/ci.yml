@@ -154,7 +154,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        ./odoo-bin -c odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
+        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
 
     - name: Create .deb Package
       run: |
