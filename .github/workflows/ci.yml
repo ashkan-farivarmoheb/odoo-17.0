@@ -18,6 +18,20 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        database-name:
+        - postgres
+        database-password:
+        - odoo
+        database-user:
+        - odoo
+        database-host:
+        - 127.0.0.1
+        database-port:
+        - 5432
+        redis-password:
+        - odoo
     services:
       db:
         image: postgres:15
@@ -27,11 +41,23 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         env:
-          POSTGRES_USER: odoo
-          POSTGRES_PASSWORD: odoo
-          POSTGRES_DB: postgres
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+          POSTGRES_DB: ${{ matrix.database-name }}
         ports:
           - 5432:5432
+      redis:
+        image: redis:6.2-alpine
+        env:
+          REDIS_PASSWORD: ${{ matrix.redis-password }}
+        options: >-
+          --health-cmd "redis-cli -a $REDIS_PASSWORD ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -129,9 +155,9 @@ jobs:
       run: |
         ./odoo-bin -c resources/odoo-local.conf -d db --without-demo=all
 
-    # - name: Run Tests
-    #   run: |
-    #     ./odoo-bin -c odoo-local.conf --test-enable --log-level=test --stop-after-init
+    - name: Run Tests
+      run: |
+        ./odoo-bin -c odoo-local.conf -d db --test-enable --log-level=test --stop-after-init
     
     # - name: Stop containers
     #   if: always()
