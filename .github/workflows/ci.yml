@@ -169,16 +169,19 @@ jobs:
         touch odoo-17.0/DEBIAN/control 
         echo -e 'Package: odoo-${{github.event.inputs.odoo_version}}-${{github.sha}}-all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
         dpkg-deb --build odoo-17.0
-        echo "::set-output name=filename::odoo-${{github.event.inputs.odoo_version}}-${{github.sha}}-all"
-        echo "::set-output name=value::odoo-${{github.event.inputs.odoo_version}}.deb"
+        echo "artifactory_name=odoo-${{github.event.inputs.odoo_version}}-${{github.sha}}-all" >> "$GITHUB_OUTPUT"
+        echo "folder=odoo-${{github.event.inputs.odoo_version}}.deb" >> "$GITHUB_OUTPUT"
+
+    - name: Directory listing
+      run: |
+        ls -la odoo-17.0.deb
 
     - name: 'Upload Artifact'
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ steps.deb_package_step.outputs.value}}
-        path: ${{ steps.deb_package_step.outputs.filename}}
-        overwrite: true
+        name: ${{ steps.deb_package_step.outputs.folder}}
+        path: ${{ steps.deb_package_step.outputs.artifactory_name}}
     
     - name: Output artifact ID
       run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
