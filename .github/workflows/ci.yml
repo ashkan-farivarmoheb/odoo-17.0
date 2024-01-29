@@ -166,6 +166,12 @@ jobs:
         echo -e 'Package: odoo-17.0\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
         dpkg-deb --build odoo-17.0
 
+    - name: 'Upload Artifact'
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-artifact
+        path: odoo-17.0.deb
+
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
