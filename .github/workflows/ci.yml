@@ -11,6 +11,10 @@ on:
         description: 'Environment to deploy'
         type: environment
         required: true
+      odoo_version:
+        description: 'Odoo version'
+        type: string
+        default: '17.0'
 
 permissions:
   contents: read
@@ -156,6 +160,17 @@ jobs:
       run: |
         ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
 
+    - name: Create a file
+      run: echo "hello world" > my-file.txt
+    - name: Upload Artifact Test
+      id: artifact-upload-step_test
+      uses: actions/upload-artifact@v4
+      with:
+        name: my-artifact # NOTE: same artifact name
+        path: my-file.txt
+    - name: Output artifact ID
+      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step_test.outputs.artifact-id }}'
+
     - name: Create .deb Package
       run: |
         python3 setup.py sdist
@@ -163,15 +178,20 @@ jobs:
         tar -xzf odoo-17.0.tar.gz
         mkdir odoo-17.0/DEBIAN
         touch odoo-17.0/DEBIAN/control 
-        echo -e 'Package: odoo-17.0\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
+        echo -e 'Package: odoo_${{inputs.odoo_version}}.${{github.sha}}_all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
         dpkg-deb --build odoo-17.0
 
     - name: 'Upload Artifact'
+      id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
-        name: my-artifact
-        path: odoo-17.0.deb
-
+        name: odoo_${{inputs.odoo_version}}
+        path: odoo_${{inputs.odoo_version}}.${{github.sha}}_all.deb
+        overwrite: true
+    
+    - name: Output artifact ID
+      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+      
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
