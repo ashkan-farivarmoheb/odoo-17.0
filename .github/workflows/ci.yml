@@ -161,13 +161,14 @@ jobs:
         ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
 
     - name: Create a file
-      run: echo "hello world" > my-file.txt
+      run: echo "hello world" > my-file1.txt
     - name: Upload Artifact Test
       id: artifact-upload-step_test
       uses: actions/upload-artifact@v4
       with:
         name: my-artifact # NOTE: same artifact name
-        path: my-file.txt
+        path: my-file1.txt
+        overwrite: true
     - name: Output artifact ID
       run:  echo 'Artifact ID is ${{ steps.artifact-upload-step_test.outputs.artifact-id }}'
 
@@ -178,15 +179,15 @@ jobs:
         tar -xzf odoo-17.0.tar.gz
         mkdir odoo-17.0/DEBIAN
         touch odoo-17.0/DEBIAN/control 
-        echo -e 'Package: odoo_${{inputs.odoo_version}}.${{github.sha}}_all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
+        echo -e 'Package: odoo-${{inputs.odoo_version}}-${{github.sha}}-all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
         dpkg-deb --build odoo-17.0
 
     - name: 'Upload Artifact'
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
-        name: odoo_${{inputs.odoo_version}}
-        path: odoo_${{inputs.odoo_version}}.${{github.sha}}_all.deb
+        name: odoo-${{inputs.odoo_version}}
+        path: odoo-${{inputs.odoo_version}}-${{github.sha}}-all.deb
         overwrite: true
     
     - name: Output artifact ID
