@@ -12,9 +12,8 @@ on:
         type: environment
         required: true
       odoo_version:
-        description: 'Odoo version'
-        type: string
-        default: '17.0'
+        description: "Odoo version"
+        default: "17.0"
 
 permissions:
   contents: read
@@ -160,34 +159,25 @@ jobs:
       run: |
         ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
 
-    - name: Create a file
-      run: echo "hello world" > my-file1.txt
-    - name: Upload Artifact Test
-      id: artifact-upload-step_test
-      uses: actions/upload-artifact@v4
-      with:
-        name: my-artifact # NOTE: same artifact name
-        path: my-file1.txt
-        overwrite: true
-    - name: Output artifact ID
-      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step_test.outputs.artifact-id }}'
-
     - name: Create .deb Package
+      id: deb_package_step
       run: |
         python3 setup.py sdist
         cd dist
         tar -xzf odoo-17.0.tar.gz
         mkdir odoo-17.0/DEBIAN
         touch odoo-17.0/DEBIAN/control 
-        echo -e 'Package: odoo-${{inputs.odoo_version}}-${{github.sha}}-all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
+        echo -e 'Package: odoo-${{github.event.inputs.odoo_version}}-${{github.sha}}-all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
         dpkg-deb --build odoo-17.0
+        echo "::set-output name=filename::odoo-${{github.event.inputs.odoo_version}}-${{github.sha}}-all"
+        echo "::set-output name=value::odoo-${{github.event.inputs.odoo_version}}.deb"
 
     - name: 'Upload Artifact'
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
-        name: odoo-${{inputs.odoo_version}}
-        path: odoo-${{inputs.odoo_version}}-${{github.sha}}-all.deb
+        name: ${{ steps.deb_package_step.outputs.value}}
+        path: ${{ steps.deb_package_step.outputs.filename}}
         overwrite: true
     
     - name: Output artifact ID
