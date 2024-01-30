@@ -91,7 +91,7 @@ jobs:
       env:
         AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
 
-    - name: Install some deps
+    - name: Install dependencies
       run: |
         sudo apt-get update && \
         DEBIAN_FRONTEND=noninteractive \
@@ -152,10 +152,11 @@ jobs:
         && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
         && sudo apt-get install -y --no-install-recommends ./wkhtmltox.deb \
         && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
-
-    - name: Install dependencies
-      run: |
         pip install -r requirements.txt
+
+    # - name: Install dependencies
+    #   run: |
+    #     pip install -r requirements.txt
 
     # - name: Build Odoo Module
     #   run: |
@@ -192,11 +193,7 @@ jobs:
       
   ReuseableMatrixJobForDeployment:
     needs: build
-    strategy:
-      fail-fast: true
-      matrix:
-        target: ${{needs.build.outputs.branch}}
     uses: ./.github/workflows/cd.yml
     with:
-      target-env: ${{ matrix.target }}
+      target-env: ${{needs.build.outputs.branch}}
     secrets: inherit
