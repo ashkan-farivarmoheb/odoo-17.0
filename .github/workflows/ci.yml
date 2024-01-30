@@ -174,7 +174,7 @@ jobs:
 
     - name: Directory listing
       run: |
-        ls -la /home/runner/work/odoo-17.0/odoo-17.0/dist
+        ls -la /home/runner/work/odoo-17.0/odoo-17.0/dist/odoo-17.0.deb
 
     - name: 'Upload Artifact'
       id: artifact-upload-step
