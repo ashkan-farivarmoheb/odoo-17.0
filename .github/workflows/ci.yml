@@ -167,7 +167,7 @@ jobs:
         tar -xzf odoo-17.0.tar.gz
         mkdir odoo-17.0/DEBIAN
         touch odoo-17.0/DEBIAN/control 
-        echo -e 'Package: odoo-${{inputs.odoo_version}}-${{github.sha}}-all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
+        echo -e 'Package: odoo-17.0\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
         dpkg-deb --build odoo-17.0
         mv odoo-17.0.deb odoo-17.0-${{github.sha}}-all.deb
         echo "artifactory_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
@@ -181,8 +181,8 @@ jobs:
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
-        name: /home/runner/work/odoo-17.0/odoo-17.0/dist
-        path: ${{ steps.deb_package_step.outputs.artifactory_name}}
+        name: odoo-17.0-${{github.sha}}-all
+        path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifactory_name}}
     
     - name: Output artifact ID
       run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
