@@ -1,4 +1,4 @@
-name: Java CI with Gradle
+name: Odoo CI
 
 on:
   push:
@@ -14,20 +14,6 @@ on:
       odoo_version:
         description: 'Odoo version'
         default: '17.0'
-  workflow_call:
-    outputs:
-      runner-id:
-        description: "Github Workflow Runner Id"
-        value: ${{jobs.build.outputs.runner-id}}
-      artifact-id:
-        description: "Artifact Id"
-        value: ${{jobs.build.outputs.artifact-id}}
-      artifact_name:
-        description: "Artifact Name"
-        value: ${{jobs.build.outputs.artifact_name}}
-      github_sha:
-        description: "Github SHA"
-        value: ${{jobs.build.outputs.github_sha}}
 
 permissions:
   contents: read
@@ -40,6 +26,7 @@ jobs:
       artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
       artifact_name: ${{ steps.deb_package_step.outputs.artifact_name}}
       github_sha: ${{github.sha}}
+      branch: ${{ env.BRANCH }}
 
     strategy:
       matrix:
@@ -203,25 +190,13 @@ jobs:
     - name: Output artifact ID
       run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
       
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: ${{ secrets.AWS_REGION }}
-  
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
-
-    # - name: Build, tag, and push image to Amazon ECR
-    #   id: build-image
-    #   env:
-    #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-    #     ECR_REPOSITORY: ${{ env.REPOSITORY_NAME }}
-    #     TAG: '${{ env.BRANCH }}-${{ env.TAG }}'
-    #     IMAGE_TAG: '${{ env.BRANCH }}-${{github.sha}}'
-    #   run: |
-    #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-    #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-    #     echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+  ReuseableMatrixJobForDeployment:
+    needs: build
+    strategy:
+      fail-fast: true
+      matrix:
+        target: ${{needs.build.outputs.branch}}
+    uses: ./.github/workflows/cd.yml
+    with:
+      target-env: ${{ matrix.target }}
+    secrets: inherit

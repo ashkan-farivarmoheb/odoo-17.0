@@ -1,0 +1,57 @@
+name: Reusable deployment workflow
+
+on:
+  workflow_call:
+    inputs:
+      target-env:
+        required: true
+        type: string
+    secrets:
+      AWS_REGION:
+        required: true
+      AWS_ACCOUNT_ID:
+        required: true
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+jobs:
+  deploy:
+    name: Deploy to ${{ inputs.target-env }}
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.target-env }}
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - run: echo "🎉 target env ${{ inputs.target-env}}"
+      - run: echo "🍏 is Dev  ${{ inputs.target-env }} == 'develop'"
+      - run: echo "🍏 is SIT1  ${{ inputs.target-env }} == 'sit1'"
+      - run: echo "🍏 is SIT2  ${{ inputs.target-env }} == 'sit2'"
+      - run: echo "🐧 is Prod  ${{ inputs.target-env }} == 'prod'"
+      
+      - name: Variables
+        id: vars
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const tag = context.sha.substring(0,7)
+            const branch = context.ref.split('/').pop()
+            const { owner, repo } = context.repo;
+            core.exportVariable('BRANCH', branch);
+            core.exportVariable('TAG', tag);
+            core.exportVariable('REPOSITORY_NAME', repo);
+            
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
