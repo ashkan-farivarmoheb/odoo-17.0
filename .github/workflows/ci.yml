@@ -21,6 +21,12 @@ jobs:
   build:
     name: build
     runs-on: ubuntu-latest
+    outputs:
+      runner-id: ${{ github.run_id }}
+      artifact-id: ${{ steps.artifact-upload-step.outputs.artifact-id }}
+      artifactory_name: ${{ steps.deb_package_step.outputs.artifactory_name}}
+      github_sha: ${{github.sha}}
+
     strategy:
       matrix:
         database-name:
@@ -60,7 +66,6 @@ jobs:
           --health-retries 5
         ports:
           - 6379:6379
-
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -173,16 +178,13 @@ jobs:
         echo "artifactory_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
         echo "folder=odoo-${{inputs.odoo_version}}.deb" >> "$GITHUB_OUTPUT"
 
-    - name: Directory listing
-      run: |
-        ls -la /home/runner/work/odoo-17.0/odoo-17.0/dist
-
     - name: 'Upload Artifact'
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
         name: odoo-17.0-${{github.sha}}-all
         path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifactory_name}}
+        retention-days: 10
     
     - name: Output artifact ID
       run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
