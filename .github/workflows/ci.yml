@@ -12,8 +12,8 @@ on:
         type: environment
         required: true
       odoo_version:
-        description: "Odoo version"
-        default: "17.0"
+        description: 'Odoo version'
+        default: '17.0'
 
 permissions:
   contents: read
@@ -167,14 +167,14 @@ jobs:
         tar -xzf odoo-17.0.tar.gz
         mkdir odoo-17.0/DEBIAN
         touch odoo-17.0/DEBIAN/control 
-        echo -e 'Package: odoo-${{github.event.inputs.odoo_version}}-${{github.sha}}-all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
+        echo -e 'Package: odoo-${{inputs.odoo_version}}-${{github.sha}}-all\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
         dpkg-deb --build odoo-17.0
-        echo "artifactory_name=odoo-${{github.event.inputs.odoo_version}}-${{github.sha}}-all" >> "$GITHUB_OUTPUT"
-        echo "folder=odoo-${{github.event.inputs.odoo_version}}.deb" >> "$GITHUB_OUTPUT"
+        echo "artifactory_name=odoo-${{inputs.odoo_version}}-${{github.sha}}-all" >> "$GITHUB_OUTPUT"
+        echo "folder=odoo-${{inputs.odoo_version}}.deb" >> "$GITHUB_OUTPUT"
 
     - name: Directory listing
       run: |
-        ls -la odoo-17.0.deb
+        ls -la /home/runner/work/odoo-17.0/odoo-17.0.deb
 
     - name: 'Upload Artifact'
       id: artifact-upload-step
