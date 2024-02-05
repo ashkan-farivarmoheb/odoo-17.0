@@ -37,7 +37,7 @@ jobs:
         database-user:
         - odoo
         database-host:
-        - 10.27.10.82
+        - 127.0.0.1
         database-port:
         - 5432
         redis-password:
@@ -54,7 +54,6 @@ jobs:
           POSTGRES_USER: ${{ matrix.database-user }}
           POSTGRES_PASSWORD: ${{ matrix.database-password }}
           POSTGRES_DB: ${{ matrix.database-name }}
-       
         ports:
           - 5432:5432
       redis:
