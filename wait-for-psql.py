@@ -28,5 +28,6 @@ if __name__ == '__main__':
         time.sleep(1)
 
     if error:
-        print("Database connection failure: %s" % error, file=sys.stderr)
+        print("Database connection failure-faraz: %s" % error, file=sys.stderr)
+        print("Database - detail: user=%s, host=%s, port=%s, password=%s, " % (args.db_user, args.db_host, args.db_port, args.db_password))
         sys.exit(1)
