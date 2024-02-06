@@ -133,7 +133,7 @@ jobs:
             python3-slugify \
             python3-vobject \
             python3-watchdog \
-            python3-xlrd \
+            python3-xlrd \f
             python3-xlwt \
             python3-stdeb \
             fakeroot \
@@ -157,6 +157,9 @@ jobs:
     # - name: Install dependencies
     #   run: |
     #     pip install -r requirements.txt
+    - name: Log Workflow Start
+      run: |
+        echo "Workflow started."
 
     - name: Build Odoo Module
       run: |
