@@ -22,4 +22,21 @@ pip3 install -r requirements.txt
 
 pip3 install --user --force-reinstall cffi
 
-./odoo-bin -c resources/odoo-local-2.conf --without-demo=all
+./odoo-bin -c resources/odoo-local.conf --without-demo=all
+./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
+
+sudo mkdir -p /mnt/efs/data/addons/17.0  /mnt/efs/data/sessions
+
+
+
+sudo usermod -a -G odoo faraz
+sudo pkill -f odoo-bin
+# Change the group ownership to 'odoo' for both directories
+sudo chown :odoo /mnt/efs/data/addons/17.0 /mnt/efs/data/sessions
+
+# Ensure that the group has read, write, and execute permissions for both directories
+sudo chmod 775 /mnt/efs/data/addons/17.0 /mnt/efs/data/sessions 
+
+ps aux | grep odoo-bin
+# Switch to the new group using newgrp
+newgrp odoo
