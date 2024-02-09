@@ -17,6 +17,10 @@ on:
 
 permissions:
   contents: read
+
+env:
+  ARTIFACT_DOMAIN: odoo
+  ARTIFACT_REPOSITORY: odoo17
 jobs:
   build:
     name: build
@@ -130,6 +134,8 @@ jobs:
             python3-qrcode \
             python3-renderpm \
             python3-setuptools \
+            wheel \
+            twin \
             python3-slugify \
             python3-vobject \
             python3-watchdog \
@@ -154,13 +160,20 @@ jobs:
         && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
         pip install -r requirements.txt
 
-    # - name: Build Odoo Module
-    #   run: |
-    #     ./odoo-bin -c resources/odoo-local.conf --without-demo=all
+    - name: Build Odoo Module
+      run: |
+        ./odoo-bin -c resources/odoo-local.conf --without-demo=all
+
+    - name: Install psql
+      run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+    - name: Connect to PostgreSQL
+      run: |
+        psql -h localhost -U ${{ matrix.database-user }} -d ${{ matrix.database-name }} -p ${{ matrix.database-password }} -c "UPDATE ir_module_module SET runbot_disabled = FALSE;"
 
     - name: Run Tests
       run: |
-        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
+        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init
 
     - name: Create .deb Package
       id: deb_package_step
@@ -183,6 +196,12 @@ jobs:
         path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
         retention-days: 10
     
+    - name: Publish to Code Artifcat
+      run: |
+        export TWINE_PASSWORD=`aws codeartifact get-authorization-token --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text`
+        export TWINE_REPOSITORY_URL=`aws codeartifact get-repository-endpoint --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --repository ${{env.ARTIFACT_REPOSITORY}} --format pypi --query repositoryEndpoint --output text`
+        twine upload /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
+
     - name: Output artifact ID
       run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
       
