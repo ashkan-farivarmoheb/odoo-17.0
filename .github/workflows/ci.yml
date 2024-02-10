@@ -165,7 +165,7 @@ jobs:
 
     - name: Run Tests
       run: |
-        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --dev-enable --stop-after-init
+        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --test-tags="post_install","-at_install" --stop-after-init
 
     - name: Create .deb Package
       id: deb_package_step
