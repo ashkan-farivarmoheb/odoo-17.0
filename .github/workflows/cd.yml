@@ -25,7 +25,8 @@ jobs:
       name: ${{ inputs.target-env }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
       
       - run: echo "🎉 target env ${{ inputs.target-env}}"
       - run: echo "🍏 is Dev  ${{ inputs.target-env }} == 'develop'"

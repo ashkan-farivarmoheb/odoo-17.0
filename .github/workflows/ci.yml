@@ -180,13 +180,13 @@ jobs:
         mv odoo-17.0.deb odoo-17.0-${{github.sha}}-all.deb
         echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
 
-    # - name: 'Upload Artifact'
-    #   id: artifact-upload-step
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: odoo-17.0-${{github.sha}}-all
-    #     path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
-    #     retention-days: 10
+    - name: 'Upload Artifact'
+      id: artifact-upload-step
+      uses: actions/upload-artifact@v4
+      with:
+        name: odoo-17.0-${{github.sha}}-all
+        path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
+        retention-days: 10
     
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
@@ -195,23 +195,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ secrets.AWS_REGION }}
 
-    - name: Install Twine
-      run: |
-        pip install wheel twine
-
-    - name: Publish Package to CodeArtifcat
-      run: |
-        aws codeartifact login --tool twine --domain ${{env.ARTIFACT_DOMAIN}} --repository ${{env.ARTIFACT_REPOSITORY}} &&
-        twine upload /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
-
-    # - name: Publish to Code Artifcat
-    #   run: |
-    #     export TWINE_PASSWORD=`aws codeartifact get-authorization-token --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text`
-    #     export TWINE_REPOSITORY_URL=`aws codeartifact get-repository-endpoint --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --repository ${{env.ARTIFACT_REPOSITORY}} --format pypi --query repositoryEndpoint --output text`
-    #     twine upload /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
-
-    # - name: Output artifact ID
-    #   run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+    - name: Outputs
+      run:  |
+        echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+        echo 'Runner ID is ${{ github.run_id }}'
+        echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
+        echo 'Github SHA is ${{ github.sha }}'
+        echo 'Branch is ${{ env.BRANCH }}'
       
   ReuseableMatrixJobForDeployment:
     needs: build
