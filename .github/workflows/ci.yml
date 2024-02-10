@@ -134,7 +134,6 @@ jobs:
             python3-qrcode \
             python3-renderpm \
             python3-setuptools \
-            wheel \
             twin \
             python3-slugify \
             python3-vobject \
@@ -160,20 +159,20 @@ jobs:
         && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
         pip install -r requirements.txt
 
-    - name: Build Odoo Module
-      run: |
-        ./odoo-bin -c resources/odoo-local.conf --without-demo=all
+    # - name: Build Odoo Module
+    #   run: |
+    #     ./odoo-bin -c resources/odoo-local.conf --without-demo=all
 
-    - name: Install psql
-      run: sudo apt-get update && sudo apt-get install -y postgresql-client
+    # - name: Install psql
+    #   run: sudo apt-get update && sudo apt-get install -y postgresql-client
 
-    - name: Connect to PostgreSQL
-      run: |
-        psql -h localhost -U ${{ matrix.database-user }} -d ${{ matrix.database-name }} -p ${{ matrix.database-password }} -c "UPDATE ir_module_module SET runbot_disabled = FALSE;"
+    # - name: Connect to PostgreSQL
+    #   run: |
+    #     psql -h localhost -U ${{ matrix.database-user }} -d ${{ matrix.database-name }} -p ${{ matrix.database-password }} -c "UPDATE ir_module_module SET runbot_disabled = FALSE;"
 
     - name: Run Tests
       run: |
-        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init
+        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -i
 
     - name: Create .deb Package
       id: deb_package_step
