@@ -159,20 +159,13 @@ jobs:
         && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
         pip install -r requirements.txt
 
-    # - name: Build Odoo Module
-    #   run: |
-    #     ./odoo-bin -c resources/odoo-local.conf --without-demo=all
-
-    # - name: Install psql
-    #   run: sudo apt-get update && sudo apt-get install -y postgresql-client
-
-    # - name: Connect to PostgreSQL
-    #   run: |
-    #     psql -h localhost -U ${{ matrix.database-user }} -d ${{ matrix.database-name }} -p ${{ matrix.database-password }} -c "UPDATE ir_module_module SET runbot_disabled = FALSE;"
+    - name: Build Odoo Module
+      run: |
+        ./odoo-bin -c resources/odoo-local.conf --without-demo=all
 
     - name: Run Tests
       run: |
-        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test -u sale -i sale
+        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --dev-enable --stop-after-init
 
     - name: Create .deb Package
       id: deb_package_step
@@ -187,22 +180,38 @@ jobs:
         mv odoo-17.0.deb odoo-17.0-${{github.sha}}-all.deb
         echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
 
-    - name: 'Upload Artifact'
-      id: artifact-upload-step
-      uses: actions/upload-artifact@v4
-      with:
-        name: odoo-17.0-${{github.sha}}-all
-        path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
-        retention-days: 10
+    # - name: 'Upload Artifact'
+    #   id: artifact-upload-step
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: odoo-17.0-${{github.sha}}-all
+    #     path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
+    #     retention-days: 10
     
-    - name: Publish to Code Artifcat
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Install Twine
       run: |
-        export TWINE_PASSWORD=`aws codeartifact get-authorization-token --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text`
-        export TWINE_REPOSITORY_URL=`aws codeartifact get-repository-endpoint --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --repository ${{env.ARTIFACT_REPOSITORY}} --format pypi --query repositoryEndpoint --output text`
+        pip install wheel twine
+
+    - name: Publish Package to CodeArtifcat
+      run: |
+        aws codeartifact login --tool twine --domain ${{env.ARTIFACT_DOMAIN}} --repository ${{env.ARTIFACT_REPOSITORY}} &&
         twine upload /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
 
-    - name: Output artifact ID
-      run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+    # - name: Publish to Code Artifcat
+    #   run: |
+    #     export TWINE_PASSWORD=`aws codeartifact get-authorization-token --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --query authorizationToken --output text`
+    #     export TWINE_REPOSITORY_URL=`aws codeartifact get-repository-endpoint --domain ${{env.ARTIFACT_DOMAIN}} --domain-owner ${{ secrets.AWS_ACCOUNT_ID }} --repository ${{env.ARTIFACT_REPOSITORY}} --format pypi --query repositoryEndpoint --output text`
+    #     twine upload /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
+
+    # - name: Output artifact ID
+    #   run:  echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
       
   ReuseableMatrixJobForDeployment:
     needs: build
