@@ -186,6 +186,7 @@ jobs:
       run: |
         dpkg-buildpackage -us -uc
         mv ../odoo*all.deb ../odoo-17.0-${{github.sha}}-all.deb
+        echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
     
     - name: 'Upload Artifact'
       id: artifact-upload-step
