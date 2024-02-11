@@ -185,13 +185,15 @@ jobs:
       id: deb_package_step
       run: |
         dpkg-buildpackage -us -uc
-        ls -la
+        ls -la debian
+        mv debian/odoo*all.deb debian/odoo-17.0-${{github.sha}}-all.deb
+    
     - name: 'Upload Artifact'
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
       with:
         name: odoo-17.0-${{github.sha}}-all
-        path: /home/runner/work/odoo-17.0/odoo-17.0/dist/${{ steps.deb_package_step.outputs.artifact_name}}
+        path: /home/runner/work/odoo-17.0/odoo-17.0/debian/${{ steps.deb_package_step.outputs.artifact_name}}
         retention-days: 10
     
     - name: Configure AWS credentials
