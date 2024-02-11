@@ -187,6 +187,7 @@ jobs:
         dpkg-buildpackage -us -uc
         ls -la debian
         ls -la debian/odoo
+        ls -la debian/odoo/DEBIAN
         ls -la build
         mv debian/odoo/odoo*all.deb debian/odoo/odoo-17.0-${{github.sha}}-all.deb
     
