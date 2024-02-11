@@ -134,7 +134,6 @@ jobs:
             python3-qrcode \
             python3-renderpm \
             python3-setuptools \
-            twin \
             python3-slugify \
             python3-vobject \
             python3-watchdog \
@@ -143,6 +142,7 @@ jobs:
             python3-stdeb \
             fakeroot \
             python3-all \
+            dpkg-dev \
             xz-utils && \
         if [ -z "${TARGETARCH}" ]; then \
             TARGETARCH="$(dpkg --print-architecture)"; \
@@ -167,19 +167,24 @@ jobs:
       run: |
         ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --test-tags="post_install","-at_install" --stop-after-init
 
+    # - name: Create .deb Package
+    #   id: deb_package_step
+    #   run: |
+    #     python3 setup.py sdist
+    #     cd dist
+    #     tar -xzf odoo-17.0.tar.gz
+    #     mkdir odoo-17.0/DEBIAN
+    #     touch odoo-17.0/DEBIAN/control 
+    #     echo -e 'Package: odoo-17.0\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
+    #     dpkg-deb --build odoo-17.0
+    #     mv odoo-17.0.deb odoo-17.0-${{github.sha}}-all.deb
+    #     echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
+
     - name: Create .deb Package
       id: deb_package_step
       run: |
-        python3 setup.py sdist
-        cd dist
-        tar -xzf odoo-17.0.tar.gz
-        mkdir odoo-17.0/DEBIAN
-        touch odoo-17.0/DEBIAN/control 
-        echo -e 'Package: odoo-17.0\nVersion: 1.0\nMaintainer: Ashkan Farivarmoheb\nArchitecture: all\nDescription: Odoo 17.0' > odoo-17.0/DEBIAN/control
-        dpkg-deb --build odoo-17.0
-        mv odoo-17.0.deb odoo-17.0-${{github.sha}}-all.deb
-        echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
-
+        dpkg-buildpackage -us -uc
+        ls -la
     - name: 'Upload Artifact'
       id: artifact-upload-step
       uses: actions/upload-artifact@v4
