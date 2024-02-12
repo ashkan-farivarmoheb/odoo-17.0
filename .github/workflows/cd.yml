@@ -6,6 +6,15 @@ on:
       target-env:
         required: true
         type: string
+      runner-id:
+        type: number
+      artifact-id:
+        type: number
+      github_sha:
+        type: string
+      branch:
+        type: string
+
     secrets:
       AWS_REGION:
         required: true
@@ -15,6 +24,8 @@ on:
         required: true
       AWS_SECRET_ACCESS_KEY:
         required: true
+env:
+  ecr_repository: odoo-17.0
 jobs:
   deploy:
     name: Deploy to ${{ inputs.target-env }}
@@ -43,7 +54,6 @@ jobs:
             const branch = context.ref.split('/').pop()
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
-            core.exportVariable('TAG', tag);
             core.exportVariable('REPOSITORY_NAME', repo);
             
       - name: Configure AWS credentials
@@ -56,3 +66,14 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+      
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
+          IMAGE_TAG: '${{ inputs.branch }}-${{inputs.github_sha}}'
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg GITHUB_SHA=${{inputs.github_sha}} --build-arg RUNNER_ID=${{inputs.runner-id}} --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"

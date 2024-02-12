@@ -8,6 +8,9 @@ ENV LANG en_US.UTF-8
 
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
+ARG GITHUB_SHA
+ARG RUNNER_ID
+ARG ARTIFACT_ID
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 
@@ -77,11 +80,17 @@ RUN useradd --no-log-init -u 10000 odoo
 ENV ODOO_VERSION 17.0
 ARG ODOO_RELEASE=20240104
 ARG ODOO_SHA=d6f7e9309786857f820333698010903b1c621c5e
-RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
-    && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
+
+RUN curl -o odoo.deb -sSL https://github.com/ashkan-farivarmoheb/odoo-${ODOO_VERSION}/actions/runs/${RUNNER_ID}/artifacts/${ARTIFACT_ID} \
+    && echo "${GITHUB_SHA} odoo.deb" | sha1sum -c - \
     && apt-get update \
     && apt-get -y install --no-install-recommends ./odoo.deb \
     && rm -rf /var/lib/apt/lists/* odoo.deb
+# RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
+#     && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
+#     && apt-get update \
+#     && apt-get -y install --no-install-recommends ./odoo.deb \
+#     && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
