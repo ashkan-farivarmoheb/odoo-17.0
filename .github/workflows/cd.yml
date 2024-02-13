@@ -25,7 +25,9 @@ on:
       AWS_SECRET_ACCESS_KEY:
         required: true
 env:
-  ecr_repository: odoo-17.0
+  service_name: odoo
+  service_version: 17.0
+  ecr_image_tag: ${{ inputs.branch }}-${{ inputs.github_sha }}
 jobs:
   deploy:
     name: Deploy to ${{ inputs.target-env }}
@@ -50,11 +52,10 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            const tag = context.sha.substring(0,7)
             const branch = context.ref.split('/').pop()
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
-            core.exportVariable('REPOSITORY_NAME', repo);
+            core.exportVariable('ecr_repository', ${{env.service_name}}-${{env.service_version}});
             
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -62,18 +63,40 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-          
+      
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Check the image exists in ECR
+        id: ecr_image_exists
+        run: |
+          IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )"
+
+          if [ $? -eq 0 ]; then
+              # Command was successful, process the output
+              echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"
+              echo "$IMAGE_META"
+              IMAGE_TAG="$( echo ${IMAGE_META} | jq '.imageDetails[0].imageTags[0]' -r )"
+          else
+              # Check if the error is ImageNotFoundException
+              if [[ "$IMAGE_META" == *"ImageNotFoundException"* ]]; then
+                  echo "No images found in repository:  ${{env.service_name}}-${{env.service_version}}"
+              else
+                  # Some other error occurred
+                  echo "Error: $IMAGE_META"
+              fi
+          fi
+          echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
       
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: ${{ env.ECR_REPOSITORY }}
+          ECR_REPOSITORY: ${{ env.ecr_repository }}
           IMAGE_TAG: '${{ inputs.branch }}-${{inputs.github_sha}}'
+        if: ${{ steps.ecr_image_exists.outputs.image_tag != env.ecr_image_tag }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg GITHUB_SHA=${{inputs.github_sha}} --build-arg RUNNER_ID=${{inputs.runner-id}} --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG --build-arg ODOO_VERSION=${{env.service_version}} --build-arg GITHUB_SHA=${{inputs.github_sha}} --build-arg RUNNER_ID=${{inputs.runner-id}} --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"

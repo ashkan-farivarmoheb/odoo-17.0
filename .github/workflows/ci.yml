@@ -84,8 +84,6 @@ jobs:
           const branch = context.ref.split('/').pop()
           const { owner, repo } = context.repo;
           core.exportVariable('BRANCH', branch);
-          core.exportVariable('TAG', tag);
-          core.exportVariable('REPOSITORY_NAME', repo);
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -168,35 +166,35 @@ jobs:
       run: |
         ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --test-tags="post_install","-at_install" --stop-after-init
 
-    - name: Create .deb Package
-      id: deb_package_step
-      run: |
-        dpkg-buildpackage -us -uc
-        mv ../odoo*all.deb ../odoo-17.0-${{github.sha}}-all.deb
-        echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
+    # - name: Create .deb Package
+    #   id: deb_package_step
+    #   run: |
+    #     dpkg-buildpackage -us -uc
+    #     mv ../odoo*all.deb ../odoo-17.0-${{github.sha}}-all.deb
+    #     echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
     
-    - name: 'Upload Artifact'
-      id: artifact-upload-step
-      uses: actions/upload-artifact@v4
-      with:
-        name: odoo-17.0-${{github.sha}}-all
-        path: /home/runner/work/odoo-17.0/${{ steps.deb_package_step.outputs.artifact_name}}
-        retention-days: 10
+    # - name: 'Upload Artifact'
+    #   id: artifact-upload-step
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: odoo-17.0-${{github.sha}}-all
+    #     path: /home/runner/work/odoo-17.0/${{ steps.deb_package_step.outputs.artifact_name}}
+    #     retention-days: 10
 
-    - name: Outputs
-      run:  |
-        echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
-        echo 'Runner ID is ${{ github.run_id }}'
-        echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
-        echo 'Github SHA is ${{ github.sha }}'
-        echo 'Branch is ${{ env.BRANCH }}'
+    # - name: Outputs
+    #   run:  |
+    #     echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+    #     echo 'Runner ID is ${{ github.run_id }}'
+    #     echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
+    #     echo 'Github SHA is ${{ github.sha }}'
+    #     echo 'Branch is ${{ env.BRANCH }}'
   ReuseableMatrixJobForDeployment:
     needs: build
     uses: ./.github/workflows/cd.yml
     with:
       target-env: ${{needs.build.outputs.branch}}
       branch: ${{needs.build.outputs.branch}}
-      runner-id: ${{ github.run_id }}
-      artifact-id: ${{needs.build.outputs.artifact-id}}
-      github_sha: ${{ github.sha }}
+      runner-id: 7873169648
+      artifact-id: 1238539513
+      github_sha: "408af80cfa429e454a7ba9d956f5d77314bd9454"
     secrets: inherit
