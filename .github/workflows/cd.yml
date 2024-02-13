@@ -71,8 +71,10 @@ jobs:
 
       - name: Check the image exists in ECR
         id: ecr_image_exists
-        run: |
-          aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}}
+        uses: actions/github-script@v3
+        with:
+          script: |
+            aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}}
           
       
       # - name: Check the image exists in ECR
