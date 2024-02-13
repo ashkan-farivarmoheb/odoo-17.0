@@ -76,7 +76,6 @@ jobs:
           script: |
             IMAGE_META=$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )
             echo $IMAGE_META
-          shell: bash
           
 # if [ $? -eq 0 ]; then
 #     # Command was successful, process the output
