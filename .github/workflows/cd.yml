@@ -71,24 +71,26 @@ jobs:
 
       - name: Check the image exists in ECR
         id: ecr_image_exists
-        run: |
-          IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )"
+        uses: actions/github-script@v3
+        with:
+          script: |
+            IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )"
 
-          if [ $? -eq 0 ]; then
-              # Command was successful, process the output
-              echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"
-              echo "$IMAGE_META"
-              IMAGE_TAG="$( echo ${IMAGE_META} | jq '.imageDetails[0].imageTags[0]' -r )"
-          else
-              # Check if the error is ImageNotFoundException
-              if [[ "$IMAGE_META" == *"ImageNotFoundException"* ]]; then
-                  echo "No images found in repository:  ${{env.service_name}}-${{env.service_version}}"
-              else
-                  # Some other error occurred
-                  echo "Error: $IMAGE_META"
-              fi
-          fi
-          echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+            if [ $? -eq 0 ]; then
+                # Command was successful, process the output
+                echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"
+                echo "$IMAGE_META"
+                IMAGE_TAG="$( echo ${IMAGE_META} | jq '.imageDetails[0].imageTags[0]' -r )"
+            else
+                # Check if the error is ImageNotFoundException
+                if [[ "$IMAGE_META" == *"ImageNotFoundException"* ]]; then
+                    echo "No images found in repository:  ${{env.service_name}}-${{env.service_version}}"
+                else
+                    # Some other error occurred
+                    echo "Error: $IMAGE_META"
+                fi
+            fi
+            echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
       
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
