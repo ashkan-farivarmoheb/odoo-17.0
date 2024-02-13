@@ -25,8 +25,8 @@ on:
       AWS_SECRET_ACCESS_KEY:
         required: true
 env:
-  service_name: odoo
-  service_version: 17.0
+  service_name: "odoo"
+  service_version: "17.0"
   ecr_image_tag: ${{ inputs.branch }}-${{ inputs.github_sha }}
 jobs:
   deploy:
