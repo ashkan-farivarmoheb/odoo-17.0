@@ -64,30 +64,31 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-          
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
       
       - name: Check the image exists in ECR
         id: ecr_image_exists
         run: |
-            IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )" \          
-            if [ $? -eq 0 ]; then \
-                # Command was successful, process the output \
-                echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"; \
-                IMAGE_TAG="$( $IMAGE_META | jq '.imageDetails[0].imageTags[0]' -r )"; \
-            else \
-                # Check if the error is ImageNotFoundException \
-                if [[ "$IMAGE_META == *"ImageNotFoundException"* ]]; then \
-                    echo "No images found in repository:  ${{env.service_name}}-${{env.service_version}}"; \
-                else \
-                    # Some other error occurred \
-                    echo "Error: $IMAGE_META"; \
-                fi; \
-            fi; \
-            echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+          aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 
+          IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )" \          
+          if [ $? -eq 0 ]; then \
+              # Command was successful, process the output \
+              echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"; \
+              IMAGE_TAG="$( $IMAGE_META | jq '.imageDetails[0].imageTags[0]' -r )"; \
+          else \
+              # Check if the error is ImageNotFoundException \
+              if [[ "$IMAGE_META == *"ImageNotFoundException"* ]]; then \
+                  echo "No images found in repository:  ${{env.service_name}}-${{env.service_version}}"; \
+              else \
+                  # Some other error occurred \
+                  echo "Error: $IMAGE_META"; \
+              fi; \
+          fi; \
+          echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
       
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
         env:
