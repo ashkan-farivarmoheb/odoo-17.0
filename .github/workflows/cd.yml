@@ -69,19 +69,19 @@ jobs:
       - name: Check the image exists in ECR
         id: ecr_image_exists
         run: |
-          IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )"          
+          IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )" && \
           if [ $? -eq 0 ]; then \
               # Command was successful, process the output \
-              echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}";
-              IMAGE_TAG=$(echo "$IMAGE_META" | jq '.imageDetails[0].imageTags[0]' -r);
-              echo $IMAGE_TAG;
+              echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"; \
+              IMAGE_TAG=$(echo "$IMAGE_META" | jq '.imageDetails[0].imageTags[0]' -r); \
+              echo $IMAGE_TAG; \
           else \
               # Check if the error is ImageNotFoundException \
               if [[ $IMAGE_META == *"ImageNotFoundException"* ]]; then \
-                  echo "No images found in repository:  ${{env.service_name}}-${{env.service_version}}";
+                  echo "No images found in repository:  ${{env.service_name}}-${{env.service_version}}"; \
               else \
                   # Some other error occurred \
-                  echo "Error: $IMAGE_META";
+                  echo "Error: $IMAGE_META"; \
               fi; \
           fi; \
           echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
