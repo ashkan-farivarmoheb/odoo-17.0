@@ -8,7 +8,6 @@ ENV LANG en_US.UTF-8
 
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
-ARG REPOSITORY_OWNER
 ARG REPOSITORY
 ARG GITHUB_TOKEN
 ARG GITHUB_SHA
@@ -86,7 +85,7 @@ ARG ODOO_RELEASE=20240104
 ARG ODOO_SHA=d6f7e9309786857f820333698010903b1c621c5e
 
 RUN curl -LJO -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-"https://api.github.com/repos/"${REPOSITORY_OWNER}"/${REPOSITORY}}/actions/artifacts/${ARTIFACT_ID}/zip"
+"https://api.github.com/repos/${REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip"
 
 RUN unzip *.zip \
     && mv *.deb odoo.deb \
