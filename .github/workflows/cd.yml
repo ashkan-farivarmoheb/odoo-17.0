@@ -100,7 +100,7 @@ jobs:
         if: ${{ steps.ecr_image_exists.outputs.image_tag != env.ecr_image_tag }}
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-            --build-arg REPOSITORY_OWNER=${{ github.repository_owner }}
+            --build-arg REPOSITORY_OWNER=${{ github.repository_owner }} \
             --build-arg REPOSITORY=${{ github.repository }}
             --build-arg ODOO_VERSION=${{env.service_version}} \
             --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
