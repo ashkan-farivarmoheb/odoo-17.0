@@ -197,5 +197,5 @@ jobs:
       branch: ${{needs.build.outputs.branch}}
       runner-id: ${{github.run_id}}
       artifact-id: ${{needs.build.outputs.artifact-id}}
-      github_sha: ${{ github.sha }}'
+      github_sha: ${{ github.sha }}
     secrets: inherit
