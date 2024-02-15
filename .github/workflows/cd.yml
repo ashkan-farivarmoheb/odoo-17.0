@@ -6,8 +6,6 @@ on:
       target-env:
         required: true
         type: string
-      runner-id:
-        type: number
       artifact-id:
         type: number
       github_sha:
@@ -104,7 +102,6 @@ jobs:
             --build-arg ODOO_VERSION=${{env.service_version}} \
             --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
             --build-arg GITHUB_SHA=${{inputs.github_sha}} \
-            --build-arg RUNNER_ID=${{inputs.runner-id}} \
             --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"

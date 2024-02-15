@@ -11,7 +11,6 @@ ARG TARGETARCH
 ARG REPOSITORY
 ARG GITHUB_TOKEN
 ARG GITHUB_SHA
-ARG RUNNER_ID
 ARG ARTIFACT_ID
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
