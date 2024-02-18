@@ -214,6 +214,6 @@ jobs:
     with:
       target-env: ${{needs.build.outputs.branch}}
       branch: ${{needs.build.outputs.branch}}
-      artifact-id: ${{ needs.build.outputs.artifact-id }}
+      artifact-id: ${{ fromJSON(needs.build.outputs.artifact-id) }}
       github_sha: ${{ github.sha }}
     secrets: inherit
