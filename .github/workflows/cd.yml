@@ -67,7 +67,7 @@ jobs:
       - name: Run ECR Fetch Image
         id: ecr_fetch_image
         run: |
-          result=$(aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f)
+          result=$(aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f 2>&1)
           echo "ecr_result=$result" >> "$GITHUB_OUTPUT"
 
       - name: Check the image exists in ECR
