@@ -67,8 +67,7 @@ jobs:
       - name: Check the image exists in ECR
         id: ecr_image_exists
         run: |
-          IMAGE_META="$( aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f 2>&1 )";
-          echo $IMAGE_META;
+          IMAGE_META="$( aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f 2>&1 )"; echo $IMAGE_META;
 
           # IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )"; \
           # if [ $? -eq 0 ]; then \
