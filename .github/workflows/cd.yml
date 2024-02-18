@@ -64,10 +64,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
       
+      - name: Run ECR Fetch Image
+        id: ecr_fetch_image
+        run: |
+          result=$(aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f)
+          echo "ecr_result=$result" >> "$GITHUB_OUTPUT"
+
       - name: Check the image exists in ECR
         id: ecr_image_exists
         run: |
-          aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f 2>&1;
+          echo ${{steps.ecr_fetch_image.outputs.ecr_result}}
 
           # IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )"; \
           # if [ $? -eq 0 ]; then \
