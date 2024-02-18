@@ -92,24 +92,21 @@ RUN unzip *.zip \
     && apt-get -y install --no-install-recommends ./odoo.deb \
     && rm -rf /var/lib/apt/lists/* odoo.deb
 
-# RUN curl -o odoo.deb -sSL http://nightly.odoo.com/${ODOO_VERSION}/nightly/deb/odoo_${ODOO_VERSION}.${ODOO_RELEASE}_all.deb \
-#     && echo "${ODOO_SHA} odoo.deb" | sha1sum -c - \
-#     && apt-get update \
-#     && apt-get -y install --no-install-recommends ./odoo.deb \
-#     && rm -rf /var/lib/apt/lists/* odoo.deb
-
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
 ADD resources /etc/odoo/
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo*.conf \
-    && mkdir -p /mnt/{extra-addons}
+    && mkdir -p /mnt/{extra-addons, sources}
 
 RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
+
+ADD requirements.txt /mnt/sources/requirements.txt
+RUN pip3 install -r /mnt/sources/requirements.txt
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo-local.conf

@@ -177,13 +177,13 @@ jobs:
     #     path: /home/runner/work/odoo-17.0/${{ steps.deb_package_step.outputs.artifact_name}}
     #     retention-days: 10
 
-    - name: Outputs
-      run:  |
-        echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
-        echo 'Runner ID is ${{ github.run_id }}'
-        echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
-        echo 'Github SHA is ${{ github.sha }}'
-        echo 'Branch is ${{ env.BRANCH }}'
+    # - name: Outputs
+    #   run:  |
+    #     echo 'Artifact ID is ${{ steps.artifact-upload-step.outputs.artifact-id }}'
+    #     echo 'Runner ID is ${{ github.run_id }}'
+    #     echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
+    #     echo 'Github SHA is ${{ github.sha }}'
+    #     echo 'Branch is ${{ env.BRANCH }}'
 
   cd:
     needs: build
@@ -191,6 +191,7 @@ jobs:
     with:
       target-env: ${{needs.build.outputs.branch}}
       branch: ${{needs.build.outputs.branch}}
-      artifact-id: 1248054386
-      github_sha: "215fd2d2b0921959c20eb4354ca57712906c99b4"
+      artifact-id: '1248054386'
+      # artifact-id: ${{needs.build.outputs.artifact-id}}
+      github_sha: ${{ github.sha }}
     secrets: inherit
