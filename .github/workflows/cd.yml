@@ -68,21 +68,18 @@ jobs:
         id: ecr_image_exists
         run: |
           IMAGE_META="$( aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f 2>&1 )"; \
-          if [ $? -eq 0 ]; then \
-              # Command was successful, process the output \
-              echo "Images found in repository: odoo-17.0"; \
-              IMAGE_TAG=$(echo "$IMAGE_META" | jq '.imageDetails[0].imageTags[0]' -r); \
-              echo "IMAGE_META: $IMAGE_META"; \
-              echo "IMAGE_TAG: $IMAGE_TAG"; \
-              echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT" \
-          else \
-              # Check if the error is ImageNotFoundException \
-              if [[ $IMAGE_META == *"ImageNotFoundException"* ]]; then \
-                  echo "No images found in repository:  odoo-17.0"; \
-              else \
-                  # Some other error occurred \
-                  echo "Error: $IMAGE_META"; \
-              fi; \
+          if [ $? -eq 0 ]; then
+              echo "Images found in repository: odoo-17.0";
+              IMAGE_TAG=$(echo "$IMAGE_META" | jq '.imageDetails[0].imageTags[0]' -r);
+              echo "IMAGE_META: $IMAGE_META";
+              echo "IMAGE_TAG: $IMAGE_TAG";
+              echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+          else
+              if [[ $IMAGE_META == *"ImageNotFoundException"* ]]; then
+                  echo "No images found in repository:  odoo-17.0";
+              else
+                  echo "Error: $IMAGE_META";
+              fi; 
           fi;
 
           # IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} 2>&1 )"; \
