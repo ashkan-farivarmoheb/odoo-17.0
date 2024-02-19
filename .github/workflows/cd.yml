@@ -97,14 +97,14 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ecr_repository }}
           IMAGE_TAG: '${{ inputs.branch }}-${{inputs.github_sha}}'
+        shell: bash
         run: |
-          docker inspect $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          # DOCKER_INFO="$(docker inspect $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG 2>&1)"
-          # if [ $? -eq 0 ]; then
-          #   echo "::set-output name=image-info::${DOCKER_INFO}"
-          # else
-          #   echo "::error::Failed to query Docker image: ${DOCKER_INFO}"
-          # fi
+          DOCKER_INFO="$(docker inspect $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG 2>&1)"
+          if [ $? -eq 0 ]; then
+            echo "::set-output name=image-info::${DOCKER_INFO}"
+          else
+            echo "::error::Failed to query Docker image: ${DOCKER_INFO}"
+          fi
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
