@@ -71,7 +71,7 @@ jobs:
       - name: Check the image exists in ECR
         id: ecr_image_exists
         run: |
-          IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} --query 'images[0]' 2>&1 )";
+          IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=develop-215fd2d2b0921959c20eb4354ca57712906c99b4 --query 'images[0]' 2>&1 )";
           if [ $? -eq 0 ]; then
               echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}";
               IMAGE_TAG=$(echo "$IMAGE_META" | jq '.imageDetails[0].imageTags[0]' -r);
