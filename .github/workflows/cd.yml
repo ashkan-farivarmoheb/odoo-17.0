@@ -72,24 +72,27 @@ jobs:
         id: ecr_image_exists
         run: |
           echo "Start calling ecr"
-          # Run the command and redirect the output to a file
-          aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} --query 'images[0]' 2>&1 > ecr_output.txt
+          # Run the command and capture the output
+          IMAGE_META=$(aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} --query 'images[0]' 2>&1)
           # Check if the command was successful
           if [ $? -eq 0 ]; then
               echo "End calling ecr"
-              # Command was successful, process the output
-              IMAGE_META=$(<ecr_output.txt)
-              echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"
-              IMAGE_TAG=$(echo "$IMAGE_META" | jq -r '.imageTags[0]')
-              echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+              # Process the output
+              if [[ -n $IMAGE_META ]]; then
+                  IMAGE_TAG=$(echo "$IMAGE_META" | jq -r '.imageTags[0]')
+                  echo "Images found in repository: ${{env.service_name}}-${{env.service_version}}"
+                  echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
+              else
+                  echo "No images found in repository: ${{env.service_name}}-${{env.service_version}}"
+              fi
           else
               # Command failed, check the error message
-              ERROR_MSG=$(<ecr_output.txt)
-              if [[ $ERROR_MSG == *"ImageNotFoundException"* ]]; then
+              echo "Image not found in ecr"
+              if [[ $IMAGE_META == *"ImageNotFoundException"* ]]; then
                   echo "No images found in repository: ${{env.service_name}}-${{env.service_version}}"
                   exit 0
               else
-                  echo "Error: $ERROR_MSG"
+                  echo "Error: $IMAGE_META"
                   exit 1
               fi
           fi
