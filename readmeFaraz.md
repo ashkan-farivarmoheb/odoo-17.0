@@ -24,6 +24,7 @@ pip3 install --user --force-reinstall cffi
 
 ./odoo-bin -c resources/odoo-local.conf --without-demo=all
 ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --stop-after-init -u account
+./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test  -u account,sale,purchase
 
 sudo mkdir -p /mnt/efs/data/addons/17.0  /mnt/efs/data/sessions
 
@@ -40,3 +41,5 @@ sudo chmod 775 /mnt/efs/data/addons/17.0 /mnt/efs/data/sessions
 ps aux | grep odoo-bin
 # Switch to the new group using newgrp
 newgrp odoo
+
+
