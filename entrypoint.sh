@@ -12,7 +12,57 @@ fi
 : ${PORT:=${DB_PORT_5432_TCP_PORT:=5432}}
 : ${USER:=${DB_ENV_POSTGRES_USER:=${POSTGRES_USER:='odoo'}}}
 : ${PASSWORD:=${DB_ENV_POSTGRES_PASSWORD:=${POSTGRES_PASSWORD:='odoo'}}}
+: ${RESTORE_FROM_BACKUP:="true"}
 
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+# Check if restoration from backup is enabled via an environment variable
+# Check if restoration from backup is enabled via an environment variable
+if [ "${RESTORE_FROM_BACKUP}" = "true" ]; then
+    echo "Restoration from backup is enabled."
+
+    # Define the backup directory and the destination directory
+    BACKUP_DIR="/etc/odoo/resources/backupFiles"
+    DEST_DIR="/mnt/efs/data"
+
+    # Find the latest modified zip file in the backup directory
+    LATEST_ZIP=$(find "$BACKUP_DIR" -type f -name '*.zip' | sort -n | tail -1)
+
+    # Proceed only if a latest zip file is found
+    if [[ -n "$LATEST_ZIP" ]]; then
+        echo "Latest backup zip found: $LATEST_ZIP"
+        
+        # Create a temporary directory to unzip the contents
+        TEMP_DIR=$(mktemp -d)
+        
+        # Unzip the file
+        unzip -q "$LATEST_ZIP" -d "$TEMP_DIR"
+        echo "Unzipped backup to $TEMP_DIR"
+        
+        # Copy the filestore folder if it exists
+        if [[ -d "$TEMP_DIR/filestore" ]]; then
+            echo "Copying filestore to $DEST_DIR"
+            # Ensure the destination directory exists
+            mkdir -p "$DEST_DIR"
+            # Copy filestore
+            cp -a "$TEMP_DIR/filestore/." "$DEST_DIR/"
+        fi
+        
+        # Copy the dump.sql if it exists
+        if [[ -f "$TEMP_DIR/dump.sql" ]]; then
+            echo "Copying dump.sql to $BACKUP_DIR"
+            cp "$TEMP_DIR/dump.sql" "$BACKUP_DIR/"
+        fi
+        
+        # Clean up the temporary directory
+        rm -rf "$TEMP_DIR"
+    else
+        echo "No backup zip file found in $BACKUP_DIR. Skipping restore operations."
+    fi
+else
+    echo "Restoration from backup is not enabled. Skipping restore operations."
+fi
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 DB_ARGS=()
 function check_config() {
