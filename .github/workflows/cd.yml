@@ -71,16 +71,20 @@ jobs:
       - name: Check the image exists in ECR
         id: ecr_image_exists
         run: |
+          set -e
+          echo "Start calling ecr"
           IMAGE_META="$( aws ecr describe-images --repository-name=${{env.service_name}}-${{env.service_version}} --image-ids=imageTag=${{inputs.branch}}-${{inputs.github_sha}} --query 'images[0]' 2>&1 )";
-          if [ $? -eq 0 ]; then
-            if [ -n "$IMAGE_META" ]; then
-              echo "Images found in repository: ${{ env.service_name }}-${{ env.service_version }}"
+          echo "End calling ecr"
+          if [[ $? -eq 0 ]]; then
+            echo "Images found in repository: ${{ env.service_name }}-${{ env.service_version }}"
+            if [[ -n $IMAGE_META ]]; then
               IMAGE_TAG=$(echo "$IMAGE_META" | jq -r '.imageTags[0]')
               echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
             else
               echo "No images found in repository: ${{ env.service_name }}-${{ env.service_version }}"
             fi
           else
+            echo "Image not found"
             if [[ $IMAGE_META == *"ImageNotFoundException"* ]]; then
               echo "No images found in repository: ${{ env.service_name }}-${{ env.service_version }}"
             else
