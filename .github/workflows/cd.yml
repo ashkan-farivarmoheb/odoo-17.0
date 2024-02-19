@@ -63,28 +63,6 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
-      
-      - name: Run AWS ECR command
-        id: describe-images
-        run: |
-          IMAGE_META=$(aws ecr describe-images --repository-name=odoo-17.0 --image-ids=imageTag=develop-494853f5e336ae7310d267ba546e13d1a17abc2f 2>&1)
-          if [ $? -eq 0 ]; then
-            echo "Command was successful"
-            echo "IMAGE_META=$IMAGE_META" >> $GITHUB_ENV
-          else
-            echo "Error: $IMAGE_META"
-            echo "::error::Failed to describe images"
-          fi
-  
-      - name: Use the output if successful
-        if: ${{ steps.describe-images.outputs.IMAGE_META }}
-        run: |
-          echo "IMAGE_META: ${{ steps.describe-images.outputs.IMAGE_META }}"
-  
-      - name: Handle error if failed
-        if: ${{ failure() }}
-        run: |
-          echo "An error occurred"
 
       # - name: Check the image exists in ECR
       #   id: ecr_image_exists
@@ -109,23 +87,37 @@ jobs:
       #     # echo "image_tag=$IMAGE_TAG" >> "$GITHUB_OUTPUT"
       
           
-      # - name: Login to Amazon ECR
-      #   id: login-ecr
-      #   uses: aws-actions/amazon-ecr-login@v1
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
-      # - name: Build, tag, and push image to Amazon ECR
-      #   id: build-image
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: ${{ env.ecr_repository }}
-      #     IMAGE_TAG: '${{ inputs.branch }}-${{inputs.github_sha}}'
-      #   if: ${{ steps.ecr_image_exists.outputs.image_tag != env.ecr_image_tag }}
-      #   run: |
-      #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-      #       --build-arg REPOSITORY=${{ github.repository }} \
-      #       --build-arg ODOO_VERSION=${{env.service_version}} \
-      #       --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
-      #       --build-arg GITHUB_SHA=${{inputs.github_sha}} \
-      #       --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
-      #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      #     echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Check Docker Image
+        id: check_docker_image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ecr_repository }}
+          IMAGE_TAG: '${{ inputs.branch }}-${{inputs.github_sha}}'
+        run: |
+          DOCKER_INFO=$(docker inspect "$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" 2>&1)
+          if [ $? -eq 0 ]; then
+            echo "::set-output name=image-info::${DOCKER_INFO}"
+          else
+            echo "::error::Failed to query Docker image: ${DOCKER_INFO}"
+          fi
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ecr_repository }}
+          IMAGE_TAG: '${{ inputs.branch }}-${{inputs.github_sha}}'
+        if: steps.check_docker_image.outputs.image-info != ''
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            --build-arg REPOSITORY=${{ github.repository }} \
+            --build-arg ODOO_VERSION=${{env.service_version}} \
+            --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
+            --build-arg GITHUB_SHA=${{inputs.github_sha}} \
+            --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
