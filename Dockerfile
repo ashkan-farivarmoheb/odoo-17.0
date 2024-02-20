@@ -106,7 +106,7 @@ RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt
 EXPOSE 8069 8071 8072
 
 ADD requirements.txt /mnt/sources/requirements.txt
-RUN pip3 install -r /mnt/sources/requirements.txt
+RUN pip install -r /mnt/sources/requirements.txt
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo-local.conf
