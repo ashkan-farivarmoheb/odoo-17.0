@@ -70,7 +70,11 @@ jobs:
 
       - name: Check the image exists in ECR
         id: ecr_image_exists
-        run: ecr_query.sh ${{env.service_name}}-${{env.service_version}} ${{inputs.branch}}-${{inputs.github_sha}}
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ecr_repository }}
+          IMAGE_TAG: '${{ inputs.branch }}-${{inputs.github_sha}}'
+        run: ./ecr_query.sh $ECR_REPOSITORY $IMAGE_TAG
 
       # - name: Check the image exists in ECR
       #   id: ecr_image_exists
