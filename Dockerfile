@@ -13,50 +13,79 @@ ARG GITHUB_TOKEN
 ARG GITHUB_SHA
 ARG ARTIFACT_ID
 
-# Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 
+# Install pip for Python 3.10 and Upgrade pip and setuptools
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install -y --no-install-recommends \
-        nfs-common \
-        ca-certificates \
-        curl \
-        dirmngr \
-        fonts-noto-cjk \
-        gnupg \
-        libssl-dev \
-        node-less \
-        npm \
-        python3-magic \
-        python3-num2words \
-        python3-odf \
-        python3-pdfminer \
-        python3-pip \
-        python3-phonenumbers \
-        python3-pyldap \
-        python3-qrcode \
-        python3-renderpm \
-        python3-setuptools \
-        python3-slugify \
-        python3-vobject \
-        python3-watchdog \
-        python3-xlrd \
-        python3-xlwt \
-        xz-utils \
-        unzip && \
-    if [ -z "${TARGETARCH}" ]; then \
-        TARGETARCH="$(dpkg --print-architecture)"; \
-    fi; \
-    WKHTMLTOPDF_ARCH=${TARGETARCH} && \
-    case ${TARGETARCH} in \
-    "amd64") WKHTMLTOPDF_ARCH=amd64 && WKHTMLTOPDF_SHA=967390a759707337b46d1c02452e2bb6b2dc6d59  ;; \
-    "arm64")  WKHTMLTOPDF_SHA=90f6e69896d51ef77339d3f3a20f8582bdf496cc  ;; \
-    "ppc64le" | "ppc64el") WKHTMLTOPDF_ARCH=ppc64el && WKHTMLTOPDF_SHA=5312d7d34a25b321282929df82e3574319aed25c  ;; \
-    esac \
-    && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
-    && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
-    && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-    && rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+    apt-get install -y curl \
+    python3.10 \
+    python3.10-distutils \
+    && curl -sSL https://bootstrap.pypa.io/get-pip.py | python3.10 - \
+    && python3.10 -m pip install --upgrade pip setuptools
+
+# Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
+RUN  apt-get update && \
+        DEBIAN_FRONTEND=noninteractive \
+         apt-get install -y --no-install-recommends \
+            nfs-common \
+            ca-certificates \
+            dirmngr \
+            fonts-noto-cjk \
+            gnupg \
+            python3-dev \
+            libxml2-dev \
+            libxslt1-dev \
+            zlib1g-dev \
+            libsasl2-dev \
+            libldap2-dev \
+            build-essential \
+            libffi-dev \
+            libmysqlclient-dev \
+            libjpeg-dev \
+            libpq-dev \
+            libjpeg8-dev \
+            liblcms2-dev \
+            libblas-dev \
+            libatlas-base-dev \
+            libssl-dev \
+            node-less \
+            npm \
+            python3-magic \
+            python3-num2words \
+            python3-odf \
+            python3-pdfminer \
+            python3-pip \
+            python3-phonenumbers \
+            python3-pyldap \
+            python3-qrcode \
+            python3-renderpm \
+            python3-slugify \
+            python3-vobject \
+            python3-watchdog \
+            python3-xlrd \
+            python3-xlwt \
+            python3-stdeb \
+            fakeroot \
+            python3-all \
+            dpkg-dev \
+            dh-python \
+            xz-utils \
+            unzip && \
+        if [ -z "${TARGETARCH}" ]; then \
+            TARGETARCH="$(dpkg --print-architecture)"; \
+        fi; \
+        WKHTMLTOPDF_ARCH=${TARGETARCH} && \
+        case ${TARGETARCH} in \
+        "amd64") WKHTMLTOPDF_ARCH=amd64 && WKHTMLTOPDF_SHA=967390a759707337b46d1c02452e2bb6b2dc6d59  ;; \
+        "arm64")  WKHTMLTOPDF_SHA=90f6e69896d51ef77339d3f3a20f8582bdf496cc  ;; \
+        "ppc64le" | "ppc64el") WKHTMLTOPDF_ARCH=ppc64el && WKHTMLTOPDF_SHA=5312d7d34a25b321282929df82e3574319aed25c  ;; \
+        esac \
+        && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
+        && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
+        && apt-get install -y --no-install-recommends ./wkhtmltox.deb \
+        && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* wkhtmltox.deb
+
+ADD requirements.txt /mnt/sources/requirements.txt
+RUN pip install -r /mnt/sources/requirements.txt
 
 # install latest postgresql-client
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
@@ -80,8 +109,6 @@ RUN useradd --no-log-init -u 10000 odoo
 
 # Install Odoo
 ENV ODOO_VERSION 17.0
-ARG ODOO_RELEASE=20240104
-ARG ODOO_SHA=d6f7e9309786857f820333698010903b1c621c5e
 
 RUN curl -LJO -H "Authorization: Bearer ${GITHUB_TOKEN}" \
 "https://api.github.com/repos/${REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip"
@@ -104,9 +131,6 @@ RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
-
-ADD requirements.txt /mnt/sources/requirements.txt
-RUN pip install -r /mnt/sources/requirements.txt
 
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo-local.conf
