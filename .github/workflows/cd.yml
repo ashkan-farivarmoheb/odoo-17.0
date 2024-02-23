@@ -1,6 +1,15 @@
 name: Reusable deployment workflow
 
 on:
+  workflow_dispatch: # Enable manual triggering
+    inputs:
+      target-env:
+        required: true
+        type: string
+      branch:
+        required: true
+        type: string
+        
   workflow_call:
     inputs:
       target-env:
