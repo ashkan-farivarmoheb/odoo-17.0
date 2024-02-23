@@ -1,0 +1,88 @@
+[
+      {
+          "name": "odoo",
+          "image": "${aws_account_id}.dkr.ecr.${aws_region}.amazonaws.com/${repository_name}:${tag}",
+          "cpu": 1024,
+          "memory": 3584,
+          "memoryReservation": 3072,
+          "portMappings": [],
+          "essential": true,
+          "environment": [
+            {
+                "name": "ODOO_RC",
+                "value": "/etc/odoo/odoo-${environment}.conf"
+            }
+          ],
+          "mountPoints": [
+              {
+                  "sourceVolume": "${project}-${environment}-efs",
+                  "containerPath": "/mnt/efs",
+                  "readOnly": false
+              }
+          ],
+          "volumesFrom": [],
+          "readonlyRootFilesystem": false,
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-create-group": "true",
+                  "awslogs-group": "/ecs/${project}",
+                  "awslogs-region": "${aws_region}",
+                  "awslogs-stream-prefix": "ecs"
+              },
+              "secretOptions": []
+          },
+          "healthCheck": {
+              "command": [
+                  "CMD-SHELL",
+                  "curl -f http://localhost:8069 || exit 1"
+              ],
+              "interval": 30,
+              "timeout": 60,
+              "retries": 3,
+              "startPeriod": 1
+          }
+      },
+      {
+          "name": "${nginx_repository_name}",
+          "image": "${aws_account_id}.dkr.ecr.${aws_region}.amazonaws.com/${nginx_repository_name}:${nginx_tag}",
+          "cpu": 512,
+          "memory": 512,
+          "memoryReservation": 512,
+          "links": [
+              "odoo"
+          ],
+          "portMappings": [
+              {
+                  "name": "nginx-80-tcp",
+                  "containerPort": 80,
+                  "hostPort": 80,
+                  "protocol": "tcp"
+              }
+          ],
+          "essential": false,
+          "environment": [],
+          "mountPoints": [],
+          "volumesFrom": [],
+          "logConfiguration": {
+              "logDriver": "awslogs",
+              "options": {
+                  "awslogs-create-group": "true",
+                  "awslogs-group": "/ecs/${project}/nginx",
+                  "awslogs-region": "${aws_region}",
+                  "awslogs-stream-prefix": "ecs"
+              },
+              "secretOptions": []
+          },
+          "healthCheck": {
+              "command": [
+                  "CMD-SHELL",
+                  "curl -f http://localhost/health || exit 1"
+              ],
+              "interval": 30,
+              "timeout": 5,
+              "retries": 3,
+              "startPeriod": 1
+          }
+      }
+]
