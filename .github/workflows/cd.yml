@@ -71,31 +71,23 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            const { data: branches } = await github.repos.listBranches({
+            const branchContainingCommit = github.git.getCommit({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              per_page: 100 // Increase if you have more than 100 branches
+              commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
+              mediaType: {
+                format: 'sha'
+              }
+            }).catch(error => {
+              // Commit not found in this branch
+              if (error.status === 404) {
+                return false;
+              }
+              // Other error occurred
+              throw error;
             });
 
-            const branchesContainingCommit = branches.filter(branch => {
-              return github.git.getCommit({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
-                mediaType: {
-                  format: 'sha'
-                }
-              }).catch(error => {
-                // Commit not found in this branch
-                if (error.status === 404) {
-                  return false;
-                }
-                // Other error occurred
-                throw error;
-              });
-            });
-
-            console.log(branchesContainingCommit.map(branch => branch.name));
+            console.log(branchContainingCommit);
 
       - name: Query branch containing commit
         id: check-branch
