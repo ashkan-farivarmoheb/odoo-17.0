@@ -7,6 +7,7 @@ echo "gitsha: $gitsha"
 
 # Fetch all branches
 git fetch --all
+git rev-parse --quiet --verify "$gitsha"
 
 # Check if the commit exists
 if git rev-parse --quiet --verify "$gitsha" > /dev/null; then
