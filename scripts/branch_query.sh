@@ -5,6 +5,8 @@ echo "Calling branch query"
 # Print the arguments
 echo "gitsha: $gitsha"
 
+git name-rev --refs="refs/heads/*"  --name-only $gitsha
+
 # Fetch all branches
 # git fetch --all
 
