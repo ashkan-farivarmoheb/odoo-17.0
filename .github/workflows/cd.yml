@@ -94,30 +94,35 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ecr_repository }}
           IMAGE_TAG: ${{ env.ecr_image_tag }}
-        if: steps.ecr_image_exists.outputs.image_tag != ${{ env.ecr_image_tag }}
+        if: steps.ecr_image_exists.outputs.image_tag == ''
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-            --build-arg REPOSITORY=${{ github.repository }} \
-            --build-arg ODOO_VERSION=${{env.service_version}} \
-            --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
-            --build-arg GITHUB_SHA=${{inputs.github_sha}} \
-            --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+          echo "image_tag: " ${{steps.ecr_image_exists.outputs.image_tag}}
+
+          # docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+          #   --build-arg REPOSITORY=${{ github.repository }} \
+          #   --build-arg ODOO_VERSION=${{env.service_version}} \
+          #   --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
+          #   --build-arg GITHUB_SHA=${{inputs.github_sha}} \
+          #   --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
+          # docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          # echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.1.0  # Specify the Terraform version to use
-        
+      
+      - name: Change directory
+        run: cd ./infrastructure
+
       - name: Initialize Terraform
-        run: terraform init
+        run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
         
       - name: Validate Terraform configuration
         run: terraform validate
         
       - name: Plan Terraform changes
-        run: terraform plan -auto-approve -var-file="${{ inputs.target-env }}.auto.tfvars" -var="tag=${{ env.ecr_image_tag }}"
+        run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
         
       - name: Apply Terraform changes
-        run: terraform apply -auto-approve -var-file="${{ inputs.target-env }}.auto.tfvars" -var="tag=${{ env.ecr_image_tag }}"
+        run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
