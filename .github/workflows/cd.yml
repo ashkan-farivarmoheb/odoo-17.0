@@ -67,14 +67,6 @@ jobs:
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
-
-      - name: Get current branch
-        id: check_step
-        run: |
-          raw=$(git branch -r --contains ${{ github.ref }})
-          branch=${raw##*/}
-          echo "{name}=branch" >> $GITHUB_OUTPUT
-          echo "Branch is $branch."
       
       - name: Query branch containing commit
         id: check-branch
