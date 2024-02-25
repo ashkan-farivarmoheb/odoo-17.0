@@ -6,13 +6,12 @@ echo "Calling branch query"
 echo "gitsha: $gitsha"
 
 # Fetch all branches
-# git fetch --all
-git rev-parse --quiet --verify "$gitsha"
+git fetch --all
+git branch
 
 # Check if the commit exists
 if git rev-parse --quiet --verify "$gitsha" > /dev/null; then
     # Get the branch containing the commit
-    git branch --contains "$gitsha"
     branch=$(git branch --contains "$gitsha" | sed 's/* //')
     echo "Found commit $gitsha in branch $branch"
 
