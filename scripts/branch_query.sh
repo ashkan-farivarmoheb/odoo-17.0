@@ -11,6 +11,7 @@ git fetch --all
 # Check if the commit exists
 if git rev-parse --quiet --verify "$gitsha" > /dev/null; then
     # Get the branch containing the commit
+    git branch --contains "$gitsha"
     branch=$(git branch --contains "$gitsha" | sed 's/* //')
     echo "Found commit $gitsha in branch $branch"
 
