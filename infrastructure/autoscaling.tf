@@ -40,7 +40,6 @@ resource "aws_autoscaling_policy" "scale_down" {
   autoscaling_group_name = aws_autoscaling_group.ecs_asg.name
   adjustment_type        = "ChangeInCapacity"
   scaling_adjustment     = -1
-  min_adjustment_magnitude = 1
   cooldown               = 120
 }
 
@@ -49,7 +48,6 @@ resource "aws_autoscaling_policy" "scale_up" {
   autoscaling_group_name = aws_autoscaling_group.ecs_asg.name
   adjustment_type        = "ChangeInCapacity"
   scaling_adjustment     = 1
-  min_adjustment_magnitude = 1
   cooldown               = 120
 }
 
