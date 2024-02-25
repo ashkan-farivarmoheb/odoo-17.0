@@ -194,7 +194,7 @@ jobs:
     uses: ./.github/workflows/cd.yml
     with:
       target-env: ${{needs.build.outputs.branch}}
-      branch: ${{needs.build.outputs.branch}}
+      # branch: ${{needs.build.outputs.branch}}
       # artifact-id: ${{ fromJson(needs.build.outputs.artifact-id) }}
       artifact-id: 1266534473
       # github_sha: ${{ github.sha }}

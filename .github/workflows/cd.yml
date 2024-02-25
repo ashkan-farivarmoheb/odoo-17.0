@@ -12,9 +12,9 @@ on:
       github_sha:
         required: true
         type: string
-      branch:
-        required: true
-        type: string
+      # branch:
+      #   required: true
+      #   type: string
 
   workflow_call:
     inputs:
@@ -22,14 +22,13 @@ on:
         required: true
         type: string
       artifact-id:
-        required: true
         type: number
       github_sha:
         required: true
         type: string
-      branch:
-        required: true
-        type: string
+      # branch:
+      #   required: true
+      #   type: string
 
     secrets:
       AWS_REGION:
@@ -43,7 +42,7 @@ on:
 env:
   service_name: "odoo"
   service_version: "17.0"
-  ecr_image_tag: ${{ inputs.branch }}-${{ inputs.github_sha }}
+  # ecr_image_tag: ${{ inputs.branch }}-${{ inputs.github_sha }}
 jobs:
   deploy:
     name: Deploy to ${{ inputs.target-env }}
@@ -68,6 +67,13 @@ jobs:
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
+
+      - name: Query branch containing commit
+        id: check-branch
+        run: |
+          git fetch --all
+          branch=$(git branch --contains ${{ inputs.github_sha }})
+          echo "ecr_image_tag=${branch}-${{ inputs.github_sha }}" >> $GITHUB_ENV
             
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -81,7 +87,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Check the image exists in ECR
-        id: ecr_image_exists
+        id: ecr-image-exists
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ecr_repository }}
@@ -94,7 +100,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ env.ecr_repository }}
           IMAGE_TAG: ${{ env.ecr_image_tag }}
-        if: steps.ecr_image_exists.outputs.image_tag == ''
+        if: steps.ecr-image-exists.outputs.image_tag == ''
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
             --build-arg REPOSITORY=${{ github.repository }} \
@@ -105,27 +111,27 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-      - name: Set up Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.1.0  # Specify the Terraform version to use
+      # - name: Set up Terraform
+      #   uses: hashicorp/setup-terraform@v1
+      #   with:
+      #     terraform_version: 1.1.0  # Specify the Terraform version to use
 
-      - name: Initialize Terraform
-        run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
-        working-directory: infrastructure
+      # - name: Initialize Terraform
+      #   run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
+      #   working-directory: infrastructure
         
-      - name: Validate Terraform configuration
-        run: terraform validate
-        working-directory: infrastructure
+      # - name: Validate Terraform configuration
+      #   run: terraform validate
+      #   working-directory: infrastructure
         
-      - name: Plan Terraform changes
-        run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-        working-directory: infrastructure
+      # - name: Plan Terraform changes
+      #   run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+      #   working-directory: infrastructure
         
-      - name: Apply Terraform changes
-        run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-        working-directory: infrastructure
+      # - name: Apply Terraform changes
+      #   run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+      #   working-directory: infrastructure
       
-      - name: Destroy Terraform changes
-        run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-        working-directory: infrastructure
+      # - name: Destroy Terraform changes
+      #   run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+      #   working-directory: infrastructure
