@@ -71,23 +71,24 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            const branchContainingCommit = github.git.getCommit({
+            github.git.getCommit({
               owner: context.repo.owner,
               repo: context.repo.repo,
               commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
               mediaType: {
                 format: 'sha'
               }
+            }).then(response => {
+              console.log(response.data); // Assuming the data you need is in the response
             }).catch(error => {
               // Commit not found in this branch
               if (error.status === 404) {
-                return false;
+                console.log("Commit not found");
+              } else {
+                // Other error occurred
+                console.error(error);
               }
-              // Other error occurred
-              throw error;
             });
-
-            console.log(branchContainingCommit);
 
       - name: Query branch containing commit
         id: check-branch
