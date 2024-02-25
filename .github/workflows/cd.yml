@@ -70,10 +70,8 @@ jobs:
 
       - name: Query branch containing commit
         id: check-branch
-        run: |
-          git fetch --all
-          branch=$(git branch --contains ${{ inputs.github_sha }})
-          echo "ecr_image_tag=${branch}-${{ inputs.github_sha }}" >> $GITHUB_ENV
+        run: ./branch_query.sh ${{ inputs.github_sha }}
+        working-directory: scripts
             
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -93,6 +91,7 @@ jobs:
           ECR_REPOSITORY: ${{ env.ecr_repository }}
           IMAGE_TAG: ${{ env.ecr_image_tag }}
         run: ./ecr_query.sh $ECR_REPOSITORY $IMAGE_TAG
+        working-directory: scripts
 
       - name: Build, tag, and push image to Amazon ECR
         id: build-image
