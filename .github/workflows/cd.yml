@@ -71,7 +71,7 @@ jobs:
       - name: Get current branch
         id: check_step
         run: |
-          raw=$(git branch -r --contains "${{ inputs.github_sha }}")
+          raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw##*/}
           echo "{name}=branch" >> $GITHUB_OUTPUT
           echo "Branch is $branch."
