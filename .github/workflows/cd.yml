@@ -7,7 +7,6 @@ on:
         required: true
         type: string
       artifact-id:
-        required: true
         type: number
       github_sha:
         required: true
@@ -62,6 +61,8 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
+            const test=$(git branch --contains "$gitsha" | sed 's/* //')
+            core.exportVariable('TEST', test);
             const branch = context.ref.split('/').pop()
             const ecr_repository = `${process.env.service_name}-${process.env.service_version}`;
             const { owner, repo } = context.repo;
