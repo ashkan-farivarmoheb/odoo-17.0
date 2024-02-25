@@ -112,6 +112,7 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
+        working-directory: infrastructure
         
       - name: Validate Terraform configuration
         run: terraform validate
