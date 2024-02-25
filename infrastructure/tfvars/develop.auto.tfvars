@@ -17,3 +17,4 @@ executionRole = "ecsTaskExecutionRole"
 min_size_asg = 1
 max_size_asg = 3
 desired_size_asg = 1
+

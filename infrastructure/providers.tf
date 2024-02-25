@@ -3,10 +3,7 @@ terraform {
   required_version = ">= 1.1.0"
 
   backend "s3" {
-    bucket         = "${var.environment}-${var.project}-bucket"
-    key            = "${var.environment}-${var.project}-terraform.tfstate"  # This is the path to the state file in the bucket
-    region         = "${var.aws_region}"          # Your AWS region
-    dynamodb_table = "${var.environment}-${var.project}-terraform-lock"     # Optional: DynamoDB table for state locking
+    key            = "odoo/terraform.tfstate"  # This is the path to the state file in the bucket
   }
 
   required_providers {
