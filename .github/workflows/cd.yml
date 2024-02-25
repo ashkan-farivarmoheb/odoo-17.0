@@ -68,6 +68,14 @@ jobs:
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
 
+      - name: Get current branch
+        id: check_step
+        run: |
+          raw=$(git branch -r --contains ${{ inputs.github_sha }})
+          branch=${raw##*/}
+          echo "{name}=branch" >> $GITHUB_OUTPUT
+          echo "Branch is $branch."
+      
       - name: Query branch containing commit
         id: check-branch
         run: ./branch_query.sh ${{ inputs.github_sha }}
