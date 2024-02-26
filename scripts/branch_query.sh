@@ -13,8 +13,12 @@ git name-rev --refs="refs/heads/*"  --name-only $gitsha
 # Check if the commit exists
 if git rev-parse --quiet --verify "$gitsha" > /dev/null; then
     # Get the branch containing the commit
-    branch=$(git branch --contains "$gitsha" | sed 's/* //')
+    branch=$(git branch --contains "$gitsha" | sed 's/* //');
     echo "Found commit $gitsha in branch $branch"
+
+    if branch != 'develop'; then
+        branch = 'snapshot';
+    fi
 
     # Set the ecr_image_tag environment variable
     ecr_image_tag="${branch}-${gitsha}"

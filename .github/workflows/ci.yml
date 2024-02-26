@@ -192,6 +192,7 @@ jobs:
   cd:
     needs: build
     uses: ./.github/workflows/cd.yml
+    if: needs.build.outputs.branch == 'develop'
     with:
       target-env: ${{needs.build.outputs.branch}}
       # branch: ${{needs.build.outputs.branch}}
