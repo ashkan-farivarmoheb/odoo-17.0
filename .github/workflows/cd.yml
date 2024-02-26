@@ -67,55 +67,72 @@ jobs:
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
       
-      - name: Get branches containing commit
+      - name: Get Branch Name
+        id: get_branch
         uses: actions/github-script@v3
         with:
           script: |
-            github.git.getCommit({
+            const response = await github.request('GET /repos/{owner}/{repo}/commits/{commit_sha}/branches', {
               owner: context.repo.owner,
               repo: context.repo.repo,
-              commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
-              mediaType: {
-                format: 'sha'
-              }
-            }).then(response => {
-              const branchName = response.data.parents[0].html_url.split('/').pop(); // Extracting branch name from commit URL
-              console.log(`Branch name: ${branchName}`);
-            }).catch(error => {
-              // Commit not found in this branch
-              if (error.status === 404) {
-                console.log("Commit not found");
-              } else {
-                // Other error occurred
-                console.error(error);
-              }
+              commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75'
             });
+            console.log(response.data[0].name);
+          result-encoding: string
+    
+      - name: Print Branch Name
+        run: |
+          echo "Branch Name: ${{ steps.get_branch.outputs.result }}"
 
-            const { data: branches } = await github.repos.listBranches({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              per_page: 100 // Increase if you have more than 100 branches
-            });
+      # - name: Get branches containing commit
+      #   uses: actions/github-script@v3
+      #   with:
+      #     script: |
+      #       github.git.getCommit({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
+      #         mediaType: {
+      #           format: 'sha'
+      #         }
+      #       }).then(response => {
+      #         const branchName = response.data.parents[0].html_url.split('/').pop(); // Extracting branch name from commit URL
+      #         console.log(`Branch name: ${branchName}`);
+      #       }).catch(error => {
+      #         // Commit not found in this branch
+      #         if (error.status === 404) {
+      #           console.log("Commit not found");
+      #         } else {
+      #           // Other error occurred
+      #           console.error(error);
+      #         }
+      #       });
 
-            const branchesContainingCommit = branches.filter(branch => {
-              return github.git.getCommit({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
-                mediaType: {
-                  format: 'sha'
-                }
-              }).catch(error => {
-                // Commit not found in this branch
-                if (error.status === 404) {
-                  return false;
-                }
-                // Other error occurred
-                throw error;
-              });
-            });
+      #       const { data: branches } = await github.repos.listBranches({
+      #         owner: context.repo.owner,
+      #         repo: context.repo.repo,
+      #         per_page: 100 // Increase if you have more than 100 branches
+      #       });
 
-            console.log(branchesContainingCommit.map(branch => branch.name));
+      #       const branchesContainingCommit = branches.filter(branch => {
+      #         return github.git.getCommit({
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #           commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
+      #           mediaType: {
+      #             format: 'sha'
+      #           }
+      #         }).catch(error => {
+      #           // Commit not found in this branch
+      #           if (error.status === 404) {
+      #             return false;
+      #           }
+      #           // Other error occurred
+      #           throw error;
+      #         });
+      #       });
+
+      #       console.log(branchesContainingCommit.map(branch => branch.name));
 
       - name: Query branch containing commit
         id: check-branch

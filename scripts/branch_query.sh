@@ -5,18 +5,16 @@ echo "Calling branch query"
 # Print the arguments
 echo "gitsha: $gitsha"
 
-git name-rev --refs="refs/heads/*"  --name-only $gitsha
-
 # Fetch all branches
-# git fetch --all
+git fetch --all;
 
 # Check if the commit exists
 if git rev-parse --quiet --verify "$gitsha" > /dev/null; then
     # Get the branch containing the commit
     branch=$(git branch --contains "$gitsha" | sed 's/* //');
-    echo "Found commit $gitsha in branch $branch"
+    echo "Found commit $gitsha in branch $branch";
 
-    if branch != 'develop'; then
+    if [ branch != 'develop' ]; then
         branch = 'snapshot';
     fi
 
