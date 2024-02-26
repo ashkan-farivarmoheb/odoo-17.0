@@ -72,12 +72,32 @@ jobs:
         uses: actions/github-script@v3
         with:
           script: |
-            const response = await github.request('GET /repos/{owner}/{repo}/commits/{commit_sha}/branches', {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75'
-            });
-            console.log(response.data[0].name);
+            try {
+              const response = await github.request('GET /repos/{owner}/{repo}/commits/{commit_sha}/compare/${{ inputs.github_sha }}', {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  commit_sha: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
+                  branch_commit_sha: 'your_branch_commit_sha',
+                  headers: {
+                    Authorization: `Bearer ${{secrets.GITHUB_TOKEN}}`
+                }
+              });
+
+              // Check if the response status is 200 OK
+              if (response.status === 200) {
+                  console.log('Commit is reachable from the branch');
+                  // Handle the response data here
+              } else {
+                  console.error('Unexpected status code:', response.status);
+                  // Handle other status codes if needed
+              }
+            } catch (error) {
+                // Handle errors
+                console.error('Error occurred:', error.message);
+                if (error.status) {
+                    console.error('Error status:', error.status);
+                }
+            }
           result-encoding: string
     
       - name: Print Branch Name
