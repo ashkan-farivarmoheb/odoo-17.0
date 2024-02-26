@@ -66,46 +66,10 @@ jobs:
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
-      
-      - name: Get Branch Name
-        id: get_branch
-        uses: actions/github-script@v3
-        with:
-          script: |
-            try {
-              const response = await github.request('GET /repos/{owner}/{repo}/git/ref/{ref}', {
-                  owner: 'OWNER',
-                  repo: 'REPO',
-                  ref: 'cd95a49e4d7dc37478b7bdff7e6d718ebb084a75',
-                  headers: {
-                    Authorization: `Bearer ${{secrets.GITHUB_TOKEN}}`
-                }
-              });
-
-              // Check if the response status is 200 OK
-              if (response.status === 200) {
-                  console.log('Commit is reachable from the branch');
-                  // Handle the response data here
-              } else {
-                  console.error('Unexpected status code:', response.status);
-                  // Handle other status codes if needed
-              }
-            } catch (error) {
-                // Handle errors
-                console.error('Error occurred:', error.message);
-                if (error.status) {
-                    console.error('Error status:', error.status);
-                }
-            }
-          result-encoding: string
-    
-      - name: Print Branch Name
-        run: |
-          echo "Branch Name: ${{ steps.get_branch.outputs.result }}"
 
       - name: Query branch containing commit
         id: check-branch
-        run: ./branch_query.sh ${{ inputs.github_sha }}
+        run: ./branch_query.sh ${{ inputs.github_sha }} ${{secrets.GITHUB_TOKEN}}
         working-directory: scripts
             
       - name: Configure AWS credentials
