@@ -11,9 +11,9 @@ on:
       github_sha:
         required: true
         type: string
-      # branch:
-      #   required: true
-      #   type: string
+      snapshot:
+        default: false
+        type: boolean
 
   workflow_call:
     inputs:
@@ -25,9 +25,9 @@ on:
       github_sha:
         required: true
         type: string
-      # branch:
-      #   required: true
-      #   type: string
+      snapshot:
+        default: false
+        type: boolean
 
     secrets:
       AWS_REGION:
@@ -48,7 +48,6 @@ jobs:
     permissions:
       contents: none
     runs-on: ubuntu-latest
-    # runs-on: self-hosted
     environment:
       name: ${{ inputs.target-env }}
 
@@ -66,12 +65,17 @@ jobs:
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
+      
+      - name: Set ecr_image_tag
+        id: set-ecr-image-tag
+        run: |
+          if [[ "${{ inputs.snapshot }}" == "true" ]]; then
+            ecr_image_tag="snapshot-${{ inputs.github_sha }}"
+          else
+            ecr_image_tag="develop-${{ inputs.github_sha }}"
+          fi
+          echo "ecr_image_tag=$ecr_image_tag" >> "$GITHUB_ENV"
 
-      - name: Query branch containing commit
-        id: check-branch
-        run: ./branch_query.sh ${{ inputs.github_sha }} ${{secrets.GITHUB_TOKEN}}
-        working-directory: scripts
-            
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
