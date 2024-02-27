@@ -9,7 +9,7 @@ resource "aws_ecs_service" "ecs_service" {
   load_balancer {
     target_group_arn = aws_lb_target_group.tcp_tg.id
     container_name   = "nginx"
-    container_port   = 80 
+    container_port   = 443 
   }
   
   depends_on = [ aws_lb.aws_lb_nlb, aws_autoscaling_group.ecs_asg ]
