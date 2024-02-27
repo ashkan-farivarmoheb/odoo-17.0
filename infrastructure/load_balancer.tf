@@ -10,7 +10,7 @@ resource "aws_lb" "aws_lb_nlb" {
     }
 }
 
-resource "aws_lb_target_group" "tcp_tg" {
+resource "aws_lb_target_group" "http_tg" {
   name     = "tcp-tg"
   target_type = "instance"
   vpc_id = data.aws_vpc.odoo.id
@@ -21,6 +21,25 @@ resource "aws_lb_target_group" "tcp_tg" {
 resource "aws_lb_listener" "http_listener" {
   load_balancer_arn = aws_lb.aws_lb_nlb.arn
   port              = "80"
+  protocol          = "TCP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.http_tg.arn
+  }
+}
+
+resource "aws_lb_target_group" "tcp_tg" {
+  name     = "example-target-group"
+  target_type = "instance"
+  vpc_id = data.aws_vpc.odoo.id
+  port     = 443
+  protocol = "TCP"
+}
+
+resource "aws_lb_listener" "tcp_listener" {
+  load_balancer_arn = aws_lb.aws_lb_nlb.arn
+  port              = "443"
   protocol          = "TCP"
 
   default_action {

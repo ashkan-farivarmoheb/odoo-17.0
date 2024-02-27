@@ -88,106 +88,106 @@ jobs:
       env:
         AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
 
-    # - name: Install dependencies
-    #   run: |
-    #     sudo apt-get update && \
-    #     DEBIAN_FRONTEND=noninteractive \
-    #     sudo apt-get install -y --no-install-recommends \
-    #         nfs-common \
-    #         ca-certificates \
-    #         curl \
-    #         dirmngr \
-    #         fonts-noto-cjk \
-    #         gnupg \
-    #         python3-dev \
-    #         libxml2-dev \
-    #         libxslt1-dev \
-    #         zlib1g-dev \
-    #         libsasl2-dev \
-    #         libldap2-dev \
-    #         build-essential \
-    #         libffi-dev \
-    #         libmysqlclient-dev \
-    #         libjpeg-dev \
-    #         libpq-dev \
-    #         libjpeg8-dev \
-    #         liblcms2-dev \
-    #         libblas-dev \
-    #         libatlas-base-dev \
-    #         libssl-dev \
-    #         node-less \
-    #         npm \
-    #         python3-magic \
-    #         python3-num2words \
-    #         python3-odf \
-    #         python3-pdfminer \
-    #         python3-pip \
-    #         python3-phonenumbers \
-    #         python3-pyldap \
-    #         python3-qrcode \
-    #         python3-renderpm \
-    #         python3-setuptools \
-    #         python3-slugify \
-    #         python3-vobject \
-    #         python3-watchdog \
-    #         python3-xlrd \
-    #         python3-xlwt \
-    #         python3-stdeb \
-    #         fakeroot \
-    #         python3-all \
-    #         dpkg-dev \
-    #         dh-python \
-    #         xz-utils && \
-    #     if [ -z "${TARGETARCH}" ]; then \
-    #         TARGETARCH="$(dpkg --print-architecture)"; \
-    #     fi; \
-    #     WKHTMLTOPDF_ARCH=${TARGETARCH} && \
-    #     case ${TARGETARCH} in \
-    #     "amd64") WKHTMLTOPDF_ARCH=amd64 && WKHTMLTOPDF_SHA=967390a759707337b46d1c02452e2bb6b2dc6d59  ;; \
-    #     "arm64")  WKHTMLTOPDF_SHA=90f6e69896d51ef77339d3f3a20f8582bdf496cc  ;; \
-    #     "ppc64le" | "ppc64el") WKHTMLTOPDF_ARCH=ppc64el && WKHTMLTOPDF_SHA=5312d7d34a25b321282929df82e3574319aed25c  ;; \
-    #     esac \
-    #     && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
-    #     && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
-    #     && sudo apt-get install -y --no-install-recommends ./wkhtmltox.deb \
-    #     && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
-    #     pip install -r requirements.txt
+    - name: Install dependencies
+      run: |
+        sudo apt-get update && \
+        DEBIAN_FRONTEND=noninteractive \
+        sudo apt-get install -y --no-install-recommends \
+            nfs-common \
+            ca-certificates \
+            curl \
+            dirmngr \
+            fonts-noto-cjk \
+            gnupg \
+            python3-dev \
+            libxml2-dev \
+            libxslt1-dev \
+            zlib1g-dev \
+            libsasl2-dev \
+            libldap2-dev \
+            build-essential \
+            libffi-dev \
+            libmysqlclient-dev \
+            libjpeg-dev \
+            libpq-dev \
+            libjpeg8-dev \
+            liblcms2-dev \
+            libblas-dev \
+            libatlas-base-dev \
+            libssl-dev \
+            node-less \
+            npm \
+            python3-magic \
+            python3-num2words \
+            python3-odf \
+            python3-pdfminer \
+            python3-pip \
+            python3-phonenumbers \
+            python3-pyldap \
+            python3-qrcode \
+            python3-renderpm \
+            python3-setuptools \
+            python3-slugify \
+            python3-vobject \
+            python3-watchdog \
+            python3-xlrd \
+            python3-xlwt \
+            python3-stdeb \
+            fakeroot \
+            python3-all \
+            dpkg-dev \
+            dh-python \
+            xz-utils && \
+        if [ -z "${TARGETARCH}" ]; then \
+            TARGETARCH="$(dpkg --print-architecture)"; \
+        fi; \
+        WKHTMLTOPDF_ARCH=${TARGETARCH} && \
+        case ${TARGETARCH} in \
+        "amd64") WKHTMLTOPDF_ARCH=amd64 && WKHTMLTOPDF_SHA=967390a759707337b46d1c02452e2bb6b2dc6d59  ;; \
+        "arm64")  WKHTMLTOPDF_SHA=90f6e69896d51ef77339d3f3a20f8582bdf496cc  ;; \
+        "ppc64le" | "ppc64el") WKHTMLTOPDF_ARCH=ppc64el && WKHTMLTOPDF_SHA=5312d7d34a25b321282929df82e3574319aed25c  ;; \
+        esac \
+        && curl -o wkhtmltox.deb -sSL https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.jammy_${WKHTMLTOPDF_ARCH}.deb \
+        && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
+        && sudo apt-get install -y --no-install-recommends ./wkhtmltox.deb \
+        && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
+        pip install -r requirements.txt
 
-    # - name: Build Odoo Module
-    #   run: |
-    #     ./odoo-bin -c resources/odoo-local.conf --without-demo=all --stop-after-init
+    - name: Build Odoo Module
+      run: |
+        ./odoo-bin -c resources/odoo-local.conf --without-demo=all --stop-after-init
 
-    # - name: Run Tests
-    #   run: |
-    #     ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --test-tags="post_install","-at_install" --stop-after-init
+    - name: Run Tests
+      run: |
+        ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --test-tags="post_install","-at_install" --stop-after-init
 
-    # - name: Create .deb Package
-    #   id: deb_package_step
-    #   run: |
-    #     dpkg-buildpackage -us -uc
-    #     mv ../odoo*all.deb ../odoo-17.0-${{github.sha}}-all.deb
-    #     echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
+    - name: Create .deb Package
+      id: deb_package_step
+      run: |
+        dpkg-buildpackage -us -uc
+        mv ../odoo*all.deb ../odoo-17.0-${{github.sha}}-all.deb
+        echo "artifact_name=odoo-17.0-${{github.sha}}-all.deb" >> "$GITHUB_OUTPUT"
     
-    # - name: 'Upload Artifact'
-    #   id: artifact-upload-step
-    #   uses: actions/upload-artifact@v4
-    #   with:
-    #     name: odoo-17.0-${{github.sha}}-all
-    #     path: /home/runner/work/odoo-17.0/${{ steps.deb_package_step.outputs.artifact_name}}
+    - name: 'Upload Artifact'
+      id: artifact-upload-step
+      uses: actions/upload-artifact@v4
+      with:
+        name: odoo-17.0-${{github.sha}}-all
+        path: /home/runner/work/odoo-17.0/${{ steps.deb_package_step.outputs.artifact_name}}
         retention-days: 10
 
-    # - name: Convert Artifact Id to Number
-    #   id: convert_artifact_id_tonumber
-    #   run: |
-    #     echo "artifact-id=${{ fromJSON(steps.artifact-upload-step.outputs.artifact-id) }}" >> "$GITHUB_OUTPUT"
+    - name: Convert Artifact Id to Number
+      id: convert_artifact_id_tonumber
+      run: |
+        echo "artifact-id=${{ fromJSON(steps.artifact-upload-step.outputs.artifact-id) }}" >> "$GITHUB_OUTPUT"
   
-    # - name: Outputs
-    #   run:  |
-    #     echo 'Artifact ID is ${{ steps.convert_artifact_id_tonumber.outputs.artifact-id }}'
-    #     echo 'Runner ID is ${{ github.run_id }}'
-    #     echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
-    #     echo 'Github SHA is ${{ github.sha }}'
-    #     echo 'Branch is ${{ env.BRANCH }}'
+    - name: Outputs
+      run:  |
+        echo 'Artifact ID is ${{ steps.convert_artifact_id_tonumber.outputs.artifact-id }}'
+        echo 'Runner ID is ${{ github.run_id }}'
+        echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
+        echo 'Github SHA is ${{ github.sha }}'
+        echo 'Branch is ${{ env.BRANCH }}'
 
   cd:
     needs: build
@@ -195,10 +195,9 @@ jobs:
     if: needs.build.outputs.branch == 'develop'
     with:
       target-env: ${{needs.build.outputs.branch}}
-      # branch: ${{needs.build.outputs.branch}}
-      # artifact-id: ${{ fromJson(needs.build.outputs.artifact-id) }}
-      artifact-id: 1266534473
-      # github_sha: ${{ github.sha }}
-      github_sha: "cd95a49e4d7dc37478b7bdff7e6d718ebb084a75"
+      artifact-id: ${{ fromJson(needs.build.outputs.artifact-id) }}
+      # artifact-id: 1266534473
+      github_sha: ${{ github.sha }}
+      # github_sha: "cd95a49e4d7dc37478b7bdff7e6d718ebb084a75"
       snapshot: false
     secrets: inherit

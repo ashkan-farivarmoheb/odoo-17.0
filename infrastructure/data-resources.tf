@@ -48,3 +48,7 @@ data "template_file" "ecs_task_template" {
     nginx_tag = "${var.nginx_tag}"
   })
 }
+
+data "aws_route53_zone" "tisol_com_au_zone" {
+  name = "tisol.com.au"
+}

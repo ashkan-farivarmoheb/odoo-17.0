@@ -113,26 +113,26 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
-      # - name: Set up Terraform
-      #   uses: hashicorp/setup-terraform@v1
-      #   with:
-      #     terraform_version: 1.1.0  # Specify the Terraform version to use
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.0  # Specify the Terraform version to use
 
-      # - name: Initialize Terraform
-      #   run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
-      #   working-directory: infrastructure
+      - name: Initialize Terraform
+        run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
+        working-directory: infrastructure
         
-      # - name: Validate Terraform configuration
-      #   run: terraform validate
-      #   working-directory: infrastructure
+      - name: Validate Terraform configuration
+        run: terraform validate
+        working-directory: infrastructure
         
-      # - name: Plan Terraform changes
-      #   run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-      #   working-directory: infrastructure
+      - name: Plan Terraform changes
+        run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+        working-directory: infrastructure
         
-      # - name: Apply Terraform changes
-      #   run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-      #   working-directory: infrastructure
+      - name: Apply Terraform changes
+        run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+        working-directory: infrastructure
       
       # - name: Destroy Terraform changes
       #   run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
