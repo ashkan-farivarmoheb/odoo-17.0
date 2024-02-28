@@ -18,6 +18,10 @@ jobs:
     delete_cluster:
         runs-on: ubuntu-latest
         steps:
+            
+            - name: Checkout code
+              uses: actions/checkout@v4
+
             - name: Set ecr_image_tag
               id: set-ecr-image-tag
               run: |
