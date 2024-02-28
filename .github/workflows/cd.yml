@@ -41,7 +41,7 @@ on:
 env:
   service_name: "odoo"
   service_version: "17.0"
-  # ecr_image_tag: ${{ inputs.branch }}-${{ inputs.github_sha }}
+
 jobs:
   deploy:
     name: Deploy to ${{ inputs.target-env }}
@@ -87,31 +87,31 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-      # - name: Check the image exists in ECR
-      #   id: ecr-image-exists
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: ${{ env.ecr_repository }}
-      #     IMAGE_TAG: ${{ env.ecr_image_tag }}
-      #   run: ./ecr_query.sh $ECR_REPOSITORY $IMAGE_TAG
-      #   working-directory: scripts
+      - name: Check the image exists in ECR
+        id: ecr-image-exists
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ecr_repository }}
+          IMAGE_TAG: ${{ env.ecr_image_tag }}
+        run: ./ecr_query.sh $ECR_REPOSITORY $IMAGE_TAG
+        working-directory: scripts
 
-      # - name: Build, tag, and push image to Amazon ECR
-      #   id: build-image
-      #   env:
-      #     ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      #     ECR_REPOSITORY: ${{ env.ecr_repository }}
-      #     IMAGE_TAG: ${{ env.ecr_image_tag }}
-      #   if: steps.ecr-image-exists.outputs.image_tag == ''
-      #   run: |
-      #     docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-      #       --build-arg REPOSITORY=${{ github.repository }} \
-      #       --build-arg ODOO_VERSION=${{env.service_version}} \
-      #       --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
-      #       --build-arg GITHUB_SHA=${{inputs.github_sha}} \
-      #       --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
-      #     docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-      #     echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ env.ecr_repository }}
+          IMAGE_TAG: ${{ env.ecr_image_tag }}
+        if: steps.ecr-image-exists.outputs.image_tag == ''
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            --build-arg REPOSITORY=${{ github.repository }} \
+            --build-arg ODOO_VERSION=${{env.service_version}} \
+            --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
+            --build-arg GITHUB_SHA=${{inputs.github_sha}} \
+            --build-arg ARTIFACT_ID=${{inputs.artifact-id}} .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v1
@@ -126,14 +126,10 @@ jobs:
         run: terraform validate
         working-directory: infrastructure
         
-      # - name: Plan Terraform changes
-      #   run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-      #   working-directory: infrastructure
+      - name: Plan Terraform changes
+        run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+        working-directory: infrastructure
         
-      # - name: Apply Terraform changes
-      #   run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-      #   working-directory: infrastructure
-      
-      - name: Destroy Terraform changes
-        run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+      - name: Apply Terraform changes
+        run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
         working-directory: infrastructure

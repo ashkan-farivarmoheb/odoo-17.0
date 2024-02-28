@@ -1,0 +1,42 @@
+
+name: Delete Cluster
+
+on:
+  workflow_dispatch: # Enable manual triggering
+    inputs:
+      target-env:
+        required: true
+        type: string
+      github_sha:
+        required: true
+        type: string
+      snapshot:
+        default: false
+        type: boolean
+
+jobs:
+    delete_cluster:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Set ecr_image_tag
+              id: set-ecr-image-tag
+              run: |
+                if [[ "${{ inputs.snapshot }}" == "true" ]]; then
+                    ecr_image_tag="snapshot-${{ inputs.github_sha }}"
+                else
+                    ecr_image_tag="develop-${{ inputs.github_sha }}"
+                fi
+                echo "ecr_image_tag=$ecr_image_tag" >> "$GITHUB_ENV"
+
+            - name: Set up Terraform
+              uses: hashicorp/setup-terraform@v1
+              with:
+                terraform_version: 1.1.0  # Specify the Terraform version to use
+
+            - name: Initialize Terraform
+              run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
+              working-directory: infrastructure
+
+            - name: Destroy Terraform changes
+              run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+              working-directory: infrastructure
