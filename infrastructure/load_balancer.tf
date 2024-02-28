@@ -11,7 +11,7 @@ resource "aws_lb" "aws_lb_nlb" {
 }
 
 resource "aws_lb_target_group" "http_tg" {
-  name     = "tcp-tg"
+  name     = "http_tg"
   target_type = "instance"
   vpc_id = data.aws_vpc.odoo.id
   port     = 80
@@ -30,7 +30,7 @@ resource "aws_lb_listener" "http_listener" {
 }
 
 resource "aws_lb_target_group" "tcp_tg" {
-  name     = "example-target-group"
+  name     = "tcp_tg"
   target_type = "instance"
   vpc_id = data.aws_vpc.odoo.id
   port     = 443
