@@ -2,7 +2,7 @@
 name: Delete Cluster
 
 on:
-  workflow_dispatch: # Enable manual triggering
+  workflow_dispatch:
     inputs:
       target-env:
         required: true
@@ -22,6 +22,17 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
+            - name: Configure AWS credentials
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                aws-region: ${{ secrets.AWS_REGION }}
+      
+            - name: Login to Amazon ECR
+              id: login-ecr
+              uses: aws-actions/amazon-ecr-login@v1
+
             - name: Set ecr_image_tag
               id: set-ecr-image-tag
               run: |
@@ -32,13 +43,21 @@ jobs:
                 fi
                 echo "ecr_image_tag=$ecr_image_tag" >> "$GITHUB_ENV"
 
-            - name: Set up Terraform
-              uses: hashicorp/setup-terraform@v1
-              with:
-                terraform_version: 1.1.0  # Specify the Terraform version to use
-
+                - name: Set up Terraform
+                uses: hashicorp/setup-terraform@v1
+                with:
+                  terraform_version: 1.1.0  # Specify the Terraform version to use
+        
             - name: Initialize Terraform
               run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
+              working-directory: infrastructure
+              
+            - name: Validate Terraform configuration
+              run: terraform validate
+              working-directory: infrastructure
+              
+            - name: Plan Terraform changes
+              run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
               working-directory: infrastructure
 
             - name: Destroy Terraform changes

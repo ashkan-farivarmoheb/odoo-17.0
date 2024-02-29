@@ -130,10 +130,10 @@ jobs:
         run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
         working-directory: infrastructure
         
-      # - name: Apply Terraform changes
-      #   run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-      #   working-directory: infrastructure
-
-      - name: Destroy Terraform changes
-        run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+      - name: Apply Terraform changes
+        run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
         working-directory: infrastructure
+
+      # - name: Destroy Terraform changes
+      #   run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+      #   working-directory: infrastructure

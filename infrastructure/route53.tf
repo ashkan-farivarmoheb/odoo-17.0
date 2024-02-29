@@ -5,7 +5,7 @@ resource "aws_route53_record" "tisol_nlb_cname" {
   ttl     = 60
 
   records = [
-    "dualstack.${aws_lb.aws_lb_nlb.dns_name}"
+    "${aws_lb.aws_lb_nlb.dns_name}"
   ]
 
   depends_on = [ aws_ecs_service.ecs_service, aws_lb.aws_lb_nlb ]
