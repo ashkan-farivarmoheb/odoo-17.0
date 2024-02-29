@@ -43,10 +43,10 @@ jobs:
                 fi
                 echo "ecr_image_tag=$ecr_image_tag" >> "$GITHUB_ENV"
 
-                - name: Set up Terraform
-                uses: hashicorp/setup-terraform@v1
-                with:
-                  terraform_version: 1.1.0  # Specify the Terraform version to use
+            - name: Set up Terraform
+              uses: hashicorp/setup-terraform@v1
+              with:
+                terraform_version: 1.1.0  # Specify the Terraform version to use
         
             - name: Initialize Terraform
               run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
