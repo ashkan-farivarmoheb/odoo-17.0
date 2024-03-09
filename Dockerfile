@@ -5,6 +5,12 @@ SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
 # Generate locale C.UTF-8 for postgres and general locale data
 ENV LANG en_US.UTF-8
+# Set the default config file
+ENV ODOO_RC /etc/odoo/odoo-local.conf
+ENV APP_CONF /opt/app/conf
+ENV AWS_RDS_CA_BUNDLE_URL https://truststore.pki.rds.amazonaws.com
+ENV AWS_REGION ap-southeast-2
+ENV AWS_RDS_CA_BUNDLE ap-southeast-2-bundle.pem
 
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
@@ -107,9 +113,6 @@ RUN npm install -g rtlcss
 # Create the odoo user
 RUN useradd --no-log-init -u 10000 odoo
 
-# Install Odoo
-ENV ODOO_VERSION 17.0
-
 RUN curl -LJO -H "Authorization: Bearer ${GITHUB_TOKEN}" \
 "https://api.github.com/repos/${REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip"
 
@@ -126,14 +129,15 @@ ADD resources /etc/odoo/
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo*.conf \
     && mkdir -p /mnt/{extra-addons,sources}
+    && mkdir -p ${APP_CONF}
 
-RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt
+RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt && chown -R odoo:odoo ${APP_CONF}
+
+#install aws rds ca bundle
+RUN curl -o ${APP_CONF}/${AWS_RDS_CA_BUNDLE} ${AWS_RDS_CA_BUNDLE_URL}/${AWS_REGION}/${AWS_RDS_CA_BUNDLE}
 
 # Expose Odoo services
 EXPOSE 8069 8071 8072
-
-# Set the default config file
-ENV ODOO_RC /etc/odoo/odoo-local.conf
 
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
