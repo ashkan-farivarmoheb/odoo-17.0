@@ -128,7 +128,7 @@ ADD resources /etc/odoo/
 
 # Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
 RUN chown odoo /etc/odoo/odoo*.conf \
-    && mkdir -p /mnt/{extra-addons,sources}
+    && mkdir -p /mnt/{extra-addons,sources} \
     && mkdir -p ${APP_CONF}
 
 RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt && chown -R odoo:odoo ${APP_CONF}
