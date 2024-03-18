@@ -8,9 +8,9 @@ ENV LANG en_US.UTF-8
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo-local.conf
 ENV APP_CONF /opt/app/conf
-ENV AWS_RDS_CA_BUNDLE_URL https://truststore.pki.rds.amazonaws.com
-ENV AWS_REGION ap-southeast-2
-ENV AWS_RDS_CA_BUNDLE ap-southeast-2-bundle.pem
+ENV AWS_RDS_CA_BUNDLE_URL https://truststore.pki.us-gov-west-1.rds.amazonaws.com
+ENV AWS_REGION global
+ENV AWS_RDS_CA_BUNDLE global-bundle.pem
 
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
