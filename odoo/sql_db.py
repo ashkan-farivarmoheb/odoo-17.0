@@ -783,7 +783,7 @@ def connection_info_for(db_or_uri):
         return db_name, {'dsn': db_or_uri, 'application_name': app_name}
 
     connection_info = {'database': db_or_uri, 'application_name': app_name}
-    for p in ('host', 'port', 'user', 'password', 'sslmode'):
+    for p in ('host', 'port', 'user', 'password', 'sslmode', 'sslrootcert'):
         cfg = tools.config['db_' + p]
         if cfg:
             connection_info[p] = cfg

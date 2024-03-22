@@ -258,6 +258,8 @@ class configmanager(object):
         group.add_option("--db_sslmode", dest="db_sslmode", type="choice", my_default='prefer',
                          choices=['disable', 'allow', 'prefer', 'require', 'verify-ca', 'verify-full'],
                          help="specify the database ssl connection mode (see PostgreSQL documentation)")
+        group.add_option("--db_sslrootcert", dest="db_sslrootcert", my_default=False,
+                         help="specify ssl root cert")
         group.add_option("--db_maxconn", dest="db_maxconn", type='int', my_default=64,
                          help="specify the maximum number of physical connections to PostgreSQL")
         group.add_option("--db_maxconn_gevent", dest="db_maxconn_gevent", type='int', my_default=False,
@@ -447,7 +449,7 @@ class configmanager(object):
 
         # if defined do not take the configfile value even if the defined value is None
         keys = ['gevent_port', 'http_interface', 'http_port', 'longpolling_port', 'http_enable', 'x_sendfile',
-                'db_name', 'db_user', 'db_password', 'db_host', 'db_sslmode',
+                'db_name', 'db_user', 'db_password', 'db_host', 'db_sslmode', 'db_sslrootcert',
                 'db_port', 'db_template', 'logfile', 'pidfile', 'smtp_port',
                 'email_from', 'smtp_server', 'smtp_user', 'smtp_password', 'from_filter',
                 'smtp_ssl_certificate_filename', 'smtp_ssl_private_key_filename',
