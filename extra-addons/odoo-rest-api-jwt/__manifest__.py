@@ -10,7 +10,7 @@
     'author': "FG",
     'category': 'developers,Tools',
     "version": "17.1",
-    'depends': ['auth_jwt', 'base'],
+    'depends': ['restfull_api_jwt', 'base'],
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
