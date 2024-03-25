@@ -16,7 +16,6 @@ from .exceptions import QueryFormatError
 from odoo.addons.restfull_api_jwt.service.auth_service import IAuthService
 from odoo.addons.restfull_api_jwt.service.dependency_container import dependency_container
 
-from odoo.addons.restfull_api_jwt.utils.exceptions_unauthorized import UnauthorizedInvalidToken, UnauthorizedMissingAuthorizationHeader
 from odoo.addons.restfull_api_jwt.utils.custom_exception import ParamsErrorException
 
 
