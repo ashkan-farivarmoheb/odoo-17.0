@@ -1,0 +1,538 @@
+{
+	"info": {
+		"_postman_id": "479f6ede-e139-436c-81f8-acc5fd33d3a3",
+		"name": "odoo-rest-api-jwt get",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29374335"
+	},
+	"item": [
+		{
+			"name": "BasicFetch",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/res.partner",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"res.partner"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pageintation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/res.partner?page_size=10&page=1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"res.partner"
+					],
+					"query": [
+						{
+							"key": "page_size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filtering",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product.template/?query={id, name,list_price}&filter=[[\"id\", \">\", 2], [\"id\", \"<\", 7]]",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{id, name,list_price}"
+						},
+						{
+							"key": "filter",
+							"value": "[[\"id\", \">\", 2], [\"id\", \"<\", 7]]"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CustomOrdering",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product.template/?query={id, name,list_price}&filter=[[\"id\", \">\", 2], [\"id\", \"<\", 7]]&order=\"id ASC\"",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{id, name,list_price}"
+						},
+						{
+							"key": "filter",
+							"value": "[[\"id\", \">\", 2], [\"id\", \"<\", 7]]"
+						},
+						{
+							"key": "order",
+							"value": "\"id ASC\""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SpecificFields-Query",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product.template/?query={id, name,list_price}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{id, name,list_price}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "limit",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product.templats/?query={id, name,list_price}&limit=3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.templats",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{id, name,list_price}"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Model record by  id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product.template/23/?query={id, name,list_price}&limit=3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						"23",
+						""
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "{id, name,list_price}"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Model record by  id Copy",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product.category/66/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.category",
+						"66",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post single record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"params\": {\r\n            \"data\": {\r\n                \"name\": \"Test category_11\"\r\n            }\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product.category/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.category",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post single record with context",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"params\": {\r\n            \"data\": {\r\n                       \"name\": \"New Product Category\",\r\n                       \"description\": \"Description of the new category\"\r\n                   },\r\n                   \"context\": {\r\n                   \"lang\": \"en_US\",\r\n                   \"tz\": \"Europe/Brussels\",\r\n                   \"uid\": \"uid\"\r\n               }\r\n\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product.category/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.category",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update single record",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"params\": {\r\n       \r\n            \"data\": {\r\n                       \"name\": \"Large Desk\"\r\n                   }\r\n            \r\n\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product.template/13",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update single record with operation",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"params\": {\r\n                   \"filter\": [[\"id\", \"=\", 13]],\r\n\r\n            \"data\": {\r\n                       \"product_tag_ids\":{\r\n                        \"push\": [3,4]\r\n                        // ,\"pop\": [3,4]\r\n                        // ,\"delete\": [1]\r\n\r\n                        }\r\n                   },\r\n                   \"context\": {\r\n                   \"lang\": \"en_US\",\r\n                   \"tz\": \"Europe/Brussels\",\r\n                   \"uid\": \"uid\"\r\n               }\r\n\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product.template",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update bulk record with operation Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"params\": {\r\n       \r\n            \"dat\": {\r\n                       \"name\": \"New Product Categor75\",\r\n                       \"product_tag_ids\":{\r\n                        \"push\": [3,4]\r\n                        // ,\"pop\": [3,4]\r\n                        // ,\"delete\": [1]\r\n\r\n                        }\r\n                   },\r\n                   \"context\": {\r\n                   \"lang\": \"en_US\",\r\n                   \"tz\": \"Europe/Brussels\",\r\n                   \"uid\": \"uid\"\r\n               }\r\n\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product.template/13",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update bulk records",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"params\": {\r\n            \"filter\": [[\"product_tag_ids\", \"=\", 3]],\r\n\r\n            \"data\": {\r\n                       \"name\": \"New Product Categor75\"\r\n                   \r\n                   },\r\n                   \"context\": {\r\n                   \"lang\": \"en_US\",\r\n                   \"tz\": \"Europe/Brussels\",\r\n                   \"uid\": \"uid\"\r\n               }\r\n\r\n        }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product.template/",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete single record Copy",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{host}}/api/product.template/43",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						"43"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete bulk records",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{ACCODE}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/api/product.template/?filter=[[\"name\", \"=\", \"New Product Categor75 (copy)\"]]",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"product.template",
+						""
+					],
+					"query": [
+						{
+							"key": "filter",
+							"value": "[[\"name\", \"=\", \"New Product Categor75 (copy)\"]]"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
