@@ -87,8 +87,10 @@ class OdooAPI(http.Controller):
 
     @http.route(
         '/object/<string:model>/<string:function>',
-        type='json', auth='user', methods=["POST"], csrf=False)
+        type='json', auth='jwt_portal_auth', methods=["POST"], csrf=False)
     def call_model_function(self, model, function, **post):
+        self.authService.validatorToken()
+
         args = []
         kwargs = {}
         if "args" in post:
@@ -101,8 +103,10 @@ class OdooAPI(http.Controller):
 
     @http.route(
         '/object/<string:model>/<int:rec_id>/<string:function>',
-        type='json', auth='user', methods=["POST"], csrf=False)
+        type='json', auth='jwt_portal_auth', methods=["POST"], csrf=False)
     def call_obj_function(self, model, rec_id, function, **post):
+        self.authService.validatorToken()
+
         args = []
         kwargs = {}
         if "args" in post:
