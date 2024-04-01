@@ -53,3 +53,5 @@ package.json
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
+
+data
