@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_delivery_carrier_form_inherit_auspost_credntial" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.inherit.auspost</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <header invisible="delivery_type!='australia_post'">
+                    <button name="australia_post_get_account_info" string="Get Account Info" type="object" class="oe_highlight"/>
+                </header >
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page string="AusPost Credentials" invisible="delivery_type!='australia_post'">
+                    <group>
+                        <field name="australia_post_api_key"/>
+                        <field name="australia_post_api_password" password="True"/>
+                    </group>
+                    <group>
+                        <field name="australia_post_account_number"/>
+                        <field name="australia_post_environment"/>
+                    </group>
+                </page>
+            </xpath>
+
+
+        </field>
+    </record>
+</odoo>
