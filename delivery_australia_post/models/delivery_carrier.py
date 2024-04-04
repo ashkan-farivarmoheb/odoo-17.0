@@ -2,6 +2,7 @@ import requests
 from odoo import fields, models, api
 import logging
 from odoo.exceptions import UserError
+from australia_post_repository import AustraliaPostRepository
 # https://webkul.com/blog/odoo-australia-shipping-integration/
 _logger = logging.getLogger(__name__)
 
@@ -42,13 +43,16 @@ class DeliveryCarrierAustraliaPost(models.Model):
          :param order: The sale.order record
          :return: A dictionary containing the shipment rate and other details.
          """
-
-        res = {
-            'success': True,
-            'price': 10.00,  # Example fixed price
-            'error_message': False,
-            'warning_message': False,
+        request = {
+            'length': order.shipping_length,
+            'width': order.shipping_width,
+            'height': order.shipping_height,
+            'weight': order.shipping_weight,
+            'from_postcode': order.warehouse_id.partner_id.zip,
+            'to_postcode': order.partner_shipping_id.zip,
+            'service_code': 'AUS_PARCEL_REGULAR'
         }
+        res = AustraliaPostRepository().get_shipping_rates(data=request)
         total_weight = order.shipping_weight
 
         _logger.debug(
