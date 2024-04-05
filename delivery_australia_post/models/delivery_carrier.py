@@ -1,16 +1,18 @@
+from .australia_post_repository import AustraliaPostRepository
+
 import requests
 from odoo import fields, models, api
 import logging
 from odoo.exceptions import UserError
-from australia_post_repository import AustraliaPostRepository
-# https://webkul.com/blog/odoo-australia-shipping-integration/
 _logger = logging.getLogger(__name__)
-
+# https://webkul.com/blog/odoo-australia-shipping-integration/
+# https://www.youtube.com/watch?v=cNgw9HTTMOQ
 # https://github.com/OCA/delivery-carrier/blob/6fdd81598a7f5ff0c031623ec6193d667f447b5a/delivery_tnt_oca/models/delivery_carrier.py#L125
 # https://github.com/OCA/delivery-carrier/blob/6fdd81598a7f5ff0c031623ec6193d667f447b5a/delivery_tnt_oca/models/tnt_request.py#L39
 
 
 class DeliveryCarrierAustraliaPost(models.Model):
+
     _inherit = 'delivery.carrier'
 
     australia_post_api_key = fields.Char(string="Australia Post API Key")
@@ -43,25 +45,22 @@ class DeliveryCarrierAustraliaPost(models.Model):
          :param order: The sale.order record
          :return: A dictionary containing the shipment rate and other details.
          """
+        australiaPost_repository = AustraliaPostRepository(self, order)
+ 
         request = {
-            'length': order.shipping_length,
-            'width': order.shipping_width,
-            'height': order.shipping_height,
+            'length': "5",
+            'width': "10",
+            'height': "1",
             'weight': order.shipping_weight,
             'from_postcode': order.warehouse_id.partner_id.zip,
             'to_postcode': order.partner_shipping_id.zip,
             'service_code': 'AUS_PARCEL_REGULAR'
         }
-        res = AustraliaPostRepository().get_shipping_rates(data=request)
-        total_weight = order.shipping_weight
 
-        _logger.debug(
-            " Australia post Shippping module rate_shipment for order %s ", res)
-        _logger.debug(
-            "   order.shipping_weight:%s ", total_weight)
+        res = australiaPost_repository.get_shipping_rates(data=request)
+        # _logger.debug(
+        #     " Australia post Shippping module rate_shipment for order %s ", res)
 
-        # Placeholder: Implement the API call to Australia Post here
-        # Example return structure
         return res
 
     def australia_post_send_shipping(self, pickings):
