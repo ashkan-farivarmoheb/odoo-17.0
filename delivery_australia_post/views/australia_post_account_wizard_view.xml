@@ -10,7 +10,6 @@
                 <group col="2">
                     <group >
                         <field name="title"/>
-                        <field name="account_holder"/>
                         <field name="name"/>
                     </group>
                     <group >
@@ -21,9 +20,9 @@
                 </group>
                 <field name="table_ids">
                     <tree editable="false">
-                        <field name="name"/>
-                        <field name="code" />
-                        <field name="available_service_type" />
+                        <field name="type"/>
+                        <field name="product_id" />
+                        <field name="group" />
                     </tree>
                 </field>
                 <footer>

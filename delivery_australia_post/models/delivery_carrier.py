@@ -1,7 +1,7 @@
 from .australia_post_repository import AustraliaPostRepository
 
 import requests
-from odoo import fields, models, api
+from odoo import fields, models, api, _
 import logging
 from odoo.exceptions import UserError
 _logger = logging.getLogger(__name__)
@@ -26,8 +26,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
     ], string="Environment", default='test_environment', help="Select the environment for Australia Post API.")
 
     australia_post_service_code = fields.Selection([
-        ('standard', 'Standard Post'),
-        ('express', 'Express Post'),
+        ('AUS_PARCEL_REGULAR', 'Standard Post'),
+        ('AUS_PARCEL_EXPRESS', 'Express Post'),
         # Add more service codes as necessary
     ], string="Service Code")
     australia_post_return_service_code = fields.Selection([
@@ -46,7 +46,11 @@ class DeliveryCarrierAustraliaPost(models.Model):
          :return: A dictionary containing the shipment rate and other details.
          """
         australiaPost_repository = AustraliaPostRepository(self, order)
- 
+
+        if not self.australia_post_service_code:
+            # australia_post_service_code is not set, raise a UserError to notify the user
+            raise UserError(
+                _("The Australia Post Service Code is not configured in the Shipping Method settings. Please specify it before proceeding."))
         request = {
             'length': "5",
             'width': "10",
@@ -54,7 +58,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
             'weight': order.shipping_weight,
             'from_postcode': order.warehouse_id.partner_id.zip,
             'to_postcode': order.partner_shipping_id.zip,
-            'service_code': 'AUS_PARCEL_REGULAR'
+            'service_code': self.australia_post_service_code
         }
 
         res = australiaPost_repository.get_shipping_rates(data=request)
@@ -117,33 +121,27 @@ class DeliveryCarrierAustraliaPost(models.Model):
         # Implement as needed for Australia Post specifics
         return 'DEFAULT_CODE'
 
-    @api.model
-    def australia_post_get_account_info(self, *args, **kwargs):
-        # Placeholder for the API call
-        try:
-            # response = requests.get("your_api_endpoint", auth=("your_username", "your_password"))
-            # response.raise_for_status()  # This will raise an exception for HTTP error responses
-            # api_data = response.json()
-            api_data = {
-                'acc_hold': 'Account Holder Example',
-                'name': 'Example Name',
-                'validdate': '2024-01-01',
-                'accNum': '123456789',
-                'AccTo': '2025-01-01',
-                # Assuming you have a list of dicts for the table part
-                'table': [{'name': 'Item 1', 'code': 'Code 1', 'available_service_type': 'Dispatch'}, {'name': 'Item 2', 'code': 'Code 2', 'available_service_type': 'Return'}]
-            }
+    @ api.model
+    def australia_post_get_account_info(self, carrier):
+        australiaPost_repository = AustraliaPostRepository(self)
+        carrier_model = self.env['delivery.carrier']
+        carrier_id = carrier[0]
 
-        # Create the wizard with the fetched data
-            wizard = self.env['australia.post.account.info.wizard'].create({
-                'title': 'Account Info',
-                'account_holder': api_data['acc_hold'],
-                'name': api_data['name'],
-                'valid_from': api_data['validdate'],
-                'account_number': api_data['accNum'],
-                'valid_to': api_data['AccTo'],
-                'table_ids': [(0, 0, line) for line in api_data['table']]
-            })
+        carrier_record = carrier_model.browse(carrier_id)
+        carrier_record.ensure_one()
+        carrier_record = carrier_record.read()[0]
+
+        try:
+            res = australiaPost_repository.get_account(
+                carrier_record)
+
+            if not res.get('data'):
+                raise UserError(
+                    _("No account data returned from Australia Post."))
+            # Create the wizard with the fetched data
+            wizard = self.env['australia.post.account.info.wizard'].create(
+                res['data'])
+
         except UserError as e:
             # Handle expected model-specific errors
             raise

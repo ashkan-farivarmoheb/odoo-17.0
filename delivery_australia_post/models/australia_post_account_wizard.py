@@ -6,8 +6,7 @@ class AustraliaPostAccountInfoWizard(models.TransientModel):
     _description = 'Australia Post Account Information'
 
     title = fields.Char(string='Title', readonly=True)
-    account_holder = fields.Char(string='Account Holder', readonly=True)
-    name = fields.Char(string='Name', readonly=True)
+    name = fields.Char(string='Account Holder Name', readonly=True)
     valid_from = fields.Date(string='Valid From', readonly=True)
     account_number = fields.Char(string='Account Number', readonly=True)
     valid_to = fields.Date(string='Valid To', readonly=True)
@@ -24,7 +23,7 @@ class AustraliaPostAccountInfoLine(models.TransientModel):
 
     wizard_id = fields.Many2one(
         'australia.post.account.info.wizard', string='Wizard', readonly=True)
-    name = fields.Char(string='Name', readonly=True)
-    code = fields.Char(string='Code', readonly=True)
-    available_service_type = fields.Char(
-        string='Available Service Type', readonly=True)
+    type = fields.Char(string='Type', readonly=True)
+    product_id = fields.Char(string='Code', readonly=True)
+    group = fields.Char(
+        string='Group', readonly=True)

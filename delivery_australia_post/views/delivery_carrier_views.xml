@@ -10,6 +10,7 @@
                     <button name="australia_post_get_account_info" string="Get Account Info" type="object" class="oe_highlight"/>
                 </header >
             </xpath>
+            <!-- #TODO: make AusPostCredential required on the form if necessary -->
 
             <xpath expr="//notebook" position="inside">
                 <page string="AusPost Credentials" invisible="delivery_type!='australia_post'">
