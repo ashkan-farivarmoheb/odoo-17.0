@@ -21,7 +21,7 @@ class AustraliaPostRepository(object):
         self.appVersion = 1.0
         self.password = carrier.australia_post_api_password
         self.account = carrier.australia_post_account_number if carrier.australia_post_account_number else None
-
+        self.api_key = carrier.australia_post_api_key
         auth_encoding = "%s:%s" % (self.account, self.password)
         self.authorization = base64.b64encode(
             auth_encoding.encode("utf-8")).decode("utf-8")
