@@ -1,0 +1,22 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "PUT",
+                "urlPath": "/shipping/v1/orders",
+                "bodyPatterns": [
+                    {
+                        "equalToJson" :  "{ \"order_reference\":\"My order reference\", \"payment_method\":\"CHARGE_TO_ACCOUNT\", \"shipments\": [{\"shipment_id\": \"569b9a3accdc791c4ba34d6f\"}]}"
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 201,
+                "bodyFileName": "austpost_create_order_shipments_success.json"
+            }
+        }
+    ]
+}
