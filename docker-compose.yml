@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+
+    wiremock:
+      image: "wiremock/wiremock:latest"
+      ports:
+        - "8887:8080"
+        - "8443:8443"
+      volumes:
+        - ./test/stubdata:/home/wiremock
+
+    db:
+      image: postgres:15
+      environment:
+        - POSTGRES_DB=postgres
+        - POSTGRES_PASSWORD=odoo
+        - POSTGRES_USER=odoo
+      ports:
+        - "5432:5432"
+
+    redis:
+      container_name: redis_container
+      image: redis:6.2-alpine
+      healthcheck:
+        test: ["CMD", "redis-cli", "ping"]
+        interval: 15s
+        timeout: 5s
+        retries: 10
+      restart: always
+      ports:
+        - '6379:6379'
+      #command: redis-server --save 20 1 --loglevel warning --requirepass password123
