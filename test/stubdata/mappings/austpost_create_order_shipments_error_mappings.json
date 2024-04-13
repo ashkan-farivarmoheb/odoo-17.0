@@ -1,0 +1,25 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "PUT",
+                "urlPath": "/shipping/v1/orders",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": {
+                            "expression": "$.shipments[0].shipment_id",
+                            "matches": "mrKsEAOvKWEAAAFH_s82k9cR"
+                        }
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 400,
+                "bodyFileName": "austpost_create_order_shipments_400_error.json"
+            }
+        }
+    ]
+}

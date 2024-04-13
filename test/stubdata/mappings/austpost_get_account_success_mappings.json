@@ -1,0 +1,17 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "GET",
+                "urlPath": "/shipping/v1/accounts/0000123456"
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_get_account_success.json"
+            }
+        }
+    ]
+}

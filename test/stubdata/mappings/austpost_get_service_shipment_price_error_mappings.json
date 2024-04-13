@@ -1,0 +1,46 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/prices/shipments",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": {
+                            "expression": "$.shipments[0].items[0].product_id",
+                            "matches": "^[A-Z0-9a-z]{1,3}"
+                        }
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 400,
+                "bodyFileName": "austpost_get_service_shipment_price_400_error.json"
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/prices/shipments",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": {
+                            "expression": "$.shipments[0].items[0].product_id",
+                                "matches": "^00"
+                        }
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 401,
+                "bodyFileName": "austpost_get_service_shipment_price_401_error.json"
+            }
+        }
+    ]
+}

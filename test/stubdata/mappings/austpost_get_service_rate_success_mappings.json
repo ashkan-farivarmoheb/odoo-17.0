@@ -1,0 +1,40 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "GET",
+                "urlPath": "/postage/parcel/domestic/calculate.json",
+                "queryParameters": {
+                    "length": {
+                        "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                    },
+                    "width": {
+                        "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                    },
+                    "height": {
+                        "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                    },
+                    "weight": {
+                        "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                    },
+                    "from_postcode": {
+                        "matches": "^[1-9]{1}\\d{3}"
+                    },
+                    "to_postcode": {
+                        "matches": "^[1-9]{1}\\d{3}"
+                    },
+                    "service_code": {
+                        "equalTo": "AUS_PARCEL_REGULAR"
+                    }
+                }
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_get_service_rate_success.json"
+            }
+        }
+    ]
+}
