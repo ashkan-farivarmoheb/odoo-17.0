@@ -45,7 +45,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
          :param order: The sale.order record
          :return: A dictionary containing the shipment rate and other details.
          """
-        australiaPost_repository = AustraliaPostRepository(self, order)
+        australiaPost_repository = AustraliaPostRepository(self)
 
         if not self.australia_post_service_code:
             # australia_post_service_code is not set, raise a UserError to notify the user
