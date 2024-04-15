@@ -1,0 +1,53 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/prices/items",
+                "bodyPatterns": [
+                    {
+                        "and": [
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].item_reference",
+                                    "matches": "abc xyz"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].length",
+                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].height",
+                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].width",
+                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].weight",
+                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_get_item_prices_success.json"
+            }
+        }
+    ]
+}

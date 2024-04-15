@@ -15,6 +15,7 @@ account_details_path = config.options.get("services_austpost_accountDetails_path
 create_shipment_path = config.options.get("services_austpost_createShipment_path")
 create_order_path = config.options.get("services_austpost_createOrder_path")
 service_rate_path = config.options.get("services_austpost_serviceRate_path")
+item_prices_path = config.options.get("services_austpost_get_item_prices_path")
 
 
 class AustraliaPostRepository(object):
@@ -226,18 +227,58 @@ class AustraliaPostRepository(object):
 
         return response
 
+    def get_item_prices(self, source=None, destination=None, items=None):
+        response = None
+        try:
+            if source is None:
+                raise UserError(_("Source for getting item price is missing."))
+            if destination is None:
+                raise UserError(_("Destination for getting destination price is missing."))
+            if items is None:
+                raise UserError(_("Items for getting prices are missing."))
+
+            headers = {
+                "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
+                "Accept": AustraliaPostRepository.ACCEPT,
+                "Authentication": self.authentication,
+                "ACCOUNT-NUMBER": self.account
+            }
+
+            payload = json.dumps({
+                "from": source,
+                "to": destination,
+                "items": items
+            })
+            res = requests.post(url="".join([host, item_prices_path]), headers=headers, data=payload)
+            res_json = res.json()
+
+            if res.status_code == 200:
+                response = self.create_success_response(res_json)
+            else:
+                response = self.create_error_response(res_json)
+
+        except requests.exceptions.Timeout:
+            raise UserError(_("Timeout: the server did not reply within 10s"))
+        except (ValueError, requests.exceptions.ConnectionError):
+            raise UserError(_("Server not reachable, please try again later"))
+        except requests.exceptions.HTTPError as e:
+            raise UserError(
+                _("{}\n{}".format(
+                    e, response['error_message'] if response else ""))
+            )
+        except Exception as e:
+            raise UserError(_("Unexpected error: %s", e))
+
+        return response
+
     def create_error_response(self, res_json):
         return {
             'success': False,
-            'data': res_json,
-            'error_message': res_json['errors'][0]['message'],
-            'warning_message': res_json['errors'][0]['message']
+            'data': res_json
         }
 
     def create_success_response(self, res_json):
         return {
             'success': True,
-            'data': res_json,
-            'error_message': False,
-            'warning_message': False,
+            'data': res_json
         }
