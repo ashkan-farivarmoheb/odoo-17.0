@@ -36,6 +36,24 @@
                                     "expression": "$.items[0].weight",
                                     "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
                                 }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].product_ids",
+                                    "matches": ".*E34.*"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].product_ids",
+                                    "matches": ".*T28S.*"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].product_ids",
+                                    "matches": ".*E34S.*"
+                                }
                             }
                         ]
                     }

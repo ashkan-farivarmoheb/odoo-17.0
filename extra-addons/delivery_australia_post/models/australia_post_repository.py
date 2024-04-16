@@ -233,9 +233,11 @@ class AustraliaPostRepository(object):
             if source is None:
                 raise UserError(_("Source for getting item price is missing."))
             if destination is None:
-                raise UserError(_("Destination for getting destination price is missing."))
+                raise UserError(_("Destination for getting price is missing."))
             if items is None:
                 raise UserError(_("Items for getting prices are missing."))
+            if items['product_ids'] is None:
+                _logger.info("product_ids for getting prices are missing")
 
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
