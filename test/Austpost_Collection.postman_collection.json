@@ -167,6 +167,38 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "services_austpost_delete_shipment_path",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8887/shipping/v1/shipments/54kjEFSvIo4759AJGsaaMNBE",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8887",
+					"path": [
+						"shipping",
+						"v1",
+						"shipments",
+						"54kjEFSvIo4759AJGsaaMNBE"
+					],
+					"query": [
+						{
+							"key": "shipment_ids",
+							"value": "9lesEAOvOm4AAAFI3swaDRYB,54kjEFSvIo4759AJGsaaMNBF",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
