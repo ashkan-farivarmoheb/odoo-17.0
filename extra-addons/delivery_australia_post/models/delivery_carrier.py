@@ -108,18 +108,22 @@ class DeliveryCarrierAustraliaPost(models.Model):
         # Example tracking link, replace with real URL format provided by Australia Post
         return 'https://auspost.com.au/mypost/track/#/details/{}'.format(picking.carrier_tracking_ref)
 
+
     def australia_post_cancel_shipment(self, picking):
-        """Cancel the shipment with Australia Post.
 
-        Args:
-            picking: The stock.picking record for which to cancel the shipment.
+        try:
+            carrier = self.env['delivery.carrier'].search([('id', '=', picking.carrier_id.id)])
+            carrier.ensure_one()
+            carrier_record = carrier.read()[0]
+            res = self._get_australia_post_repository().delete_shipment([picking.carrier_tracking_ref], carrier_record)
+        except UserError as e:
+            raise e
+        except Exception as e:
+            _logger.error("Failed to cancel shipment: %s", e)
+            raise UserError(
+                "There was a problem cancelling the shipment. Please try again later.")
 
-        Returns:
-            A dictionary indicating the success or failure of the cancellation.
-        """
-        # Implement actual cancellation logic with Australia Post's API
-        # This is a placeholder example
-        return {'success': True}
+        return {'success': res.get('success')}
 
     def _australia_post_get_default_custom_package_code(self):
         """Returns a default package code for custom implementations.
@@ -142,7 +146,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
             data = res.get('data')
             # Create the wizard with the fetched data
             info_wizard = AustraliaPostHelper.map_to_wizard_info(data)
-            account_info_record = self.get_account_by_account_number(info_wizard)
+            account_info_record = self.get_account_by_account_number(info_wizard['account_number'])
             if not account_info_record:
                 wizard = self.env['australia.post.account.info.wizard'].create(info_wizard)
             else:
@@ -189,9 +193,9 @@ class DeliveryCarrierAustraliaPost(models.Model):
     def get_info_lines(self, wizard):
         return self.env['australia.post.account.info.line'].search([('wizard_id', '=', wizard.id)])
 
-    def get_account_by_account_number(self, info_wizard):
+    def get_account_by_account_number(self, account_number):
         return self.env['australia.post.account.info.wizard'].search(
-            [('account_number', '=', info_wizard['account_number'])])
+            [('account_number', '=', account_number)])
 
     def get_account_info(self, carrier_record):
         res = self._get_australia_post_repository().get_account(carrier_record)
