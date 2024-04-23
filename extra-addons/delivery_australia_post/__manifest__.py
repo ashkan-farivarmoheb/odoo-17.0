@@ -5,7 +5,7 @@
     'description': """Long description""",
     'author': 'FG',
     'category': 'Inventory/Delivery',
-    'depends': ['odoo_shipping_service_apps'],
+    'depends': ['odoo_shipping_service_apps', 'mail'],
     'data': [
         'views/delivery_carrier_views.xml',
         'views/delivery_carrier_extra_views.xml',

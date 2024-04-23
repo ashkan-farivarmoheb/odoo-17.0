@@ -1,7 +1,6 @@
 import base64
 import json
 import logging
-
 import requests
 
 from odoo import _
@@ -9,31 +8,64 @@ from odoo.exceptions import UserError
 from odoo.tools import config
 
 _logger = logging.getLogger(__name__)
+
 host = config.options.get("services_austpost_endpoint")
-shipment_price_path = config.options.get("services_austpost_shipmentPrice_path")
-account_details_path = config.options.get("services_austpost_accountDetails_path")
-create_shipment_path = config.options.get("services_austpost_createShipment_path")
-create_order_path = config.options.get("services_austpost_createOrder_path")
-service_rate_path = config.options.get("services_austpost_serviceRate_path")
+shipment_price_path = config.options.get("services_austpost_shipmentprice_path")
+account_details_path = config.options.get("services_austpost_accountdetails_path")
+create_shipment_path = config.options.get("services_austpost_createshipment_path")
+create_order_path = config.options.get("services_austpost_createorder_path")
+service_rate_path = config.options.get("services_austpost_servicerate_path")
 item_prices_path = config.options.get("services_austpost_get_item_prices_path")
 delete_shipment_path = config.options.get("services_austpost_delete_shipment_path")
 
 
+def create_error_response(res_json):
+    return {
+        'success': False,
+        'data': res_json
+    }
+
+
+def create_success_response(res_json):
+    return {
+        'success': True,
+        'data': res_json
+    }
+
+
+def _private_get_account(carrier):
+    return carrier.get('australia_post_account_number') if carrier.get('australia_post_account_number') else None
+
+
+def _private_get_password(carrier):
+    return carrier.get('australia_post_api_password')
+
+
+def _private_get_api_key(carrier):
+    return carrier.get('australia_post_api_key')
+
+
+def _private_get_authentication(carrier):
+    auth_encoding = "%s:%s" % (_private_get_account(carrier), _private_get_password(carrier))
+    return " ".join(["Base", str(base64.b64encode(auth_encoding.encode("utf-8")))])
+
+
 class AustraliaPostRepository(object):
+    _instance = None
+
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
+    def __init__(self):
+        pass
+
     CONTENT_TYPE = "application/json"
     ACCEPT = "application/json"
 
-    def __init__(self, carrier, record=None):
-        self.carrier = carrier
-        self.record = record
-        self.appVersion = 1.0
-        self.password = carrier.australia_post_api_password
-        self.account = carrier.australia_post_account_number if carrier.australia_post_account_number else None
-        self.api_key = carrier.australia_post_api_key
-        auth_encoding = "%s:%s" % (self.account, self.password)
-        self.authentication = " ".join(["Base", base64.b64encode(auth_encoding.encode("utf-8"))])
-
-    def get_shipping_rates(self, source=None, destination=None, items=None):
+    def get_shipping_rates(self, source=None, destination=None, items=None, carrier=None):
         response = None
         try:
             if source is None:
@@ -46,8 +78,8 @@ class AustraliaPostRepository(object):
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
                 "Accept": AustraliaPostRepository.ACCEPT,
-                "Authentication": self.authentication,
-                "ACCOUNT-NUMBER": self.account
+                "Authentication": _private_get_authentication(carrier),
+                "ACCOUNT-NUMBER": _private_get_account(carrier)
             }
 
             payload = json.dumps({"shipments": [{
@@ -59,9 +91,9 @@ class AustraliaPostRepository(object):
             res_json = res.json()
 
             if res.status_code == 200:
-                response = self.create_success_response(res_json)
+                response = create_success_response(res_json)
             else:
-                response = self.create_error_response(res_json)
+                response = create_error_response(res_json)
 
         except requests.exceptions.Timeout:
             raise UserError(_("Timeout: the server did not reply within 10s"))
@@ -77,19 +109,18 @@ class AustraliaPostRepository(object):
 
         return response
 
-    def get_shipping_rates(self, data=None):
+    def get_shipping_rates(self, data=None, carrier=None):
         response = None
-        _logger.debug(" self.account2: %s ", self.account)
-        _logger.debug(" self.carrier read2: %s ", self.carrier.read())
 
         try:
-            if not self.api_key:
+            api_key = _private_get_api_key(carrier)
+            if not api_key:
                 raise UserError(
                     _("The Australia Post API Key is not configured in the Shipping Method settings. Please set it before proceeding."))
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
                 "Accept": AustraliaPostRepository.ACCEPT,
-                "AUTH-KEY": self.api_key
+                "AUTH-KEY": api_key
             }
 
             if not data:
@@ -142,17 +173,17 @@ class AustraliaPostRepository(object):
         if not carrier_record:
             raise UserError(_("Carrier data is missing."))
 
-        account_number = carrier_record.get('australia_post_account_number')
+        account_number = _private_get_account(carrier_record)
 
         try:
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
                 "Accept": AustraliaPostRepository.ACCEPT,
-                "Authentication": self.authentication,
+                "Authentication": _private_get_authentication(carrier_record),
                 "ACCOUNT-NUMBER": account_number
             }
 
-            url = f"{host}{account_details_path}{str(account_number)}"
+            url = f"{host}{account_details_path.format(account_number=account_number)}"
 
             res = requests.get(url=url, headers=headers, timeout=10)
             res_json = res.json()
@@ -160,9 +191,9 @@ class AustraliaPostRepository(object):
                           res_json, res.status_code)
 
             if res.status_code == 200:
-                response = self.create_success_response(res_json)
+                response = create_success_response(res_json)
             else:
-                response = self.create_error_response(res_json)
+                response = create_error_response(res_json)
 
         except requests.exceptions.Timeout:
             raise UserError(_("Timeout: the server did not reply within 10s"))
@@ -178,7 +209,7 @@ class AustraliaPostRepository(object):
 
         return response
 
-    def create_shipment(self, shipment_detail=None, source=None, destination=None, items=None):
+    def create_shipment(self, shipment_detail=None, source=None, destination=None, items=None, carrier=None):
         response = None
 
         try:
@@ -194,7 +225,7 @@ class AustraliaPostRepository(object):
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
                 "Accept": AustraliaPostRepository.ACCEPT,
-                "Authentication": self.authentication
+                "Authentication": _private_get_authentication(carrier)
             }
 
             payload = json.dumps({"shipments": [{
@@ -210,9 +241,9 @@ class AustraliaPostRepository(object):
             res_json = res.json()
 
             if res.status_code == 201:
-                response = self.create_success_response(res_json)
+                response = create_success_response(res_json)
             else:
-                response = self.create_error_response(res_json)
+                response = create_error_response(res_json)
 
         except requests.exceptions.Timeout:
             raise UserError(_("Timeout: the server did not reply within 10s"))
@@ -228,7 +259,7 @@ class AustraliaPostRepository(object):
 
         return response
 
-    def get_item_prices(self, source=None, destination=None, items=None):
+    def get_item_prices(self, source=None, destination=None, items=None, carrier=None):
         response = None
         try:
             if source is None:
@@ -243,8 +274,8 @@ class AustraliaPostRepository(object):
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
                 "Accept": AustraliaPostRepository.ACCEPT,
-                "Authentication": self.authentication,
-                "ACCOUNT-NUMBER": self.account
+                "Authentication": _private_get_authentication(carrier),
+                "ACCOUNT-NUMBER": _private_get_account(carrier)
             }
 
             payload = json.dumps({
@@ -256,9 +287,9 @@ class AustraliaPostRepository(object):
             res_json = res.json()
 
             if res.status_code == 200:
-                response = self.create_success_response(res_json)
+                response = create_success_response(res_json)
             else:
-                response = self.create_error_response(res_json)
+                response = create_error_response(res_json)
 
         except requests.exceptions.Timeout:
             raise UserError(_("Timeout: the server did not reply within 10s"))
@@ -274,7 +305,7 @@ class AustraliaPostRepository(object):
 
         return response
 
-    def delete_shipment(self, shipment_ids):
+    def delete_shipment(self, shipment_ids, carrier=None):
         if not shipment_ids:
             raise UserError(_("Shipment Ids are is missing."))
 
@@ -283,8 +314,8 @@ class AustraliaPostRepository(object):
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
                 "Accept": AustraliaPostRepository.ACCEPT,
-                "Authentication": self.authentication,
-                "ACCOUNT-NUMBER": self.account
+                "Authentication": _private_get_authentication(carrier),
+                "ACCOUNT-NUMBER": _private_get_account(carrier)
             }
             if len(shipment_ids) == 1:
                 url = f"{host}{delete_shipment_path}/{shipment_ids[0]}"
@@ -298,10 +329,10 @@ class AustraliaPostRepository(object):
             res = requests.delete(url=url, headers=headers, params=params, timeout=10)
 
             if res.status_code == 200:
-                response = self.create_success_response(None)
+                response = create_success_response(None)
             else:
                 res_json = res.json()
-                response = self.create_error_response(res_json)
+                response = create_error_response(res_json)
 
         except requests.exceptions.Timeout:
             raise UserError(_("Timeout: the server did not reply within 10s"))
@@ -316,16 +347,3 @@ class AustraliaPostRepository(object):
             raise UserError(_("Unexpected error: %s", e))
 
         return response
-
-
-    def create_error_response(self, res_json):
-        return {
-            'success': False,
-            'data': res_json
-        }
-
-    def create_success_response(self, res_json):
-        return {
-            'success': True,
-            'data': res_json
-        }

@@ -1,10 +1,13 @@
 from .australia_post_repository import AustraliaPostRepository
+from .australia_post_helper import AustraliaPostHelper
 
-import requests
 from odoo import fields, models, api, _
 import logging
 from odoo.exceptions import UserError
+
 _logger = logging.getLogger(__name__)
+
+
 # https://webkul.com/blog/odoo-australia-shipping-integration/
 # https://www.youtube.com/watch?v=cNgw9HTTMOQ
 # https://github.com/OCA/delivery-carrier/blob/6fdd81598a7f5ff0c031623ec6193d667f447b5a/delivery_tnt_oca/models/delivery_carrier.py#L125
@@ -12,7 +15,6 @@ _logger = logging.getLogger(__name__)
 
 
 class DeliveryCarrierAustraliaPost(models.Model):
-
     _inherit = 'delivery.carrier'
 
     australia_post_api_key = fields.Char(string="Australia Post API Key")
@@ -39,13 +41,20 @@ class DeliveryCarrierAustraliaPost(models.Model):
         ('australia_post', 'Australia Post')
     ], ondelete={'australia_post': 'cascade'})
 
+    _australia_post_repository_instance = None
+
+    @classmethod
+    def _get_australia_post_repository(cls):
+        if cls._australia_post_repository_instance is None:
+            cls._australia_post_repository_instance = AustraliaPostRepository.get_instance()
+        return cls._australia_post_repository_instance
+
     def australia_post_rate_shipment(self, order):
         """Calculate the shipping rate with Australia Post for a given order.
 
          :param order: The sale.order record
          :return: A dictionary containing the shipment rate and other details.
          """
-        australiaPost_repository = AustraliaPostRepository(self)
 
         if not self.australia_post_service_code:
             # australia_post_service_code is not set, raise a UserError to notify the user
@@ -61,7 +70,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
             'service_code': self.australia_post_service_code
         }
 
-        res = australiaPost_repository.get_shipping_rates(data=request)
+        res = self._get_australia_post_repository().get_shipping_rates(data=request)
         # _logger.debug(
         #     " Australia post Shippping module rate_shipment for order %s ", res)
 
@@ -121,32 +130,31 @@ class DeliveryCarrierAustraliaPost(models.Model):
         # Implement as needed for Australia Post specifics
         return 'DEFAULT_CODE'
 
-    @ api.model
+    @api.model
     def australia_post_get_account_info(self, carrier):
-        australiaPost_repository = AustraliaPostRepository(self)
-        carrier_model = self.env['delivery.carrier']
-        carrier_id = carrier[0]
 
-        carrier_record = carrier_model.browse(carrier_id)
+        carrier_record = self.env['delivery.carrier'].browse(carrier[0])
         carrier_record.ensure_one()
         carrier_record = carrier_record.read()[0]
 
         try:
-            res = australiaPost_repository.get_account(
-                carrier_record)
-
-            if not res.get('data'):
-                raise UserError(
-                    _("No account data returned from Australia Post."))
+            res = self.get_account_info(carrier_record)
+            data = res.get('data')
             # Create the wizard with the fetched data
-            wizard = self.env['australia.post.account.info.wizard'].create(
-                res['data'])
+            info_wizard = AustraliaPostHelper.map_to_wizard_info(data)
+            account_info_record = self.env['australia.post.account.info.wizard'].search(
+                [('account_number', '=', info_wizard['account_number'])])
+            if not account_info_record:
+                wizard = self.env['australia.post.account.info.wizard'].create(info_wizard)
+            else:
+                wizard = account_info_record
+
+            info_lines = AustraliaPostHelper.map_to_wizard_lines(data['postage_products'], wizard.id)
+            list(map(lambda line:  self.env['australia.post.account.info.line'].create(line), info_lines))
 
         except UserError as e:
-            # Handle expected model-specific errors
-            raise
+            raise e
         except Exception as e:
-            # Handle unexpected errors, possibly logging them and giving a user-friendly message
             _logger.error("Failed to fetch account info: %s", e)
             raise UserError(
                 "There was a problem fetching the account information. Please try again later.")
@@ -161,3 +169,10 @@ class DeliveryCarrierAustraliaPost(models.Model):
             'target': 'new',
             'res_id': wizard.id,
         }
+
+    def get_account_info(self, carrier_record):
+        res = self._get_australia_post_repository().get_account(carrier_record)
+        if not res.get('data'):
+            raise UserError(
+                _("No account data returned from Australia Post."))
+        return res
