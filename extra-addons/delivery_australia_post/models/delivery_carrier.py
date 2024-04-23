@@ -142,15 +142,18 @@ class DeliveryCarrierAustraliaPost(models.Model):
             data = res.get('data')
             # Create the wizard with the fetched data
             info_wizard = AustraliaPostHelper.map_to_wizard_info(data)
-            account_info_record = self.env['australia.post.account.info.wizard'].search(
-                [('account_number', '=', info_wizard['account_number'])])
+            account_info_record = self.get_account_by_account_number(info_wizard)
             if not account_info_record:
                 wizard = self.env['australia.post.account.info.wizard'].create(info_wizard)
             else:
                 wizard = account_info_record
 
             info_lines = AustraliaPostHelper.map_to_wizard_lines(data['postage_products'], wizard.id)
-            list(map(lambda line:  self.env['australia.post.account.info.line'].create(line), info_lines))
+
+            existing_records = self.get_info_lines(wizard)
+            self.update_or_insert_info_lines(existing_records, info_lines)
+            # Remove records not present in info_lines
+            self.remove_info_lines(existing_records, info_lines)
 
         except UserError as e:
             raise e
@@ -169,6 +172,26 @@ class DeliveryCarrierAustraliaPost(models.Model):
             'target': 'new',
             'res_id': wizard.id,
         }
+
+    def remove_info_lines(self, existing_records, info_lines):
+        records_to_remove = existing_records - existing_records.filtered(
+            lambda r: r.product_id in [line['product_id'] for line in info_lines])
+        records_to_remove.unlink()
+
+    def update_or_insert_info_lines(self, existing_records, info_lines):
+        for line in info_lines:
+            existing_record = existing_records.filtered(lambda r: r.product_id == line['product_id'])
+            if existing_record:
+                existing_record.write(line)
+            else:
+                self.env['australia.post.account.info.line'].create(line)
+
+    def get_info_lines(self, wizard):
+        return self.env['australia.post.account.info.line'].search([('wizard_id', '=', wizard.id)])
+
+    def get_account_by_account_number(self, info_wizard):
+        return self.env['australia.post.account.info.wizard'].search(
+            [('account_number', '=', info_wizard['account_number'])])
 
     def get_account_info(self, carrier_record):
         res = self._get_australia_post_repository().get_account(carrier_record)
