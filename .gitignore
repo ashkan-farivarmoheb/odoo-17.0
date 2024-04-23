@@ -47,7 +47,8 @@ package.json
 /man/
 /share/
 /src/
-
+.vscode/
+.venv/
 # terraform
 .terraform/
 .terraform.lock.hcl
