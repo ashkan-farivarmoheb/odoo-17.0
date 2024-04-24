@@ -12,8 +12,9 @@ class AustraliaPostHelper(object):
         }
 
     @staticmethod
-    def map_to_wizard_line(postage_product, wizard_id):
+    def map_to_wizard_line(postage_product, wizard_id, carrier_id):
         return {
+            'carrier': carrier_id,
             'type': postage_product['type'],
             'group': postage_product['group'],
             'product_id': postage_product['product_id'],
@@ -21,6 +22,6 @@ class AustraliaPostHelper(object):
         }
 
     @staticmethod
-    def map_to_wizard_lines(postage_products, wizard_id):
+    def map_to_wizard_lines(postage_products, wizard_id, carrier_id):
         return list(map(AustraliaPostHelper.map_to_wizard_line, postage_products,
-                        [wizard_id] * len(postage_products)))
+                        [wizard_id] * len(postage_products), [carrier_id] * len(postage_products)))

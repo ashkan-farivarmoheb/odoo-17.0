@@ -296,7 +296,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
                 wizard = account_info_record
 
             info_lines = AustraliaPostHelper.map_to_wizard_lines(
-                data['postage_products'], wizard.id)
+                data['postage_products'], wizard.id, carrier_record['id'])
 
             existing_records = self.get_info_lines(wizard)
             self.update_or_insert_info_lines(existing_records, info_lines)
