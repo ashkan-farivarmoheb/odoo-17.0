@@ -156,7 +156,6 @@ class DeliveryCarrierAustraliaPost(models.Model):
                                                 delivery order will be added to new Batch.""")
 
 # TODO: functions of above need to be reviewed and tested
-
     _australia_post_repository_instance = None
 
     @classmethod
