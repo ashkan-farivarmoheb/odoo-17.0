@@ -150,9 +150,9 @@ class DeliveryCarrierAustraliaPost(models.Model):
     use_existing_batch_cronjob = fields.Boolean(string="Use Existing Batch",
                                                 default=False,
                                                 copy=False,
-                                                help="""True: Delivery orders will be added to existing batch in 
-                                                draft state for carrier. 
-                                                False: New batch will be created every time and all the 
+                                                help="""True: Delivery orders will be added to existing batch in
+                                                draft state for carrier.
+                                                False: New batch will be created every time and all the
                                                 delivery order will be added to new Batch.""")
 
 # TODO: functions of above need to be reviewed and tested
@@ -162,16 +162,19 @@ class DeliveryCarrierAustraliaPost(models.Model):
     @classmethod
     def _get_australia_post_repository(cls):
         if cls._australia_post_repository_instance is None:
-            cls._australia_post_repository_instance = AustraliaPostRepository.get_instance()
+            cls._australia_post_repository_instance = AustraliaPostRepository.get_instance(
+            )
         return cls._australia_post_repository_instance
 
-    _australia_post_repository_instance = None
+    _australia_post_request_instance = None
 
     @classmethod
-    def _get_australia_post_repository(cls):
-        if cls._australia_post_repository_instance is None:
-            cls._australia_post_repository_instance = AustraliaPostRepository.get_instance()
-        return cls._australia_post_repository_instance
+    def _get_australia_post_request(cls, order):
+        """Retrieve or create an instance of AustraliaPostRequest with order and carrier details."""
+        if cls._australia_post_request_instance is None:
+            cls._australia_post_request_instance = AustraliaPostRequest.get_instance(
+                order)
+        return cls._australia_post_request_instance
 
     def australia_post_rate_shipment(self, order):
         """Calculate the shipping rate with Australia Post for a given order.
@@ -179,27 +182,41 @@ class DeliveryCarrierAustraliaPost(models.Model):
          :param order: The sale.order record
          :return: A dictionary containing the shipment rate and other details.
          """
-        australiaPost_request = AustraliaPostRequest(self)
+        try:
+            australiaPost_request = self._get_australia_post_request(
+                order)  # self is the carrier
 
-        if not self.australia_post_service_code:
-            # australia_post_service_code is not set, raise a UserError to notify the user
+            rate_data = australiaPost_request._prepare_rate_shipment_data()
+            _logger.debug('rate_data -------%s ', rate_data)
+
+        except Exception as e:
+            # Log the error and handle appropriately
+            print(f"Error preparing shipping rates request: {str(e)}")
+            return {'success': False, 'error': str(e)}
+
+        if not self.service_product_id:
+            # service_product_id is not set, raise a UserError to notify the user
             raise UserError(
                 _("The Australia Post Service Code is not configured in the Shipping Method settings. Please specify it before proceeding."))
 
-        res = self._get_australiaPost_repository().get_shipping_rates(
-            source=australiaPost_request['source'],
-            destination=australiaPost_request['destination'],
-            items=australiaPost_request['items'],
+        res = self._get_australia_post_repository().get_item_prices(
+            source=rate_data['source'],
+            destination=rate_data['destination'],
+            items=rate_data['items'],
+            carrier=self  # self is the carrier
         )
+        _logger.debug('data -------%s ', res)
         if not res.get('data'):
             raise UserError(
                 _("No account data returned from Australia Post."))
             # Create the wizard with the fetched data
-        data = res.get('data')
-        if res.get('success') and data.get('shipment_summary') and data.get('shipment_summary').get('total_cost'):
+        data = res['data']
+        _logger.debug('data -------%s ', data)
+        if res['data'] and data['shipment_summary'] and data['shipment_summary']['total_cost']:
             return {
                 "success": res.get('success'),
-                "price":  data.get('shipment_summary').get('total_cost'),
+                "price":  self.get_price_by_product_id(
+                    data, data['product_id']),
                 "error_message": False,
                 "warning_message": False,
             }
@@ -353,3 +370,11 @@ class DeliveryCarrierAustraliaPost(models.Model):
             raise UserError(
                 _("No account data returned from Australia Post."))
         return res
+
+    def get_price_by_product_id(res, product_id):
+        # Assume res_json is obtained from res.json() where res is an instance of a response class
+        for item in res['items']:
+            for price_info in item['prices']:
+                if price_info['product_id'] == product_id:
+                    return price_info['calculated_price']
+        return None  # Return None if product_id is not found

@@ -38,15 +38,19 @@ def create_success_response(res_json):
 
 
 def _private_get_account(carrier):
-    return carrier.get('australia_post_account_number') if carrier.get('australia_post_account_number') else None
+    if not carrier.australia_post_account_number:
+        raise UserError(
+            _("Australia Post Account Number for getting shipping rate is missing."))
+    else:
+        return carrier.australia_post_account_number
 
 
 def _private_get_password(carrier):
-    return carrier.get('australia_post_api_password')
+    return carrier.australia_post_api_password
 
 
 def _private_get_api_key(carrier):
-    return carrier.get('australia_post_api_key')
+    return carrier.australia_post_api_key
 
 
 def _private_get_authentication(carrier):
@@ -79,9 +83,14 @@ class AustraliaPostRepository(object):
             if destination is None:
                 raise UserError(
                     _("Destination for getting shipping rate is missing."))
+
             if items is None:
                 raise UserError(
                     _("Items for getting shipping rate are missing."))
+
+            if carrier is None:
+                raise UserError(
+                    _("carrier for getting shipping rate are missing."))
 
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
@@ -95,10 +104,14 @@ class AustraliaPostRepository(object):
                 "to": destination,
                 "items": items
             }]})
+
+            _logger.debug(
+                'Initializing API Request get_shipping_rates payload: %s - headers: %s', payload, headers)
             res = requests.post(url="".join(
                 [host, create_shipment_path]), headers=headers, data=payload)
             res_json = res.json()
-
+            _logger.debug(
+                'API response json get_shipping_rates: %s ', res_json)
             if res.status_code == 200:
                 response = create_success_response(res_json)
             else:
@@ -118,65 +131,65 @@ class AustraliaPostRepository(object):
 
         return response
 
-    def get_shipping_rates(self, data=None, carrier=None):
-        response = None
+    # def get_shipping_rates(self, data=None, carrier=None):
+    #     response = None
 
-        try:
-            api_key = _private_get_api_key(carrier)
-            if not api_key:
-                raise UserError(
-                    _("The Australia Post API Key is not configured in the Shipping Method settings. Please set it before proceeding."))
-            headers = {
-                "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
-                "Accept": AustraliaPostRepository.ACCEPT,
-                "AUTH-KEY": api_key
-            }
+    #     try:
+    #         api_key = _private_get_api_key(carrier)
+    #         if not api_key:
+    #             raise UserError(
+    #                 _("The Australia Post API Key is not configured in the Shipping Method settings. Please set it before proceeding."))
+    #         headers = {
+    #             "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
+    #             "Accept": AustraliaPostRepository.ACCEPT,
+    #             "AUTH-KEY": api_key
+    #         }
 
-            if not data:
-                raise UserError(
-                    _("Data for shipping rate calculation is missing."))
-            params = {
-                'length': data['length'],
-                'width': data['width'],
-                'height': data['height'],
-                'weight': data['weight'],
-                'from_postcode': data['from_postcode'],
-                'to_postcode': data['to_postcode'],
-                'service_code': data['service_code']
-            }
+    #         if not data:
+    #             raise UserError(
+    #                 _("Data for shipping rate calculation is missing."))
+    #         params = {
+    #             'length': data['length'],
+    #             'width': data['width'],
+    #             'height': data['height'],
+    #             'weight': data['weight'],
+    #             'from_postcode': data['from_postcode'],
+    #             'to_postcode': data['to_postcode'],
+    #             'service_code': data['service_code']
+    #         }
 
-            res = requests.get(url="".join(
-                [host, service_rate_path]), params=params, headers=headers, timeout=10)
-            res_json = res.json()
+    #         res = requests.get(url="".join(
+    #             [host, service_rate_path]), params=params, headers=headers, timeout=10)
+    #         res_json = res.json()
 
-            if res.status_code == 200:
-                response = {
-                    'success': True,
-                    'price': res_json['postage_result']['total_cost'],
-                    'error_message': False,
-                    'warning_message': False,
-                }
-            else:
-                response = {
-                    'success': False,
-                    'price': -1,
-                    'error_message': res_json['error']['errorMessage'],
-                    'warning_message': res_json['error']['errorMessage'],
-                }
+    #         if res.status_code == 200:
+    #             response = {
+    #                 'success': True,
+    #                 'price': res_json['postage_result']['total_cost'],
+    #                 'error_message': False,
+    #                 'warning_message': False,
+    #             }
+    #         else:
+    #             response = {
+    #                 'success': False,
+    #                 'price': -1,
+    #                 'error_message': res_json['error']['errorMessage'],
+    #                 'warning_message': res_json['error']['errorMessage'],
+    #             }
 
-        except requests.exceptions.Timeout:
-            raise UserError(_("Timeout: the server did not reply within 10s"))
-        except (ValueError, requests.exceptions.ConnectionError):
-            raise UserError(_("Server not reachable, please try again later"))
-        except requests.exceptions.HTTPError as e:
-            raise UserError(
-                _("{}\n{}".format(
-                    e, response['error_message'] if response else ""))
-            )
-        except Exception as e:
-            raise UserError(_("Unexpected error: %s", e))
+    #     except requests.exceptions.Timeout:
+    #         raise UserError(_("Timeout: the server did not reply within 10s"))
+    #     except (ValueError, requests.exceptions.ConnectionError):
+    #         raise UserError(_("Server not reachable, please try again later"))
+    #     except requests.exceptions.HTTPError as e:
+    #         raise UserError(
+    #             _("{}\n{}".format(
+    #                 e, response['error_message'] if response else ""))
+    #         )
+    #     except Exception as e:
+    #         raise UserError(_("Unexpected error: %s", e))
 
-        return response
+    #     return response
 
     def get_account(self, carrier_record):
         response = None
@@ -281,8 +294,9 @@ class AustraliaPostRepository(object):
                 raise UserError(_("Destination for getting price is missing."))
             if items is None:
                 raise UserError(_("Items for getting prices are missing."))
-            if items['product_ids'] is None:
-                _logger.info("product_ids for getting prices are missing")
+            if carrier is None:
+                raise UserError(
+                    _("carrier for getting shipping rate are missing."))
 
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
@@ -296,15 +310,18 @@ class AustraliaPostRepository(object):
                 "to": destination,
                 "items": items
             })
+            _logger.debug(
+                'Initializing API Request get_item_prices.payload: %s - headers: %s', payload, headers)
+
             res = requests.post(url="".join(
                 [host, item_prices_path]), headers=headers, data=payload)
             res_json = res.json()
-
+            _logger.debug(
+                'API response json get_item_prices: %s ', res_json)
             if res.status_code == 200:
                 response = create_success_response(res_json)
             else:
                 response = create_error_response(res_json)
-
         except requests.exceptions.Timeout:
             raise UserError(_("Timeout: the server did not reply within 10s"))
         except (ValueError, requests.exceptions.ConnectionError):
