@@ -10,7 +10,7 @@
                             {
                                 "matchesJsonPath": {
                                     "expression": "$.items[0].item_reference",
-                                    "matches": "abc xyz"
+                                    "matches": "S00001"
                                 }
                             },
                             {
@@ -38,22 +38,32 @@
                                 }
                             },
                             {
-                                "matchesJsonPath": {
-                                    "expression": "$.items[0].product_ids",
-                                    "matches": ".*E34.*"
-                                }
-                            },
-                            {
-                                "matchesJsonPath": {
-                                    "expression": "$.items[0].product_ids",
-                                    "matches": ".*T28S.*"
-                                }
-                            },
-                            {
-                                "matchesJsonPath": {
-                                    "expression": "$.items[0].product_ids",
-                                    "matches": ".*E34S.*"
-                                }
+                                "or": [
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*E34.*"
+                                        }
+                                    },
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*T28S.*"
+                                        }
+                                    },
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*T28.*"
+                                        }
+                                    },
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*E34S.*"
+                                        }
+                                    }
+                                ]
                             }
                         ]
                     }

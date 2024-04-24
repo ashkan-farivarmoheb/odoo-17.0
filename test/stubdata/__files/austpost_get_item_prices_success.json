@@ -7,8 +7,8 @@
       "width": 5,
       "prices": [
         {
-          "product_id": "E34",
-          "product_type": "EXPRESS POST",
+          "product_id": "T28",
+          "product_type": "PARCEL POST",
           "options": {
             "signature_on_delivery_option": false,
             "authority_to_leave_option": true

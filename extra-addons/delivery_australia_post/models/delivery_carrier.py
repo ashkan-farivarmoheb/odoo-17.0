@@ -168,11 +168,10 @@ class DeliveryCarrierAustraliaPost(models.Model):
     _australia_post_request_instance = None
 
     @classmethod
-    def _get_australia_post_request(cls, order):
+    def _get_australia_post_request(cls):
         """Retrieve or create an instance of AustraliaPostRequest with order and carrier details."""
         if cls._australia_post_request_instance is None:
-            cls._australia_post_request_instance = AustraliaPostRequest.get_instance(
-                order)
+            cls._australia_post_request_instance = AustraliaPostRequest.get_instance()
         return cls._australia_post_request_instance
 
     def australia_post_rate_shipment(self, order):
@@ -182,10 +181,9 @@ class DeliveryCarrierAustraliaPost(models.Model):
          :return: A dictionary containing the shipment rate and other details.
          """
         try:
-            australiaPost_request = self._get_australia_post_request(
-                order)  # self is the carrier
+            australia_post_request = self._get_australia_post_request()  # self is the carrier
 
-            rate_data = australiaPost_request._prepare_rate_shipment_data()
+            rate_data = australia_post_request.prepare_rate_shipment_data(order, self.service_product_id)
             _logger.debug('rate_data -------%s ', rate_data)
 
         except Exception as e:
@@ -198,11 +196,12 @@ class DeliveryCarrierAustraliaPost(models.Model):
             raise UserError(
                 _("The Australia Post Service Code is not configured in the Shipping Method settings. Please specify it before proceeding."))
 
+        self.ensure_one()
         res = self._get_australia_post_repository().get_item_prices(
             source=rate_data['source'],
             destination=rate_data['destination'],
             items=rate_data['items'],
-            carrier=self  # self is the carrier
+            carrier=self.read()[0]  # self is the carrier
         )
         _logger.debug('data -------%s ', res)
         if not res.get('data'):
@@ -211,11 +210,11 @@ class DeliveryCarrierAustraliaPost(models.Model):
             # Create the wizard with the fetched data
         data = res['data']
         _logger.debug('data -------%s ', data)
-        if res['data'] and data['shipment_summary'] and data['shipment_summary']['total_cost']:
+        if self.validate_shipment_rate(data):
             return {
                 "success": res.get('success'),
                 "price":  self.get_price_by_product_id(
-                    data, data['product_id']),
+                    data, self.service_product_id),
                 "error_message": False,
                 "warning_message": False,
             }
@@ -231,6 +230,10 @@ class DeliveryCarrierAustraliaPost(models.Model):
             else:
                 raise UserError(
                     _("Unknown error occurred while fetching shipping rates."))
+
+    def validate_shipment_rate(self, data):
+        return (data and len(data['items']) > 0
+                and data['items'][0]['prices'])
 
     def australia_post_send_shipping(self, pickings):
         """Send the shipping information to Australia Post and return tracking numbers.
@@ -370,7 +373,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
                 _("No account data returned from Australia Post."))
         return res
 
-    def get_price_by_product_id(res, product_id):
+    def get_price_by_product_id(self, res, product_id):
         # Assume res_json is obtained from res.json() where res is an instance of a response class
         for item in res['items']:
             for price_info in item['prices']:

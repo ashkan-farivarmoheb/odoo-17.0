@@ -17,17 +17,12 @@ class AustraliaPostRequest(object):
     _instance = None
 
     @classmethod
-    def get_instance(cls, order):
+    def get_instance(cls):
         if cls._instance is None:
-            cls._instance = cls(order)
+            cls._instance = cls()
         return cls._instance
 
-    def __init__(self, order):
-        self.order = order
-
-        _logger.debug(
-            'Initializing AustraliaPostRequest with order: %s', self.order)
-
+    def __init__(self):
         pass
 
     def _partner_to_shipping_data(self, partner):
@@ -37,34 +32,32 @@ class AustraliaPostRequest(object):
             "postcode": partner.zip,
         }
 
-    def _prepare_product(self):
-        # height = max(order.default_packaging_id.height, 0.01)
-        # width = max(order.default_packaging_id.width, 0.01)
-        # p_length = max(order.default_packaging_id.packaging_length, 0.01)
-
+    def _prepare_product(self, order, service_product_id):
         _logger.debug('Preparing product details for order: %s',
-                      self.order.name)
+                      order.name)
 
         return [{
             'length': "5",
             'width': "10",
             'height': "1",
-            'weight': self.order.shipping_weight,
+            'weight': order.shipping_weight,
+            'item_reference': order.name,
+            'product_ids': [service_product_id]
         }]
 
-    def _prepare_rate_shipment_data(self):
+    def prepare_rate_shipment_data(self, order, service_product_id):
         _logger.debug('Preparing rate shipment data for order: %s',
-                      self.order.name)
+                      order.name)
         return {
-            "rateId": self.order.name,
+            "rateId": order.name,
             "source": self._partner_to_shipping_data(
-                self.order.warehouse_id.partner_id
-                or self.order.company_id.partner_id
+                order.warehouse_id.partner_id
+                or order.company_id.partner_id
             ),
             "destination": self._partner_to_shipping_data(
-                self.order.partner_shipping_id
+                order.partner_shipping_id
             ),
-            "collectionDateTime": self.order.expected_date,
-            "items": self._prepare_product(),
-            "currency": self.order.currency_id.name,
+            "collectionDateTime": order.expected_date,
+            "items": self._prepare_product(order, service_product_id),
+            "currency": order.currency_id.name,
         }
