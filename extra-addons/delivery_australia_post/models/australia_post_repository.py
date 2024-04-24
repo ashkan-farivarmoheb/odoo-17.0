@@ -10,13 +10,17 @@ from odoo.tools import config
 _logger = logging.getLogger(__name__)
 
 host = config.options.get("services_austpost_endpoint")
-shipment_price_path = config.options.get("services_austpost_shipmentprice_path")
-account_details_path = config.options.get("services_austpost_accountdetails_path")
-create_shipment_path = config.options.get("services_austpost_createshipment_path")
+shipment_price_path = config.options.get(
+    "services_austpost_shipmentprice_path")
+account_details_path = config.options.get(
+    "services_austpost_accountdetails_path")
+create_shipment_path = config.options.get(
+    "services_austpost_createshipment_path")
 create_order_path = config.options.get("services_austpost_createorder_path")
 service_rate_path = config.options.get("services_austpost_servicerate_path")
 item_prices_path = config.options.get("services_austpost_get_item_prices_path")
-delete_shipment_path = config.options.get("services_austpost_delete_shipment_path")
+delete_shipment_path = config.options.get(
+    "services_austpost_delete_shipment_path")
 
 
 def create_error_response(res_json):
@@ -46,7 +50,8 @@ def _private_get_api_key(carrier):
 
 
 def _private_get_authentication(carrier):
-    auth_encoding = "%s:%s" % (_private_get_account(carrier), _private_get_password(carrier))
+    auth_encoding = "%s:%s" % (_private_get_account(
+        carrier), _private_get_password(carrier))
     return " ".join(["Base", str(base64.b64encode(auth_encoding.encode("utf-8")))])
 
 
@@ -69,11 +74,14 @@ class AustraliaPostRepository(object):
         response = None
         try:
             if source is None:
-                raise UserError(_("Source for getting shipping rate is missing."))
+                raise UserError(
+                    _("Source for getting shipping rate is missing."))
             if destination is None:
-                raise UserError(_("Destination for getting shipping rate is missing."))
+                raise UserError(
+                    _("Destination for getting shipping rate is missing."))
             if items is None:
-                raise UserError(_("Items for getting shipping rate are missing."))
+                raise UserError(
+                    _("Items for getting shipping rate are missing."))
 
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
@@ -87,7 +95,8 @@ class AustraliaPostRepository(object):
                 "to": destination,
                 "items": items
             }]})
-            res = requests.post(url="".join([host, create_shipment_path]), headers=headers, data=payload)
+            res = requests.post(url="".join(
+                [host, create_shipment_path]), headers=headers, data=payload)
             res_json = res.json()
 
             if res.status_code == 200:
@@ -136,7 +145,8 @@ class AustraliaPostRepository(object):
                 'service_code': data['service_code']
             }
 
-            res = requests.get(url="".join([host, service_rate_path]), params=params, headers=headers, timeout=10)
+            res = requests.get(url="".join(
+                [host, service_rate_path]), params=params, headers=headers, timeout=10)
             res_json = res.json()
 
             if res.status_code == 200:
@@ -214,11 +224,13 @@ class AustraliaPostRepository(object):
 
         try:
             if shipment_detail is None:
-                raise UserError(_("Shipment details for creating shipping is missing."))
+                raise UserError(
+                    _("Shipment details for creating shipping is missing."))
             if source is None:
                 raise UserError(_("Source for creating shipping is missing."))
             if destination is None:
-                raise UserError(_("Destination for creating shipping is missing."))
+                raise UserError(
+                    _("Destination for creating shipping is missing."))
             if items is None:
                 raise UserError(_("Items for creating shipping are missing."))
 
@@ -237,7 +249,8 @@ class AustraliaPostRepository(object):
                 "to": destination,
                 "items": items
             }]})
-            res = requests.post(url="".join([host, create_shipment_path]), headers=headers, data=payload)
+            res = requests.post(url="".join(
+                [host, create_shipment_path]), headers=headers, data=payload)
             res_json = res.json()
 
             if res.status_code == 201:
@@ -283,7 +296,8 @@ class AustraliaPostRepository(object):
                 "to": destination,
                 "items": items
             })
-            res = requests.post(url="".join([host, item_prices_path]), headers=headers, data=payload)
+            res = requests.post(url="".join(
+                [host, item_prices_path]), headers=headers, data=payload)
             res_json = res.json()
 
             if res.status_code == 200:
@@ -326,7 +340,8 @@ class AustraliaPostRepository(object):
                     'shipment_ids': shipment_ids
                 }
 
-            res = requests.delete(url=url, headers=headers, params=params, timeout=10)
+            res = requests.delete(url=url, headers=headers,
+                                  params=params, timeout=10)
 
             if res.status_code == 200:
                 response = create_success_response(None)
