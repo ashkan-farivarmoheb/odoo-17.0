@@ -150,21 +150,12 @@ class DeliveryCarrierAustraliaPost(models.Model):
     use_existing_batch_cronjob = fields.Boolean(string="Use Existing Batch",
                                                 default=False,
                                                 copy=False,
-                                                help="""True: Delivery orders will be added to existing batch in 
-                                                draft state for carrier. 
-                                                False: New batch will be created every time and all the 
+                                                help="""True: Delivery orders will be added to existing batch in
+                                                draft state for carrier.
+                                                False: New batch will be created every time and all the
                                                 delivery order will be added to new Batch.""")
 
 # TODO: functions of above need to be reviewed and tested
-
-    _australia_post_repository_instance = None
-
-    @classmethod
-    def _get_australia_post_repository(cls):
-        if cls._australia_post_repository_instance is None:
-            cls._australia_post_repository_instance = AustraliaPostRepository.get_instance()
-        return cls._australia_post_repository_instance
-
     _australia_post_repository_instance = None
 
     @classmethod
