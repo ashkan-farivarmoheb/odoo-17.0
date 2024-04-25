@@ -183,7 +183,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
         try:
             australia_post_request = self._get_australia_post_request()  # self is the carrier
 
-            rate_data = australia_post_request.prepare_rate_shipment_data(order, self.service_product_id)
+            rate_data = australia_post_request.create_rate_shipment_request(order, self.service_product_id)
             _logger.debug('rate_data -------%s ', rate_data)
 
         except Exception as e:
@@ -231,28 +231,27 @@ class DeliveryCarrierAustraliaPost(models.Model):
                 raise UserError(
                     _("Unknown error occurred while fetching shipping rates."))
 
-    def validate_shipment_rate(self, data):
-        return (data and len(data['items']) > 0
-                and data['items'][0]['prices'])
-
     def australia_post_send_shipping(self, pickings):
-        """Send the shipping information to Australia Post and return tracking numbers.
-
-        Args:
-            pickings: The stock.picking records for which to send shipping information.
-
-        Returns:
-            A list of dictionaries with picking and tracking information.
-        """
-        # Replace the following logic with actual communication with Australia Post's API.
-        # This is a placeholder example.
         res = []
-        for picking in pickings:
-            # Simulated API call and response handling
-            # This should be obtained from Australia Post's response
-            tracking_number = 'AP123456789AU'
-            res.append(
-                {'exact_price': 10.0, 'tracking_number': tracking_number})
+        try:
+            payload = self._get_australia_post_request().create_post_shipment_request(
+                                                pickings, self.email_tracking, self.allow_part_delivery, self.authority_leave)
+            response = self._get_australia_post_repository().create_shipment(payload, pickings[0].carrier_id.read()[0])
+            if not response.get('data'):
+                raise UserError(
+                    _("No shipments data returned from Australia Post."))
+
+            for shipment in response.get('data')['shipments']:
+                res.append({
+                    "exact_price": shipment['shipment_summary']['total_cost'],
+                    'tracking_number': shipment['shipment_id']
+                })
+        except UserError as e:
+            raise e
+        except Exception as e:
+            _logger.error("Failed to create shipment: %s", e)
+            raise UserError(
+                "There was a problem creating a shipment. Please try again later.")
         return res
 
     def australia_post_get_tracking_link(self, picking):
@@ -380,3 +379,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
                 if price_info['product_id'] == product_id:
                     return price_info['calculated_price']
         return None  # Return None if product_id is not found
+
+    def validate_shipment_rate(self, data):
+        return (data and len(data['items']) > 0
+                and data['items'][0]['prices'])

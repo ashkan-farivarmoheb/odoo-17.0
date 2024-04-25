@@ -8,7 +8,7 @@
                     {
                         "matchesJsonPath": {
                             "expression": "$.shipments[0].shipment_reference",
-                            "matches": "XYZ-001-01"
+                            "matches": ".*"
                         }
                     }
                 ]

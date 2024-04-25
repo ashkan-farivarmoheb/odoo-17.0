@@ -173,20 +173,13 @@ class AustraliaPostRepository(object):
 
         return response
 
-    def create_shipment(self, shipment_detail=None, source=None, destination=None, items=None, carrier=None):
+    def create_shipment(self, payload=None, carrier=None):
         response = None
 
         try:
-            if shipment_detail is None:
+            if payload is None:
                 raise UserError(
-                    _("Shipment details for creating shipping is missing."))
-            if source is None:
-                raise UserError(_("Source for creating shipping is missing."))
-            if destination is None:
-                raise UserError(
-                    _("Destination for creating shipping is missing."))
-            if items is None:
-                raise UserError(_("Items for creating shipping are missing."))
+                    _("Payload for creating shipping is missing."))
 
             headers = {
                 "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
@@ -194,15 +187,6 @@ class AustraliaPostRepository(object):
                 "Authentication": _private_get_authentication(carrier)
             }
 
-            payload = json.dumps({"shipments": [{
-                "shipment_reference": shipment_detail['shipment_reference'],
-                "customer_reference_1": shipment_detail['customer_reference_1'],
-                "customer_reference_2": shipment_detail['customer_reference_2'],
-                "email_tracking_enabled": shipment_detail['email_tracking_enabled'],
-                "from": source,
-                "to": destination,
-                "items": items
-            }]})
             res = requests.post(url="".join(
                 [host, create_shipment_path]), headers=headers, data=payload)
             res_json = res.json()
