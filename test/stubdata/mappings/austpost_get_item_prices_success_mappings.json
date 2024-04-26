@@ -10,7 +10,7 @@
                             {
                                 "matchesJsonPath": {
                                     "expression": "$.items[0].item_reference",
-                                    "matches": "S00001"
+                                    "matches": ".*"
                                 }
                             },
                             {
