@@ -232,20 +232,23 @@ class DeliveryCarrierAustraliaPost(models.Model):
                     _("Unknown error occurred while fetching shipping rates."))
 
     def australia_post_send_shipping(self, pickings):
-        res = []
+        return [self.australia_post_create_shipping(p) for p in pickings]
+
+    def australia_post_create_shipping(self, picking):
+        res = None
         try:
-            payload = self._get_australia_post_request().create_post_shipment_request(
-                                                pickings, self.email_tracking, self.allow_part_delivery, self.authority_leave)
-            response = self._get_australia_post_repository().create_shipment(payload, pickings[0].carrier_id.read()[0])
+            payload = self._get_australia_post_request().create_post_shipment_request(picking, self.email_tracking, self.allow_part_delivery, self.authority_leave)
+            response = self._get_australia_post_repository().create_shipment(payload, picking.carrier_id.read()[0])
             if not response.get('data'):
                 raise UserError(
                     _("No shipments data returned from Australia Post."))
-
             for shipment in response.get('data')['shipments']:
-                res.append({
-                    "exact_price": shipment['shipment_summary']['total_cost'],
-                    'tracking_number': shipment['shipment_id']
-                })
+                picking.shipment_id = shipment['shipment_id']
+                if len(shipment['items']) > 0:
+                    res = {
+                        "exact_price": shipment['shipment_summary']['total_cost'],
+                        'tracking_number': shipment['items'][0]['tracking_details']['article_id'] if shipment['items'][0]['tracking_details'] else ''
+                    }
         except UserError as e:
             raise e
         except Exception as e:
@@ -279,7 +282,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
             carrier.ensure_one()
             carrier_record = carrier.read()[0]
             res = self._get_australia_post_repository().delete_shipment(
-                [picking.carrier_tracking_ref], carrier_record)
+                [picking.shipment_id], carrier_record)
         except UserError as e:
             raise e
         except Exception as e:
