@@ -14,7 +14,7 @@ Delivery = [
     # ('fedex','fedex'),
     # ('ups','ups'),
     # ('usps','USPS'),
-    # ('auspost','auspost'),
+    ('auspost', 'auspost'),
 ]
 
 

@@ -29,8 +29,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
     ], string="Environment", default='test_environment', help="Select the environment for Australia Post API.")
 
     delivery_type = fields.Selection(selection_add=[
-        ('australia_post', 'Australia Post')
-    ], ondelete={'australia_post': 'cascade'})
+        ('auspost', 'auspost')
+    ], ondelete={'auspost': 'cascade'})
     # Auspost  service type
     service_type = fields.Char(string='Type', readonly=True)
     service_product_id = fields.Char(string='Code', readonly=True)

@@ -13,7 +13,7 @@
             </xpath>
 
             <xpath expr="//notebook/page[@name='destination']" position="before">
-                <page name="auspost_credentials" string="AusPost Credentials" invisible="delivery_type!='australia_post'">
+                <page name="auspost_credentials" string="AusPost Credentials" invisible="delivery_type!='auspost'">
                     <group col="2">
                         <group>
                             <field name="australia_post_account_number" required="True"/>
