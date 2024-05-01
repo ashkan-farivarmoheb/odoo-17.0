@@ -7,27 +7,28 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='provider_details']/field[last()]" position="after">
                 <field name="is_automatic_shipment_mail" string="Automatic Send Shipment Mail"/>
-                <field name="mail_template_id" string="E-mail Template" readonly="1" invisible="not is_automatic_shipment_mail" required="is_automatic_shipment_mail" />
+                <field name="mail_template_id" string="E-mail Template" invisible="not is_automatic_shipment_mail" required="is_automatic_shipment_mail"/>
                 <field name="tracking_link" widget="url" invisible="not is_automatic_shipment_mail" required="is_automatic_shipment_mail"/>
                 <field name="is_zip_required" string="Is Zip Required?" invisible="1"/>
             </xpath>
 
-            <xpath expr="//notebook/page[@name='destination']" position="before">
-                <page name="auspost_credentials" string="AusPost Credentials" invisible="delivery_type!='auspost'">
-                    <group col="2">
-                        <group>
-                            <field name="australia_post_account_number" required="True"/>
-                            <field name="australia_post_api_key" required="True"/>
-                            <field name="australia_post_api_password" required="True" password="True"/>
-
-                            <!-- <field name="australia_post_environment"/> -->
-                        </group>
-                        <group invisible="not australia_post_account_number">
-                            <button name="australia_post_get_account_info" string="Get Account Info" type="object" class="oe_highlight"/>
-                        </group>
+            <xpath expr="//notebook/page[@name='custom_carrier_tab']" position="inside">
+                <group col="2">
+                    <group string="Australia Post Credentials">
+                        <field name="australia_post_account_number" required="True"/>
+                        <field name="australia_post_api_key" required="True"/>
+                        <field name="australia_post_api_password" required="True" password="True"/>
+                    </group>
+                    <group name="auspost_shipping_information" string="Australia Post Shipping Information">
+                        <field name="service_product_id"/>
+                        <field name="service_group"/>
+                        <field name="service_type"/>
                     </group>
 
-                </page>
+                </group>
+                <group invisible="not australia_post_account_number">
+                    <button name="australia_post_get_account_info" string="Get Account Info" type="object" class="oe_highlight"/>
+                </group>
             </xpath>
             <xpath expr="//notebook/page[last()]" position="after">
                 <page string="Batch Configuration" name="batch_configuration" invisible="delivery_type in ['fixed','base_on_rule']">

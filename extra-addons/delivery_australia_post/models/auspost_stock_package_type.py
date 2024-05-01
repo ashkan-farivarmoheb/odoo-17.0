@@ -1,5 +1,8 @@
 from odoo import models, fields
+import logging
+from odoo.exceptions import UserError
 
+_logger = logging.getLogger(__name__)
 
 class AusPostPackageType(models.Model):
     _inherit = 'stock.package.type'
@@ -10,3 +13,5 @@ class AusPostPackageType(models.Model):
             ('auspost', 'auspost')
         ]
     )
+
+    

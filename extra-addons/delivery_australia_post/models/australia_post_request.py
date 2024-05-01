@@ -58,12 +58,13 @@ class AustraliaPostRequest(object):
         }
 
     def create_post_shipment_request(self, picking, email_tracking, allow_part_delivery, authority_leave):
-        product_names = ", ".join([self._extract_product_name(move.product_id.product_tmpl_id.name) for move in picking.move_ids])
+        product_names = ", ".join([self._extract_product_name(
+            move.product_id.product_tmpl_id.name) for move in picking.move_ids])
         shipment_request = {
             "shipment_reference": picking.sale_id.id,
             "customer_reference_1": picking.sale_id.name,
             "customer_reference_2": product_names,
-            "email_tracking_enabled": email_tracking,
+            "email_tracking_enabled": email_tracking and AustraliaPostHelper.map_res_partner_to_shipment(picking.partner_id).get('email', False),
             "from": AustraliaPostHelper.map_res_partner_to_shipment(picking.sale_id.warehouse_id.partner_id),
             "to": AustraliaPostHelper.map_res_partner_to_shipment(picking.partner_id),
             "items": AustraliaPostHelper.map_shipment_items(picking, allow_part_delivery, authority_leave)
@@ -77,4 +78,3 @@ class AustraliaPostRequest(object):
         if match:
             extracted = match.group(1)
         return extracted
-
