@@ -19,7 +19,7 @@
         <field name="name">Australia Post</field>
         <!-- Link to the product defined above -->
         <field name="product_id" ref="product_delivery_australia_post"/>
-        <field name="delivery_type">australia_post</field>
+        <field name="delivery_type">auspost</field>
         <!-- Specify the integration code or method here -->
         <!-- The price can be dynamically calculated based on rules or API responses -->
         <field name="fixed_price">0</field>

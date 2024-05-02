@@ -91,7 +91,7 @@ class AustraliaPostRequest(object):
             "shipment_reference": picking.id,
             "customer_reference_1": picking.sale_id.id,
             "customer_reference_2": product_names,
-            "email_tracking_enabled": picking.carrier_id.email_tracking if picking.carrier_id else False,
+            "email_tracking_enabled": picking.carrier_id.email_tracking if picking.carrier_id and picking.partner_id.email else False,
             "from": AustraliaPostHelper.map_res_partner_to_shipment(picking.sale_id.warehouse_id.partner_id),
             "to": AustraliaPostHelper.map_res_partner_to_shipment(picking.partner_id),
             "items": AustraliaPostHelper.map_shipment_items(picking)

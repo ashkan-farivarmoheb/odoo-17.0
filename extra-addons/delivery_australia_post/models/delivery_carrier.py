@@ -6,7 +6,6 @@ from odoo import fields, models, api, _
 import json
 import logging
 from odoo.exceptions import UserError
-
 _logger = logging.getLogger(__name__)
 
 
@@ -24,14 +23,14 @@ class DeliveryCarrierAustraliaPost(models.Model):
         string="Australia Post Account Number")
     australia_post_api_password = fields.Char(
         string="Australia Post API Password", groups="base.group_system")
-    australia_post_environment = fields.Selection([
-        ('test_environment', 'Testing'),
-        ('prod_environment', 'Production')
-    ], string="Environment", default='test_environment', help="Select the environment for Australia Post API.")
+    # australia_post_environment = fields.Selection([
+    #     ('test_environment', 'Testing'),
+    #     ('prod_environment', 'Production')
+    # ], string="Environment", default='test_environment', help="Select the environment for Australia Post API.")
 
     delivery_type = fields.Selection(selection_add=[
-        ('australia_post', 'Australia Post')
-    ], ondelete={'australia_post': 'cascade'})
+        ('auspost', 'Australia Post')
+    ], ondelete={'auspost': 'cascade'})
     # Auspost  service type
     service_type = fields.Char(string='Type', readonly=True)
     service_product_id = fields.Char(string='Code', readonly=True)
@@ -42,11 +41,10 @@ class DeliveryCarrierAustraliaPost(models.Model):
     tracking_link = fields.Char(string="Tracking Link",
                                 help="Tracking link(URL) useful to track the "
                                      "shipment or package from this URL.",
-                                size=256)
+                                size=256, default="https://auspost.com.au/mypost/track/#/details")
     mail_template_id = fields.Many2one('mail.template', 'E-mail Template',
-                                       help="choose mail template ",
-                                       #    default=lambda self: self.env.ref('delivery_australia_post.email_template_shipment_tracking_ept').id)
-                                       )
+                                       help="choose mail template, default template is 'Shipping: Send by Email'",
+                                       default=lambda self: self.env.ref('stock.mail_template_data_delivery_confirmation').id)
 
     is_automatic_shipment_mail = fields.Boolean('Automatic Send Shipment Confirmation Mail',
                                                 help="True: Send the shipment confirmation email to customer "
@@ -73,11 +71,11 @@ class DeliveryCarrierAustraliaPost(models.Model):
         default=False,
         copy=False
     )
-    stock_package_type_id = fields.Many2one('stock.package.type',
-                                            string="Package Type",
-                                            help="Type of packaging used for delivery.",
-                                            copy=False,
-                                            )
+    # stock_package_type_id = fields.Many2one('stock.package.type',
+    #                                         string="Package Type",
+    #                                         help="Type of packaging used for delivery.",
+    #                                         copy=False,
+    #                                         )
     commercial_value = fields.Boolean(
         string="Commercial Value",
         help="Declare the value of goods for customs purposes.",
@@ -175,16 +173,21 @@ class DeliveryCarrierAustraliaPost(models.Model):
             cls._australia_post_request_instance = AustraliaPostRequest.get_instance()
         return cls._australia_post_request_instance
 
-    def australia_post_rate_shipment(self, order):
+    def auspost_rate_shipment(self, order):
         """Calculate the shipping rate with Australia Post for a given order.
 
          :param order: The sale.order record
          :return: A dictionary containing the shipment rate and other details.
          """
+
+        _logger.debug(
+            "auspost_rate_shipment")
+
         try:
             australia_post_request = self._get_australia_post_request()  # self is the carrier
 
-            rate_data = australia_post_request.create_rate_shipment_request(order, self.service_product_id)
+            rate_data = australia_post_request.create_rate_shipment_request(
+                order, self.service_product_id)
             _logger.debug('rate_data -------%s ', rate_data)
 
         except Exception as e:
@@ -232,33 +235,10 @@ class DeliveryCarrierAustraliaPost(models.Model):
                 raise UserError(
                     _("Unknown error occurred while fetching shipping rates."))
 
-    def australia_post_send_shipping(self, pickings):
+    def auspost_send_shipping(self, pickings):
         return [self.australia_post_create_shipping(p) for p in pickings]
 
-    def australia_post_create_shipping(self, picking):
-        res = None
-        try:
-            payload = json.dumps(self._get_australia_post_request().create_post_shipment_request(picking))
-            response = self._get_australia_post_repository().create_shipment(payload, picking.carrier_id.read()[0])
-            if not response.get('data'):
-                raise UserError(
-                    _("No shipments data returned from Australia Post."))
-            for shipment in response.get('data')['shipments']:
-                picking.shipment_id = shipment['shipment_id']
-                if len(shipment['items']) > 0:
-                    res = {
-                        "exact_price": shipment['shipment_summary']['total_cost'],
-                        'tracking_number': shipment['items'][0]['tracking_details']['article_id'] if shipment['items'][0]['tracking_details'] else ''
-                    }
-        except UserError as e:
-            raise e
-        except Exception as e:
-            _logger.error("Failed to create shipment: %s", e)
-            raise UserError(
-                "There was a problem creating a shipment. Please try again later.")
-        return res
-
-    def australia_post_get_tracking_link(self, picking):
+    def auspost_get_tracking_link(self, picking):
         """Generate a tracking link for the customer.
 
         Args:
@@ -273,10 +253,11 @@ class DeliveryCarrierAustraliaPost(models.Model):
 
         # Example tracking link, replace with real URL format provided by Australia Post
 
-        return f'{base_url}/{picking.carrier_tracking_ref}'
+        return f'{base_url}/{picking.carrier_tracking_ref}' if picking.carrier_tracking_ref else False
 
-    def australia_post_cancel_shipment(self, picking):
-
+    def auspost_cancel_shipment(self, picking):
+        _logger.debug(
+            "auspost_cancel_shipment")
         try:
             carrier = self.env['delivery.carrier'].search(
                 [('id', '=', picking.carrier_id.id)])
@@ -292,6 +273,38 @@ class DeliveryCarrierAustraliaPost(models.Model):
                 "There was a problem cancelling the shipment. Please try again later.")
 
         return {'success': res.get('success')}
+
+    def australia_post_create_shipping(self, picking):
+        res = None
+        _logger.debug(
+            "australia_post_create_shipping")
+        try:
+            payload = json.dumps(self._get_australia_post_request().create_post_shipment_request(picking))
+            response = self._get_australia_post_repository().create_shipment(
+                payload, picking.carrier_id.read()[0])
+            if not response.get('data'):
+                raise UserError(
+                    _("No shipments data returned from Australia Post."))
+            for shipment in response.get('data')['shipments']:
+                picking.shipment_id = shipment['shipment_id']
+                _logger.debug(
+                    "australia_post_create_shipping for shipment %s", picking.shipment_id)
+
+                if len(shipment['items']) > 0:
+                    res = {
+                        "exact_price": shipment['shipment_summary']['total_cost'],
+                        'tracking_number': shipment['items'][0]['tracking_details']['article_id'] if shipment['items'][0]['tracking_details'] else ''
+                    }
+                # if self.is_automatic_shipment_mail:
+                #     _logger.debug("is_automatic_shipment_mail is true")
+                #     self.send_shipment_confirm_mail(picking)
+        except UserError as e:
+            raise e
+        except Exception as e:
+            _logger.error("Failed to create shipment: %s", e)
+            raise UserError(
+                "There was a problem creating a shipment. Please try again later.")
+        return res
 
     def _australia_post_get_default_custom_package_code(self):
         """Returns a default package code for custom implementations.
@@ -387,3 +400,16 @@ class DeliveryCarrierAustraliaPost(models.Model):
     def validate_shipment_rate(self, data):
         return (data and len(data['items']) > 0
                 and data['items'][0]['prices'])
+
+    # def send_shipment_confirm_mail(self, picking):
+    #     _logger.debug('send_shipment_confirm_mail %s   %s',
+    #                   self.id, picking)
+    #     picking_record = self.env['stock.picking'].browse(picking.id)
+    #     if picking_record:
+    #         _logger.debug('send_shipment_confirm_mail ')
+    #         # Call the method from StockPickingAustraliaPost
+    #         picking_record.auto_shipment_confirm_mail()
+
+    #     # email_template = self.mail_template_id
+    #     # if email_template:
+    #     #     email_template.send_mail(self.id, force_send=True)

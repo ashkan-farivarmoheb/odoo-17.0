@@ -20,7 +20,7 @@ class ProductPackaging(models.Model):
         for obj in self:
             name = obj.name
             if obj.package_carrier_type:
-                name += " [%s]" % (obj.package_carrier_type)
+                name += " [%s]" % (str(obj.package_carrier_type))
             obj.display_name = name
 
     @api.model
