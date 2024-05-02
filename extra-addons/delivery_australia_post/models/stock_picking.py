@@ -142,7 +142,6 @@ class StockPickingAustraliaPost(models.Model):
         if not self[0].carrier_id:
             raise ValidationError(
                 _('Carrier is not specified for Stock Picking %s. please Choose a Carrier.', self.name))
-            return False
         res = super().button_validate()
         if res is True and self.batch_id:
             payload = json.dumps(self._get_australia_post_request()

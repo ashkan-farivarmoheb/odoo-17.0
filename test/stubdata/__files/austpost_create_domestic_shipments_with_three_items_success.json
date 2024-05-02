@@ -1,15 +1,15 @@
  {
     "shipments": [
         {
-            "shipment_id": "54kjEFSvIo4759AJGsaaMNBF",
+            "shipment_id": "54kjEFSvIo4759AJGsaaMNBG",
             "shipment_reference": "1",
             "shipment_creation_date": "2014-08-27T15:48:09+10:00",
             "shipment_modified_date": "2014-08-27T15:48:09+10:00",
-            "customer_reference_1": "S00001",
-            "customer_reference_2": "SKU-1, SKU-2",
+            "customer_reference_1": "S00003",
+            "customer_reference_2": "SKU-1, SKU-2, SKU-3",
             "sender_references": [
-            "S00001",
-            "SKU-1, SKU-2"
+            "S00003",
+            "SKU-1, SKU-2, SKU-3"
       	     ],
             "email_tracking_enabled":true,
             "items": [
@@ -17,7 +17,7 @@
                     "item_id": "LDCsEAOvU_oAAAFI6MwaDRYB",
                     "item_reference": "SKU-1",
                     "tracking_details": {
-                        "article_id": "ABC000128B4C5",
+                        "article_id": "ABC000128B4C8",
                         "consignment_id": "ABC000128"
                     },
                     "product_id": "T28",
@@ -30,10 +30,25 @@
                     }
                 },
                 {
+                    "item_id": "ynesEAOvnlAAAAFI88waDRYB",
+                    "item_reference": "SKU-3",
+                    "tracking_details": {
+                        "article_id": "ABC000128B4C9",
+                        "consignment_id": "ABC000128"
+                    },
+                    "product_id": "T28",
+                    "item_summary": {
+                        "total_cost": 4,
+                        "total_cost_ex_gst": 3.64,
+                        "total_gst": 0.36,
+                        "status": "Created"
+                    }
+                },
+                {
                     "item_id": "TkGsEAOv9.4AAAFI8MwaDRYB",
                     "item_reference": "SKU-2",
                     "tracking_details": {
-                        "article_id": "ABC000128B4C7",
+                        "article_id": "ABC000128B4C0",
                         "consignment_id": "ABC000128"
                     },
                     "product_id": "T28",
@@ -46,15 +61,15 @@
                 }
             ],
             "shipment_summary": {
-                "total_cost": 9,
-                "total_cost_ex_gst": 8.19,
+                "total_cost": 13,
+                "total_cost_ex_gst": 11.82,
                 "fuel_surcharge": 2.15,
-                "total_gst": 0.81,
+                "total_gst": 1.18,
                 "manual_handling_surcharge": 7.60,
                 "status": "Created",
-                "number_of_items": 2,
+                "number_of_items": 3,
                 "tracking_summary": {
-                    "Initiated": 2
+                    "Initiated": 3
                 }
             }
         }
