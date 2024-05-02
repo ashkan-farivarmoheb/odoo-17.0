@@ -21,10 +21,10 @@
                         <div colspan="2" invisible="not australia_post_account_number">
                             <button name="australia_post_get_account_info" string="Select a service linked to your auspost account" type="object" class="oe_inline fa fa-arrow-right oe_link"/>
                         </div>
-                        <div colspan="2" class="alert alert-warning" invisible="not australia_post_api_key or not australia_post_api_password or not australia_post_account_number or not service_product_id" role="status">
+                        <div colspan="2" class="alert alert-warning" invisible="service_product_id" role="status">
                             <p class="mb-0">
                                 <i class="fa fa-exclamation-triangle"/>
- Do not forget to select a service for a valid configuration.</p>
+                                Do not forget to select a service for a valid configuration.</p>
                         </div>
                     </group>
                     <group name="auspost_shipping_information" string="Australia Post Shipping Information">

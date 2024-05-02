@@ -12,6 +12,7 @@
         'data/delivery_carrier_data.xml',
         'views/stock_picking_view.xml',
         'views/australia_post_account_wizard_view.xml',
+        'views/stock_quant_package_view.xml',
         'security/ir.model.access.csv'],
     'installable': True,
     'application': False,
