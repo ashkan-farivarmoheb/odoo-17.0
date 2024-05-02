@@ -304,3 +304,45 @@ class AustraliaPostRepository(object):
             raise UserError(_("Unexpected error: %s", e))
 
         return response
+
+    def create_order_shipments(self, payload=None, carrier=None):
+        return self._create_order_shipments(method="put", payload=payload, carrier=carrier)
+
+    def create_order_including_from_shipments(self, payload=None, carrier=None):
+        return self._create_order_shipments(method="post", payload=payload, carrier=carrier)
+
+    def _create_order_shipments(self, method="put", payload=None, carrier=None):
+        try:
+            if payload is None:
+                raise UserError(_("Payload for creating shipping is missing."))
+
+            headers = {
+                "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
+                "Accept": AustraliaPostRepository.ACCEPT,
+                "Authentication": _private_get_authentication(carrier)
+            }
+
+            url = "".join([host, create_order_path])
+            res = requests.request(method, url, headers=headers, data=payload)
+            res_json = res.json()
+
+            if res.status_code == 200 and method == "put":
+                response = create_success_response(res_json)
+            elif res.status_code == 201 and method == "post":
+                response = create_success_response(res_json)
+            else:
+                response = create_error_response(res_json)
+
+        except requests.exceptions.Timeout:
+            raise UserError(_("Timeout: the server did not reply within 10s"))
+        except (ValueError, requests.exceptions.ConnectionError):
+            raise UserError(_("Server not reachable, please try again later"))
+        except requests.exceptions.HTTPError as e:
+            raise UserError(
+                _("{}\n{}".format(
+                    e, response['error_message'] if response else ""))
+            )
+        except Exception as e:
+            raise UserError(_("Unexpected error: %s", e))
+
+        return response

@@ -3,6 +3,7 @@ from .australia_post_request import AustraliaPostRequest
 from .australia_post_helper import AustraliaPostHelper
 
 from odoo import fields, models, api, _
+import json
 import logging
 from odoo.exceptions import UserError
 
@@ -237,7 +238,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
     def australia_post_create_shipping(self, picking):
         res = None
         try:
-            payload = self._get_australia_post_request().create_post_shipment_request(picking, self.email_tracking, self.allow_part_delivery, self.authority_leave)
+            payload = json.dumps(self._get_australia_post_request().create_post_shipment_request(picking))
             response = self._get_australia_post_repository().create_shipment(payload, picking.carrier_id.read()[0])
             if not response.get('data'):
                 raise UserError(

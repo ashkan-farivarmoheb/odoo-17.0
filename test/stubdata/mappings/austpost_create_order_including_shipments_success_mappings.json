@@ -2,13 +2,13 @@
     "mappings": [
         {
             "request": {
-                "method": "PUT",
+                "method": "POST",
                 "urlPath": "/shipping/v1/orders",
                 "bodyPatterns": [
                     {
                         "matchesJsonPath": {
-                            "expression": "$.shipments[0].shipment_id",
-                            "matches": "54kjEFSvIo4759AJGsaaMNBF"
+                            "expression": "$.order_reference",
+                            "matches": ".*"
                         }
                     }
                 ]
@@ -18,7 +18,7 @@
                     "Content-Type": "application/json"
                 },
                 "status": 201,
-                "bodyFileName": "austpost_create_order_shipments_success.json"
+                "bodyFileName": "austpost_create_order_including_shipments_success.json"
             }
         }
     ]

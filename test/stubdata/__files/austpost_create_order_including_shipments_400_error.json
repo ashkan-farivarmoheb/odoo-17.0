@@ -1,0 +1,13 @@
+ {
+    "errors": [
+        {
+            "code": "42012",
+            "name": " PRODUCT_NOT_SUPPORTED_BY_CONTRACT_ERROR",
+            "message": "The product T288 you have entered is not available on your contract for the destination postcode. For further assistance, please contact your Account Manager or call Australia Post on 13 21 31.",
+            "context": {
+              "product_id": "T288",
+        	  "location_id": "0000123456"
+            }
+        }
+    ]
+}

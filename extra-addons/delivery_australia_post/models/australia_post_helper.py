@@ -39,7 +39,7 @@ class AustraliaPostHelper(object):
         }
 
     @staticmethod
-    def map_shipment_items(picking, authority_leave, allow_part_delivery):
+    def map_shipment_items(picking):
         items = []
         for move in picking.move_ids:
             item = {
@@ -49,8 +49,8 @@ class AustraliaPostHelper(object):
                 'width': "10",
                 'height': "1",
                 'weight': move.weight,
-                "authority_to_leave": authority_leave,
-                "allow_partial_delivery": allow_part_delivery
+                "authority_to_leave": picking.carrier_id.authority_leave if picking.carrier_id else False,
+                "allow_partial_delivery": picking.carrier_id.allow_part_delivery if picking.carrier_id else False,
             }
             items.append(item)
         return items

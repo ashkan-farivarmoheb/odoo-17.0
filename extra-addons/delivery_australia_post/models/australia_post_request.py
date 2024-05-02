@@ -1,14 +1,12 @@
-from .australia_post_helper import AustraliaPostHelper
 import logging
 import re
-import json
 
+from .australia_post_helper import AustraliaPostHelper
 
 _logger = logging.getLogger(__name__)
 
 
 class AustraliaPostRequest(object):
-
     _instance = None
 
     @classmethod
@@ -57,18 +55,26 @@ class AustraliaPostRequest(object):
             "currency": order.currency_id.name,
         }
 
-    def create_post_shipment_request(self, picking, email_tracking, allow_part_delivery, authority_leave):
-        product_names = ", ".join([self._extract_product_name(move.product_id.product_tmpl_id.name) for move in picking.move_ids])
-        shipment_request = {
-            "shipment_reference": picking.sale_id.id,
-            "customer_reference_1": picking.sale_id.name,
-            "customer_reference_2": product_names,
-            "email_tracking_enabled": email_tracking,
-            "from": AustraliaPostHelper.map_res_partner_to_shipment(picking.sale_id.warehouse_id.partner_id),
-            "to": AustraliaPostHelper.map_res_partner_to_shipment(picking.partner_id),
-            "items": AustraliaPostHelper.map_shipment_items(picking, allow_part_delivery, authority_leave)
+    def create_post_shipment_request(self, picking):
+        shipment_request = self._create_post_shipment_request(picking)
+        return {"shipments": [shipment_request]}
+
+    def create_order_including_shipments_request(self, batch):
+        return {
+            "order_reference": batch.name,
+            "payment_method": "CHARGE_TO_ACCOUNT",
+            "shipments": [self._create_post_shipment_request(p) for p in batch.picking_ids]
         }
-        return json.dumps({"shipments": [shipment_request]})
+
+    def create_order_request(self, batch):
+        shipment_ids = set()
+        [shipment_ids.add(p.shipment_id) for p in batch.picking_ids]
+
+        return {
+            "order_reference": batch.name,
+            "payment_method": "CHARGE_TO_ACCOUNT",
+            "shipments": [{"shipment_id": s} for s in shipment_ids]
+        }
 
     def _extract_product_name(self, name):
         extracted = name
@@ -78,3 +84,16 @@ class AustraliaPostRequest(object):
             extracted = match.group(1)
         return extracted
 
+    def _create_post_shipment_request(self, picking):
+        product_names = ", ".join(
+            [self._extract_product_name(move.product_id.product_tmpl_id.name) for move in picking.move_ids])
+        shipment_request = {
+            "shipment_reference": picking.id,
+            "customer_reference_1": picking.sale_id.id,
+            "customer_reference_2": product_names,
+            "email_tracking_enabled": picking.carrier_id.email_tracking if picking.carrier_id else False,
+            "from": AustraliaPostHelper.map_res_partner_to_shipment(picking.sale_id.warehouse_id.partner_id),
+            "to": AustraliaPostHelper.map_res_partner_to_shipment(picking.partner_id),
+            "items": AustraliaPostHelper.map_shipment_items(picking)
+        }
+        return shipment_request
