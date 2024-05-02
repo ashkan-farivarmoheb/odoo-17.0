@@ -30,17 +30,16 @@ class StockPicking(models.Model):
             amount = self.get_picking_price(package_id)
             package_id.cover_amount = packaging_id.get_cover_amount(amount)
         return True
-    
 
     def _get_cover_amount_without_qty_done(self):
         picking_move_lines = self.move_line_ids
-        move_line_ids = picking_move_lines.filtered(lambda ml: 
-            float_compare(ml.quantity, 0.0, precision_rounding=ml.product_uom_id.rounding) > 0 and not ml.result_package_id)
+        move_line_ids = picking_move_lines.filtered(lambda ml:
+                                                    float_compare(ml.quantity, 0.0, precision_rounding=ml.product_uom_id.rounding) > 0 and not ml.result_package_id)
 
         if not move_line_ids:
-            move_line_ids = picking_move_lines.filtered(lambda ml: 
-                        float_compare(ml.product_packaging_qty, 0.0, precision_rounding=ml.product_uom_id.rounding) > 0 and 
-                        float_compare(ml.quantity, 0.0, precision_rounding=ml.product_uom_id.rounding) == 0)
+            move_line_ids = picking_move_lines.filtered(lambda ml:
+                                                        float_compare(ml.product_packaging_qty, 0.0, precision_rounding=ml.product_uom_id.rounding) > 0 and
+                                                        float_compare(ml.quantity, 0.0, precision_rounding=ml.product_uom_id.rounding) == 0)
         price = 0
         if move_line_ids:
             for line in move_line_ids:
@@ -48,17 +47,19 @@ class StockPicking(models.Model):
                     qty = line.quantity
                 else:
                     qty = line.product_packaging_qty
-                    
+
                 if line.move_id.sale_line_id:
                     price_unit = line.move_id.sale_line_id.price_unit*qty or 0.0
                 else:
                     price_unit = line.product_id.lst_price*qty or 0.0
                 price += price_unit
 
-        total_weight = sum([po.quantity * po.product_id.weight for po in move_line_ids]) 
+        total_weight = sum(
+            [po.quantity * po.product_id.weight for po in move_line_ids])
 
         if not total_weight:
-            total_weight = sum([po.product_packaging_qty * po.product_id.weight for po in move_line_ids]) 
+            total_weight = sum(
+                [po.product_packaging_qty * po.product_id.weight for po in move_line_ids])
         return price, total_weight
 
     def action_put_in_pack(self):
@@ -92,13 +93,13 @@ class StockPicking(models.Model):
             delivery_type = context.get('current_package_carrier_type')
             ctx = {
                 'no_description':
-                not(delivery_type in ['fedex', 'dhl',
-                    'ups', 'auspost', 'canada_post', 'my_dhl','freightview']),
+                not (delivery_type in ['fedex', 'dhl',
+                                       'ups', 'auspost', 'canada_post', 'my_dhl', 'freightview']),
                 'no_cover_amount':
-                    not(delivery_type in [
-                        'fedex', 'dhl', 'ups', 'usps', 'auspost', 'canada_post','my_dhl','freightview']),
+                    not (delivery_type in [
+                        'fedex', 'dhl', 'ups', 'usps', 'auspost', 'canada_post', 'my_dhl', 'freightview']),
                 'no_edt_document':
-                    not(delivery_type in ['fedex', 'ups']),
+                    not (delivery_type in ['fedex', 'ups']),
                 'current_package_picking_id': self.id,
 
             }
@@ -162,8 +163,6 @@ class StockPicking(models.Model):
         else:
             return super(StockPicking, self).action_cancel()
 
-            
-
     def do_new_transfer(self):
         for pick in self:
             carrier_id = pick.carrier_id
@@ -179,8 +178,10 @@ class StockPicking(models.Model):
         """
         available_carriers = []
         return available_carriers
-    
+
     def send_to_shipper(self):
+        _logger.debug("send to shippppper base: %s", self)
+
         self.ensure_one()
         avilable_carriers_list = self.get_all_wk_carriers()
         if self.carrier_id.delivery_type and (self.carrier_id.delivery_type not in ['base_on_rule', 'fixed']) and (self.carrier_id.delivery_type in avilable_carriers_list):
@@ -189,13 +190,20 @@ class StockPicking(models.Model):
                     'Create the package first for picking %s before sending to shipper.' % (self.name))
             else:
                 # try:
-                res = self.carrier_id.send_shipping(self)
+                _logger.debug(
+                    "send to shippppper base package_ids %s", self.package_ids)
+
+                res = self.carrier_id.send_shipping(self)[0]
+
                 self.carrier_price = res.get('exact_price')
                 self.carrier_tracking_ref = res.get(
                     'tracking_number') and res.get('tracking_number').strip(',')
                 self.label_genrated = True
                 self.date_delivery = res.get('date_delivery')
-                self.weight_shipment = float(res.get('weight'))
+                if res.get(
+                        'weight'):
+                    self.weight_shipment = float(res.get('weight'))
+
                 msg = _("Shipment sent to carrier %s for expedition with tracking number %s") % (
                     self.carrier_id.delivery_type, self.carrier_tracking_ref)
                 self.message_post(
@@ -207,7 +215,6 @@ class StockPicking(models.Model):
                 #     return self.carrier_id._shipping_genrated_message(e)
         else:
             return super(StockPicking, self).send_to_shipper()
-
 
     @api.model
     def unset_fields_prev(self):

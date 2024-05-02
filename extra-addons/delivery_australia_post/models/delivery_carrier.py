@@ -129,12 +129,12 @@ class DeliveryCarrierAustraliaPost(models.Model):
                                        help="If Auto Create Batch Is True Then Automatically "
                                             "Create The Batch.")
 
-    @api.onchange('auto_create_batch')
-    def _on_change_auto_create_batch(self):
-        cron = self.env.ref(
-            'delivery_carrier.auto_create_batch_picking') or False
-        if cron and not cron.active and self.auto_create_batch:
-            cron.active = True
+    # @api.onchange('auto_create_batch')
+    # def _on_change_auto_create_batch(self):
+    #     cron = self.env.ref(
+    #         'delivery_carrier.auto_create_batch_picking') or False
+    #     if cron and not cron.active and self.auto_create_batch:
+    #         cron.active = True
 
     batch_limit = fields.Integer('Delivery Order Limit In Batch', default=100)
 
@@ -400,16 +400,3 @@ class DeliveryCarrierAustraliaPost(models.Model):
     def validate_shipment_rate(self, data):
         return (data and len(data['items']) > 0
                 and data['items'][0]['prices'])
-
-    # def send_shipment_confirm_mail(self, picking):
-    #     _logger.debug('send_shipment_confirm_mail %s   %s',
-    #                   self.id, picking)
-    #     picking_record = self.env['stock.picking'].browse(picking.id)
-    #     if picking_record:
-    #         _logger.debug('send_shipment_confirm_mail ')
-    #         # Call the method from StockPickingAustraliaPost
-    #         picking_record.auto_shipment_confirm_mail()
-
-    #     # email_template = self.mail_template_id
-    #     # if email_template:
-    #     #     email_template.send_mail(self.id, force_send=True)

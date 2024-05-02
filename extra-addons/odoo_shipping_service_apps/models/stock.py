@@ -40,14 +40,14 @@ class StockMoveLine(models.Model):
                 'context').copy() or dict()
             ctx = {
                 'no_description':
-                not(delivery_type in [
+                not (delivery_type in [
                     'fedex', 'dhl', 'ups', 'auspost', 'canada_post'] and delivery_type or False),
                 'no_cover_amount':
-                not(delivery_type in ['fedex', 'dhl', 'ups', 'usps',
-                    'auspost', 'canada_post'] and delivery_type or False),
+                not (delivery_type in ['fedex', 'dhl', 'ups', 'usps',
+                                       'auspost', 'canada_post'] and delivery_type or False),
                 'no_edt_document':
-                    not(delivery_type in ['fedex', 'ups']
-                        and delivery_type or False),
+                    not (delivery_type in ['fedex', 'ups']
+                         and delivery_type or False),
                 'current_package_picking_id': self.picking_id.id,
             }
             context.update(ctx)

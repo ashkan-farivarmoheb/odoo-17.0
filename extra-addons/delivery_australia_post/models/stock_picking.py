@@ -38,6 +38,14 @@ class StockPickingAustraliaPost(models.Model):
             )
         return cls._australia_post_repository_instance
 
+    def get_all_wk_carriers(self):
+        # First, call the super method to get the existing carriers
+        available_carriers = super(
+            StockPickingAustraliaPost, self).get_all_wk_carriers()
+        new_carriers = ['auspost']
+        available_carriers.extend(new_carriers)
+        return available_carriers
+
     def _action_done(self):
         """
         Done pickings and make visible download button and send to shipper button based on
@@ -88,16 +96,16 @@ class StockPickingAustraliaPost(models.Model):
                       self.carrier_id, self.carrier_id.get_tracking_link)
         self.ensure_one()
         ctx = dict(self._context) or {}
-        shipping_instance = self.carrier_id if self.carrier_id else False
-        if shipping_instance:
-            email_template = shipping_instance.mail_template_id
+        carrier = self.carrier_id if self.carrier_id else False
+        if carrier:
+            email_template = carrier.mail_template_id
             if not email_template:
                 raise ValidationError(_(
                     'You must set the value of E-mail Template in Menu Settings >> Shipping Method.'))
             if self.carrier_id.get_tracking_link(self):
                 tracking_link = self.carrier_id.get_tracking_link(self)
                 _logger.debug('auto_shipment_confirm_mail2 %s   %s %s',
-                              tracking_link, shipping_instance, email_template)
+                              tracking_link, carrier, email_template)
                 ctx.update(
                     {'tracking_link': tracking_link, 'force_send': True})
                 self.with_context(ctx). \
@@ -115,17 +123,19 @@ class StockPickingAustraliaPost(models.Model):
         :return: Return send shipper dict if clicked Send Shipper Button else return none
         """
         if self.batch_id:
-            _logger.debug('The StockPicking %s is included in %s', self.id, self.batch_id.id)
+            _logger.debug('The StockPicking %s is included in %s',
+                          self.id, self.batch_id.id)
 
         _logger.debug("send to shipper: %s", self)
 
         res = super().send_to_shipper()
         carrier = self.carrier_id or False
-        if carrier and carrier.is_automatic_shipment_mail:
+        if carrier and carrier.delivery_type and (carrier.delivery_type in ['auspost']) and carrier.is_automatic_shipment_mail:
             _logger.debug("is_automatic_shipment_mail is true")
             self.auto_shipment_confirm_mail()
         if self.package_ids:
-            self.package_ids.write({'tracking_no': self.carrier_tracking_ref})
+            self.package_ids.write(
+                {'tracking_no': self.carrier_tracking_ref, 'order_id': self.sale_id})
         return res
 
     def button_validate(self):
@@ -146,6 +156,7 @@ class StockPickingAustraliaPost(models.Model):
 
                 data = response.get('data')
                 self.update_batch_details(self.batch_id, data)
+
         return res
 
     def update_batch_details(self, batch, data):
