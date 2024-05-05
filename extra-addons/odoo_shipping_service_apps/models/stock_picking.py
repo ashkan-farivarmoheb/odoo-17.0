@@ -174,7 +174,7 @@ class StockPicking(models.Model):
 
     def get_all_wk_carriers(self):
         """
-        Created to add and detect Webkul avaialable delivery carriers 
+        Created to add and detect Webkul avaialable delivery carriers
         """
         available_carriers = []
         return available_carriers
@@ -185,7 +185,7 @@ class StockPicking(models.Model):
         self.ensure_one()
         avilable_carriers_list = self.get_all_wk_carriers()
         if self.carrier_id.delivery_type and (self.carrier_id.delivery_type not in ['base_on_rule', 'fixed']) and (self.carrier_id.delivery_type in avilable_carriers_list):
-            if not len(self.package_ids):
+            if not self.batch_id and not len(self.package_ids):
                 raise ValidationError(
                     'Create the package first for picking %s before sending to shipper.' % (self.name))
             else:
