@@ -9,6 +9,9 @@
       <xpath expr="//group[1]/group[@name='amount']" position="inside">
         <field name='tracking_no'/>
       </xpath>
+      <xpath expr="//field[@name='pack_date']" position="after">
+        <field name='order_id' invisible="not order_id" readonly='True'/>
+      </xpath>
     </field>
   </record>
 

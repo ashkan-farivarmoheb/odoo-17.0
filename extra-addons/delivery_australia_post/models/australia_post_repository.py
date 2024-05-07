@@ -108,7 +108,7 @@ class AustraliaPostRepository(object):
             _logger.debug(
                 'Initializing API Request get_shipping_rates payload: %s - headers: %s', payload, headers)
             res = requests.post(url="".join(
-                [host, shipment_price_path  ]), headers=headers, data=payload)
+                [host, shipment_price_path]), headers=headers, data=payload)
             res_json = res.json()
             _logger.debug(
                 'API response json get_shipping_rates: %s ', res_json)
@@ -130,7 +130,6 @@ class AustraliaPostRepository(object):
             raise UserError(_("Unexpected error: %s", e))
 
         return response
-
 
     def get_account(self, carrier_record):
         response = None
@@ -174,6 +173,8 @@ class AustraliaPostRepository(object):
         return response
 
     def create_shipment(self, payload=None, carrier=None):
+        _logger.debug(
+            'create_shipment carrier: %s   payload: %s', carrier, payload)
         response = None
 
         try:
@@ -306,12 +307,19 @@ class AustraliaPostRepository(object):
         return response
 
     def create_order_shipments(self, payload=None, carrier=None):
+        _logger.debug(
+            'create_order_shipments carrier: %s   payload: %s', carrier, payload)
         return self._create_order_shipments(method="put", payload=payload, carrier=carrier)
 
     def create_order_including_from_shipments(self, payload=None, carrier=None):
+        _logger.debug(
+            'create_order_including_from_shipments carrier: %s   payload: %s', carrier, payload)
         return self._create_order_shipments(method="post", payload=payload, carrier=carrier)
 
     def _create_order_shipments(self, method="put", payload=None, carrier=None):
+        _logger.debug(
+            '_create_order_shipments carrier: %s   payload: %s', carrier, payload)
+
         try:
             if payload is None:
                 raise UserError(_("Payload for creating shipping is missing."))
@@ -325,6 +333,8 @@ class AustraliaPostRepository(object):
             url = "".join([host, create_order_path])
             res = requests.request(method, url, headers=headers, data=payload)
             res_json = res.json()
+
+            _logger.debug('res_json             %s', (res_json))
 
             if res.status_code == 200 and method == "put":
                 response = create_success_response(res_json)

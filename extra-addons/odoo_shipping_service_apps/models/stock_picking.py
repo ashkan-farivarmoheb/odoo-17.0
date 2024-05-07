@@ -63,6 +63,7 @@ class StockPicking(models.Model):
         return price, total_weight
 
     def action_put_in_pack(self):
+        _logger.debug('action_put_in_pack weswebkuuuuuuul')
         self.ensure_one()
         cover = 0
         carrier_id = self.carrier_id
@@ -87,6 +88,8 @@ class StockPicking(models.Model):
             cover, shipping_weight = self._get_cover_amount_without_qty_done()
 
         res = super(StockPicking, self).action_put_in_pack()
+        _logger.debug(
+            'action_put_in_pack res:%s   type(res) :%s', res, type(res))
         if res and (type(res) == dict):
             context = res.get('context') and res.get(
                 'context').copy() or dict()
@@ -112,6 +115,8 @@ class StockPicking(models.Model):
                 ctx['default_cover_amount'] = cover
                 ctx['default_shipping_weight'] = shipping_weight
             context.update(ctx)
+            _logger.debug(
+                'action_put_in_pack context:%s  ', context, )
             res['context'].update(context)
 
             """
@@ -167,7 +172,7 @@ class StockPicking(models.Model):
         for pick in self:
             carrier_id = pick.carrier_id
             if carrier_id and (carrier_id.delivery_type not in ['base_on_rule', 'fixed']):
-                if not len(pick.package_ids):
+                if not len(pick.package_ids) and not pick.batch_id:
                     raise ValidationError(
                         'Create the package first for picking %s before sending to shipper.' % (pick.name))
         return super(StockPicking, self).do_new_transfer()
