@@ -74,14 +74,14 @@ class StockPickingAustraliaPost(models.Model):
             # TODO: when the batching implemented uncomment this
             if picking.carrier_tracking_ref and picking.batch_id:
                 picking.send_to_shipper_process_done = True
-            if picking.carrier_tracking_ref:
-                picking.send_to_shipper_process_done = True
+            # if picking.carrier_tracking_ref:
+            #     picking.send_to_shipper_process_done = True
 
-        # pickings_ready_for_download = self.filtered(
-        #     lambda x: x.send_to_shipper_process_done)
-        # if pickings_ready_for_download:
-        #     pickings_ready_for_download.mapped(
-        #         'batch_id').ready_for_download = True
+        pickings_ready_for_download = self.filtered(
+            lambda x: x.send_to_shipper_process_done)
+        if pickings_ready_for_download:
+            pickings_ready_for_download.mapped(
+                'batch_id').ready_for_download = True
 
         return res
 
@@ -160,3 +160,6 @@ class StockPickingAustraliaPost(models.Model):
 
     def update_batch_details(self, batch, data):
         batch.order_id = data['order']['order_id']
+        # if 'tracking_number' in data:
+        #     batch.send_to_shipper_process_done = bool(data['shipments']['tracking_number'])
+        #     batch.ready_for_download = bool(data['tracking_number'])

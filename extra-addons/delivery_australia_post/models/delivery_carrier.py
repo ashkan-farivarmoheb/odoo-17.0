@@ -129,13 +129,6 @@ class DeliveryCarrierAustraliaPost(models.Model):
                                        help="If Auto Create Batch Is True Then Automatically "
                                             "Create The Batch.")
 
-    # @api.onchange('auto_create_batch')
-    # def _on_change_auto_create_batch(self):
-    #     cron = self.env.ref(
-    #         'delivery_carrier.auto_create_batch_picking') or False
-    #     if cron and not cron.active and self.auto_create_batch:
-    #         cron.active = True
-
     batch_limit = fields.Integer('Delivery Order Limit In Batch', default=100)
 
     auto_done_pickings = fields.Boolean(string="Auto Validate Delivery Orders",
@@ -146,13 +139,6 @@ class DeliveryCarrierAustraliaPost(models.Model):
     user_id = fields.Many2one('res.users',
                               string='Batch Responsible',
                               help='Responsible person to process the batch')
-    use_existing_batch_cronjob = fields.Boolean(string="Use Existing Batch",
-                                                default=False,
-                                                copy=False,
-                                                help="""True: Delivery orders will be added to existing batch in
-                                                draft state for carrier.
-                                                False: New batch will be created every time and all the
-                                                delivery order will be added to new Batch.""")
 
 # TODO: functions of above need to be reviewed and tested
     _australia_post_repository_instance = None
@@ -279,7 +265,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
         _logger.debug(
             "australia_post_create_shipping")
         try:
-            payload = json.dumps(self._get_australia_post_request().create_post_shipment_request(picking))
+            payload = json.dumps(self._get_australia_post_request(
+            ).create_post_shipment_request(picking))
             response = self._get_australia_post_repository().create_shipment(
                 payload, picking.carrier_id.read()[0])
             if not response.get('data'):

@@ -203,7 +203,7 @@ class StockPicking(models.Model):
                 self.carrier_price = res.get('exact_price')
                 self.carrier_tracking_ref = res.get(
                     'tracking_number') and res.get('tracking_number').strip(',')
-                self.label_genrated = True
+                self.label_genrated = bool(self.carrier_tracking_ref)
                 self.date_delivery = res.get('date_delivery')
                 if res.get(
                         'weight'):
