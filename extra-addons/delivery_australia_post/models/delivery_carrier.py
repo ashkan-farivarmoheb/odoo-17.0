@@ -272,16 +272,22 @@ class DeliveryCarrierAustraliaPost(models.Model):
             if not response.get('data'):
                 raise UserError(
                     _("No shipments data returned from Australia Post."))
-            for shipment in response.get('data')['shipments']:
-                picking.shipment_id = shipment['shipment_id']
+            for shipment in response.get('data', {}).get('shipments', []):
+                picking.shipment_id = shipment.get('shipment_id')
                 _logger.debug(
                     "australia_post_create_shipping for shipment %s", picking.shipment_id)
+                items = shipment.get('items', [])
 
-                if len(shipment['items']) > 0:
+                if items:
+                    tracking_numbers = [item['tracking_details']['article_id']
+                                        for item in items if 'tracking_details' in item]
                     res = {
                         "exact_price": shipment['shipment_summary']['total_cost'],
-                        'tracking_number': shipment['items'][0]['tracking_details']['article_id'] if shipment['items'][0]['tracking_details'] else ''
+                        "tracking_number": tracking_numbers if tracking_numbers else ''
                     }
+                    _logger.debug(
+                        "australia_post_create_shipping Shipping response: %s", res)
+
                 # if self.is_automatic_shipment_mail:
                 #     _logger.debug("is_automatic_shipment_mail is true")
                 #     self.send_shipment_confirm_mail(picking)

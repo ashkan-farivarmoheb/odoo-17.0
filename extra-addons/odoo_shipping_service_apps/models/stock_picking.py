@@ -185,7 +185,7 @@ class StockPicking(models.Model):
         return available_carriers
 
     def send_to_shipper(self):
-        _logger.debug("send to shippppper base: %s", self)
+        _logger.debug("send to shipper webkul: %s", self)
 
         self.ensure_one()
         avilable_carriers_list = self.get_all_wk_carriers()
@@ -197,8 +197,7 @@ class StockPicking(models.Model):
                 # try:
                 _logger.debug(
                     "send to shippppper base package_ids %s", self.package_ids)
-
-                res = self.carrier_id.send_shipping(self)[0]
+                res = self.carrier_id.send_shipping(self)
 
                 self.carrier_price = res.get('exact_price')
                 self.carrier_tracking_ref = res.get(

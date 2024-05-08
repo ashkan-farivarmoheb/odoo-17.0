@@ -122,13 +122,44 @@ class StockPickingAustraliaPost(models.Model):
         Return send shipper dict if clicked Send Shipper Button else return none
         :return: Return send shipper dict if clicked Send Shipper Button else return none
         """
-        if self.batch_id:
-            _logger.debug('The StockPicking %s is included in %s',
-                          self.id, self.batch_id.id)
+        
+        self.ensure_one()
+        avilable_carriers_list = self.get_all_wk_carriers()
+
+        if self.carrier_id.delivery_type and (self.carrier_id.delivery_type not in ['base_on_rule', 'fixed']) and (self.carrier_id.delivery_type in avilable_carriers_list):
+            if not self.batch_id and not len(self.package_ids):
+                raise ValidationError(
+                    'Create the package first for picking %s before sending to shipper.' % (self.name))
+            else:
+                # try:
+                _logger.debug(
+                    "send to shippppper base package_ids %s", self.package_ids)
+                res = self.carrier_id.send_shipping(self)
+
+                self.carrier_price = res.get('exact_price')
+                self.carrier_tracking_ref = res.get(
+                    'tracking_number',[]) and res.get('tracking_number').strip(',')
+                self.label_genrated = bool(self.carrier_tracking_ref)
+                self.date_delivery = res.get('date_delivery')
+                if res.get(
+                        'weight'):
+                    self.weight_shipment = float(res.get('weight'))
+
+                msg = _("Shipment sent to carrier %s for expedition with tracking number %s") % (
+                    self.carrier_id.delivery_type, self.carrier_tracking_ref)
+                self.message_post(
+                    body=msg,
+                    subject="Attachments of tracking",
+                    attachments=res.get('attachments')
+                )
+                # except Exception as e:
+                #     return self.carrier_id._shipping_genrated_message(e)
+        else:
+            return super(StockPickingAustraliaPost, self).send_to_shipper()
 
         _logger.debug("send to shipper: %s", self)
 
-        res = super().send_to_shipper()
+        # res = super(StockPickingAustraliaPost, self).send_to_shipper()
         carrier = self.carrier_id or False
         if carrier and carrier.delivery_type and (carrier.delivery_type in ['auspost']) and carrier.is_automatic_shipment_mail:
             _logger.debug("is_automatic_shipment_mail is true")

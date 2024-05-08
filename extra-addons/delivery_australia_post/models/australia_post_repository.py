@@ -194,6 +194,8 @@ class AustraliaPostRepository(object):
 
             if res.status_code == 201:
                 response = create_success_response(res_json)
+                _logger.debug(
+                    'create_shipment res: %s', res_json)
             else:
                 response = create_error_response(res_json)
 
