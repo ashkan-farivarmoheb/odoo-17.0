@@ -1,12 +1,14 @@
-data "aws_vpc" "odoo" {
-  id = var.vpc_id
+data "aws_vpcs" "odoo" {
+  filter {
+    name   = "tag:Name"
+    values = ["${var.environment}-${var.project}-vpc"]
+  }
 }
-
 
 data "aws_subnets" "private-odoo" {
   filter {
     name   = "vpc-id"
-    values = [var.vpc_id]
+    values = [data.aws_vpcs.odoo.ids[0]]
   }
   filter {
     name   = "map-public-ip-on-launch"
@@ -17,7 +19,7 @@ data "aws_subnets" "private-odoo" {
 data "aws_subnets" "public-odoo" {
   filter {
     name   = "vpc-id"
-    values = [var.vpc_id]
+    values = [data.aws_vpcs.odoo.ids[0]]
   }
   filter {
     name   = "map-public-ip-on-launch"
@@ -28,11 +30,11 @@ data "aws_subnets" "public-odoo" {
 data "aws_security_groups" "vpc-odoo-asg" {
   filter {
     name   = "vpc-id"
-    values = [var.vpc_id]
+    values = [data.aws_vpcs.odoo.ids[0]]
   }
   filter {
     name = "group-name"
-    values = [ "default" ]
+    values = [ "${var.environment}-${var.project}-default-sg" ]
   }
 }
 
@@ -51,4 +53,18 @@ data "template_file" "ecs_task_template" {
 
 data "aws_route53_zone" "tisol_com_au_zone" {
   name = "tisol.com.au"
+}
+
+data "aws_efs_file_systems" "efs" {
+  filter {
+    name   = "tags.Name"
+    values = ["${var.environment}-${var.project}-efs"]
+  }
+}
+
+data "aws_efs_access_point" "odoo_access" {
+filter {
+    name   = "tags.Name"
+    values = ["${var.environment}-${var.project}-efs-ap"]
+  }
 }
