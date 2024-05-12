@@ -49,6 +49,11 @@ variable "ec2_key_name" {
   type        = string
 }
 
+variable "nfs_access_point_id" {
+  description = "NFS access point"
+  type        = string
+}
+
 variable "min_size_asg" {
   description = "ASG min size"
   type        = number

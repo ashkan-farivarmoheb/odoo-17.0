@@ -4,11 +4,11 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
     volume {
       name = "${var.environment}-${var.project}-efs"
       efs_volume_configuration {
-        file_system_id = data.aws_efs_file_systems.efs.ids[0]
+        file_system_id = data.aws_efs_file_system.efs.id
         root_directory =  "/"
         transit_encryption = "ENABLED"
         authorization_config {
-            access_point_id = data.aws_efs_access_point.odoo_access.ids[0]
+            access_point_id = "${var.nfs_access_point_id}"
             iam = "ENABLED"
             }
         }

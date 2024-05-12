@@ -5,6 +5,7 @@ project = "odoo"
 instance_type = "c3.xlarge"
 imageId = "ami-0523ffd1be8111018"
 ec2_key_name = "bationhost"
+nfs_access_point_id = "fsap-0e10c60e248d23702"
 desired_task_count = 1
 repository_name = "odoo-17.0"
 nginx_repository_name = "nginx"

@@ -55,16 +55,8 @@ data "aws_route53_zone" "tisol_com_au_zone" {
   name = "tisol.com.au"
 }
 
-data "aws_efs_file_systems" "efs" {
-  filter {
-    name   = "tags.Name"
-    values = ["${var.environment}-${var.project}-efs"]
-  }
-}
-
-data "aws_efs_access_point" "odoo_access" {
-filter {
-    name   = "tags.Name"
-    values = ["${var.environment}-${var.project}-efs-ap"]
+data "aws_efs_file_system" "efs" {
+  tags = {
+    Name = "${var.environment}-${var.project}-efs"
   }
 }
