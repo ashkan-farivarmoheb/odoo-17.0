@@ -20,6 +20,18 @@ class StockPickingAustraliaPost(models.Model):
                                                   readonly=True,
                                                   help="This field indicates that send to shipper "
                                                        "for picking is done.")
+    authority_leave = fields.Boolean(
+        string="Authority to Leave",
+        help="Allow delivery without recipient signature.",
+        default=False,
+        copy=False
+    )
+    allow_part_delivery = fields.Boolean(
+        string="Allow Partial Delivery",
+        help="Permit the delivery of orders in multiple shipments.",
+        default=False,
+        copy=False
+    )
 
     _australia_post_request_instance = None
     _australia_post_repository_instance = None
@@ -38,12 +50,11 @@ class StockPickingAustraliaPost(models.Model):
             )
         return cls._australia_post_repository_instance
 
-    def get_all_wk_carriers(self):
-        # First, call the super method to get the existing carriers
-        available_carriers = super(
-            StockPickingAustraliaPost, self).get_all_wk_carriers()
-        new_carriers = ['auspost']
-        available_carriers.extend(new_carriers)
+    def get_all_carriers(self):
+  
+        available_carriers = []
+        new_carrier = ['auspost']
+        available_carriers.extend(new_carrier)
         return available_carriers
 
     def _action_done(self):
@@ -56,6 +67,9 @@ class StockPickingAustraliaPost(models.Model):
         _logger.debug("Logging the StockPicking of self_: %s", self)
         res = False
         for picking in self:
+            if self.carrier_id.delivery_type in self.get_all_carriers() and not len(picking.package_ids):
+                raise UserError(
+                    'Create the package first for picking %s before sending to shipper.' % (picking.name))
             try:
                 with self._cr.savepoint():
                     res = super(StockPickingAustraliaPost,
@@ -123,60 +137,143 @@ class StockPickingAustraliaPost(models.Model):
         :return: Return send shipper dict if clicked Send Shipper Button else return none
         """
         
+        
         self.ensure_one()
-        avilable_carriers_list = self.get_all_wk_carriers()
+        available_carriers_list = self.get_all_carriers()
+        packages = self.package_ids
+        res = self.carrier_id.send_shipping(self)
+        _logger.debug(
+                    "send to shippppper australiapost res:%s  ",self.carrier_id.send_shipping(self))
+        
+        if self.carrier_id.delivery_type in ['base_on_rule', 'fixed'] or self.carrier_id.delivery_type not in available_carriers_list:
+            return super(StockPickingAustraliaPost, self).send_to_shipper()
+    
+        if not len(self.package_ids):
+            raise ValidationError(
+                'Create the package first for picking %s before sending to shipper.' % (self.name))
 
-        if self.carrier_id.delivery_type and (self.carrier_id.delivery_type not in ['base_on_rule', 'fixed']) and (self.carrier_id.delivery_type in avilable_carriers_list):
-            if not self.batch_id and not len(self.package_ids):
-                raise ValidationError(
-                    'Create the package first for picking %s before sending to shipper.' % (self.name))
-            else:
-                # try:
-                _logger.debug(
-                    "send to shippppper base package_ids %s", self.package_ids)
-                res = self.carrier_id.send_shipping(self)
+        _logger.debug("Sending to shipper base package_ids %s", self.package_ids)
+    
+        # if self.package_ids and len(res) != len(self.package_ids) :
+        #     raise ValidationError("The number of shipping results does not match the number of packages.")
+  
 
-                self.carrier_price = res.get('exact_price')
-                self.carrier_tracking_ref = res.get(
-                    'tracking_number',[]) and res.get('tracking_number').strip(',')
-                self.label_genrated = bool(self.carrier_tracking_ref)
-                self.date_delivery = res.get('date_delivery')
-                if res.get(
-                        'weight'):
-                    self.weight_shipment = float(res.get('weight'))
+
+        
+        
+        _logger.debug(
+            "send to shippppper australiapost packages:%s  ",packages)
+        
+        
+        carrier_tracking_refs=[]
+        
+
+       
+        
+        if len(self.package_ids)> 0:
+            if len(res) != len(self.package_ids) :
+                raise ValidationError("The number of shipping results does not match the number of packages.")
+            # for package, ship_info in zip(self.package_ids, res):
+            for package in self.package_ids:
+
+                _logger.debug("send to shippppper australiapost res :%s  ",res)
+                 # Find the corresponding ship_info based on package.name
+                ship_info = next((info for info in res if info['tracking_reference'] == package.name), None)
+                
+                if ship_info:
+                    _logger.debug("send to shippppper australiapost pack:%s  ",ship_info)
+                    
+                        
+                    pack_tracking_number=ship_info.get('tracking_number', '').strip(',')
+                    carrier_tracking_refs.append(pack_tracking_number)
+                    
+                    
+                    self.label_genrated = bool(self.carrier_tracking_ref)
+                    # _logger.debug("send to shippppper australiapost package %s pack_tracking_number:%s  ",package,pack_tracking_number)
+                    
+                    
+                    package.write({ 
+                                    'tracking_no': pack_tracking_number,
+                                    'order_id': self.sale_id.id if self.sale_id else False,
+                                    'carrier_id':self.carrier_id,
+                
+                                    },
+                                )
+                else:
+                    _logger.warning("No ship_info found for package with name %s", package.name)                
+                if ship_info.get(
+                    'weight'):
+                    self.weight_shipment +=float(ship_info.get('weight'))
+                    
 
                 msg = _("Shipment sent to carrier %s for expedition with tracking number %s") % (
-                    self.carrier_id.delivery_type, self.carrier_tracking_ref)
+                self.carrier_id.delivery_type, self.carrier_tracking_ref)
                 self.message_post(
                     body=msg,
                     subject="Attachments of tracking",
-                    attachments=res.get('attachments')
+                    attachments=ship_info.get('attachments')
                 )
-                # except Exception as e:
-                #     return self.carrier_id._shipping_genrated_message(e)
+            if carrier_tracking_refs:
+                self.carrier_tracking_ref=carrier_tracking_refs[0] if len(carrier_tracking_refs)==1 else carrier_tracking_refs
+       
+        
         else:
-            return super(StockPickingAustraliaPost, self).send_to_shipper()
-
-        _logger.debug("send to shipper: %s", self)
-
-        # res = super(StockPickingAustraliaPost, self).send_to_shipper()
+            # for index, item in enumerate(res):
+            #     if item['picking_id'] == self.picking_id:
+            #         res=res[index]
+            res=[item for item in res if item['picking_id'] == self.id][0]  
+                
+            self.carrier_tracking_ref=res.get('tracking_number', '')
+            self.carrier_price = res.get('exact_price')
+            self.label_genrated = bool(self.carrier_tracking_ref)
+            self.date_delivery = res.get('date_delivery')
+            if res.get(
+                    'weight'):
+                    self.weight_shipment +=float(res.get('weight'))
+                    
+            _logger.debug("send to shippppper australiapost shimpen_id:%s  ",self.shipment_id)
+    
+            msg = _("Shipment sent to carrier %s for expedition with tracking number %s") % (
+            self.carrier_id.delivery_type, self.carrier_tracking_ref)
+            self.message_post(
+                body=msg,
+                subject="Attachments of tracking",
+                attachments=res.get('attachments')
+            )
+            
+      
         carrier = self.carrier_id or False
-        if carrier and carrier.delivery_type and (carrier.delivery_type in ['auspost']) and carrier.is_automatic_shipment_mail:
-            _logger.debug("is_automatic_shipment_mail is true")
+        if carrier.is_automatic_shipment_mail: 
+            _logger.debug("is_automatic_shipment_mail is true") 
             self.auto_shipment_confirm_mail()
-        if self.package_ids:
-            self.package_ids.write(
-                {'tracking_no': self.carrier_tracking_ref, 'order_id': self.sale_id})
-        return res
+        
+        
+        
+        _logger.debug("send to shippppper australiapost carrier_tracking_refs:%s  ",carrier_tracking_refs)
+    
+            
+                
+                        
+
+                    
+        # except Exception as e:
+        #     return self.carrier_id._shipping_genrated_message(e)
+
+
+
+
 
     def button_validate(self):
+        available_carriers_list = self.get_all_carriers()
+
         if not self[0].carrier_id:
             raise ValidationError(
                 _('Carrier is not specified for Stock Picking %s. please Choose a Carrier.', self.name))
         res = super().button_validate()
-        if res is True and self.batch_id:
+        if res is True and self.batch_id and self[0].carrier_id in available_carriers_list :
             payload = json.dumps(self._get_australia_post_request()
                                  .create_order_request(self.batch_id))
+            _logger.debug('button_validate payload= %s',payload)
             if len(self) > 0:
                 response = (self._get_australia_post_repository()
                             .create_order_shipments(payload, self[0].carrier_id.read()[0]))
@@ -194,3 +291,68 @@ class StockPickingAustraliaPost(models.Model):
         # if 'tracking_number' in data:
         #     batch.send_to_shipper_process_done = bool(data['shipments']['tracking_number'])
         #     batch.ready_for_download = bool(data['tracking_number'])
+
+    
+    def open_website_url(self):
+        """Open tracking page.
+
+        More than 1 tracking number: display a list of packages
+        Else open directly the tracking page
+        """
+        self.ensure_one()
+        avilable_carriers_list = self.get_all_carriers()
+
+            
+        if self.carrier_id.delivery_type and (self.carrier_id.delivery_type not in ['base_on_rule', 'fixed']) and (self.carrier_id.delivery_type in avilable_carriers_list):
+            packages = self.package_ids
+            if len(packages) == 0:
+                raise UserError(_("No packages found for this picking"))
+            if len(packages) == 1:
+                    return super().open_website_url()  # shortpath
+            else:
+                if not self._support_multi_tracking():
+                    packages = packages[0]
+
+
+            # display a list of pickings
+            xmlid = "stock.action_package_view"
+            action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
+            action["domain"] = [("id", "in", packages.ids)]
+            action["context"] = {"picking_id": self.id}
+            return action
+        else:
+            return super().open_website_url()
+    
+    def _support_multi_tracking(self):
+        # By default roulier carrier may have one tracking ref per pack.
+        # override this method for your carrier if you always have a unique
+        # tracking per picking
+        return True
+    
+    
+    def _roulier_generate_labels(self):
+        """
+        Return format expected by send_shipping : a list of dict (one dict per
+        picking).
+        {
+            'exact_price': 0.0,
+            'tracking_number': "concatenated numbers",
+            'labels': list of dict of labels, managed by base_delivery_carrier_label
+        }
+        """
+        label_info = []
+        for picking in self:
+            move_line_no_pack = picking.move_line_ids.filtered(
+                lambda ml: ml.qty_done > 0.0 and not ml.result_package_id
+            )
+            if move_line_no_pack:
+                raise UserError(
+                    _(
+                        "Some products have no destination package in picking %s, "
+                        "please add a destination package in order to be able to "
+                        "generate the carrier label."
+                    )
+                    % picking.name
+                )
+            label_info.append(picking.package_ids._generate_labels(picking))
+        return label_info

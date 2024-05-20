@@ -9,6 +9,10 @@
                 <xpath expr="/form/header/button[last()]" position="after">
                     <button name="auto_shipment_confirm_mail" string="Email Shipment Confirmation" type="object" icon="fa-envelope-o" class="oe_highlight oe_stat_button" invisible="not carrier_id or not carrier_tracking_ref" help="Click to send a shipment confirmation email to the customer."/>
                 </xpath>
+                <xpath expr="//field[@name='label_genrated']" position="after">
+                 <field name="authority_leave" invisible="not delivery_type in ('auspost')"/>
+                 <field name="allow_part_delivery"  invisible="not delivery_type in ('auspost')"/>
+                </xpath>
             </field>
         </record>
     </data>

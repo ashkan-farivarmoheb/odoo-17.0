@@ -14,4 +14,3 @@ class AusPostPackageType(models.Model):
         ]
     )
 
-    

@@ -5,7 +5,7 @@ from .australia_post_helper import AustraliaPostHelper
 from odoo import fields, models, api, _
 import json
 import logging
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 _logger = logging.getLogger(__name__)
 
 
@@ -222,7 +222,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
                     _("Unknown error occurred while fetching shipping rates."))
 
     def auspost_send_shipping(self, pickings):
-        return [self.australia_post_create_shipping(p) for p in pickings]
+        return [self.australia_post_create_shipping(p) for p in pickings][0]
 
     def auspost_get_tracking_link(self, picking):
         """Generate a tracking link for the customer.
@@ -241,56 +241,84 @@ class DeliveryCarrierAustraliaPost(models.Model):
 
         return f'{base_url}/{picking.carrier_tracking_ref}' if picking.carrier_tracking_ref else False
 
-    def auspost_cancel_shipment(self, picking):
-        _logger.debug(
-            "auspost_cancel_shipment")
-        try:
-            carrier = self.env['delivery.carrier'].search(
-                [('id', '=', picking.carrier_id.id)])
-            carrier.ensure_one()
-            carrier_record = carrier.read()[0]
-            res = self._get_australia_post_repository().delete_shipment(
-                [picking.shipment_id], carrier_record)
-        except UserError as e:
-            raise e
-        except Exception as e:
-            _logger.error("Failed to cancel shipment: %s", e)
-            raise UserError(
-                "There was a problem cancelling the shipment. Please try again later.")
+    def auspost_cancel_shipment(self, picking,package=None):
+        if not picking.package_ids or len(picking.package_ids)==1:
+            _logger.debug(
+                "auspost_cancel_shipment")
+            try:
+                carrier = self.env['delivery.carrier'].search(
+                    [('id', '=', picking.carrier_id.id)])
+                carrier.ensure_one()
+                carrier_record = carrier.read()[0]
+                res = self._get_australia_post_repository().delete_shipment(
+                    [picking.shipment_id], carrier_record)
+            except UserError as e:
+                raise e
+            except Exception as e:
+                _logger.error("Failed to cancel shipment: %s", e)
+                raise UserError(
+                    "There was a problem cancelling the shipment. Please try again later.")
 
-        return {'success': res.get('success')}
+            return {'success': res.get('success')}
+        
+        else:
+            _logger.debug(
+                "auspost_cancel_shipment")
+            try:
+                carrier = self.env['delivery.carrier'].search(
+                    [('id', '=', picking.carrier_id.id)])
+                carrier.ensure_one()
+                carrier_record = carrier.read()[0]
+                res = self._get_australia_post_repository().delete_item([picking.shipment_id],[picking.package_ids.package_id], carrier_record)
+                if not picking.package_ids:
+                    res = self._get_australia_post_repository().delete_shipment(
+                    [picking.shipment_id], carrier_record)
+            except UserError as e:
+                raise e
+            except Exception as e:
+                _logger.error("Failed to cancel shipment: %s", e)
+                raise UserError(
+                    "There was a problem cancelling the shipment. Please try again later.")
+
+            return {'success': res.get('success')}
+            
 
     def australia_post_create_shipping(self, picking):
-        res = None
+        res = []
         _logger.debug(
             "australia_post_create_shipping")
+      
         try:
             payload = json.dumps(self._get_australia_post_request(
             ).create_post_shipment_request(picking))
             response = self._get_australia_post_repository().create_shipment(
                 payload, picking.carrier_id.read()[0])
+            
             if not response.get('data'):
                 raise UserError(
                     _("No shipments data returned from Australia Post."))
+            # Process each shipment in the response
             for shipment in response.get('data', {}).get('shipments', []):
                 picking.shipment_id = shipment.get('shipment_id')
                 _logger.debug(
                     "australia_post_create_shipping for shipment %s", picking.shipment_id)
                 items = shipment.get('items', [])
-
+                _logger.debug("australia_post_create_shipping forssssssssssssssssss    items %s", items)
+                
                 if items:
-                    tracking_numbers = [item['tracking_details']['article_id']
-                                        for item in items if 'tracking_details' in item]
-                    res = {
-                        "exact_price": shipment['shipment_summary']['total_cost'],
-                        "tracking_number": tracking_numbers if tracking_numbers else ''
-                    }
-                    _logger.debug(
-                        "australia_post_create_shipping Shipping response: %s", res)
+                    # Create a list of dictionaries for each item's tracking details and exact price
+                    for item in items:
+                        item_info={"picking_id":picking.id,
+                                   "item_reference":item["item_reference"],
+                                   "tracking_number":item['tracking_details']['article_id'] ,
+                                   "exact_price": item['item_summary']['total_cost']
+                                    }
+                        res.append(item_info)                 
+     
 
-                # if self.is_automatic_shipment_mail:
-                #     _logger.debug("is_automatic_shipment_mail is true")
-                #     self.send_shipment_confirm_mail(picking)
+            # _logger.debug(
+            #             "australia_post_create_shipping Shipping response: %s", res)
+                
         except UserError as e:
             raise e
         except Exception as e:
