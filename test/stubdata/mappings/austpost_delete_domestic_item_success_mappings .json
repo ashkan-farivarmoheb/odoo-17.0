@@ -3,7 +3,7 @@
         {
             "request": {
                 "method": "DELETE",
-                "urlPathPattern": "/shipping/v1/shipments/[a-zA-Z0-9]+"
+                "urlPathPattern": "/shipping/v1/shipments/[a-zA-Z0-9]+/items/[a-zA-Z0-9]+"
             },
             "response": {
                 "status": 200
@@ -14,8 +14,11 @@
                 "method": "DELETE",
                 "urlPath": "/shipping/v1/shipments",
                 "queryParameters": {
-                    "shipment_ids": {
+                    "shipment_id": {
                         "matches": "^54kjEFSvIo4759AJGsaa[a-zA-Z0-9]{4}$"
+                    },
+                    "item_id": {
+                        "matches": "^LDCsEAOvU_oAAAFI6Mwa[a-zA-Z0-9]{4}$"
                     }
                 }
             },

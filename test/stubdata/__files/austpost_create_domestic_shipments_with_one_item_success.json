@@ -17,7 +17,7 @@
             "items": [
                 
                 {
-                    "item_id": "LDCsEAOvU_oAAAFI6MwaDRYB",
+                    "item_id": "LDCsEAOvU_oAAAFI6Mwa{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                     "item_reference": "{{jsonPath request.body '$.shipments[0].items[0].item_reference'}}",
                     "tracking_details": {
                         "article_id": "ABC000128{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
