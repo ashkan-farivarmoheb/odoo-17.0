@@ -6,6 +6,7 @@ from odoo.exceptions import ValidationError
 from odoo import fields, models, _
 import logging
 from odoo.exceptions import UserError
+import ast
 
 _logger = logging.getLogger(__name__)
 
@@ -355,21 +356,35 @@ class StockPickingAustraliaPost(models.Model):
             and (self.carrier_id.delivery_type not in ["base_on_rule", "fixed"])
             and (self.carrier_id.delivery_type in avilable_carriers_list)
         ):
+            current_tracking_ref = self.carrier_tracking_ref
+
             packages = self.package_ids
-            if len(packages) == 0:
-                raise UserError(_("No packages found for this picking"))
-            if len(packages) == 1:
-                return super().open_website_url()  # shortpath
-            else:
+            try:
+                current_tracking_ref = (
+                    ast.literal_eval(self.carrier_tracking_ref)
+                    if self.carrier_tracking_ref
+                    else False
+                )
+            except (ValueError, SyntaxError):
+                if current_tracking_ref == self.carrier_tracking_ref:
+                    _logger.debug("It is a single string matching the tracking number")
+                    # Single tracking ref Exists
+                    return super().open_website_url()  # shortpath
+                else:
+                    raise UserError(
+                        "carrier_tracking_ref is not a valid list or matching single string."
+                    )
+
+            if isinstance(current_tracking_ref, list):
                 if not self._support_multi_tracking():
                     packages = packages[0]
 
-            # display a list of pickings
-            xmlid = "stock.action_package_view"
-            action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
-            action["domain"] = [("id", "in", packages.ids)]
-            action["context"] = {"picking_id": self.id}
-            return action
+                # display a list of pickings
+                xmlid = "stock.action_package_view"
+                action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
+                action["domain"] = [("id", "in", packages.ids)]
+                action["context"] = {"picking_id": self.id}
+                return action
         else:
             return super().open_website_url()
 

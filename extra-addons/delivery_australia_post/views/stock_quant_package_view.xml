@@ -6,7 +6,7 @@
     <field name="model">stock.quant.package</field>
     <field name="inherit_id" ref="stock.view_quant_package_form" />
     <field name="arch" type="xml">
-      <xpath expr="//header/button[last()]">
+      <xpath expr="//header/button[@name='unpack']" position="after">
         <button type="object" name="open_website_url" class="oe_stat_button" icon='fa-truck'
           string="Tracking" invisible="not tracking_no" />
       </xpath>

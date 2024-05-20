@@ -9,7 +9,6 @@ import logging
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
-from ..decorator import implemented_by_carrier
 from .australia_post_repository import AustraliaPostRepository
 from .australia_post_request import AustraliaPostRequest
 import ast
@@ -61,7 +60,9 @@ class QuantPackage(models.Model):
         """
         self.ensure_one()
         base_url = (
-            self.tracking_link.rstrip("/") if self.carrier_id.tracking_link else False
+            self.picking_id.carrier_id.tracking_link.rstrip("/")
+            if self.picking_id.carrier_id.tracking_link
+            else False
         )
 
         url = f"{base_url}/{self.tracking_no}" if self.tracking_no else False
@@ -75,19 +76,6 @@ class QuantPackage(models.Model):
             "url": url,
         }
         return client_action
-
-    # def _get_tracking_link(self):
-    #         """Build a tracking url.
-
-    #         You have to implement it for your carrier.
-    #         It's like :
-    #             'https://the-carrier.com/?track=%s' % self.parcel_tracking
-    #         returns:
-    #             string (url)
-    #         """
-    #         self.carrier_id.get_tracking_link()
-
-    #         _logger.warning("not implemented")
 
     def cancel_item(self):
         if self.tracking_no and self.picking_id.carrier_id.delivery_type == "auspost":
