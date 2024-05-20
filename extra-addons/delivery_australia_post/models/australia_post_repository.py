@@ -386,7 +386,7 @@ class AustraliaPostRepository(object):
             res = requests.request(method, url, headers=headers, data=payload)
             res_json = res.json()
 
-            _logger.debug('res_json             %s', (res_json))
+            _logger.debug('_create_order_shipments res_json :%s', (res_json))
 
             if res.status_code == 200 and method == "put":
                 response = create_success_response(res_json)

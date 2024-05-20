@@ -63,11 +63,12 @@ class StockPickingAustraliaPost(models.Model):
         condition.
         @return: return  response for done process
        """
+        avilable_carriers_list = self.get_all_wk_carriers()
 
         _logger.debug("Logging the StockPicking of self_: %s", self)
         res = False
         for picking in self:
-            if self.carrier_id.delivery_type in self.get_all_carriers() and not len(picking.package_ids):
+            if self.carrier_id.delivery_type in avilable_carriers_list and not len(picking.package_ids):
                 raise UserError(
                     'Create the package first for picking %s before sending to shipper.' % (picking.name))
             try:
@@ -178,7 +179,7 @@ class StockPickingAustraliaPost(models.Model):
 
                 _logger.debug("send to shippppper australiapost res :%s  ",res)
                  # Find the corresponding ship_info based on package.name
-                ship_info = next((info for info in res if info['tracking_reference'] == package.name), None)
+                ship_info = next((info for info in res if info['item_reference'] == package.name), None)
                 
                 if ship_info:
                     _logger.debug("send to shippppper australiapost pack:%s  ",ship_info)
@@ -269,22 +270,33 @@ class StockPickingAustraliaPost(models.Model):
         if not self[0].carrier_id:
             raise ValidationError(
                 _('Carrier is not specified for Stock Picking %s. please Choose a Carrier.', self.name))
-        res = super().button_validate()
-        if res is True and self.batch_id and self[0].carrier_id in available_carriers_list :
-            payload = json.dumps(self._get_australia_post_request()
-                                 .create_order_request(self.batch_id))
-            _logger.debug('button_validate payload= %s',payload)
-            if len(self) > 0:
-                response = (self._get_australia_post_repository()
-                            .create_order_shipments(payload, self[0].carrier_id.read()[0]))
-                if not response.get('data'):
-                    raise UserError(
-                        _("No order data returned from Australia Post."))
+        try:
+            res = super().button_validate()
+            if res and self.batch_id and  (self.carrier_id.delivery_type in available_carriers_list) :
+                _logger.debug('button_validate request batch_id= %s',self.batch_id)
 
-                data = response.get('data')
-                self.update_batch_details(self.batch_id, data)
+                payload = json.dumps(self._get_australia_post_request()
+                                    .create_order_request(self.batch_id))
+                _logger.debug('button_validate payload= %s',payload)
+                if len(self) > 0:
+                    response = (self._get_australia_post_repository()
+                                .create_order_shipments(payload, self[0].carrier_id.read()[0]))
+                    if not response.get('data'):
+                        raise UserError(
+                            _("No order data returned from Australia Post."))
 
-        return res
+                    data = response.get('data')
+                    self.update_batch_details(self.batch_id, data)
+
+            return res
+    
+        except UserError as e:
+            raise e
+        except Exception as e:
+            _logger.error("Failed to create Order: %s", e)
+            raise UserError(
+                "There was a problem creating a Order. Please try again later.")
+        
 
     def update_batch_details(self, batch, data):
         batch.order_id = data['order']['order_id']
