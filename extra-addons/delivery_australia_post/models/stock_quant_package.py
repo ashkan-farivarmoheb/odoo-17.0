@@ -2,28 +2,55 @@
 Emipro Technologies Private Limited
 Author : Vatsal Dharek : vatasld@emiprotechnologies.com
 """
+
 # -*- coding: utf-8 -*-
 from odoo import fields, models, _
 import logging
 from odoo.exceptions import UserError
+
 _logger = logging.getLogger(__name__)
 from ..decorator import implemented_by_carrier
+from .australia_post_repository import AustraliaPostRepository
+from .australia_post_request import AustraliaPostRequest
+import ast
+
 
 class QuantPackage(models.Model):
     """
     Adding Tracking number field to Stock.Quant.package
     """
+
     _inherit = "stock.quant.package"
 
-    tracking_no = fields.Char(string="Tracking Number",
-                              help="In packages, Indicates all tracking number as per provider")
-    item_id=fields.Char(string="Item Id", size=256)
-    carrier_id = fields.Many2one("delivery.carrier", string="Carrier")    
+    tracking_no = fields.Char(
+        string="Tracking Number",
+        help="In packages, Indicates all tracking number as per provider",
+    )
+    item_id = fields.Char(string="Item Id", size=256)
+    # carrier_id = fields.Many2one("delivery.carrier", string="Carrier")
+    picking_id = fields.Many2one("stock.picking", string="Picking")
     # @implemented_by_carrier
     # def _get_tracking_link(self):
     #     pass
-    
-    
+    _australia_post_repository_instance = None
+
+    @classmethod
+    def _get_australia_post_repository(cls):
+        if cls._australia_post_repository_instance is None:
+            cls._australia_post_repository_instance = (
+                AustraliaPostRepository.get_instance()
+            )
+        return cls._australia_post_repository_instance
+
+    _australia_post_request_instance = None
+
+    @classmethod
+    def _get_australia_post_request(cls):
+        """Retrieve or create an instance of AustraliaPostRequest with order and carrier details."""
+        if cls._australia_post_request_instance is None:
+            cls._australia_post_request_instance = AustraliaPostRequest.get_instance()
+        return cls._australia_post_request_instance
+
     def open_website_url(self):
         """Open website for parcel tracking.
 
@@ -33,12 +60,12 @@ class QuantPackage(models.Model):
             action
         """
         self.ensure_one()
-        base_url = self.tracking_link.rstrip(
-            '/') if self.carrier_id.tracking_link else False
-        
-        
-        url= f'{base_url}/{self.tracking_no}' if self.tracking_no else False
-        
+        base_url = (
+            self.tracking_link.rstrip("/") if self.carrier_id.tracking_link else False
+        )
+
+        url = f"{base_url}/{self.tracking_no}" if self.tracking_no else False
+
         if not base_url or not url:
             raise UserError(_("The tracking url is not available."))
         client_action = {
@@ -48,8 +75,7 @@ class QuantPackage(models.Model):
             "url": url,
         }
         return client_action
-    
-    
+
     # def _get_tracking_link(self):
     #         """Build a tracking url.
 
@@ -60,6 +86,81 @@ class QuantPackage(models.Model):
     #             string (url)
     #         """
     #         self.carrier_id.get_tracking_link()
-            
-            
+
     #         _logger.warning("not implemented")
+
+    def cancel_item(self):
+        if self.tracking_no and self.picking_id.carrier_id.delivery_type == "auspost":
+            _logger.debug("cancel_item")
+            try:
+                carrier = self.picking_id.carrier_id
+                carrier.ensure_one()
+                carrier_record = carrier.read()[0]
+                old_picking_carrier_tracking_refs = self.picking_id.carrier_tracking_ref
+                if not old_picking_carrier_tracking_refs:
+                    raise UserError("carrier_tracking_ref is empty or invalid.")
+                try:
+                    old_picking_carrier_tracking_refs = (
+                        ast.literal_eval(self.picking_id.carrier_tracking_ref)
+                        if self.picking_id.carrier_tracking_ref
+                        else False
+                    )
+
+                except (ValueError, SyntaxError):
+                    if old_picking_carrier_tracking_refs == self.tracking_no:
+                        _logger.debug(
+                            "It is a single string matching the tracking number"
+                        )
+                        # Single tracking ref Exists
+                        self.picking_id.cancel_shipment()
+                    else:
+                        raise UserError(
+                            "carrier_tracking_ref is not a valid list or matching single string."
+                        )
+
+                # Multi tracking ref Exists
+                if isinstance(old_picking_carrier_tracking_refs, list):
+                    res = self._get_australia_post_repository().delete_item(
+                        [self.picking_id.shipment_id], [self.id], carrier_record
+                    )
+                    _logger.debug("its list now")
+
+                    if res.get("success"):
+                        old_picking_carrier_tracking_refs.remove(self.tracking_no)
+                        new_picking_carrier_tracking_refs = (
+                            str(old_picking_carrier_tracking_refs)
+                            if len(old_picking_carrier_tracking_refs) > 1
+                            else (
+                                old_picking_carrier_tracking_refs[0]
+                                if len(old_picking_carrier_tracking_refs) == 1
+                                else False
+                            )
+                        )
+
+                        package_tracking_no = self.tracking_no
+
+                        # Update the stock.quant.package model record
+                        self.write({"tracking_no": False})
+
+                        self.picking_id.write(
+                            {"carrier_tracking_ref": new_picking_carrier_tracking_refs}
+                        )
+
+                        msg = f"Package {self.name} with tracking number {package_tracking_no} has been canceled"
+                        self.picking_id.message_post(body=msg)
+
+                        return {"success": res.get("success")}
+                    else:
+                        raise UserError(
+                            "Failed to delete the item from the Australia Post repository."
+                        )
+
+            except UserError as e:
+                raise e
+            except Exception as e:
+                _logger.error("Failed to cancel shipment: %s", e)
+                raise UserError(
+                    "There was a problem cancelling the shipment. Please try again later."
+                )
+        else:
+            raise UserError("There are no tracking number associated with this record.")

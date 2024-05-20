@@ -7,6 +7,7 @@ import json
 import logging
 from odoo.exceptions import UserError, ValidationError
 _logger = logging.getLogger(__name__)
+import ast
 
 
 # https://webkul.com/blog/odoo-australia-shipping-integration/
@@ -241,47 +242,45 @@ class DeliveryCarrierAustraliaPost(models.Model):
 
         return f'{base_url}/{picking.carrier_tracking_ref}' if picking.carrier_tracking_ref else False
 
-    def auspost_cancel_shipment(self, picking,package=None):
-        if not picking.package_ids or len(picking.package_ids)==1:
-            _logger.debug(
+    def auspost_cancel_shipment(self, picking):
+        old_picking_carrier_tracking_refs = picking.carrier_tracking_ref
+        if not old_picking_carrier_tracking_refs:
+            raise UserError("carrier_tracking_ref is empty or invalid.")
+        try:
+             old_picking_carrier_tracking_refs=ast.literal_eval(picking.carrier_tracking_ref) if picking.carrier_tracking_ref else False
+        except (ValueError, SyntaxError): 
+            if old_picking_carrier_tracking_refs == picking.carrier_tracking_ref:
+                # single tracking ref Exists
+                _logger.debug(
                 "auspost_cancel_shipment")
-            try:
-                carrier = self.env['delivery.carrier'].search(
-                    [('id', '=', picking.carrier_id.id)])
-                carrier.ensure_one()
-                carrier_record = carrier.read()[0]
-                res = self._get_australia_post_repository().delete_shipment(
-                    [picking.shipment_id], carrier_record)
-            except UserError as e:
-                raise e
-            except Exception as e:
-                _logger.error("Failed to cancel shipment: %s", e)
-                raise UserError(
-                    "There was a problem cancelling the shipment. Please try again later.")
-
-            return {'success': res.get('success')}
-        
-        else:
-            _logger.debug(
-                "auspost_cancel_shipment")
-            try:
-                carrier = self.env['delivery.carrier'].search(
-                    [('id', '=', picking.carrier_id.id)])
-                carrier.ensure_one()
-                carrier_record = carrier.read()[0]
-                res = self._get_australia_post_repository().delete_item([picking.shipment_id],[picking.package_ids.package_id], carrier_record)
-                if not picking.package_ids:
+                try:
+                    carrier = self.env['delivery.carrier'].search(
+                        [('id', '=', picking.carrier_id.id)])
+                    carrier.ensure_one()
+                    carrier_record = carrier.read()[0]
                     res = self._get_australia_post_repository().delete_shipment(
-                    [picking.shipment_id], carrier_record)
-            except UserError as e:
-                raise e
-            except Exception as e:
-                _logger.error("Failed to cancel shipment: %s", e)
-                raise UserError(
-                    "There was a problem cancelling the shipment. Please try again later.")
+                        [picking.shipment_id], carrier_record)
+                    
+                    if res.get('success'):
+                    # Update the stock.quant.package model record
+                        package = picking.package_ids
+                        package.write({'tracking_no': False})
+                    
+                except UserError as e:
+                    raise e
+                except Exception as e:
+                    _logger.error("Failed to cancel shipment: %s", e)
+                    raise UserError(
+                        "There was a problem cancelling the shipment. Please try again later.")
 
-            return {'success': res.get('success')}
-            
+                return {'success': res.get('success')}
+            else:
+                raise UserError("carrier_tracking_ref is not a valid list or matching single string.")
+    
+        if isinstance(old_picking_carrier_tracking_refs, list):
+            raise UserError("There are multiple packages/tracking numbers. Please go to the packages and cancel them individually.")
+        
+
 
     def australia_post_create_shipping(self, picking):
         res = []
