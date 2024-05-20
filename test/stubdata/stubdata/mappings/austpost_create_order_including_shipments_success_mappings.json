@@ -1,0 +1,25 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/orders",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": {
+                            "expression": "$.order_reference",
+                            "matches": ".*"
+                        }
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 201,
+                "bodyFileName": "austpost_create_order_including_shipments_success.json"
+            }
+        }
+    ]
+}

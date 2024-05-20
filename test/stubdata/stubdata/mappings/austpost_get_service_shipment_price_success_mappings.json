@@ -1,0 +1,25 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/prices/shipments",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": {
+                            "expression": "$.shipments[0].items[0].product_id",
+                            "matches": "^[A-Z0-9a-z]{1,10}"
+                        }
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_get_service_shipment_price_success.json"
+            }
+        }
+    ]
+}
