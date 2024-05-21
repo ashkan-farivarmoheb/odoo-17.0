@@ -393,30 +393,3 @@ class StockPickingAustraliaPost(models.Model):
         # override this method for your carrier if you always have a unique
         # tracking per picking
         return True
-
-    def _roulier_generate_labels(self):
-        """
-        Return format expected by send_shipping : a list of dict (one dict per
-        picking).
-        {
-            'exact_price': 0.0,
-            'tracking_number': "concatenated numbers",
-            'labels': list of dict of labels, managed by base_delivery_carrier_label
-        }
-        """
-        label_info = []
-        for picking in self:
-            move_line_no_pack = picking.move_line_ids.filtered(
-                lambda ml: ml.qty_done > 0.0 and not ml.result_package_id
-            )
-            if move_line_no_pack:
-                raise UserError(
-                    _(
-                        "Some products have no destination package in picking %s, "
-                        "please add a destination package in order to be able to "
-                        "generate the carrier label."
-                    )
-                    % picking.name
-                )
-            label_info.append(picking.package_ids._generate_labels(picking))
-        return label_info
