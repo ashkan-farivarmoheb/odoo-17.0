@@ -355,6 +355,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
                     for item in items:
                         item_info = {
                             "picking_id": picking.id,
+                            "item_id": item["item_id"],
                             "item_reference": item["item_reference"],
                             "tracking_number": item["tracking_details"]["article_id"],
                             "exact_price": item["item_summary"]["total_cost"],

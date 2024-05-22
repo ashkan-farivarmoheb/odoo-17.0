@@ -81,12 +81,7 @@ class StockPickingAustraliaPost(models.Model):
         carrier_id = self.env["sale.order"].context.get("default_carrier_id")
         _logger.debug("carrier_id context: %s", carrier_id)
        
-       
-        delivery_methods = (
-            self.env["delivery.carrier"]
-            .with_context(active_test=False)
-            .search([("shipping_instance_id", "=", self.ids)])
-        )
+    
 
         if not carrier_id:
             _logger.debug("Checking self.carrier_id")
@@ -272,6 +267,7 @@ class StockPickingAustraliaPost(models.Model):
                             "tracking_no": pack_tracking_number,
                             "order_id": self.sale_id.id if self.sale_id else False,
                             "picking_id": self.id,
+                            "item_id":ship_info.get("item_id")
                         },
                     )
                     msg = _(
