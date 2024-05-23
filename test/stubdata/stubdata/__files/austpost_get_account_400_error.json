@@ -1,9 +1,0 @@
- {
-    "errors": [
-        {
-            "code": "41007",
-            "name": "CONTRACT_SETUP_ERROR",
-            "message": "Contract information for the submitted contract identifier 0000123457 could not be found. For further assistance please contact your Account Manager or call Australia Post on 13 21 31."
-        }
-    ]
-}
