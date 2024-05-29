@@ -16,10 +16,24 @@ class StockPickingAustraliaPost(models.Model):
     is_shipment_confirmation_send = fields.Boolean(
         'Shipment Confirmation Send')
 
-    send_to_shipper_process_done = fields.Boolean('Send To Shipper (Done).', copy=False,
-                                                  readonly=True,
-                                                  help="This field indicates that send to shipper "
-                                                       "for picking is done.")
+    send_to_shipper_process_done = fields.Boolean(
+        "Send To Shipper (Done).",
+        copy=False,
+        readonly=True,
+        help="This field indicates that send to shipper " "for picking is done.",
+    )
+    authority_leave = fields.Boolean(
+        string="Authority to Leave",
+        help="Allow delivery without recipient signature.",
+        # default=lambda self: self._default_authority_leave(),
+        copy=False,
+    )
+    allow_part_delivery = fields.Boolean(
+        string="Allow Partial Delivery",
+        help="Permit the delivery of orders in multiple shipments.",
+        # default=lambda self: self._default_allow_part_delivery(),
+        copy=False,
+    )
 
     _australia_post_request_instance = None
     _australia_post_repository_instance = None
@@ -38,12 +52,55 @@ class StockPickingAustraliaPost(models.Model):
             )
         return cls._australia_post_repository_instance
 
-    def get_all_wk_carriers(self):
-        # First, call the super method to get the existing carriers
-        available_carriers = super(
-            StockPickingAustraliaPost, self).get_all_wk_carriers()
-        new_carriers = ['auspost']
-        available_carriers.extend(new_carriers)
+    # TODO: not working
+    # @api.model
+    # def _default_authority_leave(self):
+    #     carrier_id = self.env.context.get("default_carrier_id")
+    #     _logger.debug("carrier_id context: %s", carrier_id)
+
+    #     if not carrier_id:
+    #         _logger.debug("Checking self.carrier_id")
+    #         # This might not be set correctly at this point in record creation
+    #         carrier_id = (
+    #             self._context.get("default_carrier_id", False) or self.carrier_id.id
+    #             if hasattr(self, "carrier_id")
+    #             else False
+    #         )
+
+    #     _logger.debug("Final carrier_id used: %s", carrier_id)
+
+    #     if carrier_id:
+    #         carrier = self.env["delivery.carrier"].browse(carrier_id)
+    #         _logger.debug("Carrier: %s", carrier)
+    #         return carrier.authority_leave
+    #     return False
+    # #TODO: not working
+    # @api.model
+    # def _default_allow_part_delivery(self):
+    #     carrier_id = self.env["sale.order"].context.get("default_carrier_id")
+    #     _logger.debug("carrier_id context: %s", carrier_id)
+
+    #     if not carrier_id:
+    #         _logger.debug("Checking self.carrier_id")
+    #         carrier_id = (
+    #             self._context.get("default_carrier_id", False) or self.carrier_id.id
+    #             if hasattr(self, "carrier_id")
+    #             else False
+    #         )
+    #         _logger.debug("Context: %s", self.env.context)
+    #     _logger.debug("Final carrier_id used: %s", carrier_id)
+
+    #     if carrier_id:
+    #         carrier = self.env["delivery.carrier"].browse(carrier_id)
+    #         _logger.debug("Carrier: %s", carrier)
+    #         return carrier.allow_part_delivery
+    #     return False
+
+    def get_all_carriers(self):
+
+        available_carriers = []
+        new_carrier = ["auspost"]
+        available_carriers.extend(new_carrier)
         return available_carriers
 
     def _action_done(self):
@@ -122,7 +179,7 @@ class StockPickingAustraliaPost(models.Model):
         Return send shipper dict if clicked Send Shipper Button else return none
         :return: Return send shipper dict if clicked Send Shipper Button else return none
         """
-        
+
         self.ensure_one()
         avilable_carriers_list = self.get_all_wk_carriers()
 
@@ -138,7 +195,7 @@ class StockPickingAustraliaPost(models.Model):
 
                 self.carrier_price = res.get('exact_price')
                 self.carrier_tracking_ref = res.get(
-                    'tracking_number',[]) and res.get('tracking_number').strip(',')
+                    'tracking_number', []) and res.get('tracking_number').strip(',')
                 self.label_genrated = bool(self.carrier_tracking_ref)
                 self.date_delivery = res.get('date_delivery')
                 if res.get(
