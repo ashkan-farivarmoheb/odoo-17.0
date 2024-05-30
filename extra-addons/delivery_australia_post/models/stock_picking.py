@@ -25,14 +25,15 @@ class StockPickingAustraliaPost(models.Model):
     authority_leave = fields.Boolean(
         string="Authority to Leave",
         help="Allow delivery without recipient signature.",
-        default=lambda self: self._default_authority_leave(),
-        copy=False,
+        compute='_compute_authority_leave',
+        store=True
     )
+
     allow_part_delivery = fields.Boolean(
         string="Allow Partial Delivery",
         help="Permit the delivery of orders in multiple shipments.",
-        default=lambda self: self._default_allow_part_delivery(),
-        copy=False,
+        compute='_compute_allow_part_delivery',
+        store=True
     )
 
     _australia_post_request_instance = None
@@ -52,52 +53,22 @@ class StockPickingAustraliaPost(models.Model):
                 AustraliaPostRepository.get_instance()
             )
         return cls._australia_post_repository_instance
-    
-    #TODO: not working 
-    @api.model
-    def _default_authority_leave(self):
-        carrier_id = self.env.context.get("default_carrier_id")
-        _logger.debug("carrier_id context: %s", carrier_id)
 
-        if not carrier_id:
-            _logger.debug("Checking self.carrier_id")
-            # This might not be set correctly at this point in record creation
-            carrier_id = (
-                self._context.get("default_carrier_id", False) or self.carrier_id.id
-                if hasattr(self, "carrier_id")
-                else False
-            )
+    @api.depends('carrier_id')
+    def _compute_allow_part_delivery(self):
+        for picking in self:
+            if picking.carrier_id:
+                self.allow_part_delivery = picking.carrier_id.allow_part_delivery
+            else:
+                self.allow_part_delivery = False
 
-        _logger.debug("Final carrier_id used: %s", carrier_id)
-
-        if carrier_id:
-            carrier = self.env["delivery.carrier"].browse(carrier_id)
-            _logger.debug("Carrier: %s", carrier)
-            return carrier.authority_leave
-        return False
-    #TODO: not working 
-    @api.model
-    def _default_allow_part_delivery(self):
-        carrier_id = self.env["sale.order"].context.get("default_carrier_id")
-        _logger.debug("carrier_id context: %s", carrier_id)
-       
-    
-
-        if not carrier_id:
-            _logger.debug("Checking self.carrier_id")
-            carrier_id = (
-                self._context.get("default_carrier_id", False) or self.carrier_id.id
-                if hasattr(self, "carrier_id")
-                else False
-            )
-            _logger.debug("Context: %s", self.env.context)
-        _logger.debug("Final carrier_id used: %s", carrier_id)
-
-        if carrier_id:
-            carrier = self.env["delivery.carrier"].browse(carrier_id)
-            _logger.debug("Carrier: %s", carrier)
-            return carrier.allow_part_delivery
-        return False
+    @api.depends('carrier_id')
+    def _compute_authority_leave(self):
+        for picking in self:
+            if picking.carrier_id:
+                self.authority_leave = picking.carrier_id.authority_leave
+            else:
+                self.authority_leave = False
 
     def get_all_carriers(self):
 
