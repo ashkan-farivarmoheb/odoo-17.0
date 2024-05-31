@@ -3,7 +3,7 @@
         {
             "request": {
                 "method": "DELETE",
-                "urlPath": "/shipping/v1/shipments/54kjEFSvIo4759AJGsaaMNBE"
+                "urlPath": "/shipping/v1/shipments/[a-zA-Z0-9]+"
             },
             "response": {
                 "headers": {

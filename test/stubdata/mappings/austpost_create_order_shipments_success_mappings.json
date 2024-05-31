@@ -6,10 +6,10 @@
                 "urlPath": "/shipping/v1/orders",
                 "bodyPatterns": [
                     {
-                        "matchesJsonPath": {
-                            "expression": "$.shipments[0].shipment_id",
-                            "matches": "54kjEFSvIo4759AJGsaaMNBE"
-                        }
+                        "matchesJsonPath": "$[?(@.shipments.length() == 1)]"
+
+                          
+                        
                     }
                 ]
             },
@@ -18,8 +18,28 @@
                     "Content-Type": "application/json"
                 },
                 "status": 201,
-                "bodyFileName": "austpost_create_order_shipments_success.json"
+                "bodyFileName": "austpost_create_order_shipments_with_one_shipment_success.json"
+            }
+        }, 
+        {
+            "request": {
+                "method": "PUT",
+                "urlPath": "/shipping/v1/orders",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": "$[?(@.shipments.length() == 2)]"
+
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 201,
+                "bodyFileName": "austpost_create_order_shipments_with_two_shipment_success.json"
             }
         }
+        
     ]
 }

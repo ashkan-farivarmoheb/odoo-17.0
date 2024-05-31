@@ -1,0 +1,94 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/labels",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": "$.preferences[0].groups[?(@.layout == 'A4-1pp' && @.group == 'Parcel Post')]"
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_create_label_parcel_post_A4-1pp_success.json"
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/labels",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": "$.preferences[0].groups[?(@.layout == 'A4-1pp' && @.group == 'Express Post')]"
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_create_label_express_post_A4-1pp_success.json"
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/labels",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": "$.preferences[0].groups[?(@.layout == 'THERMAL-LABEL-A6-1PP' && @.group == 'Parcel Post')]"
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_create_label_parcel_post_THERMAL_LABEL-A6-1PP_success.json"
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/labels",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": "$.preferences[0].groups[?(@.layout == 'THERMAL-LABEL-A6-1PP' && @.group == 'Express Post')]"
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_create_label_express_post_THERMAL_LABEL-A6-1PP_success.json"
+            }
+        },
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/labels",
+                "bodyPatterns": [
+                    {
+                        "matchesJsonPath": "$.preferences[0].groups[?(@.layout == 'A4-4pp')]"
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_create_label_multi_A4-4pp_success.json"
+            }
+        }
+    ]
+}

@@ -1,7 +1,9 @@
+
+ 
  {
     "shipments": [
         {
-            "shipment_id": "54kjEFSvIo4759AJGsaaMNBF",
+            "shipment_id": "54kjEFSvIo4759AJGsaa{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
             "shipment_reference": "1",
             "shipment_creation_date": "2014-08-27T15:48:09+10:00",
             "shipment_modified_date": "2014-08-27T15:48:09+10:00",
@@ -13,11 +15,12 @@
       	     ],
             "email_tracking_enabled":true,
             "items": [
+                
                 {
-                    "item_id": "LDCsEAOvU_oAAAFI6MwaDRYB",
-                    "item_reference": "SKU-1",
+                    "item_id": "LDCsEAOvU_oAAAFI6Mwa{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
+                    "item_reference": "{{jsonPath request.body '$.shipments[0].items[0].item_reference'}}",
                     "tracking_details": {
-                        "article_id": "ABC000128B4C5",
+                        "article_id": "ABC000128{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                         "consignment_id": "ABC000128"
                     },
                     "product_id": "T28",

@@ -21,6 +21,8 @@ service_rate_path = config.options.get("services_austpost_servicerate_path")
 item_prices_path = config.options.get("services_austpost_get_item_prices_path")
 delete_shipment_path = config.options.get(
     "services_austpost_delete_shipment_path")
+delete_item_path = config.options.get(
+    "services_austpost_delete_shipment_path")
 
 
 def create_error_response(res_json):
@@ -307,6 +309,54 @@ class AustraliaPostRepository(object):
             raise UserError(_("Unexpected error: %s", e))
 
         return response
+    
+    def delete_item(self,shipment_ids,package_ids, carrier=None):
+        
+        if not shipment_ids:
+            raise UserError(_("Shipment Ids are is missing."))
+        if not package_ids:
+            raise UserError(_("Package Ids are is missing."))
+        if not len(shipment_ids) == 1:
+                raise UserError(_("Shipment Id must be single."))
+        if not len(package_ids) == 1:
+                raise UserError(_("Package Id must be single."))
+
+        response = None
+        try:
+            headers = {
+                "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
+                "Accept": AustraliaPostRepository.ACCEPT,
+                "Authentication": _private_get_authentication(carrier),
+                "ACCOUNT-NUMBER": _private_get_account(carrier)
+            }
+            
+            if len(shipment_ids) == 1:
+                url = f"{host}{delete_item_path}/{shipment_ids[0]}/items/{package_ids[0]}"
+                params = {}
+ 
+
+            res = requests.delete(url=url, headers=headers,
+                                params=params, timeout=10)
+
+            if res.status_code == 200:
+                response = create_success_response(None)
+            else:
+                res_json = res.json()
+                response = create_error_response(res_json)
+
+        except requests.exceptions.Timeout:
+            raise UserError(_("Timeout: the server did not reply within 10s"))
+        except (ValueError, requests.exceptions.ConnectionError):
+            raise UserError(_("Server not reachable, please try again later"))
+        except requests.exceptions.HTTPError as e:
+            raise UserError(
+                _("{}\n{}".format(
+                    e, response['error_message'] if response else ""))
+            )
+        except Exception as e:
+            raise UserError(_("Unexpected error: %s", e))
+
+        return response
 
     def create_order_shipments(self, payload=None, carrier=None):
         _logger.debug(
@@ -336,7 +386,7 @@ class AustraliaPostRepository(object):
             res = requests.request(method, url, headers=headers, data=payload)
             res_json = res.json()
 
-            _logger.debug('res_json             %s', (res_json))
+            _logger.debug('_create_order_shipments res_json :%s', (res_json))
 
             if res.status_code == 200 and method == "put":
                 response = create_success_response(res_json)

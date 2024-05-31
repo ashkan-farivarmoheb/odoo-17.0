@@ -17,11 +17,13 @@ class StockPickingBatchAustraliaPost(models.Model):
     _inherit = "stock.picking.batch"
     order_id = fields.Char(string="Carrier Order Id", size=256)
 
-    carrier_id = fields.Many2one('delivery.carrier',
-                                 string="Delivery Method",
-                                 copy=False,
-                                 help="""According to the selected shipping provider,
-                                 Visible the delivery method.""")
+    carrier_id = fields.Many2one(
+        "delivery.carrier",
+        string="Delivery Method",
+        copy=False,
+        help="""According to the selected shipping provider,
+                                 Visible the delivery method.""",
+    )
 
     ready_for_download = fields.Boolean(
         "ReadyForDownload",
@@ -36,8 +38,11 @@ class StockPickingBatchAustraliaPost(models.Model):
         @return: Zip file for all Invoices.
         """
         self.ensure_one()
-        allow_partial_invoice = self.env['ir.config_parameter'].sudo().get_param(
-            'batch_pickings_validate_ept.download_partial_invoice')
+        allow_partial_invoice = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("batch_pickings_validate_ept.download_partial_invoice")
+        )
         invoice_ids = []
         invoice_messages = []
         not_allow_invoice = False
@@ -47,10 +52,12 @@ class StockPickingBatchAustraliaPost(models.Model):
                     invoice_ids.append(invoice_id.id)
             else:
                 not_allow_invoice = True
-                invoice_messages.append("Invoice Is Not Created For This Order %s (%s)." % (
-                    picking_id.origin, picking_id.name))
+                invoice_messages.append(
+                    "Invoice Is Not Created For This Order %s (%s)."
+                    % (picking_id.origin, picking_id.name)
+                )
         if not invoice_ids:
-            raise UserError(_("%s" % ('\n'.join(invoice_messages))))
+            raise UserError(_("%s" % ("\n".join(invoice_messages))))
         if not allow_partial_invoice and not_allow_invoice:
             raise UserError(
                 _(
@@ -193,31 +200,31 @@ class StockPickingBatchAustraliaPost(models.Model):
             if os.path.exists(pdf_path):
                 shutil.rmtree(pdf_path)
 
-    @api.depends('company_id', 'picking_type_id', 'state', 'carrier_id')
+    @api.depends("company_id", "picking_type_id", "state", "carrier_id")
     def _compute_allowed_picking_ids(self):
-        allowed_picking_states = ['waiting', 'confirmed', 'assigned']
+        allowed_picking_states = ["waiting", "confirmed", "assigned"]
 
         for batch in self:
             domain_states = list(allowed_picking_states)
             # Allows adding draft pickings only if the batch is in draft.
-            if batch.state == 'draft':
-                domain_states.append('draft')
+            if batch.state == "draft":
+                domain_states.append("draft")
             domain = [
-                ('company_id', '=', batch.company_id.id),
-                ('state', 'in', domain_states),
+                ("company_id", "=", batch.company_id.id),
+                ("state", "in", domain_states),
             ]
             if batch.picking_type_id:
-                domain += [('picking_type_id', '=', batch.picking_type_id.id)]
-            _logger.debug('allowed_pickings %s', domain)
+                domain += [("picking_type_id", "=", batch.picking_type_id.id)]
+            _logger.debug("allowed_pickings %s", domain)
             if self.carrier_id:
-                allowed_picking_states += ['done']
+                allowed_picking_states += ["done"]
                 domain += [
-                    ('picking_type_code', '=', 'outgoing'),
-                    ('carrier_id', '!=', False),
-                    ('carrier_id', '=', self.carrier_id.id),
-                    ('send_to_shipper_process_done', '=', False),
-                    ('carrier_tracking_ref', '=', False),
-                    ('state', 'in', allowed_picking_states)
+                    ("picking_type_code", "=", "outgoing"),
+                    ("carrier_id", "!=", False),
+                    ("carrier_id", "=", self.carrier_id.id),
+                    ("send_to_shipper_process_done", "=", False),
+                    ("carrier_tracking_ref", "=", False),
+                    ("state", "in", allowed_picking_states),
                 ]
 
             # Apply the existing domain logic
