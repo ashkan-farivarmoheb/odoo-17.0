@@ -41,11 +41,7 @@ class StockPickingAustraliaPost(models.Model):
         return cls._australia_post_repository_instance
 
     def get_all_carriers(self):
-
-        available_carriers = []
-        new_carrier = ["auspost"]
-        available_carriers.extend(new_carrier)
-        return available_carriers
+        return ["auspost"]
 
     def _action_done(self):
         """

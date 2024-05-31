@@ -179,13 +179,12 @@ class StockPickingBatchAustraliaPost(models.Model):
                 "target": "self",
             }
         finally:
-            # msg = _("Batch Order sent to carrier %s with the attached zip Delivery Slip  %s") % (
-            #     self.carrier_id.delivery_type, self.carrier_tracking_ref)
-            # self.message_post(
-            #     body=msg,
-            #     subject="Attachments of tracking",
-            #     attachments=res.get('attachments')
-            # )
+            msg = _("Delivery slip ZIP files have been created and downloaded for Batch Transfer %s. To see the tracking numbers, check the ZIP file or the stock picking/package.") % (
+                self.name)
+            self.message_post(
+                body=msg,
+                subject="Attachments of tracking",
+            )
 
             # Cleanup the ZIP file after download
             if os.path.exists(zip_path):
