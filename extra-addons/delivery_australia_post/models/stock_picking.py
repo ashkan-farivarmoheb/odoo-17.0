@@ -27,14 +27,16 @@ class StockPickingAustraliaPost(models.Model):
         string="Authority to Leave",
         help="Allow delivery without recipient signature.",
         compute='_compute_authority_leave',
-        store=True
+        store=True,
+        readonly=False
     )
 
     allow_part_delivery = fields.Boolean(
         string="Allow Partial Delivery",
         help="Permit the delivery of orders in multiple shipments.",
         compute='_compute_allow_part_delivery',
-        store=True
+        store=True,
+        readonly=False
     )
 
     _australia_post_request_instance = None
@@ -57,19 +59,21 @@ class StockPickingAustraliaPost(models.Model):
 
     @api.depends('carrier_id')
     def _compute_allow_part_delivery(self):
-        for picking in self:
-            if picking.carrier_id:
-                self.allow_part_delivery = picking.carrier_id.allow_part_delivery
-            else:
-                self.allow_part_delivery = False
+        if not self.allow_part_delivery:
+            for picking in self:
+                if picking.carrier_id:
+                    self.allow_part_delivery = picking.carrier_id.allow_part_delivery
+                else:
+                    self.allow_part_delivery = False
 
     @api.depends('carrier_id')
     def _compute_authority_leave(self):
-        for picking in self:
-            if picking.carrier_id:
-                self.authority_leave = picking.carrier_id.authority_leave
-            else:
-                self.authority_leave = False
+        if not self.authority_leave:
+            for picking in self:
+                if picking.carrier_id:
+                    self.authority_leave = picking.carrier_id.authority_leave
+                else:
+                    self.authority_leave = False
 
     def get_all_carriers(self):
 
