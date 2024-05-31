@@ -22,18 +22,6 @@ class StockPickingAustraliaPost(models.Model):
         readonly=True,
         help="This field indicates that send to shipper " "for picking is done.",
     )
-    authority_leave = fields.Boolean(
-        string="Authority to Leave",
-        help="Allow delivery without recipient signature.",
-        # default=lambda self: self._default_authority_leave(),
-        copy=False,
-    )
-    allow_part_delivery = fields.Boolean(
-        string="Allow Partial Delivery",
-        help="Permit the delivery of orders in multiple shipments.",
-        # default=lambda self: self._default_allow_part_delivery(),
-        copy=False,
-    )
 
     _australia_post_request_instance = None
     _australia_post_repository_instance = None
@@ -51,50 +39,6 @@ class StockPickingAustraliaPost(models.Model):
             cls._australia_post_repository_instance = AustraliaPostRepository.get_instance(
             )
         return cls._australia_post_repository_instance
-
-    # TODO: not working
-    # @api.model
-    # def _default_authority_leave(self):
-    #     carrier_id = self.env.context.get("default_carrier_id")
-    #     _logger.debug("carrier_id context: %s", carrier_id)
-
-    #     if not carrier_id:
-    #         _logger.debug("Checking self.carrier_id")
-    #         # This might not be set correctly at this point in record creation
-    #         carrier_id = (
-    #             self._context.get("default_carrier_id", False) or self.carrier_id.id
-    #             if hasattr(self, "carrier_id")
-    #             else False
-    #         )
-
-    #     _logger.debug("Final carrier_id used: %s", carrier_id)
-
-    #     if carrier_id:
-    #         carrier = self.env["delivery.carrier"].browse(carrier_id)
-    #         _logger.debug("Carrier: %s", carrier)
-    #         return carrier.authority_leave
-    #     return False
-    # #TODO: not working
-    # @api.model
-    # def _default_allow_part_delivery(self):
-    #     carrier_id = self.env["sale.order"].context.get("default_carrier_id")
-    #     _logger.debug("carrier_id context: %s", carrier_id)
-
-    #     if not carrier_id:
-    #         _logger.debug("Checking self.carrier_id")
-    #         carrier_id = (
-    #             self._context.get("default_carrier_id", False) or self.carrier_id.id
-    #             if hasattr(self, "carrier_id")
-    #             else False
-    #         )
-    #         _logger.debug("Context: %s", self.env.context)
-    #     _logger.debug("Final carrier_id used: %s", carrier_id)
-
-    #     if carrier_id:
-    #         carrier = self.env["delivery.carrier"].browse(carrier_id)
-    #         _logger.debug("Carrier: %s", carrier)
-    #         return carrier.allow_part_delivery
-    #     return False
 
     def get_all_carriers(self):
 
@@ -248,6 +192,3 @@ class StockPickingAustraliaPost(models.Model):
 
     def update_batch_details(self, batch, data):
         batch.order_id = data['order']['order_id']
-        # if 'tracking_number' in data:
-        #     batch.send_to_shipper_process_done = bool(data['shipments']['tracking_number'])
-        #     batch.ready_for_download = bool(data['tracking_number'])

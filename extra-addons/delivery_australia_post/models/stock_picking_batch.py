@@ -29,9 +29,6 @@ class StockPickingBatchAustraliaPost(models.Model):
         copy=False,
         help="Mark as True when it's have tracking ref number.",
     )
-    # picking_type_id = fields.Many2one(
-    #     'stock.picking.type', 'Operation Type', check_company=True, copy=False, compute='_compute_picking_type_ids',
-    #     index=True)
 
     def download_invoices(self):
         """
@@ -182,6 +179,14 @@ class StockPickingBatchAustraliaPost(models.Model):
                 "target": "self",
             }
         finally:
+            # msg = _("Batch Order sent to carrier %s with the attached zip Delivery Slip  %s") % (
+            #     self.carrier_id.delivery_type, self.carrier_tracking_ref)
+            # self.message_post(
+            #     body=msg,
+            #     subject="Attachments of tracking",
+            #     attachments=res.get('attachments')
+            # )
+
             # Cleanup the ZIP file after download
             if os.path.exists(zip_path):
                 os.remove(zip_path)
@@ -216,11 +221,9 @@ class StockPickingBatchAustraliaPost(models.Model):
                     ('state', 'in', allowed_picking_states)
                 ]
 
-                _logger.debug('allowed_pickings filtered %s', domain)
             # Apply the existing domain logic
             allowed_pickings = self.env['stock.picking'].search(domain)
-            _logger.debug('result self.carrier_id %s   allowed_pickings   %s',
-                          self.carrier_id, allowed_pickings)
+
             # Apply additional filters
 
             batch.allowed_picking_ids = allowed_pickings
@@ -247,33 +250,3 @@ class StockPickingBatchAustraliaPost(models.Model):
         }
 
         return [label_attachment]
-
-    @api.onchange('carrier_id')
-    def _onchange_carrier_id(self):
-        _logger.debug('_onchange_carrier_id')
-        domain = self.env['ir.filters'].get_filters('stock.picking.type')
-        if self.carrier_id and self.carrier_id.delivery_type == "auspost":
-            domain += [('code', '=', 'outgoing')]
-        else:
-            domain = [d for d in domain if d != ('code', '=', 'outgoing')]
-
-        allowed_picking_types = self.env["stock.picking.type"].search(domain)
-
-        self.picking_type_id = allowed_picking_types and allowed_picking_types[0] or False
-        _logger.debug(
-            '_onchange_carrier_id domain %s %s %s', domain, allowed_picking_types, self.picking_type_id.code)
-
-        # Update the domain for the field in the view
-        return {'domain': {'picking_type_id': domain}}
-
-    # @api.depends('carrier_id')
-    # def _compute_picking_type_ids(self):
-    #     _logger.debug('_onchange_carrier_id')
-    #     domain = self.env['ir.filters'].get_filters('stock.picking.type')
-    #     _logger.debug('_onchange_carrier_id domain %s', domain)
-    #     if self.carrier_id and self.carrier_id.delivery_type == "auspost":
-    #         domain += [('code', '=', 'outgoing')]
-    #         _logger.debug('_onchange_carrier_id auspost domain %s', domain)
-    #         allowed_picking_type = self.env["stock.picking.type"].search(
-    #             domain)
-    #         self.picking_type_id = allowed_picking_type
