@@ -32,6 +32,8 @@ class StockPickingBatchAustraliaPost(models.Model):
         help="Mark as True when it's have tracking ref number.",
     )
 
+
+
     def download_invoices(self):
         """
         To download invoices for all pickings in batch.
@@ -256,3 +258,19 @@ class StockPickingBatchAustraliaPost(models.Model):
         }
 
         return [label_attachment]
+
+    @api.onchange('carrier_id')
+    def _onchange_carrier_id(self):
+        if self.carrier_id.delivery_type == 'auspost':
+            outgoing_picking_type = self.env['stock.picking.type'].search([('code', '=', 'outgoing')], limit=1)
+            if outgoing_picking_type:
+                self.picking_type_id = outgoing_picking_type
+            else:
+                self.carrier_id=False
+
+
+        
+    @api.onchange('picking_type_id')
+    def _onchange_picking_type(self):
+        if self.carrier_id.delivery_type == 'auspost' and self.picking_type_code !='outgoing':
+            self.carrier_id=False

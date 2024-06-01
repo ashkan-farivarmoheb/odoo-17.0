@@ -1,8 +1,3 @@
-"""
-Emipro Technologies Private Limited
-Author : Vatsal Dharek : vatasld@emiprotechnologies.com
-"""
-
 # -*- coding: utf-8 -*-
 from odoo import fields, models, _
 import logging
@@ -12,6 +7,7 @@ _logger = logging.getLogger(__name__)
 from .australia_post_repository import AustraliaPostRepository
 from .australia_post_request import AustraliaPostRequest
 import ast
+from odoo.exceptions import ValidationError
 
 
 class QuantPackage(models.Model):
@@ -59,15 +55,12 @@ class QuantPackage(models.Model):
             action
         """
         self.ensure_one()
-        base_url = (
-            self.picking_id.carrier_id.tracking_link.rstrip("/")
-            if self.picking_id.carrier_id.tracking_link
-            else False
-        )
+        if self.picking_id.carrier_id.delivery_type == "auspost":
+            url = self.picking_id.carrier_id._get_tracking_link(self.tracking_no)
+        else:
+            raise ValidationError(_("Shipping method is not AUSPOST"))
 
-        url = f"{base_url}/{self.tracking_no}" if self.tracking_no else False
-
-        if not base_url or not url:
+        if not url:
             raise UserError(_("The tracking url is not available."))
         client_action = {
             "type": "ir.actions.act_url",

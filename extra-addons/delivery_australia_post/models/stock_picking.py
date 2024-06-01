@@ -75,12 +75,15 @@ class StockPickingAustraliaPost(models.Model):
                 else:
                     self.authority_leave = False
 
-    def get_all_carriers(self):
+    def _get_default_carrier_id(self):
+        _logger.debug("_context %s",self._context)
+        return self._context.get("default_carrier_id", False) or (
+            self.carrier_id.id if hasattr(self, "carrier_id") else False
+        )
 
-        available_carriers = []
-        new_carrier = ["auspost"]
-        available_carriers.extend(new_carrier)
-        return available_carriers
+    # //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    def get_all_carriers(self):
+        return ["auspost"]
 
     def _action_done(self):
         """
@@ -88,7 +91,7 @@ class StockPickingAustraliaPost(models.Model):
         condition.
         @return: return  response for done process
         """
-        avilable_carriers_list = self.get_all_wk_carriers()
+        avilable_carriers_list = self.get_all_carriers()
 
         _logger.debug("Logging the StockPicking of self_: %s", self)
         res = False
@@ -109,20 +112,14 @@ class StockPickingAustraliaPost(models.Model):
                 message = "Delivery Order : %s Description : %s" % (
                     picking.name, e)
                 picking.message_post(body=message)
-                # if picking.batch_id:
-                #     picking.batch_id.message_post(body=message)
                 _logger.exception(
                     "Error while processing for send to Shipper - Picking : %s \n %s",
                     picking.name,
                     e,
                 )
                 continue
-
-            # TODO: when the batching implemented uncomment this
             if picking.carrier_tracking_ref and picking.batch_id:
                 picking.send_to_shipper_process_done = True
-            # if picking.carrier_tracking_ref:
-            #     picking.send_to_shipper_process_done = True
 
         pickings_ready_for_download = self.filtered(
             lambda x: x.send_to_shipper_process_done
@@ -143,7 +140,7 @@ class StockPickingAustraliaPost(models.Model):
         _logger.debug(
             "auto_shipment_confirm_mail %s   %s",
             self.carrier_id,
-            self.carrier_id.get_tracking_link,
+            self.carrier_id.auspost_get_tracking_link,
         )
         self.ensure_one()
         ctx = dict(self._context) or {}
@@ -156,8 +153,8 @@ class StockPickingAustraliaPost(models.Model):
                         "You must set the value of E-mail Template in Menu Settings >> Shipping Method."
                     )
                 )
-            if self.carrier_id.get_tracking_link(self):
-                tracking_link = self.carrier_id.get_tracking_link(self)
+            if self.carrier_id.auspost_get_tracking_link(self):
+                tracking_link = self.carrier_id.auspost_get_tracking_link(self)
                 _logger.debug(
                     "auto_shipment_confirm_mail2 %s   %s %s",
                     tracking_link,
@@ -189,7 +186,7 @@ class StockPickingAustraliaPost(models.Model):
         packages = self.package_ids
         res = self.carrier_id.send_shipping(self)
         _logger.debug(
-            "send to shippppper australiapost res:%s  ",
+            "sendto_shipper australiapost res:%s  ",
             self.carrier_id.send_shipping(self),
         )
 
@@ -201,31 +198,27 @@ class StockPickingAustraliaPost(models.Model):
 
         if not len(self.package_ids):
             raise ValidationError(
-                "Create the package first for picking %s before sending to shipper."
-                % (self.name)
+                _(
+                    "Create the package first for picking %s before sending to shipper."
+                    % (self.name)
+                )
             )
 
-        _logger.debug("Sending to shipper base package_ids %s",
-                      self.package_ids)
-
-        # if self.package_ids and len(res) != len(self.package_ids) :
-        #     raise ValidationError("The number of shipping results does not match the number of packages.")
-
-        _logger.debug(
-            "send to shippppper australiapost packages:%s  ", packages)
+        _logger.debug("sendto_shipper australiapost packages:%s  ", packages)
 
         carrier_tracking_refs = []
 
         if len(self.package_ids) > 0:
             if len(res) != len(self.package_ids):
                 raise ValidationError(
-                    "The number of shipping results does not match the number of packages."
+                    _(
+                        "The number of shipping results does not match the number of packages."
+                    )
                 )
             # for package, ship_info in zip(self.package_ids, res):
             for package in self.package_ids:
 
-                _logger.debug(
-                    "send to shippppper australiapost res :%s  ", res)
+                _logger.debug("sendto_shipper australiapost res :%s  ", res)
                 # Find the corresponding ship_info based on package.name
                 ship_info = next(
                     (info for info in res if info["item_reference"]
@@ -234,9 +227,7 @@ class StockPickingAustraliaPost(models.Model):
                 )
 
                 if ship_info:
-                    _logger.debug(
-                        "send to shippppper australiapost pack:%s  ", ship_info
-                    )
+                    _logger.debug("sendto_shipper australiapost pack:%s  ", ship_info)
 
                     pack_tracking_number = ship_info.get("tracking_number", "").strip(
                         ","
@@ -244,7 +235,6 @@ class StockPickingAustraliaPost(models.Model):
                     carrier_tracking_refs.append(pack_tracking_number)
 
                     self.label_genrated = bool(self.carrier_tracking_ref)
-                    # _logger.debug("send to shippppper australiapost package %s pack_tracking_number:%s  ",package,pack_tracking_number)
 
                     package.write(
                         {
@@ -266,8 +256,10 @@ class StockPickingAustraliaPost(models.Model):
 
                 else:
                     raise ValidationError(
-                        "No ship_info found for package with name %s." % (
-                            package.name)
+                        _(
+                            "No ship_info found for package with name %s."
+                            % (package.name)
+                        )
                     )
 
                 if ship_info and ship_info.get("weight"):
@@ -281,9 +273,7 @@ class StockPickingAustraliaPost(models.Model):
                 )
 
         else:
-            # for index, item in enumerate(res):
-            #     if item['picking_id'] == self.picking_id:
-            #         res=res[index]
+
             res = [item for item in res if item["picking_id"] == self.id][0]
 
             self.carrier_tracking_ref = res.get("tracking_number", "")
@@ -294,7 +284,7 @@ class StockPickingAustraliaPost(models.Model):
                 self.weight_shipment += float(res.get("weight"))
 
             _logger.debug(
-                "send to shippppper australiapost shimpen_id:%s  ", self.shipment_id
+                "sendto_shipper australiapost shimpen_id:%s  ", self.shipment_id
             )
 
             msg = _(
@@ -308,16 +298,9 @@ class StockPickingAustraliaPost(models.Model):
 
         carrier = self.carrier_id or False
         if carrier.is_automatic_shipment_mail:
-            _logger.debug("is_automatic_shipment_mail is true")
+            _logger.debug("is_automatic_shipment_mail is")
             self.auto_shipment_confirm_mail()
-
-        _logger.debug(
-            "send to shippppper australiapost carrier_tracking_refs:%s  ",
-            carrier_tracking_refs,
-        )
-
-        # except Exception as e:
-        #     return self.carrier_id._shipping_genrated_message(e)
+        return res
 
     def button_validate(self):
         available_carriers_list = self.get_all_carriers()
@@ -366,7 +349,7 @@ class StockPickingAustraliaPost(models.Model):
         except Exception as e:
             _logger.error("Failed to create Order: %s", e)
             raise UserError(
-                "There was a problem creating a Order. Please try again later."
+                _("There was a problem creating a Order. Please try again later.")
             )
 
     def update_batch_details(self, batch, data):
@@ -376,11 +359,9 @@ class StockPickingAustraliaPost(models.Model):
         #     batch.ready_for_download = bool(data['tracking_number'])
 
     def open_website_url(self):
-        """Open tracking page.
+        """Open tracking page. More than 1 tracking number: display a list of packages. Else open directly the tracking page"""
+        _logger.debug("open_website_url picking")
 
-        More than 1 tracking number: display a list of packages
-        Else open directly the tracking page
-        """
         self.ensure_one()
         avilable_carriers_list = self.get_all_carriers()
 
@@ -400,30 +381,36 @@ class StockPickingAustraliaPost(models.Model):
                 )
             except (ValueError, SyntaxError):
                 if current_tracking_ref == self.carrier_tracking_ref:
-                    _logger.debug(
-                        "It is a single string matching the tracking number")
                     # Single tracking ref Exists
                     return super().open_website_url()  # shortpath
                 else:
                     raise UserError(
-                        "carrier_tracking_ref is not a valid list or matching single string."
+                        _(
+                            "carrier_tracking_ref is not a valid list or matching single string."
+                        )
                     )
+
+            _logger.debug("current_tracking_ref", current_tracking_ref)
 
             if isinstance(current_tracking_ref, list):
                 if not self._support_multi_tracking():
                     packages = packages[0]
 
-                # display a list of pickings
+                # display a list of package
                 xmlid = "stock.action_package_view"
                 action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
                 action["domain"] = [("id", "in", packages.ids)]
                 action["context"] = {"picking_id": self.id}
                 return action
+            else:
+                return super().open_website_url()
+
         else:
+            _logger.debug("super open website")
             return super().open_website_url()
 
     def _support_multi_tracking(self):
-        # By default roulier carrier may have one tracking ref per pack.
+        # By default Auspost carrier may have one tracking ref per pack.
         # override this method for your carrier if you always have a unique
         # tracking per picking
         return True

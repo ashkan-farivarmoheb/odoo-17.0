@@ -198,11 +198,10 @@ class DeliveryCarrierAustraliaPost(models.Model):
             rate_data = australia_post_request.create_rate_shipment_request(
                 order, self.service_product_id
             )
-            _logger.debug("rate_data -------%s ", rate_data)
+            _logger.debug("auspost_rate_shipment :%s ", rate_data)
 
         except Exception as e:
-            # Log the error and handle appropriately
-            print(f"Error preparing shipping rates request: {str(e)}")
+            _logger.error(f"Error preparing shipping rates request: {str(e)}")
             return {"success": False, "error": str(e)}
 
         if not self.service_product_id:
@@ -218,14 +217,13 @@ class DeliveryCarrierAustraliaPost(models.Model):
             source=rate_data["source"],
             destination=rate_data["destination"],
             items=rate_data["items"],
-            carrier=self.read()[0],  # self is the carrier
+            carrier=self.read()[0],
         )
-        _logger.debug("data -------%s ", res)
+
         if not res.get("data"):
             raise UserError(_("No account data returned from Australia Post."))
             # Create the wizard with the fetched data
         data = res["data"]
-        _logger.debug("data -------%s ", data)
         if self.validate_shipment_rate(data):
             return {
                 "success": res.get("success"),
@@ -251,29 +249,22 @@ class DeliveryCarrierAustraliaPost(models.Model):
     def auspost_send_shipping(self, pickings):
         return [self.australia_post_create_shipping(p) for p in pickings][0]
 
-    def auspost_get_tracking_link(self, picking):
-        """Generate a tracking link for the customer.
-
-        Args:
-            picking: The stock.picking record for which to generate a tracking link.
-
-        Returns:
-            A string containing the URL to track the shipment.
-        """
+    def _get_tracking_link(self, tracking_ref):
+        _logger.debug("get_tracking_link %s   %s", tracking_ref, self.tracking_link)
 
         base_url = (
             self.tracking_link.rstrip("/")
             if self.tracking_link
             else "https://auspost.com.au/mypost/track/#/details"
         )
+        _logger.debug("get_tracking_link base_url %s", base_url)
 
-        # Example tracking link, replace with real URL format provided by Australia Post
+        return f"{base_url}/{tracking_ref}" if tracking_ref and base_url else False
 
-        return (
-            f"{base_url}/{picking.carrier_tracking_ref}"
-            if picking.carrier_tracking_ref
-            else False
-        )
+   
+
+    def auspost_get_tracking_link(self, picking):
+        return self._get_tracking_link(picking.carrier_tracking_ref)
 
     def auspost_cancel_shipment(self, picking):
         old_picking_carrier_tracking_refs = picking.carrier_tracking_ref
@@ -370,18 +361,9 @@ class DeliveryCarrierAustraliaPost(models.Model):
         except Exception as e:
             _logger.error("Failed to create shipment: %s", e)
             raise UserError(
-                "There was a problem creating a shipment. Please try again later."
+                _("There was a problem creating a shipment. Please try again later.")
             )
         return res
-
-    def _australia_post_get_default_custom_package_code(self):
-        """Returns a default package code for custom implementations.
-
-        Returns:
-            A string representing the default package code.
-        """
-        # Implement as needed for Australia Post specifics
-        return "DEFAULT_CODE"
 
     @api.model
     def australia_post_get_account_info(self, carrier):
@@ -419,7 +401,9 @@ class DeliveryCarrierAustraliaPost(models.Model):
         except Exception as e:
             _logger.error("Failed to fetch account info: %s", e)
             raise UserError(
-                "There was a problem fetching the account information. Please try again later."
+                _(
+                    "There was a problem fetching the account information. Please try again later."
+                )
             )
 
         # Return action to open the wizard
