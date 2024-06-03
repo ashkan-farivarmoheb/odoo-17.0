@@ -11,11 +11,14 @@
             "S00003",
             "SKU-1, SKU-2, SKU-3"
       	     ],
-            "email_tracking_enabled":true,
+            "email_tracking_enabled":"{{jsonPath request.body '$.shipments[0].email_tracking_enabled'}}",
             "items": [
                 {
                     "item_id": "LDCsEAOvU_oAAAFI6Mwa{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                     "item_reference": "{{jsonPath request.body '$.shipments[0].items[0].item_reference'}}",
+                    "authority_to_leave": "{{jsonPath request.body '$.shipments[0].items[0].authority_to_leave'}}",
+                    "safe_drop_enabled": "{{jsonPath request.body '$.shipments[0].items[0].safe_drop_enabled'}}",
+                    "allow_partial_delivery": "{{jsonPath request.body '$.shipments[0].items[0].allow_partial_delivery'}}",
                     "tracking_details": {
                         "article_id": "ABC000128{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                         "consignment_id": "ABC000128"
@@ -32,6 +35,9 @@
                 {
                     "item_id": "LDCsEAOvU_oAAAFI6Mwa{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                     "item_reference": "{{jsonPath request.body '$.shipments[0].items[1].item_reference'}}",
+                    "authority_to_leave": "{{jsonPath request.body '$.shipments[0].items[1].authority_to_leave'}}",
+                    "safe_drop_enabled": "{{jsonPath request.body '$.shipments[0].items[1].safe_drop_enabled'}}",
+                    "allow_partial_delivery": "{{jsonPath request.body '$.shipments[0].items[1].allow_partial_delivery'}}",
                     "tracking_details": {
                         "article_id": "ABC000128{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                         "consignment_id": "ABC000128"
@@ -47,6 +53,9 @@
                 {
                     "item_id": "LDCsEAOvU_oAAAFI6Mwa{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                     "item_reference": "{{jsonPath request.body '$.shipments[0].items[2].item_reference'}}",
+                    "authority_to_leave": "{{jsonPath request.body '$.shipments[0].items[2].authority_to_leave'}}",
+                    "safe_drop_enabled": "{{jsonPath request.body '$.shipments[0].items[2].safe_drop_enabled'}}",
+                    "allow_partial_delivery": "{{jsonPath request.body '$.shipments[0].items[2].allow_partial_delivery'}}",
                     "tracking_details": {
                         "article_id": "ABC000128{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                         "consignment_id": "ABC000128"

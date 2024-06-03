@@ -13,12 +13,15 @@
             "S00001",
             "SKU-1"
       	     ],
-            "email_tracking_enabled":true,
+            "email_tracking_enabled":"{{jsonPath request.body '$.shipments[0].email_tracking_enabled'}}",
             "items": [
                 
                 {
                     "item_id": "LDCsEAOvU_oAAAFI6Mwa{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                     "item_reference": "{{jsonPath request.body '$.shipments[0].items[0].item_reference'}}",
+                    "authority_to_leave": "{{jsonPath request.body '$.shipments[0].items[0].authority_to_leave'}}",
+                    "safe_drop_enabled": "{{jsonPath request.body '$.shipments[0].items[0].safe_drop_enabled'}}",
+                    "allow_partial_delivery": "{{jsonPath request.body '$.shipments[0].items[0].allow_partial_delivery'}}",
                     "tracking_details": {
                         "article_id": "ABC000128{{randomValue length=4 type='ALPHANUMERIC' uppercase=true}}",
                         "consignment_id": "ABC000128"

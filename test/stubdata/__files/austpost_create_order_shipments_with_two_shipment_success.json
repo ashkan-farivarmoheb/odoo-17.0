@@ -23,12 +23,12 @@
       "shipment_id": "{{jsonPath request.body '$.shipments[0].shipment_id'}}",
       "shipment_reference": "XYZ-001-01",
       "shipment_creation_date": "2014-08-27T13:55:47+10:00",
-      "email_tracking_enabled": false,
+      "email_tracking_enabled": "{{jsonPath request.body '$.shipments[0].email_tracking_enabled'}}",
       "items": [{
         "weight": 5.000,
-        "authority_to_leave": true,
-        "safe_drop_enabled": true,
-        "allow_partial_delivery": true,
+        "authority_to_leave": "{{jsonPath request.body '$.shipments[0].items[0].authority_to_leave'}}",
+        "safe_drop_enabled": "{{jsonPath request.body '$.shipments[0].items[0].safe_drop_enabled'}}",
+        "allow_partial_delivery": "{{jsonPath request.body '$.shipments[0].items[0].allow_partial_delivery'}}",
         "item_id": "NfMK1UnLtDcAAAFyJ1IF297V",
         "item_reference": "the reference",
         "tracking_details": {
@@ -63,12 +63,12 @@
       "shipment_id": "{{jsonPath request.body '$.shipments[1].shipment_id'}}",
       "shipment_reference": "XYZ-001-01",
       "shipment_creation_date": "2014-08-27T13:55:47+10:00",
-      "email_tracking_enabled": false,
+      "email_tracking_enabled": "{{jsonPath request.body '$.shipments[1].email_tracking_enabled'}}",
       "items": [{
         "weight": 5.000,
-        "authority_to_leave": true,
-        "safe_drop_enabled": true,
-        "allow_partial_delivery": true,
+        "authority_to_leave": "{{jsonPath request.body '$.shipments[0].items[1].authority_to_leave'}}",
+        "safe_drop_enabled": "{{jsonPath request.body '$.shipments[0].items[1].safe_drop_enabled'}}",
+        "allow_partial_delivery": "{{jsonPath request.body '$.shipments[0].items[1].allow_partial_delivery'}}",
         "item_id": "NfMK1UnLtDcAAAFyJ1IF297V",
         "item_reference": "the reference",
         "tracking_details": {

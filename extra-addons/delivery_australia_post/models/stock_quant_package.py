@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models, _
+from odoo.exceptions import ValidationError
+import ast
+from .australia_post_request import AustraliaPostRequest
+from .australia_post_repository import AustraliaPostRepository
+from odoo import fields, models, _, api
 import logging
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
-from .australia_post_repository import AustraliaPostRepository
-from .australia_post_request import AustraliaPostRequest
-import ast
-from odoo.exceptions import ValidationError
 
 
 class QuantPackage(models.Model):
@@ -22,11 +22,44 @@ class QuantPackage(models.Model):
         help="In packages, Indicates all tracking number as per provider",
     )
     item_id = fields.Char(string="Item Id", size=256)
-    # carrier_id = fields.Many2one("delivery.carrier", string="Carrier")
     picking_id = fields.Many2one("stock.picking", string="Picking")
-    # @implemented_by_carrier
-    # def _get_tracking_link(self):
-    #     pass
+    authority_leave = fields.Boolean(
+        string="Authority to Leave",
+        help="Allow delivery without recipient signature.",
+        compute='_compute_authority_leave',
+        store=True,
+        readonly=False
+    )
+
+    allow_part_delivery = fields.Boolean(
+        string="Allow Partial Delivery",
+        help="Permit the delivery of orders in multiple shipments.",
+        compute='_compute_allow_part_delivery',
+        store=True,
+        readonly=False
+    )
+
+    @api.depends('picking_id.carrier_id')
+    def _compute_allow_part_delivery(self):
+        for package in self:
+            _logger.debug('_compute_allow_part_delivery %s',
+                          package.allow_part_delivery)
+            if not package.allow_part_delivery:
+                if package.picking_id.carrier_id:
+                    package.allow_part_delivery = package.picking_id.carrier_id.allow_part_delivery
+                else:
+                    package.allow_part_delivery = False
+
+    @api.depends('picking_id.carrier_id')
+    def _compute_authority_leave(self):
+        for package in self:
+            _logger.debug('_compute_authority_leave %s',
+                          package.authority_leave)
+            if not package.authority_leave:
+                if package.picking_id.carrier_id:
+                    package.authority_leave = package.picking_id.carrier_id.authority_leave
+                else:
+                    package.authority_leave = False
     _australia_post_repository_instance = None
 
     @classmethod
@@ -56,7 +89,8 @@ class QuantPackage(models.Model):
         """
         self.ensure_one()
         if self.picking_id.carrier_id.delivery_type == "auspost":
-            url = self.picking_id.carrier_id._get_tracking_link(self.tracking_no)
+            url = self.picking_id.carrier_id._get_tracking_link(
+                self.tracking_no)
         else:
             raise ValidationError(_("Shipping method is not AUSPOST"))
 
@@ -79,7 +113,8 @@ class QuantPackage(models.Model):
                 carrier_record = carrier.read()[0]
                 old_picking_carrier_tracking_refs = self.picking_id.carrier_tracking_ref
                 if not old_picking_carrier_tracking_refs:
-                    raise UserError("carrier_tracking_ref is empty or invalid.")
+                    raise UserError(
+                        "carrier_tracking_ref is empty or invalid.")
                 try:
                     old_picking_carrier_tracking_refs = (
                         ast.literal_eval(self.picking_id.carrier_tracking_ref)
@@ -102,12 +137,14 @@ class QuantPackage(models.Model):
                 # Multi tracking ref Exists
                 if isinstance(old_picking_carrier_tracking_refs, list):
                     res = self._get_australia_post_repository().delete_item(
-                        [self.picking_id.shipment_id], [self.id], carrier_record
+                        [self.picking_id.shipment_id], [
+                            self.id], carrier_record
                     )
                     _logger.debug("its list now")
 
                     if res.get("success"):
-                        old_picking_carrier_tracking_refs.remove(self.tracking_no)
+                        old_picking_carrier_tracking_refs.remove(
+                            self.tracking_no)
                         new_picking_carrier_tracking_refs = (
                             str(old_picking_carrier_tracking_refs)
                             if len(old_picking_carrier_tracking_refs) > 1
@@ -144,4 +181,5 @@ class QuantPackage(models.Model):
                     "There was a problem cancelling the shipment. Please try again later."
                 )
         else:
-            raise UserError("There are no tracking number associated with this record.")
+            raise UserError(
+                "There are no tracking number associated with this record.")

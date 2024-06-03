@@ -76,12 +76,12 @@ class DeliveryCarrierAustraliaPost(models.Model):
         default=False,
         copy=False,
     )
-    email_tracking = fields.Boolean(
-        string="Email Tracking Enabled",
-        help="Send tracking information to customers via email.",
-        default=False,
-        copy=False,
-    )
+    # email_tracking = fields.Boolean(
+    #     string="Email Tracking Enabled",
+    #     help="Send tracking information to customers via email.",
+    #     default=False,
+    #     copy=False,
+    # )
     # stock_package_type_id = fields.Many2one('stock.package.type',
     #                                         string="Package Type",
     #                                         help="Type of packaging used for delivery.",

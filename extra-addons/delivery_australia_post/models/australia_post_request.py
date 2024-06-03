@@ -67,18 +67,20 @@ class AustraliaPostRequest(object):
         }
 
     def create_order_request(self, batch):
-#TODO: for producttion the following need to be commented 
-        _logger.debug('create_order_request  batch []= %s ',batch)
+        # TODO: for producttion the following need to be commented
+        _logger.debug('create_order_request  batch []= %s ', batch)
         shipment_ids = []
 
         for p in batch.picking_ids:
             shipment_ids.append(p.shipment_id)
-        _logger.debug('create_order_request  shipment_ids []= %s ', [{"shipment_id": s} for s in shipment_ids])
+        _logger.debug('create_order_request  shipment_ids []= %s ', [
+                      {"shipment_id": s} for s in shipment_ids])
 
-#TODO: for producttion the following need to be uncommented 
+# TODO: for producttion the following need to be uncommented
         shipment_ids = set()
         [shipment_ids.add(p.shipment_id) for p in batch.picking_ids]
-        _logger.debug('create_order_request  shipment_ids set= %s ', [{"shipment_id": s} for s in shipment_ids])
+        _logger.debug('create_order_request  shipment_ids set= %s ', [
+                      {"shipment_id": s} for s in shipment_ids])
         return {
             "order_reference": batch.name,
             "payment_method": "CHARGE_TO_ACCOUNT",
@@ -100,7 +102,7 @@ class AustraliaPostRequest(object):
             "shipment_reference": picking.id,
             "customer_reference_1": picking.sale_id.id,
             "customer_reference_2": product_names,
-            "email_tracking_enabled": picking.carrier_id.email_tracking if picking.carrier_id and picking.partner_id.email else False,
+            "email_tracking_enabled": picking.is_automatic_shipment_mail if picking.is_automatic_shipment_mail and picking.partner_id.email else False,
             "from": AustraliaPostHelper.map_res_partner_to_shipment(picking.sale_id.warehouse_id.partner_id),
             "to": AustraliaPostHelper.map_res_partner_to_shipment(picking.partner_id),
             "items": AustraliaPostHelper.map_shipment_items(picking)

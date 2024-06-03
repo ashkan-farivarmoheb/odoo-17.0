@@ -3,6 +3,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+
 class AustraliaPostHelper(object):
     @staticmethod
     def map_to_wizard_info(account_info):
@@ -47,9 +48,13 @@ class AustraliaPostHelper(object):
     def map_shipment_items(picking):
         items = []
         _logger.debug(
-                        "map_shipment_items picking.package_ids: %s", picking.package_ids)
-        
+            "map_shipment_items picking.package_ids: %s", picking.package_ids)
+
         for package in picking.package_ids:
+            carrier = getattr(picking, 'carrier_id', None)
+            authority_to_leave, allow_partial_delivery = AustraliaPostHelper.determine_authority_and_delivery(
+                package, carrier)
+
             item = {
                 "item_reference": package.name,
                 "product_id": picking.carrier_id.service_product_id,
@@ -57,10 +62,21 @@ class AustraliaPostHelper(object):
                 'width':  package.width,
                 'height':  package.height,
                 'weight': package.weight,
-                "authority_to_leave": picking.carrier_id.authority_leave and picking.authority_leave if picking.carrier_id else False,
-                "allow_partial_delivery": picking.carrier_id.allow_part_delivery and picking.allow_part_delivery if picking.carrier_id else False,
+                "authority_to_leave": authority_to_leave,
+                "allow_partial_delivery": allow_partial_delivery,
+                "safe_drop_enabled": True
+                # / https://developers.auspost.com.au/content/downloads/AP_ATL_Shipping_and_TrackingFactSheet_FA.pdf
             }
             items.append(item)
         return items
 
+    @staticmethod
+    def determine_authority_and_delivery(package, carrier):
+        if carrier:
+            authority_to_leave = package.authority_leave if package.authority_leave is not None else carrier.authority_leave
+            allow_partial_delivery = package.allow_part_delivery if package.allow_part_delivery is not None else carrier.allow_part_delivery
+        else:
+            authority_to_leave = False
+            allow_partial_delivery = False
 
+        return authority_to_leave, allow_partial_delivery

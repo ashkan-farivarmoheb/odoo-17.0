@@ -23,24 +23,29 @@ class StockPickingAustraliaPost(models.Model):
         readonly=True,
         help="This field indicates that send to shipper " "for picking is done.",
     )
-    authority_leave = fields.Boolean(
-        string="Authority to Leave",
-        help="Allow delivery without recipient signature.",
-        compute='_compute_authority_leave',
+    is_automatic_shipment_mail = fields.Boolean(
+        "Automatic Send Shipment Confirmation Mail",
+        help="True: Send the shipment confirmation email to customer "
+        "when tracking number is available.",
+        compute='_compute_is_automatic_shipment_mail',
         store=True,
         readonly=False
-    )
 
-    allow_part_delivery = fields.Boolean(
-        string="Allow Partial Delivery",
-        help="Permit the delivery of orders in multiple shipments.",
-        compute='_compute_allow_part_delivery',
-        store=True,
-        readonly=False
+
     )
 
     _australia_post_request_instance = None
     _australia_post_repository_instance = None
+
+    @api.depends('carrier_id')
+    def _compute_is_automatic_shipment_mail(self):
+        for picking in self:
+            _logger.debug('_compute_is_automatic_shipment_mail %s',picking.is_automatic_shipment_mail)
+            if not picking.is_automatic_shipment_mail:
+                if picking.carrier_id:
+                    picking.is_automatic_shipment_mail = picking.carrier_id.is_automatic_shipment_mail
+                else:
+                    picking.is_automatic_shipment_mail = False
 
     @classmethod
     def _get_australia_post_request(cls):
@@ -57,26 +62,8 @@ class StockPickingAustraliaPost(models.Model):
             )
         return cls._australia_post_repository_instance
 
-    @api.depends('carrier_id')
-    def _compute_allow_part_delivery(self):
-        if not self.allow_part_delivery:
-            for picking in self:
-                if picking.carrier_id:
-                    self.allow_part_delivery = picking.carrier_id.allow_part_delivery
-                else:
-                    self.allow_part_delivery = False
-
-    @api.depends('carrier_id')
-    def _compute_authority_leave(self):
-        if not self.authority_leave:
-            for picking in self:
-                if picking.carrier_id:
-                    self.authority_leave = picking.carrier_id.authority_leave
-                else:
-                    self.authority_leave = False
-
     def _get_default_carrier_id(self):
-        _logger.debug("_context %s",self._context)
+        _logger.debug("_context %s", self._context)
         return self._context.get("default_carrier_id", False) or (
             self.carrier_id.id if hasattr(self, "carrier_id") else False
         )
@@ -227,7 +214,8 @@ class StockPickingAustraliaPost(models.Model):
                 )
 
                 if ship_info:
-                    _logger.debug("sendto_shipper australiapost pack:%s  ", ship_info)
+                    _logger.debug(
+                        "sendto_shipper australiapost pack:%s  ", ship_info)
 
                     pack_tracking_number = ship_info.get("tracking_number", "").strip(
                         ","
@@ -296,22 +284,22 @@ class StockPickingAustraliaPost(models.Model):
                 attachments=res.get("attachments"),
             )
 
-        carrier = self.carrier_id or False
-        if carrier.is_automatic_shipment_mail:
-            _logger.debug("is_automatic_shipment_mail is")
+        if self.is_automatic_shipment_mail:
+            _logger.debug("is_automatic_shipment_mail is",
+                          self.is_automatic_shipment_mail)
             self.auto_shipment_confirm_mail()
         return res
 
     def button_validate(self):
         available_carriers_list = self.get_all_carriers()
 
-        if not self[0].carrier_id:
-            raise ValidationError(
-                _(
-                    "Carrier is not specified for Stock Picking %s. please Choose a Carrier.",
-                    self.name,
-                )
-            )
+        # if not self[0].carrier_id:
+        #     raise ValidationError(
+        #         _(
+        #             "Carrier is not specified for Stock Picking %s. please Choose a Carrier.",
+        #             self.name,
+        #         )
+        #     )
         try:
             res = super().button_validate()
             if (

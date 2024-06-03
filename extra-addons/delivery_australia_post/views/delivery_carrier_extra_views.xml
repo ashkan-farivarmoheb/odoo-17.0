@@ -12,7 +12,7 @@
                         <group name="general_setting" string="Genral Setting">
                             <field name="authority_leave"/>
                             <field name="allow_part_delivery"/>
-                            <field name="email_tracking"/>
+                            <!-- <field name="email_tracking"/> -->
                             <!-- <field name="shipping_service_id" default="context.get('default_shipping_service_id')"/>
                             <field name="service_product_id" default="context.get('default_service_product_id')" required="delivery_type not in ['fixed','base_on_rule']"/> -->
                             <!-- <field name="stock_package_type_id"/> -->
