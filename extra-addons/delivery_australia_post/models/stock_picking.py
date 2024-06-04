@@ -231,7 +231,7 @@ class StockPickingAustraliaPost(models.Model):
                     ).write(
                         {
                             "tracking_no": pack_tracking_number,
-                            # "order_id": self.sale_id.id if self.sale_id else False,
+                            "order_id": self.sale_id.id if self.sale_id else False,
                             "item_id": ship_info.get("item_id")
                         },
                     )
@@ -345,7 +345,6 @@ class StockPickingAustraliaPost(models.Model):
 
     def update_batch_details(self, batch, data):
         batch.order_id = data["order"]["order_id"]
-
 
     def open_website_url(self):
         """Open tracking page. More than 1 tracking number: display a list of packages. Else open directly the tracking page"""
