@@ -80,6 +80,14 @@ class QuantPackage(models.Model):
         return client_action
 
     def cancel_item(self):
+        self.ensure_one()
+        if not self.picking_id.carrier_id.void_shipment:
+            msg = 'Void Shipment for package %s not allowed, please contact your Admin to enable the  Void Shipment for %s.' % (
+                self.name,self.picking_id.carrier_id.name )
+            self.picking_id.message_post(
+                body=msg, subject="Not allowed to Void the Shipment.")
+            return self.picking_id.carrier_id._shipping_genrated_message(msg)
+
         if self.tracking_no and self.picking_id.carrier_id.delivery_type == "auspost":
             _logger.debug("cancel_item")
             try:
