@@ -165,7 +165,7 @@ class StockPickingBatchAustraliaPost(models.Model):
             and x.state == "done"
             and x.carrier_id
             and x.carrier_tracking_ref
-        )
+        ).sorted(key=lambda x: x.id)
 
         # Raise an error if no pickings are found
         if not pickings:
@@ -180,8 +180,7 @@ class StockPickingBatchAustraliaPost(models.Model):
                     ("res_model", "=", "stock.picking"),
                     ("res_id", "=", picking.id),
                     ("mimetype", "=", "application/pdf"),
-                ],
-                order="res_id ASC"
+                ]
 
             )
             _logger.debug("label_attachment for %s", picking)
@@ -307,7 +306,7 @@ class StockPickingBatchAustraliaPost(models.Model):
             and x.state == "done"
             and x.carrier_id
             and x.carrier_tracking_ref
-        )
+        ).sorted(key=lambda x: x.id)
 
         # Raise an error if no pickings are found
         if not pickings:
@@ -322,8 +321,7 @@ class StockPickingBatchAustraliaPost(models.Model):
                     ("res_model", "=", "stock.picking"),
                     ("res_id", "=", picking.id),
                     ("mimetype", "=", "application/pdf"),
-                ],
-                order="res_id ASC"
+                ]
             )
             _logger.debug("label_attachment for %s", picking)
 
@@ -416,8 +414,8 @@ class StockPickingBatchAustraliaPost(models.Model):
             )
 
             # TODO Remove the combined PDF file from the attachment model  after ensuring the download is complete. This might involve a callback or a scheduled job
-                # if attachment:
-                #     attachment.unlink()
+            # if attachment:
+            #     attachment.unlink()
 
             # Remove the combined PDF file after use to save storage
             if os.path.exists(combined_pdf_path):
