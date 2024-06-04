@@ -1,4 +1,31 @@
 import logging
+import zipfile
+import os
+from PyPDF2 import PdfMerger
+from pathlib import Path
+
+
+class AustraliaPostHelper:
+
+    @staticmethod
+    def append_pdfs(pdf_dir, pdf_file_name, files_to_append):
+        """
+        Append PDF files into a single PDF file.
+        :param pdf_dir: Directory where the combined PDF file will be created.
+        :param pdf_file_name: Name of the combined PDF file.
+        :param files_to_append: List of file paths to append into the combined PDF.
+        :return: Path to the created combined PDF file.
+        """
+        pdf_path = pdf_dir / pdf_file_name
+        merger = PdfMerger()
+
+        for file_path in files_to_append:
+            if os.path.exists(file_path):
+                merger.append(file_path)
+
+        merger.write(pdf_path)
+        merger.close()
+        return pdf_path
 
 
 _logger = logging.getLogger(__name__)
@@ -80,3 +107,39 @@ class AustraliaPostHelper(object):
             allow_partial_delivery = False
 
         return authority_to_leave, allow_partial_delivery
+
+    @staticmethod
+    def create_zip(zip_dir, zip_file_name, files_to_zip):
+        """
+        Create a ZIP file containing the specified files.
+        :param zip_dir: Directory where the ZIP file will be created.
+        :param zip_file_name: Name of the ZIP file.
+        :param files_to_zip: List of file paths to include in the ZIP file.
+        :return: Path to the created ZIP file.
+        """
+        zip_path = zip_dir / zip_file_name
+        with zipfile.ZipFile(zip_path, "w") as zipf:
+            for file_path in files_to_zip:
+                if os.path.exists(file_path):
+                    zipf.write(file_path, os.path.basename(file_path))
+        return zip_path
+
+    @staticmethod
+    def combine_pdfs(pdf_dir, pdf_file_name, files_to_append):
+        """
+        Append PDF files into a single PDF file.
+        :param pdf_dir: Directory where the combined PDF file will be created.
+        :param pdf_file_name: Name of the combined PDF file.
+        :param files_to_append: List of file paths to append into the combined PDF.
+        :return: Path to the created combined PDF file.
+        """
+        pdf_path = pdf_dir / pdf_file_name
+        merger = PdfMerger()
+
+        for file_path in files_to_append:
+            if os.path.exists(file_path):
+                merger.append(file_path)
+
+        merger.write(pdf_path)
+        merger.close()
+        return pdf_path
