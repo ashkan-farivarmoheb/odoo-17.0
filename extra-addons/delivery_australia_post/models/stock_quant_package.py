@@ -23,6 +23,8 @@ class QuantPackage(models.Model):
     )
     item_id = fields.Char(string="Item Id", size=256)
     picking_id = fields.Many2one("stock.picking", string="Picking")
+    carrier_id = fields.Many2one(
+        'delivery.carrier', string="Carrier", related='picking_id.carrier_id')
     authority_leave = fields.Boolean(
         string="Authority to Leave",
         help="Allow delivery without recipient signature.",
@@ -37,6 +39,8 @@ class QuantPackage(models.Model):
         readonly=False
     )
 
+    _australia_post_repository_instance = None
+
     @classmethod
     def _get_australia_post_repository(cls):
         if cls._australia_post_repository_instance is None:
@@ -44,15 +48,6 @@ class QuantPackage(models.Model):
                 AustraliaPostRepository.get_instance()
             )
         return cls._australia_post_repository_instance
-
-    _australia_post_request_instance = None
-
-    @classmethod
-    def _get_australia_post_request(cls):
-        """Retrieve or create an instance of AustraliaPostRequest with order and carrier details."""
-        if cls._australia_post_request_instance is None:
-            cls._australia_post_request_instance = AustraliaPostRequest.get_instance()
-        return cls._australia_post_request_instance
 
     def open_website_url(self):
         """Open website for parcel tracking.
@@ -83,7 +78,7 @@ class QuantPackage(models.Model):
         self.ensure_one()
         if not self.picking_id.carrier_id.void_shipment:
             msg = 'Void Shipment for package %s not allowed, please contact your Admin to enable the  Void Shipment for %s.' % (
-                self.name,self.picking_id.carrier_id.name )
+                self.name, self.picking_id.carrier_id.name)
             self.picking_id.message_post(
                 body=msg, subject="Not allowed to Void the Shipment.")
             return self.picking_id.carrier_id._shipping_genrated_message(msg)

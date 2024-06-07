@@ -16,25 +16,25 @@
                             {
                                 "matchesJsonPath": {
                                     "expression": "$.items[0].length",
-                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                    "matches": "^(\\d{0,4})(.?)(\\d{0,1})"
                                 }
                             },
                             {
                                 "matchesJsonPath": {
                                     "expression": "$.items[0].height",
-                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                    "matches": "^(\\d{0,4})(.?)(\\d{0,1})"
                                 }
                             },
                             {
                                 "matchesJsonPath": {
                                     "expression": "$.items[0].width",
-                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                    "matches": "^(\\d{0,4})(.?)(\\d{0,1})"
                                 }
                             },
                             {
                                 "matchesJsonPath": {
                                     "expression": "$.items[0].weight",
-                                    "matches": "^(\\d{0,5})(.?)(\\d{0,2})"
+                                    "matches": "^(\\d{0,5})(.?)(\\d{0,3})"
                                 }
                             },
                             {

@@ -3,6 +3,8 @@ import zipfile
 import os
 from PyPDF2 import PdfMerger
 from pathlib import Path
+from odoo.exceptions import UserError, ValidationError
+from odoo import _
 
 
 class AustraliaPostHelper:
@@ -78,17 +80,20 @@ class AustraliaPostHelper(object):
             "map_shipment_items picking.package_ids: %s", picking.package_ids)
 
         for package in picking.package_ids:
-            carrier = getattr(picking, 'carrier_id', None)
-            authority_to_leave, allow_partial_delivery = AustraliaPostHelper.determine_authority_and_delivery(
-                package, carrier)
-
+            if not picking.carrier_id:
+                raise ValidationError(_("no Carrier provided"))
+            carrier_id = picking.carrier_id
+            authority_to_leave, allow_partial_delivery = AustraliaPostHelper._determine_authority_and_delivery(
+                package, carrier_id)
+            shipping_weight = AustraliaPostHelper._compute_api_weight(
+                carrier_id, package.shipping_weight)
             item = {
                 "item_reference": package.name,
                 "product_id": picking.carrier_id.service_product_id,
-                'length': package.length,
-                'width':  package.width,
-                'height':  package.height,
-                'weight': package.weight,
+                'length': round(package.length, 1),
+                'width':  round(package.width, 1),
+                'height':  round(package.height, 1),
+                'weight': round(shipping_weight, 3),
                 "authority_to_leave": authority_to_leave,
                 "allow_partial_delivery": allow_partial_delivery,
                 "safe_drop_enabled": True
@@ -98,7 +103,33 @@ class AustraliaPostHelper(object):
         return items
 
     @staticmethod
-    def determine_authority_and_delivery(package, carrier):
+    def map_rate_shipment_items(carrier, order):
+        _logger.debug('Preparing product details for order: %s', order.name)
+        if not carrier.service_product_id:
+            raise ValidationError(_("no Carrier provided"))
+        service_product_id = carrier.service_product_id
+        shipping_weight = AustraliaPostHelper._compute_api_weight(
+            carrier, order.shipping_weight)
+        # TODO order L W H for rate request?
+        return [{
+            'length': "5",
+            'width': "10",
+            'height': "1",
+            'weight': round(shipping_weight, 3),
+            'item_reference': order.name,
+            'product_ids': [service_product_id]
+        }]
+
+    @staticmethod
+    def _compute_api_weight(carrier, shipping_weight):
+        api_weight = carrier._get_api_weight(
+            shipping_weight)
+        _logger.debug(
+            "converted to api_weight %s", api_weight)
+        return api_weight
+
+    @staticmethod
+    def _determine_authority_and_delivery(package, carrier):
         if carrier:
             authority_to_leave = package.authority_leave if package.authority_leave is not None else carrier.authority_leave
             allow_partial_delivery = package.allow_part_delivery if package.allow_part_delivery is not None else carrier.allow_part_delivery
