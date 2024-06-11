@@ -50,6 +50,8 @@ package.json
 .vscode/
 .venv/
 odoo-venv/
+venv/
+resources/odoo-local-faraz.conf
 
 # terraform
 .terraform/
