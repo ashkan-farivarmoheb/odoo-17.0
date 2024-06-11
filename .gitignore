@@ -47,6 +47,10 @@ package.json
 /man/
 /share/
 /src/
+.vscode/
+.venv/
+odoo-venv/
+
 
 # terraform
 .terraform/
