@@ -3,8 +3,7 @@
     <!--  To inherit products page  -->
     <template id="product_page" inherit_id="website_sale.products" active="True" name="Products 1">
         <xpath expr="//div[hasclass('o_wsale_products_main_row')]" position="before">
-            <section class="banner product_banner"
-                     style="background-image: url(/theme_silon/static/src/img/product_banner/product_banner.jpg) !important;">
+            <section class="banner product_banner" style="background-image: url(/theme_silon/static/src/img/product_banner/product_banner.jpg) !important;">
                 <div class="container">
                     <div class="row">
                         <h1 class="product_heading">PRODUCTS</h1>
@@ -22,29 +21,25 @@
                         <div class="row">
                             <div class="col-12 col-sm-6 col-lg-3 col-md-6">
                                 <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/artem-gavrysh-ygAujED2tZ4-unsplash.jpg)">
+                                    <div class="product__image" style="background-image: url(/theme_silon/static/src/img/followus/artem-gavrysh-ygAujED2tZ4-unsplash.jpg)">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 col-md-6">
                                 <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/edu-lauton-TyQ-0lPp6e4-unsplash.jpg)">
+                                    <div class="product__image" style="background-image: url(/theme_silon/static/src/img/followus/edu-lauton-TyQ-0lPp6e4-unsplash.jpg)">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 col-md-6">
                                 <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/philipe-cavalcante-Ugpcxb0jG4Q-unsplash.jpg)">
+                                    <div class="product__image" style="background-image: url(/theme_silon/static/src/img/followus/philipe-cavalcante-Ugpcxb0jG4Q-unsplash.jpg)">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-12 col-sm-6 col-lg-3 col-md-6">
                                 <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/remy_loz-rT5LrFoNeA0-unsplash1.jpg)">
+                                    <div class="product__image" style="background-image: url(/theme_silon/static/src/img/followus/remy_loz-rT5LrFoNeA0-unsplash1.jpg)">
                                     </div>
                                 </div>
                             </div>

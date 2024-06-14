@@ -1,0 +1,66 @@
+/* Mega Menu Container */
+.mega-menu {
+  position: relative;
+  background-color: $color-white; /* Ensure this variable is defined */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: $color-black; /* Ensure this variable is defined */
+  padding: 20px;
+
+  /* Solutions Text Styling */
+  h2 {
+    color: $color-black !important; /* Text color */
+    font-size: $font-size-h2; /* Ensure this variable is defined */
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $color-black; /* Text color */
+    font-size: $font-size-text; /* Ensure this variable is defined */
+    text-transform: none; /* Maintain original case */
+    margin-bottom: 20px;
+  }
+
+  /* Link with Image */
+  .link-with-image {
+    display: flex;
+    align-items: center;
+    text-decoration: none; /* Remove underline for entire link */
+    color: $color-black !important; /* Override inherited styles */
+    position: relative;
+    padding-bottom: 2px; /* Adjust as needed for spacing */
+    font-size: $font-size-h4; /* Use font size for h4 */
+
+    .link-text {
+      text-decoration: none; /* Ensure text is not underlined by default */
+      position: relative; /* Needed for the pseudo-element */
+      color: $color-black !important; /* Ensure the text color is black */
+    }
+
+    .link-text::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; /* Slightly below the text */
+      left: 0;
+      width: 0;
+      height: 2px; /* Adjust thickness of the underline */
+      background-color: $color-thirdly; /* Color of the underline */
+      transition: width 0.3s ease-in-out; /* Animation effect */
+    }
+
+    .link-text:hover::after {
+      width: 100%; /* Fully underline the text */
+    }
+  }
+
+  /* Image styling */
+  .link-image {
+    width: 48px; /* Set the image width to 48px */
+    height: 48px; /* Set the image height to 48px */
+    margin-right: 10px; /* Space between the image and the text */
+    flex-shrink: 0; /* Prevent the image from shrinking */
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid $color-black; /* Optional: make border black */
+  }
+}

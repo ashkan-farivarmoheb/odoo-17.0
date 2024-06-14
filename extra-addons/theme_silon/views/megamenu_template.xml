@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="menu_service" model="website.menu">
+            <field name="name">Services</field>
+            <field name="url">/service</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">20</field>
+        </record>
+
+        <record id="menu_rent" model="website.menu">
+            <field name="name">Property for Rent</field>
+            <field name="url">/rent</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">15</field>
+            <field name="is_mega_menu">True</field>
+            <field name="mega_menu_content" type="html">
+                <section class="o_cc5 mega-menu">
+                    <div class="container">
+                        <div class="row py-5">
+                            <!-- First two columns: Empty space -->
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-2"></div>
+
+                            <!-- SOLUTIONS Column -->
+                            <div class="col-lg-3">
+                                <aside>
+                                    <h2>SOLUTIONS</h2>
+                                    <p>Streamline everyday management of your operation - no matter what industry you're in - with Steersman’s suite of high-performance business applications for SMBs.</p>
+                                </aside>
+                            </div>
+
+                            <!-- First Rooms for Rent Column -->
+                            <div class="col-lg-3">
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent1</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image2" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent2</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image3" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent3</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image4" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent4</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image5" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent5</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Second Rooms for Rent Column -->
+                            <div class="col-lg-3">
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent6</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image2" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent7</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image3" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent8</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image4" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent9</span>
+                                    </a>
+                                </div>
+                                <div class="pb-2 my-2 border-bottom">
+                                    <a href="/" class="link-with-image h4">
+                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image5" class="link-image"/>
+                                        <span class="link-text">Rooms for Rent10</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+            </field>
+        </record>
+    </data>
+</odoo>

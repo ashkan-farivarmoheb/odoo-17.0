@@ -16,10 +16,11 @@ background-color:$color-footer !important;
         
     }
     .footer_items a{
-        color: $color_grey;
+        color: $color_whitesmoke;
         text-decoration: none;
         &:hover{
-            color: $color-black;
+            color: $color-secondary;
+            text-decoration: underline;
         }
     }
     
@@ -35,7 +36,7 @@ margin-left: 15px;
     .footer_heading{
             margin-top: 20px;
             margin-bottom: 10px;
-            color: #212529 !important;
+            color: $color_whitesmoke !important;
     }
     .social_media {
         ul{
@@ -49,7 +50,7 @@ margin-left: 15px;
                margin: 7px 
            }
            &:hover {
-            background-color: darken($color-red, 30%) !important;
+            background-color: darken($color-secondary, 30%) !important;
             border: none;
         }
         }
@@ -71,7 +72,11 @@ margin-left: 15px;
 }   
 .copy_right{
     text-align: center;
-    a{ color:$color-red;  }
+    a{ color:$color_whitesmoke;
+     &:hover{
+            color: $color-secondary;
+            text-decoration: underline;
+        }  }
     .text-muted {
   color: #6c757d !important;
 }
