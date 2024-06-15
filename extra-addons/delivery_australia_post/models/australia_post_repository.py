@@ -23,6 +23,7 @@ delete_shipment_path = config.options.get(
     "services_austpost_delete_shipment_path")
 delete_item_path = config.options.get(
     "services_austpost_delete_shipment_path")
+create_label_path = config.options.get("services_austpost_createlabel_path")
 
 
 def create_error_response(res_json):
@@ -309,9 +310,9 @@ class AustraliaPostRepository(object):
             raise UserError(_("Unexpected error: %s", e))
 
         return response
-    
+
     def delete_item(self,shipment_ids,package_ids, carrier=None):
-        
+
         if not shipment_ids:
             raise UserError(_("Shipment Ids are is missing."))
         if not package_ids:
@@ -329,11 +330,11 @@ class AustraliaPostRepository(object):
                 "Authentication": _private_get_authentication(carrier),
                 "ACCOUNT-NUMBER": _private_get_account(carrier)
             }
-            
+
             if len(shipment_ids) == 1:
                 url = f"{host}{delete_item_path}/{shipment_ids[0]}/items/{package_ids[0]}"
                 params = {}
- 
+
 
             res = requests.delete(url=url, headers=headers,
                                 params=params, timeout=10)
@@ -408,3 +409,45 @@ class AustraliaPostRepository(object):
             raise UserError(_("Unexpected error: %s", e))
 
         return response
+
+    def create_labels(self, carrier, payload=None):
+        _logger.debug(
+            'create labels: %s payload: %s', carrier, payload)
+        response = None
+
+        try:
+            if payload is None:
+                raise UserError(
+                    _("Payload for creating labels is missing."))
+
+            headers = {
+                "Content-Type": AustraliaPostRepository.CONTENT_TYPE,
+                "Accept": AustraliaPostRepository.ACCEPT,
+                "Authentication": _private_get_authentication(carrier)
+            }
+
+            res = requests.post(url="".join(
+                [host, create_label_path]), headers=headers, data=payload)
+            res_json = res.json()
+
+            if res.status_code == 200:
+                response = create_success_response(res_json)
+                _logger.debug(
+                    'create_label res: %s', res_json)
+            else:
+                response = create_error_response(res_json)
+
+        except requests.exceptions.Timeout:
+            raise UserError(_("Timeout: the server did not reply within 10s"))
+        except (ValueError, requests.exceptions.ConnectionError) as e:
+            raise UserError(_("Server not reachable, please try again later"))
+        except requests.exceptions.HTTPError as e:
+            raise UserError(
+                _("{}\n{}".format(
+                    e, response['error_message'] if response else ""))
+            )
+        except Exception as e:
+            raise UserError(_("Unexpected error: %s", e))
+
+        return response
+

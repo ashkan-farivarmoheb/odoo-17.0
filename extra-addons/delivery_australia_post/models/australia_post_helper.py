@@ -80,3 +80,17 @@ class AustraliaPostHelper(object):
             allow_partial_delivery = False
 
         return authority_to_leave, allow_partial_delivery
+
+    @staticmethod
+    def map_pickings_to_preferences(carrier):
+        return {
+            "type": "PRINT",
+            "format": "ZPL",
+            "metadata": {
+                "group": carrier.service_group,
+                "branded": carrier.branded,
+                "layout": "A4-4pp",
+                "left_offset": 0,
+                "top_offset": 0
+            }
+        }

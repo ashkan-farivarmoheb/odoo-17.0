@@ -1,14 +1,16 @@
+import json
+
+from .australia_post_repository import AustraliaPostRepository
+from .australia_post_request import AustraliaPostRequest
 from odoo.exceptions import UserError
-from odoo import models, fields, api, _, tools
+from odoo import api, _, tools
 from odoo import fields, models
 import logging
 import os
 import base64
 import shutil
-import tarfile
 import zipfile
 from pathlib import Path
-
 
 _logger = logging.getLogger(__name__)
 
@@ -32,7 +34,23 @@ class StockPickingBatchAustraliaPost(models.Model):
         help="Mark as True when it's have tracking ref number.",
     )
 
+    _australia_post_request_instance = None
+    _australia_post_repository_instance = None
 
+    @classmethod
+    def _get_australia_post_request(cls):
+        """Retrieve or create an instance of AustraliaPostRequest with order and carrier details."""
+        if cls._australia_post_request_instance is None:
+            cls._australia_post_request_instance = AustraliaPostRequest.get_instance()
+        return cls._australia_post_request_instance
+
+    @classmethod
+    def _get_australia_post_repository(cls):
+        if cls._australia_post_repository_instance is None:
+            cls._australia_post_repository_instance = (
+                AustraliaPostRepository.get_instance()
+            )
+        return cls._australia_post_repository_instance
 
     def download_invoices(self):
         """
@@ -88,15 +106,20 @@ class StockPickingBatchAustraliaPost(models.Model):
         # Filter pickings with labels
         pickings = self.picking_ids.filtered(
             lambda x: x.picking_type_code == "outgoing"
-            and x.state == "done"
-            and x.carrier_id
-            and x.carrier_tracking_ref
+                      and x.state == "done"
+                      and x.carrier_id
+                      and x.shipment_id
         )
 
         if not pickings:
             raise UserError(_("No pickings found with labels to download."))
 
-   # Create the ZIP archive in <data_dir>/tmp/
+        requests = self._get_australia_post_request().create_post_labels_batch_request(pickings)
+        responses = [
+            self._get_australia_post_repository().create_labels(carrier.read()[0], request)
+            for carrier, requests in requests.items() for request in requests]
+
+        # Create the ZIP archive in <data_dir>/tmp/
         zip_dir = Path(data_dir, "tmp", "label_zip")
         zip_dir.mkdir(parents=True, exist_ok=True)
 
@@ -106,20 +129,30 @@ class StockPickingBatchAustraliaPost(models.Model):
         zip_path = zip_dir / zip_file_name
         _logger.debug("zip_path %s zip_file_name %s file_path %s labels_dir %s",
                       zip_path, zip_file_name, labels_dir, labels_dir)
+
         try:
 
             with zipfile.ZipFile(zip_path, "w") as zipf:
-                for picking in pickings:
+                label_attachments = self.env["ir.attachment"].search(
+                    [
+                        ("res_model", "=", "stock.picking.batch"),
+                        ("res_id", "=", self.id),
+                        ("mimetype", "=", "application/pdf"),
+                    ]
+                )
+                _logger.debug("label_attachment for %s", self)
+
+                for response in responses:
                     label_attachments = self.env["ir.attachment"].search(
                         [
-                            ("res_model", "=", "stock.picking"),
-                            ("res_id", "=", picking.id),
+                            ("res_model", "=", "stock.picking.batch"),
+                            ("res_id", "=", self.id),
                             ("mimetype", "=", "application/pdf"),
                         ]
                     )
-                    _logger.debug("label_attachment for %s", picking)
+                    _logger.debug("label_attachment for %s", self)
                     if not label_attachments:
-                        _logger.debug("no label_attachment for %s", picking)
+                        _logger.debug("no label_attachment for %s", self)
                         report_data = self.stock_picking_action_report(picking)
                         if report_data:
                             label_attachments = report_data
@@ -184,12 +217,13 @@ class StockPickingBatchAustraliaPost(models.Model):
             return {
                 "type": "ir.actions.act_url",
                 "url": "/web/content/%s?filename_field=name&download=true"
-                % (attachment.id),
+                       % (attachment.id),
                 "target": "self",
             }
         finally:
-            msg = _("Delivery slip ZIP files have been created and downloaded for Batch Transfer %s. To see the tracking numbers, check the ZIP file or the stock picking/package.") % (
-                self.name)
+            msg = _(
+                "Delivery slip ZIP files have been created and downloaded for Batch Transfer %s. To see the tracking numbers, check the ZIP file or the stock picking/package.") % (
+                      self.name)
             self.message_post(
                 body=msg,
                 subject="Attachments of tracking",
@@ -201,6 +235,103 @@ class StockPickingBatchAustraliaPost(models.Model):
             # Cleanup the pdf file
             if os.path.exists(pdf_path):
                 shutil.rmtree(pdf_path)
+
+        # try:
+        #
+        #     with zipfile.ZipFile(zip_path, "w") as zipf:
+        #         for picking in pickings:
+        #             label_attachments = self.env["ir.attachment"].search(
+        #                 [
+        #                     ("res_model", "=", "stock.picking"),
+        #                     ("res_id", "=", picking.id),
+        #                     ("mimetype", "=", "application/pdf"),
+        #                 ]
+        #             )
+        #             _logger.debug("label_attachment for %s", picking)
+        #             if not label_attachments:
+        #                 _logger.debug("no label_attachment for %s", picking)
+        #                 report_data = self.stock_picking_action_report(picking)
+        #                 if report_data:
+        #                     label_attachments = report_data
+        #                 else:
+        #                     continue
+        #
+        #             for sequence, label_attachment in enumerate(
+        #                 label_attachments, start=1
+        #             ):
+        #                 if isinstance(label_attachment, dict):
+        #                     pdf_content = base64.b64decode(
+        #                         label_attachment.get('datas'))
+        #                     file_extension = (
+        #                         label_attachment.get('name').split(".")[1]
+        #                         if label_attachment.get('name').split(".")[1]
+        #                         else "pdf"
+        #                     )
+        #                 else:
+        #                     pdf_content = base64.b64decode(
+        #                         label_attachment.datas)
+        #                     file_extension = (
+        #                         label_attachment.name.split(".")[1]
+        #                         if label_attachment.name.split(".")[1]
+        #                         else "pdf"
+        #                     )
+        #                 # Construct the PDF filename and path
+        #                 pdf_filename = "%s_%s.%s" % (
+        #                     sequence,
+        #                     picking.name.replace("/", "_"),
+        #                     file_extension,
+        #                 )
+        #                 pdf_path = labels_dir / pdf_filename
+        #                 _logger.debug(
+        #                     f"PDF path for {picking.name}: {pdf_path}")
+        #                 # Write the PDF content to a file in data_dir
+        #                 with open(pdf_path, "wb") as f:
+        #                     f.write(pdf_content)
+        #                 # Add the PDF file to the ZIP file
+        #                 zipf.write(pdf_path, pdf_filename)
+        #                 # Remove the PDF file after adding it to the ZIP
+        #                 os.remove(pdf_path)
+        #
+        #     # Read and encode the ZIP file
+        #     with open(zip_path, "rb") as f:
+        #         zip_data = base64.b64encode(f.read())
+        #     _logger.debug(f"zip_data: {zip_data}")
+        #
+        #     # Create an attachment for the ZIP file
+        #     attachment = self.env["ir.attachment"].create(
+        #         {
+        #             "name": "Wave - %s.zip" % (zip_file_name or ""),
+        #             "store_fname": "Wave - %s.zip" % (zip_file_name or ""),
+        #             "type": "binary",
+        #             "datas": zip_data or "",
+        #             "mimetype": "application/zip",
+        #             "res_model": "stock.picking.batch",
+        #             "res_id": self.id,
+        #             "res_name": self.name,
+        #         }
+        #     )
+        #
+        #     return {
+        #         "type": "ir.actions.act_url",
+        #         "url": "/web/content/%s?filename_field=name&download=true"
+        #                % (attachment.id),
+        #         "target": "self",
+        #     }
+        # finally:
+        #     msg = _(
+        #         "Delivery slip ZIP files have been created and downloaded for Batch Transfer %s. To see the tracking numbers, check the ZIP file or the stock picking/package.") % (
+        #               self.name)
+        #     self.message_post(
+        #         body=msg,
+        #         subject="Attachments of tracking",
+        #     )
+        #
+        #     # Cleanup the ZIP file after download
+        #     if os.path.exists(zip_path):
+        #         os.remove(zip_path)
+        #     # Cleanup the pdf file
+        #     if os.path.exists(pdf_path):
+        #         shutil.rmtree(pdf_path)
 
     @api.depends("company_id", "picking_type_id", "state", "carrier_id")
     def _compute_allowed_picking_ids(self):
@@ -253,7 +384,7 @@ class StockPickingBatchAustraliaPost(models.Model):
 
         pdf = report[0]
         label_attachment = {
-            'datas':  base64.b64encode(pdf).decode('utf-8'),
+            'datas': base64.b64encode(pdf).decode('utf-8'),
             'name': 'picking_report_%s.pdf' % picking.name.replace("/", "_")
         }
 
@@ -266,11 +397,9 @@ class StockPickingBatchAustraliaPost(models.Model):
             if outgoing_picking_type:
                 self.picking_type_id = outgoing_picking_type
             else:
-                self.carrier_id=False
+                self.carrier_id = False
 
-
-        
     @api.onchange('picking_type_id')
     def _onchange_picking_type(self):
-        if self.carrier_id.delivery_type == 'auspost' and self.picking_type_code !='outgoing':
-            self.carrier_id=False
+        if self.carrier_id.delivery_type == 'auspost' and self.picking_type_code != 'outgoing':
+            self.carrier_id = False
