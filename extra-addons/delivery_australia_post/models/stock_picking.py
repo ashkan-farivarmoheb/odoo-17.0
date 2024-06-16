@@ -40,7 +40,8 @@ class StockPickingAustraliaPost(models.Model):
     @api.depends('carrier_id')
     def _compute_is_automatic_shipment_mail(self):
         for picking in self:
-            _logger.debug('_compute_is_automatic_shipment_mail %s',picking.is_automatic_shipment_mail)
+            _logger.debug('_compute_is_automatic_shipment_mail %s',
+                          picking.is_automatic_shipment_mail)
             if not picking.is_automatic_shipment_mail:
                 if picking.carrier_id:
                     picking.is_automatic_shipment_mail = picking.carrier_id.is_automatic_shipment_mail
@@ -215,7 +216,7 @@ class StockPickingAustraliaPost(models.Model):
 
                 if ship_info:
                     _logger.debug(
-                        "sendto_shipper australiapost pack:%s  ", ship_info)
+                        "sendto_shipper australiapost pack:%s   %s ", ship_info, package.allow_part_delivery)
 
                     pack_tracking_number = ship_info.get("tracking_number", "").strip(
                         ","
@@ -224,11 +225,13 @@ class StockPickingAustraliaPost(models.Model):
 
                     self.label_genrated = bool(self.carrier_tracking_ref)
 
-                    package.write(
+                    package.with_context(
+                        package_allow_part_delivery=package.allow_part_delivery,
+                        package_authority_leave=package.authority_leave
+                    ).write(
                         {
                             "tracking_no": pack_tracking_number,
                             "order_id": self.sale_id.id if self.sale_id else False,
-                            "picking_id": self.id,
                             "item_id": ship_info.get("item_id")
                         },
                     )
@@ -285,7 +288,7 @@ class StockPickingAustraliaPost(models.Model):
             )
 
         if self.is_automatic_shipment_mail:
-            _logger.debug("is_automatic_shipment_mail is",
+            _logger.debug("is_automatic_shipment_mail is %s",
                           self.is_automatic_shipment_mail)
             self.auto_shipment_confirm_mail()
         return res
@@ -342,9 +345,6 @@ class StockPickingAustraliaPost(models.Model):
 
     def update_batch_details(self, batch, data):
         batch.order_id = data["order"]["order_id"]
-        # if 'tracking_number' in data:
-        #     batch.send_to_shipper_process_done = bool(data['shipments']['tracking_number'])
-        #     batch.ready_for_download = bool(data['tracking_number'])
 
     def open_website_url(self):
         """Open tracking page. More than 1 tracking number: display a list of packages. Else open directly the tracking page"""

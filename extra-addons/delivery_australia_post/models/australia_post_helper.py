@@ -1,4 +1,33 @@
 import logging
+import zipfile
+import os
+from PyPDF2 import PdfMerger
+from pathlib import Path
+from odoo.exceptions import UserError, ValidationError
+from odoo import _
+
+
+class AustraliaPostHelper:
+
+    @staticmethod
+    def append_pdfs(pdf_dir, pdf_file_name, files_to_append):
+        """
+        Append PDF files into a single PDF file.
+        :param pdf_dir: Directory where the combined PDF file will be created.
+        :param pdf_file_name: Name of the combined PDF file.
+        :param files_to_append: List of file paths to append into the combined PDF.
+        :return: Path to the created combined PDF file.
+        """
+        pdf_path = pdf_dir / pdf_file_name
+        merger = PdfMerger()
+
+        for file_path in files_to_append:
+            if os.path.exists(file_path):
+                merger.append(file_path)
+
+        merger.write(pdf_path)
+        merger.close()
+        return pdf_path
 
 
 _logger = logging.getLogger(__name__)
@@ -51,17 +80,20 @@ class AustraliaPostHelper(object):
             "map_shipment_items picking.package_ids: %s", picking.package_ids)
 
         for package in picking.package_ids:
-            carrier = getattr(picking, 'carrier_id', None)
-            authority_to_leave, allow_partial_delivery = AustraliaPostHelper.determine_authority_and_delivery(
-                package, carrier)
-
+            if not picking.carrier_id:
+                raise ValidationError(_("no Carrier provided"))
+            carrier_id = picking.carrier_id
+            authority_to_leave, allow_partial_delivery = AustraliaPostHelper._determine_authority_and_delivery(
+                package, carrier_id)
+            shipping_weight = AustraliaPostHelper._compute_api_weight(
+                carrier_id, package.shipping_weight)
             item = {
                 "item_reference": package.name,
                 "product_id": picking.carrier_id.service_product_id,
-                'length': package.length,
-                'width':  package.width,
-                'height':  package.height,
-                'weight': package.weight,
+                'length': round(package.length, 1),
+                'width':  round(package.width, 1),
+                'height':  round(package.height, 1),
+                'weight': round(shipping_weight, 3),
                 "authority_to_leave": authority_to_leave,
                 "allow_partial_delivery": allow_partial_delivery,
                 "safe_drop_enabled": True
@@ -71,7 +103,33 @@ class AustraliaPostHelper(object):
         return items
 
     @staticmethod
-    def determine_authority_and_delivery(package, carrier):
+    def map_rate_shipment_items(carrier, order):
+        _logger.debug('Preparing product details for order: %s', order.name)
+        if not carrier.service_product_id:
+            raise ValidationError(_("no Carrier provided"))
+        service_product_id = carrier.service_product_id
+        shipping_weight = AustraliaPostHelper._compute_api_weight(
+            carrier, order.shipping_weight)
+        # TODO order L W H for rate request?
+        return [{
+            'length': "5",
+            'width': "10",
+            'height': "1",
+            'weight': round(shipping_weight, 3),
+            'item_reference': order.name,
+            'product_ids': [service_product_id]
+        }]
+
+    @staticmethod
+    def _compute_api_weight(carrier, shipping_weight):
+        api_weight = carrier._get_api_weight(
+            shipping_weight)
+        _logger.debug(
+            "converted to api_weight %s", api_weight)
+        return api_weight
+
+    @staticmethod
+    def _determine_authority_and_delivery(package, carrier):
         if carrier:
             authority_to_leave = package.authority_leave if package.authority_leave is not None else carrier.authority_leave
             allow_partial_delivery = package.allow_part_delivery if package.allow_part_delivery is not None else carrier.allow_part_delivery
@@ -80,6 +138,42 @@ class AustraliaPostHelper(object):
             allow_partial_delivery = False
 
         return authority_to_leave, allow_partial_delivery
+
+    @staticmethod
+    def create_zip(zip_dir, zip_file_name, files_to_zip):
+        """
+        Create a ZIP file containing the specified files.
+        :param zip_dir: Directory where the ZIP file will be created.
+        :param zip_file_name: Name of the ZIP file.
+        :param files_to_zip: List of file paths to include in the ZIP file.
+        :return: Path to the created ZIP file.
+        """
+        zip_path = zip_dir / zip_file_name
+        with zipfile.ZipFile(zip_path, "w") as zipf:
+            for file_path in files_to_zip:
+                if os.path.exists(file_path):
+                    zipf.write(file_path, os.path.basename(file_path))
+        return zip_path
+
+    @staticmethod
+    def combine_pdfs(pdf_dir, pdf_file_name, files_to_append):
+        """
+        Append PDF files into a single PDF file.
+        :param pdf_dir: Directory where the combined PDF file will be created.
+        :param pdf_file_name: Name of the combined PDF file.
+        :param files_to_append: List of file paths to append into the combined PDF.
+        :return: Path to the created combined PDF file.
+        """
+        pdf_path = pdf_dir / pdf_file_name
+        merger = PdfMerger()
+
+        for file_path in files_to_append:
+            if os.path.exists(file_path):
+                merger.append(file_path)
+
+        merger.write(pdf_path)
+        merger.close()
+        return pdf_path
 
     @staticmethod
     def map_pickings_to_preferences(carrier):

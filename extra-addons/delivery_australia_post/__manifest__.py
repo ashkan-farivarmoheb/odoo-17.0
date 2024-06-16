@@ -14,6 +14,7 @@
         'views/australia_post_account_wizard_view.xml',
         'views/stock_quant_package_view.xml',
         'views/stock_picking_batch_view.xml',
+        'views/choose_delivery_package_view.xml',
         'security/ir.model.access.csv'],
     'installable': True,
     'application': False,

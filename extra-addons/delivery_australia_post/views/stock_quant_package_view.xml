@@ -19,9 +19,9 @@
       </xpath>
       <xpath expr="//field[@name='pack_date']" position="after">
         <field name='order_id' invisible="not order_id" readonly='True' />
-        <field name='picking_id' invisible="True" readonly='True' />
-        <field name="authority_leave" invisible="not picking_id.carrier_id and not picking_id.carrier_id.delivery_type in ('auspost')"/>
-        <field name="allow_part_delivery" invisible="not picking_id.carrier_id and not picking_id.carrier_id.delivery_type in ('auspost')"/>
+        <field name='carrier_id' invisible="True" readonly='True' />
+        <field name="authority_leave" invisible="not carrier_id and not carrier_id.delivery_type in ('auspost')"/>
+        <field name="allow_part_delivery" invisible="not carrier_id and not carrier_id.delivery_type in ('auspost')"/>
       </xpath>
     </field>
   </record>

@@ -1,3 +1,4 @@
+import ast
 from .australia_post_repository import AustraliaPostRepository
 from .australia_post_request import AustraliaPostRequest
 from .australia_post_helper import AustraliaPostHelper
@@ -8,7 +9,6 @@ import logging
 from odoo.exceptions import UserError, ValidationError
 
 _logger = logging.getLogger(__name__)
-import ast
 
 
 # https://webkul.com/blog/odoo-australia-shipping-integration/
@@ -21,7 +21,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
     _inherit = "delivery.carrier"
 
     australia_post_api_key = fields.Char(string="Australia Post API Key")
-    australia_post_account_number = fields.Char(string="Australia Post Account Number")
+    australia_post_account_number = fields.Char(
+        string="Australia Post Account Number")
     australia_post_api_password = fields.Char(
         string="Australia Post API Password", groups="base.group_system"
     )
@@ -38,7 +39,6 @@ class DeliveryCarrierAustraliaPost(models.Model):
     service_product_id = fields.Char(string="Code", readonly=True)
     service_group = fields.Char(string="Group", readonly=True)
 
-    # TODO: functions of these need to be reviewed and tested
     tracking_link = fields.Char(
         string="Tracking Link",
         help="Tracking link(URL) useful to track the "
@@ -76,17 +76,7 @@ class DeliveryCarrierAustraliaPost(models.Model):
         default=False,
         copy=False,
     )
-    # email_tracking = fields.Boolean(
-    #     string="Email Tracking Enabled",
-    #     help="Send tracking information to customers via email.",
-    #     default=False,
-    #     copy=False,
-    # )
-    # stock_package_type_id = fields.Many2one('stock.package.type',
-    #                                         string="Package Type",
-    #                                         help="Type of packaging used for delivery.",
-    #                                         copy=False,
-    #                                         )
+
     commercial_value = fields.Boolean(
         string="Commercial Value",
         help="Declare the value of goods for customs purposes.",
@@ -161,8 +151,41 @@ class DeliveryCarrierAustraliaPost(models.Model):
         help="Responsible person to process the batch",
     )
 
-    # TODO: functions of above need to be reviewed and tested
     _australia_post_repository_instance = None
+
+    @api.onchange('delivery_type')
+    def _onchange_delivery_type(self):
+        """
+        Automatically set the delivery_uom field to 'kg' when delivery_type is 'aus'.
+        This provides real-time feedback in the form view.
+        """
+        if self.delivery_type == 'auspost':
+            # self.delivery_uom = self._get_default_uom().name
+            self.uom_id = self.env.ref('uom.product_uom_kgm')
+
+    @api.model
+    def create(self, vals):
+        """
+        Override the create method to set delivery_uom to 'kg' when delivery_type is 'aus'.
+
+        @param vals: dict of values used to create the new record
+        @return: newly created record
+        """
+        if vals.get('delivery_type') == 'auspost':
+            vals['uom_id'] = self.env.ref('uom.product_uom_kgm').id
+        return super(DeliveryCarrierAustraliaPost, self).create(vals)
+
+    @api.model
+    def write(self, vals):
+        """
+        Override the write method to set delivery_uom to 'kg' when delivery_type is 'aus'.
+
+        @param vals: dict of values used to update the record
+        @return: result of the parent class's write method
+        """
+        if 'delivery_type' in vals and vals['delivery_type'] == 'aus':
+            vals['delivery_uom'] = 'kg'
+        return super(DeliveryCarrierAustraliaPost, self).write(vals)
 
     @classmethod
     def _get_australia_post_repository(cls):
@@ -189,21 +212,6 @@ class DeliveryCarrierAustraliaPost(models.Model):
         """
 
         _logger.debug("auspost_rate_shipment")
-
-        try:
-            australia_post_request = (
-                self._get_australia_post_request()
-            )  # self is the carrier
-
-            rate_data = australia_post_request.create_rate_shipment_request(
-                order, self.service_product_id
-            )
-            _logger.debug("auspost_rate_shipment :%s ", rate_data)
-
-        except Exception as e:
-            _logger.error(f"Error preparing shipping rates request: {str(e)}")
-            return {"success": False, "error": str(e)}
-
         if not self.service_product_id:
             # service_product_id is not set, raise a UserError to notify the user
             raise UserError(
@@ -211,6 +219,20 @@ class DeliveryCarrierAustraliaPost(models.Model):
                     "The Australia Post Service Code is not configured in the Shipping Method settings. Please specify it before proceeding."
                 )
             )
+
+        try:
+            australia_post_request = (
+                self._get_australia_post_request()
+            )  # self is the carrier
+
+            rate_data = australia_post_request.create_rate_shipment_request(self,
+                                                                            order
+                                                                            )
+            _logger.debug("auspost_rate_shipment :%s ", rate_data)
+
+        except Exception as e:
+            _logger.error(f"Error preparing shipping rates request: {str(e)}")
+            return {"success": False, "error": str(e)}
 
         self.ensure_one()
         res = self._get_australia_post_repository().get_item_prices(
@@ -239,7 +261,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
                 code = error.get("code", "No code provided")
                 message = error.get("message", "No message provided")
                 raise UserError(
-                    _("Getting information wasn't successful. %s: %s" % (code, message))
+                    _("Getting information wasn't successful. %s: %s" %
+                      (code, message))
                 )
             else:
                 raise UserError(
@@ -250,7 +273,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
         return [self.australia_post_create_shipping(p) for p in pickings][0]
 
     def _get_tracking_link(self, tracking_ref):
-        _logger.debug("get_tracking_link %s   %s", tracking_ref, self.tracking_link)
+        _logger.debug("get_tracking_link %s   %s",
+                      tracking_ref, self.tracking_link)
 
         base_url = (
             self.tracking_link.rstrip("/")
@@ -260,8 +284,6 @@ class DeliveryCarrierAustraliaPost(models.Model):
         _logger.debug("get_tracking_link base_url %s", base_url)
 
         return f"{base_url}/{tracking_ref}" if tracking_ref and base_url else False
-
-   
 
     def auspost_get_tracking_link(self, picking):
         return self._get_tracking_link(picking.carrier_tracking_ref)
@@ -327,7 +349,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
             )
 
             if not response.get("data"):
-                raise UserError(_("No shipments data returned from Australia Post."))
+                raise UserError(
+                    _("No shipments data returned from Australia Post."))
             # Process each shipment in the response
             for shipment in response.get("data", {}).get("shipments", []):
                 picking.shipment_id = shipment.get("shipment_id")
@@ -419,7 +442,8 @@ class DeliveryCarrierAustraliaPost(models.Model):
 
     def remove_info_lines(self, existing_records, info_lines):
         records_to_remove = existing_records - existing_records.filtered(
-            lambda r: r.product_id in [line["product_id"] for line in info_lines]
+            lambda r: r.product_id in [line["product_id"]
+                                       for line in info_lines]
         )
         records_to_remove.unlink()
 

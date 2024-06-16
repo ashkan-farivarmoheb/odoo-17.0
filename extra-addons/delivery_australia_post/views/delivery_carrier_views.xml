@@ -11,6 +11,14 @@
                 <field name="tracking_link" widget="url" invisible="not is_automatic_shipment_mail" required="is_automatic_shipment_mail"/>
                 <field name="is_zip_required" string="Is Zip Required?" invisible="1"/>
             </xpath>
+            <xpath expr="//group[@name='Delivery Setting']/field[@name='delivery_uom']" position="replace">
+                <field name= 'delivery_uom' invisible='True' required='False'/>
+            </xpath>
+            <xpath expr="//group[@name='Delivery Setting']/field[@name='uom_id']" position="replace">
+                <field name= 'uom_id' readonly="delivery_type in ('auspost')" required="delivery_type not in ('fixed', 'base_on_rule')"/>
+            </xpath>
+
+
 
             <xpath expr="//notebook/page[@name='custom_carrier_tab']" position="inside">
                 <group col="2">
@@ -34,9 +42,6 @@
                     </group>
 
                 </group>
-                <!-- <group invisible="not australia_post_account_number">
-                    <button name="australia_post_get_account_info" string="Get Account Info" type="object" class="oe_highlight"/>
-                </group> -->
 
             </xpath>
 

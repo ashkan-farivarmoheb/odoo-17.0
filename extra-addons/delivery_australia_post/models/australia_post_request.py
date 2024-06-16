@@ -30,22 +30,10 @@ class AustraliaPostRequest(object):
             "postcode": partner.zip,
         }
 
-    def _prepare_rate_shipment_items(self, order, service_product_id):
-        _logger.debug('Preparing product details for order: %s',
-                      order.name)
-
-        return [{
-            'length': "5",
-            'width': "10",
-            'height': "1",
-            'weight': order.shipping_weight,
-            'item_reference': order.name,
-            'product_ids': [service_product_id]
-        }]
-
-    def create_rate_shipment_request(self, order, service_product_id):
+    def create_rate_shipment_request(self, carrier, order):
         _logger.debug('Preparing rate shipment data for order: %s',
                       order.name)
+
         return {
             "rateId": order.name,
             "source": self._partner_to_shipping_data(
@@ -56,7 +44,7 @@ class AustraliaPostRequest(object):
                 order.partner_shipping_id
             ),
             "collectionDateTime": order.expected_date,
-            "items": self._prepare_rate_shipment_items(order, service_product_id),
+            "items": AustraliaPostHelper.map_rate_shipment_items(carrier,order),
             "currency": order.currency_id.name,
         }
 

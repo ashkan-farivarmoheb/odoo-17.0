@@ -23,10 +23,11 @@ class QuantPackage(models.Model):
     )
     item_id = fields.Char(string="Item Id", size=256)
     picking_id = fields.Many2one("stock.picking", string="Picking")
+    carrier_id = fields.Many2one(
+        'delivery.carrier', string="Carrier", related='picking_id.carrier_id')
     authority_leave = fields.Boolean(
         string="Authority to Leave",
         help="Allow delivery without recipient signature.",
-        compute='_compute_authority_leave',
         store=True,
         readonly=False
     )
@@ -34,32 +35,10 @@ class QuantPackage(models.Model):
     allow_part_delivery = fields.Boolean(
         string="Allow Partial Delivery",
         help="Permit the delivery of orders in multiple shipments.",
-        compute='_compute_allow_part_delivery',
         store=True,
         readonly=False
     )
 
-    @api.depends('picking_id.carrier_id')
-    def _compute_allow_part_delivery(self):
-        for package in self:
-            _logger.debug('_compute_allow_part_delivery %s',
-                          package.allow_part_delivery)
-            if not package.allow_part_delivery:
-                if package.picking_id.carrier_id:
-                    package.allow_part_delivery = package.picking_id.carrier_id.allow_part_delivery
-                else:
-                    package.allow_part_delivery = False
-
-    @api.depends('picking_id.carrier_id')
-    def _compute_authority_leave(self):
-        for package in self:
-            _logger.debug('_compute_authority_leave %s',
-                          package.authority_leave)
-            if not package.authority_leave:
-                if package.picking_id.carrier_id:
-                    package.authority_leave = package.picking_id.carrier_id.authority_leave
-                else:
-                    package.authority_leave = False
     _australia_post_repository_instance = None
 
     @classmethod
@@ -69,15 +48,6 @@ class QuantPackage(models.Model):
                 AustraliaPostRepository.get_instance()
             )
         return cls._australia_post_repository_instance
-
-    _australia_post_request_instance = None
-
-    @classmethod
-    def _get_australia_post_request(cls):
-        """Retrieve or create an instance of AustraliaPostRequest with order and carrier details."""
-        if cls._australia_post_request_instance is None:
-            cls._australia_post_request_instance = AustraliaPostRequest.get_instance()
-        return cls._australia_post_request_instance
 
     def open_website_url(self):
         """Open website for parcel tracking.
@@ -105,6 +75,14 @@ class QuantPackage(models.Model):
         return client_action
 
     def cancel_item(self):
+        self.ensure_one()
+        if not self.picking_id.carrier_id.void_shipment:
+            msg = 'Void Shipment for package %s not allowed, please contact your Admin to enable the  Void Shipment for %s.' % (
+                self.name, self.picking_id.carrier_id.name)
+            self.picking_id.message_post(
+                body=msg, subject="Not allowed to Void the Shipment.")
+            return self.picking_id.carrier_id._shipping_genrated_message(msg)
+
         if self.tracking_no and self.picking_id.carrier_id.delivery_type == "auspost":
             _logger.debug("cancel_item")
             try:
