@@ -18,86 +18,92 @@
                 <section class="o_cc5 mega-menu">
                     <div class="container">
                         <div class="row py-5">
-                            <!-- First two columns: Empty space -->
-                            <div class="col-lg-2"></div>
-                            <div class="col-lg-2"></div>
-
-                            <!-- SOLUTIONS Column -->
-                            <div class="col-lg-3">
-                                <aside>
-                                    <h2>SOLUTIONS</h2>
-                                    <p>Streamline everyday management of your operation - no matter what industry you're in - with Steersman’s suite of high-performance business applications for SMBs.</p>
-                                </aside>
-                            </div>
-
-                            <!-- First Rooms for Rent Column -->
-                            <div class="col-lg-3">
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent1</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image2" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent2</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image3" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent3</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image4" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent4</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image5" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent5</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Second Rooms for Rent Column -->
-                            <div class="col-lg-3">
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent6</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image2" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent7</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image3" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent8</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image4" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent9</span>
-                                    </a>
-                                </div>
-                                <div class="pb-2 my-2 border-bottom">
-                                    <a href="/" class="link-with-image h4">
-                                        <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image5" class="link-image"/>
-                                        <span class="link-text">Rooms for Rent10</span>
-                                    </a>
+                            <!-- Blank Space: Takes 4 columns (2/5 of the total 12) -->
+                            <div class="col-lg-4"></div>
+                        
+                            <!-- Content: Takes 8 columns (3/5 of the total 12) -->
+                            <div class="col-lg-8">
+                                <div class="row">
+                                    <!-- SOLUTIONS Column: Takes 4 columns -->
+                                    <div class="col-lg-4">
+                                        <aside>
+                                            <h2 class="my-2">SOLUTIONS</h2>
+                                            <p class="my-1">Streamline everyday management of your operation - no matter what industry you're in - with Steersman’s suite of high-performance business applications for SMBs.</p>
+                                        </aside>
+                                    </div>
+                        
+                                    <!-- First Rooms for Rent Column: Takes 4 columns -->
+                                    <div class="col-lg-4">
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent1</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image2" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent2</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image3" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent3</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image4" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent4</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image5" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent5</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                        
+                                    <!-- Second Rooms for Rent Column: Takes 4 columns -->
+                                    <div class="col-lg-4">
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent6</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image2" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent7</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image3" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent8</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image4" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent9</span>
+                                            </a>
+                                        </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image5" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent10</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
+                        
                     </div>
                 </section>
 

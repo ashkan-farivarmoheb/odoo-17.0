@@ -9,15 +9,15 @@
   /* Solutions Text Styling */
   h2 {
     color: $color-black !important; /* Text color */
-    font-size: $font-size-h2; /* Ensure this variable is defined */
-    margin-bottom: 10px;
+    font-size: 32px; /* Ensure this variable is defined */
+
   }
 
   p {
     color: $color-black; /* Text color */
-    font-size: $font-size-text; /* Ensure this variable is defined */
+    font-size: $font-size-h4; /* Ensure this variable is defined */
     text-transform: none; /* Maintain original case */
-    margin-bottom: 20px;
+
   }
 
   /* Link with Image */
@@ -64,3 +64,4 @@
     border-bottom: 1px solid $color-black; /* Optional: make border black */
   }
 }
+
