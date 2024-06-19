@@ -1,78 +1,140 @@
-.top-nav{
-    list-style-type:none;
+.top-nav {
+  list-style-type: none;
 }
-.header-top{
-    color: $color-black;
-    margin-top: 25px;
-    margin-bottom: 10px;
-    font-size: $font-size-text;
-    font-weight: 300;
-        &-wrap{
-            display: flex;
-            justify-content: space-between;
+.header-top {
+  color: $color-black;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: $font-size-text;
+  font-weight: 300;
+  &-wrap {
+    display: flex;
+    justify-content: space-between;
 
-            @media screen and (max-width:768px){
-                flex-direction: column;
-                align-items: center;
-            
-            }
-            
-           
-        }
-    .info{
-        a{
-            color: $color-grey;
-            &:hover{
-                color:$color-black;
-                text-decoration: none;
-            }
-        }
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
     }
-
-    ul{
-        @media screen and (max-width:768px){
-           padding-left: 0px;
-        }
+  }
+  .info {
+    a {
+      color: $color-grey;
+      &:hover {
+        color: $color-black;
+        text-decoration: none;
+      }
     }
-    li{
-        cursor: pointer;
-        margin-right: 12px;
-        a{
-            color: $color-black;
-            &:hover{
-                color:$color-grey;
-                text-decoration: none;
-            }
-        }
+  }
 
-
+  ul {
+    @media screen and (max-width: 768px) {
+      padding-left: 0px;
     }
+  }
+  li {
+    cursor: pointer;
+    margin-right: 12px;
+    a {
+      color: $color-black;
+      &:hover {
+        color: $color-grey;
+        text-decoration: none;
+      }
+    }
+  }
 }
 
-.navbar-nav{
-    font-weight: 500;
-    text-transform: uppercase;
-    color: $color-black !important;
+.navbar-nav {
+  font-weight: 500;
+  text-transform: uppercase;
+  color: $color-black !important;
+  height: 70px; // Fixed height for the navbar
+  display: flex;
+  align-items: center; // Vertically centers the items within the navbar
 }
 
-.navbar-brand  img{
-    width: 100%;
-    max-width: 100px;
+.navbar-brand img {
+  width: 100%;
+  max-width: 100px;
 }
 
 .icons-nav {
-    &.right{
-    @media screen and (max-width:992px) {
-        display: none;
+  &.right {
+    @media screen and (max-width: 992px) {
+      display: none;
     }
-}
-ul{
+  }
+
+  ul {
     display: flex;
-    list-style:none ;
-}
+    list-style: none;
+  }
 }
 
-.icons-nav img{
-    width:100%;
-max-width: 24px;
+.icons-nav img {
+  width: 100%;
+  max-width: 24px;
+}
+
+.nav-item .nav-link {
+  text-decoration: none;
+  position: relative; // Necessary for ::after to be positioned relative to this element
+  color: $color-primary !important; // Apply primary color to text
+  display: inline-block; // Ensure it only takes up the necessary space
+  padding: 0; // Remove all padding
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; // Position the underline just below the text
+    left: 0;
+    width: 0; // Start with no width
+    height: 2px; // Set the height of the underline
+    background-color: $color-thirdly; // Set the underline color to the third color
+    transition: width 0.3s ease-in-out; // Smooth transition for the width
+    box-shadow: none; // Remove any shadow
+    text-shadow: none; // Remove any text shadow
+    border: none; // Remove any border
+    outline: none; // Remove any outline
+  }
+
+  &:hover::after {
+    width: 100%; // Expand the underline to the full width on hover
+  }
+}
+
+.nav-item.dropdown .nav-link {
+  position: relative; // Necessary for ::after to be positioned relative to this element
+  color: $color-primary !important; // Apply primary color to text
+  display: inline-block; // Ensure it only takes up the necessary space
+  padding: 0; // Remove all padding
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; // Position the underline just below the text
+    left: 0;
+    width: 0; // Start with no width
+    height: 2px; // Set the height of the underline
+    background-color: $color-thirdly; // Set the underline color to the third color
+    transition: width 0.3s ease-in-out; // Smooth transition for the width
+    box-shadow: none; // Remove any shadow
+    text-shadow: none; // Remove any text shadow
+    border: none; // Remove any border
+    outline: none; // Remove any outline
+  }
+
+  &:hover::after {
+    width: 100%; // Expand the underline to the full width on hover
+  }
+}
+
+.dropdown-menu.o_mega_menu {
+  top: 86px !important; // Fixed value, adjust as per the actual header height
+  width: 100%; // Ensure it covers the full width of the container
+  position: absolute; // Ensure it is positioned relative to the containing element
+  left: 0; // Align to the left edge of the container
+  z-index: 1000; // Ensure it is above other content
+  background-color: #fff; // Background color
+  transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
 }
