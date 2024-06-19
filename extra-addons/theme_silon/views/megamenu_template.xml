@@ -13,7 +13,7 @@
             <field name="name">Solutions</field>
             <field name="url">/Solutions</field>
             <field name="parent_id" ref="website.main_menu"/>
-            <field name="sequence" type="int">15</field>
+            <field name="sequence" type="int">25</field>
             <field name="is_mega_menu">True</field>
             <field name="mega_menu_content" type="html">
                 <section class="o_cc5 mega-menu">
@@ -76,95 +76,95 @@
                             </div>
                         </div>
                         <!-- Horizontal Separator -->
-                        <hr class="full-width-separator">
+                        <hr class="full-width-separator"/>
 
-                            <div class="container-fluid row py-5">
-                                <a href="/" class="see_all_link h4">
-                                    <span class="see_all_link-text">Rooms for Rent1</span>
-                                </a>
-                            </div>
+                        <div class="container-fluid row py-5">
+                            <a href="/" class="see_all_link h4">
+                                <span class="see_all_link-text">Rooms for Rent1</span>
+                            </a>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
 
 
 
-                </field>
-            </record>
+            </field>
+        </record>
+        <record id="menu_rent" model="website.menu">
+            <field name="name">Solutions2</field>
+            <field name="url">/Solutions2</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">16</field>
+            <field name="is_mega_menu">True</field>
+            <field name="mega_menu_content" type="html">
+                <section class="o_cc5 mega-menu">
+                    <div class="container-fluid">
+                        <div class="row py-5">
+                            <!-- Blank Space: Takes 3 columns on large screens only -->
+                            <div class="col-lg-3 d-none d-lg-block"></div>
 
-            <record id="menu_rent" model="website.menu">
-                <field name="name">Solutions2</field>
-                <field name="url">/Solutions2</field>
-                <field name="parent_id" ref="website.main_menu"/>
-                <field name="sequence" type="int">16</field>
-                <field name="is_mega_menu">True</field>
-                <field name="mega_menu_content" type="html">
-                    <section class="o_cc5 mega-menu">
-                        <div class="container-fluid">
-                            <div class="row py-5">
-                                <!-- Blank Space: Takes 3 columns on large screens only -->
-                                <div class="col-lg-3 d-none d-lg-block"></div>
+                            <!-- Content: Takes full width on screens smaller than large (lg) -->
+                            <div class="col-lg-9 col-12">
+                                <div class="row">
+                                    <!-- SOLUTIONS Column -->
+                                    <div class="col-lg-4 col-md-6 col-12 solutions-column">
+                                        <aside>
+                                            <h2 class="my-4">SOLUTIONS</h2>
+                                            <p class="my-2 solutions-description">Streamline everyday management of your operation - no matter what industry you're in - with Steersman’s suite of high-performance business applications for SMBs.</p>
+                                        </aside>
+                                    </div>
 
-                                <!-- Content: Takes full width on screens smaller than large (lg) -->
-                                <div class="col-lg-9 col-12">
-                                    <div class="row">
-                                        <!-- SOLUTIONS Column -->
-                                        <div class="col-lg-4 col-md-6 col-12 solutions-column">
-                                            <aside>
-                                                <h2 class="my-4">SOLUTIONS</h2>
-                                                <p class="my-2 solutions-description">Streamline everyday management of your operation - no matter what industry you're in - with Steersman’s suite of high-performance business applications for SMBs.</p>
-                                            </aside>
+                                    <!-- First Rooms for Rent Column -->
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent1</span>
+                                            </a>
                                         </div>
-
-                                        <!-- First Rooms for Rent Column -->
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="pb-2 my-2">
-                                                <a href="/" class="link-with-image h4">
-                                                    <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
-                                                    <span class="link-text">Rooms for Rent1</span>
-                                                </a>
-                                            </div>
-                                            <div class="pb-2 my-2">
-                                                <a href="/" class="link-with-image h4">
-                                                    <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
-                                                    <span class="link-text">Rooms for Rent2</span>
-                                                </a>
-                                            </div>
-                                            <div class="pb-2 my-2">
-                                                <a href="/" class="link-with-image h4">
-                                                    <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
-                                                    <span class="link-text">Rooms for Rent3</span>
-                                                </a>
-                                            </div>
-                                            <div class="pb-2 my-2">
-                                                <a href="/" class="link-with-image h4">
-                                                    <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
-                                                    <span class="link-text">Rooms for Rent4</span>
-                                                </a>
-                                            </div>
-                                            <!-- Add other items here -->
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent2</span>
+                                            </a>
                                         </div>
-
-                                        <!-- Second Rooms for Rent Column -->
-                                        <div class="col-lg-4 col-md-6 col-12">
-                                            <div class="pb-2 my-2">
-                                                <a href="/" class="link-with-image h4">
-                                                    <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
-                                                    <span class="link-text">Rooms for Rent6</span>
-                                                </a>
-                                            </div>
-                                            <!-- Add other items here -->
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent3</span>
+                                            </a>
                                         </div>
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent4</span>
+                                            </a>
+                                        </div>
+                                        <!-- Add other items here -->
+                                    </div>
+
+                                    <!-- Second Rooms for Rent Column -->
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="pb-2 my-2">
+                                            <a href="/" class="link-with-image h4">
+                                                <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg" alt="Image1" class="link-image"/>
+                                                <span class="link-text">Rooms for Rent6</span>
+                                            </a>
+                                        </div>
+                                        <!-- Add other items here -->
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </section>
 
 
 
 
-                </field>
-            </record>
-        </data>
-    </odoo>
+            </field>
+        </record>
+
+    </data>
+</odoo>
