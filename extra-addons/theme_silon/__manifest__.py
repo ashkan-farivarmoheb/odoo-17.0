@@ -19,6 +19,7 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
+
 {
     'name': 'Theme Silon',
     'version': '17.0.1.0.0',
@@ -29,7 +30,7 @@
     'company': 'Cybrosys Techno Solutions',
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
-    'depends': ['website', 'website_mass_mailing', 'website_sale_wishlist'],
+    'depends': ['web', 'website', 'website_mass_mailing', 'website_sale_wishlist'],
     'data': [
         'data/silon_configuration_data.xml',
         'security/ir.model.access.csv',
@@ -50,7 +51,8 @@
         'views/cart_templates.xml',
         'views/product_templates.xml',
         'views/products_templates.xml',
-        'views/layout_templates.xml'
+        'views/layout_templates.xml',
+      
     ],
     'assets': {
         'web.assets_frontend': [
@@ -79,11 +81,12 @@
             'theme_silon/static/src/js/most_popular.js',
             'theme_silon/static/src/js/featured_product.js',
             'theme_silon/static/src/js/trending.js',
+            'theme_silon/static/src/js/navbar_scroll.js',
         ],
     },
     'images': [
         'static/description/banner.png',
-        'static/description/theme_screenshot.png'
+        'static/description/theme_screenshot.png',
     ],
     'license': 'LGPL-3',
     'installable': True,

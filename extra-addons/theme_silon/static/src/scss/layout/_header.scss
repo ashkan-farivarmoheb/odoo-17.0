@@ -1,12 +1,14 @@
 .top-nav {
   list-style-type: none;
 }
+
 .header-top {
   color: $color-black;
   margin-top: 25px;
   margin-bottom: 10px;
   font-size: $font-size-text;
   font-weight: 300;
+
   &-wrap {
     display: flex;
     justify-content: space-between;
@@ -16,9 +18,11 @@
       align-items: center;
     }
   }
+
   .info {
     a {
       color: $color-grey;
+
       &:hover {
         color: $color-black;
         text-decoration: none;
@@ -31,17 +35,46 @@
       padding-left: 0px;
     }
   }
+
   li {
     cursor: pointer;
     margin-right: 12px;
+
     a {
       color: $color-black;
+
       &:hover {
         color: $color-grey;
         text-decoration: none;
       }
     }
   }
+}
+
+
+/* Full-page class for body */
+main.full-page {
+  margin: 0;
+  padding: 0;
+  height: 200vh; /* Adjust height for content */
+  overflow: auto; /* Ensure main tag can scroll */
+}
+
+/* Navbar styles */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  transition: background-color 0.3s ease;
+  background-color: transparent; /* Initial background is transparent */
+  border-bottom: 1px solid transparent; /* Add border to differentiate */
+}
+
+/* Change background when scrolled */
+main.scrolled .navbar {
+  background-color: white; /* Change to white when scrolled */
+  border-bottom: 1px solid #ccc; /* Add a bottom border */
 }
 
 .navbar-nav {
@@ -51,6 +84,7 @@
   height: 70px; // Fixed height for the navbar
   display: flex;
   align-items: center; // Vertically centers the items within the navbar
+
 }
 
 .navbar-brand img {
@@ -129,8 +163,9 @@
   }
 }
 
+
 .dropdown-menu.o_mega_menu {
-  top: 86px !important; // Fixed value, adjust as per the actual header height
+  top: 100% !important; // Fixed value, adjust as per the actual header height
   width: 100%; // Ensure it covers the full width of the container
   position: absolute; // Ensure it is positioned relative to the containing element
   left: 0; // Align to the left edge of the container
@@ -138,3 +173,4 @@
   background-color: #fff; // Background color
   transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
 }
+

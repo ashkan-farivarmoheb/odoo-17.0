@@ -15,6 +15,11 @@
                           rel="stylesheet"/>
                     <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;display=swap"
                           rel="stylesheet"/>
+
+                    <!-- Call to include assets for the frontend -->
+                    <t t-call-assets="web.assets_frontend"/>
+                    <script type="text/javascript" src="/theme_silon/static/src/js/navbar_scroll.js"></script>
+
                 </head>
                 <body>
                     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -34,6 +39,8 @@
                         1));
                         });
                     </script>
+                    <script type="text/javascript" src="/theme_silon/static/src/js/navbar_scroll.js"/>
+
                 </body>
             </html>
         </xpath>
