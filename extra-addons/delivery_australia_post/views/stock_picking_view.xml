@@ -7,7 +7,9 @@
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
                 <xpath expr="/form/header/button[last()]" position="after">
+                    <field name="shipment_id" invisible="True" />
                     <button name="auto_shipment_confirm_mail" string="Email Shipment Confirmation" type="object" icon="fa-envelope-o" class="oe_highlight oe_stat_button" invisible="not carrier_id or not carrier_tracking_ref" help="Click to send a shipment confirmation email to the customer."/>
+                    <button name="download_labels" string="Download Labels" type="object" class="oe_highlight" invisible="(not carrier_id and not carrier_id.delivery_type in ('auspost') ) or not shipment_id"/>
                 </xpath>
                 <xpath expr="//field[@name='label_genrated']" position="after">
                     <field name="is_automatic_shipment_mail" string="Automatic Send Shipment Mail" invisible="not carrier_id and not carrier_id.delivery_type in ('auspost') "/>

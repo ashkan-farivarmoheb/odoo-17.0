@@ -3,9 +3,6 @@ from .australia_post_request import AustraliaPostRequest
 from odoo.exceptions import UserError
 from odoo import api, _, tools
 from odoo import fields, models
-from odoo import http
-from odoo.http import request, content_disposition
-import requests
 import logging
 import os
 import base64
@@ -151,18 +148,6 @@ class StockPickingBatchAustraliaPost(models.Model):
         }
 
         return [label_attachment]
-
-    def label_action_report(self, label_response):
-        if len(label_response.get('data').get('labels')) > 0:
-            url = label_response.get('data').get('labels')[0].get('url')
-
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            return [base64.b64encode(response.content).decode('utf-8')]
-
-        except requests.RequestException as e:
-            return request.not_found()
 
     @api.onchange('carrier_id')
     def _onchange_carrier_id(self):
@@ -334,6 +319,7 @@ class StockPickingBatchAustraliaPost(models.Model):
             lambda x: x.picking_type_code == "outgoing"
                       and x.state == "done"
                       and x.carrier_id
+                      and x.carrier_id.delivery_type == "auspost"
                       and x.shipment_id
         )
 
@@ -345,22 +331,22 @@ class StockPickingBatchAustraliaPost(models.Model):
             self._get_australia_post_repository().create_labels(carrier.read()[0], request)
             for carrier, requests in requests.items() for request in requests]
 
-        zip_file_name, zip_path = self.create_zipfile_with_path(data_dir, labels_dir)
+        zip_file_name, zip_path = AustraliaPostHelper.create_zipfile_with_path(data_dir, labels_dir, self.name)
         try:
             with zipfile.ZipFile(zip_path, "w") as zipf:
                 seq = 0
                 for response in responses:
                     seq += 1
-                    report_data = self.label_action_report(response)
+                    report_data = AustraliaPostHelper.label_action_report(response)
                     if not report_data:
                         continue
-                    pdf_filename, pdf_path = self.create_pdf_with_path(labels_dir, report_data, seq)
+                    pdf_filename, pdf_path = AustraliaPostHelper.create_pdf_with_path(labels_dir, report_data, self.name, seq)
                     # Add the PDF file to the ZIP file
                     zipf.write(pdf_path, pdf_filename)
                     # Remove the PDF file after adding it to the ZIP
                     os.remove(pdf_path)
 
-            attachment = self.create_zipfile_attachment(zip_file_name, zip_path)
+            attachment = self._create_zipfile_attachment(zip_file_name, zip_path)
 
             return {
                 "type": "ir.actions.act_url",
@@ -378,48 +364,6 @@ class StockPickingBatchAustraliaPost(models.Model):
             # Cleanup the pdf file
             if os.path.exists(pdf_path):
                 shutil.rmtree(pdf_path)
-
-    def create_zipfile_attachment(self, zip_file_name, zip_path):
-        # Read and encode the ZIP file
-        with open(zip_path, "rb") as f:
-            zip_data = base64.b64encode(f.read())
-        _logger.debug(f"zip_data: {zip_data}")
-        # Create an attachment for the ZIP file
-        return  self.env["ir.attachment"].create(
-            {
-                "name": "Wave - %s.zip" % (zip_file_name or ""),
-                "store_fname": "Wave - %s.zip" % (zip_file_name or ""),
-                "type": "binary",
-                "datas": zip_data or "",
-                "mimetype": "application/zip",
-                "res_model": "stock.picking.batch",
-                "res_id": self.id,
-                "res_name": self.name,
-            }
-        )
-
-    def create_zipfile_with_path(self, data_dir, labels_dir):
-        zip_dir = Path(data_dir, "tmp", "label_zip")
-        zip_dir.mkdir(parents=True, exist_ok=True)
-        zip_file_name = "%s.zip" % (
-            self.name.replace("/", "_") if self.name else "Shipping_Labels"
-        )
-        zip_path = zip_dir / zip_file_name
-        _logger.debug("zip_path %s zip_file_name %s file_path %s labels_dir %s",
-                      zip_path, zip_file_name, labels_dir, labels_dir)
-        return zip_file_name, zip_path
-
-    def create_pdf_with_path(self, labels_dir, report_data, seq):
-        pdf_filename = "%s_%s.%s" % (
-            seq,
-            self.name.replace("/", "_"),
-            'pdf',
-        )
-        pdf_path = labels_dir / pdf_filename
-        pdf_content = base64.b64decode(report_data[0])
-        with open(pdf_path, "wb") as f:
-            f.write(pdf_content)
-        return pdf_filename, pdf_path
 
     def download_delivery_slip(self):
         """
@@ -560,3 +504,20 @@ class StockPickingBatchAustraliaPost(models.Model):
             for file_path in files_to_append:
                 if os.path.exists(file_path):
                     os.remove(file_path)
+    def _create_zipfile_attachment(self, zip_file_name, zip_path):
+        # Read and encode the ZIP file
+        with open(zip_path, "rb") as f:
+            zip_data = base64.b64encode(f.read())
+        # Create an attachment for the ZIP file
+        return self.env["ir.attachment"].create(
+            {
+                "name": "Wave - %s.zip" % (zip_file_name or ""),
+                "store_fname": "Wave - %s.zip" % (zip_file_name or ""),
+                "type": "binary",
+                "datas": zip_data or "",
+                "mimetype": "application/zip",
+                "res_model": "stock.picking.batch",
+                "res_id": self.id,
+                "res_name": self.name,
+            }
+        )

@@ -102,6 +102,9 @@ class AustraliaPostRequest(object):
         }
         return shipment_request
 
+    def create_post_labels_request(self, picking):
+        return self.create_post_labels_batch_request([picking])
+
     def create_post_labels_batch_request(self, pickings):
         packages = [package_id for picking in pickings for package_id in picking.package_ids]
         group_by_carrier = self._group_by_carrier(packages)
