@@ -1,18 +1,30 @@
 from .australia_post_repository import AustraliaPostRepository
 from .australia_post_request import AustraliaPostRequest
+from .australia_post_helper import AustraliaPostHelper
 
 import json
 from odoo.exceptions import ValidationError
-from odoo import fields, models, api, _
+from odoo import fields, models, api, _, tools
 import logging
 from odoo.exceptions import UserError
 import ast
+from pathlib import Path
+import os
+import shutil
+import zipfile
+import base64
+
 
 _logger = logging.getLogger(__name__)
 
+data_dir = tools.config.get("data_dir")
 
 class StockPickingAustraliaPost(models.Model):
     _inherit = "stock.picking"
+
+    DOWNLOAD_LABEL_MESSAGE = ("Delivery label ZIP files have been created and downloaded for Batch Transfer %s. To see "
+                              "the tracking numbers, check the ZIP file or the stock picking/package.")
+
     shipment_id = fields.Char(string="Shipment Id", size=256)
     is_shipment_confirmation_send = fields.Boolean(
         "Shipment Confirmation Send")
@@ -402,3 +414,78 @@ class StockPickingAustraliaPost(models.Model):
         # override this method for your carrier if you always have a unique
         # tracking per picking
         return True
+
+    def download_labels(self):
+        """
+        Package all labels for the pickings in the batch into a ZIP file.
+        @return: ZIP file containing all labels.
+        """
+        self.ensure_one()
+        if not data_dir:
+            raise ValueError(
+                "The 'data_dir' configuration value is not set in Odoo.")
+
+        # Define file path using the `data_dir`
+        labels_dir = Path(data_dir, "tmp", "labels")
+        labels_dir.mkdir(parents=True, exist_ok=True)
+        if self.picking_type_code != "outgoing" or self.state != "done" or not self.carrier_id or self.carrier_id.delivery_type != "auspost" or not self.shipment_id:
+            raise ValueError(
+                "The picking is not valid to download labels")
+
+        requests = self._get_australia_post_request().create_post_labels_request(self)
+        responses = [
+            self._get_australia_post_repository().create_labels(carrier.read()[0], request)
+            for carrier, requests in requests.items() for request in requests]
+
+        zip_file_name, zip_path = AustraliaPostHelper.create_zipfile_with_path(data_dir, labels_dir, self.name)
+        try:
+            with zipfile.ZipFile(zip_path, "w") as zipf:
+                seq = 0
+                for response in responses:
+                    seq += 1
+                    report_data = AustraliaPostHelper.label_action_report(response)
+                    if not report_data:
+                        continue
+                    pdf_filename, pdf_path = AustraliaPostHelper.create_pdf_with_path(labels_dir, report_data, self.name, seq)
+                    # Add the PDF file to the ZIP file
+                    zipf.write(pdf_path, pdf_filename)
+                    # Remove the PDF file after adding it to the ZIP
+                    os.remove(pdf_path)
+
+            attachment = self._create_zipfile_attachment(zip_file_name, zip_path)
+
+            return {
+                "type": "ir.actions.act_url",
+                "url": "/web/content/%s?filename_field=name&download=true"
+                       % (attachment.id),
+                "target": "self",
+            }
+        finally:
+            msg = _(StockPickingAustraliaPost.DOWNLOAD_LABEL_MESSAGE) % (self.name)
+            self.message_post(body=msg, subject="Attachments of tracking")
+
+            # Cleanup the ZIP file after download
+            if os.path.exists(zip_path):
+                os.remove(zip_path)
+            # Cleanup the pdf file
+            if os.path.exists(pdf_path):
+                shutil.rmtree(pdf_path)
+    def _create_zipfile_attachment(self, zip_file_name, zip_path):
+        # Read and encode the ZIP file
+        with open(zip_path, "rb") as f:
+            zip_data = base64.b64encode(f.read())
+        # Create an attachment for the ZIP file
+        return self.env["ir.attachment"].create(
+            {
+                "name": "Wave - %s.zip" % (zip_file_name or ""),
+                "store_fname": "Wave - %s.zip" % (zip_file_name or ""),
+                "type": "binary",
+                "datas": zip_data or "",
+                "mimetype": "application/zip",
+                "res_model": "stock.picking",
+                "res_id": self.id,
+                "res_name": self.name,
+            }
+        )
+
+

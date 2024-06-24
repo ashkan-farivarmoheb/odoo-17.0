@@ -1,10 +1,13 @@
 import logging
-import zipfile
-import os
 from PyPDF2 import PdfMerger
-from pathlib import Path
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import ValidationError
 from odoo import _
+from pathlib import Path
+import os
+import base64
+import zipfile
+import requests
+from odoo.http import request
 
 
 class AustraliaPostHelper:
@@ -174,3 +177,55 @@ class AustraliaPostHelper(object):
         merger.write(pdf_path)
         merger.close()
         return pdf_path
+
+    @staticmethod
+    def map_pickings_to_preferences(carrier):
+        return {
+            "type": "PRINT",
+            "format": "ZPL",
+            "metadata": {
+                "group": carrier.service_group,
+                "branded": carrier.branded,
+                "layout": carrier.label_layout_type if carrier.label_layout_type else "A4-1pp",
+                "left_offset": carrier.left_offset,
+                "top_offset": carrier.top_offset
+            }
+        }
+
+    @staticmethod
+    def create_pdf_with_path(labels_dir, report_data, name, seq):
+        pdf_filename = "%s_%s.%s" % (
+            seq,
+            name.replace("/", "_"),
+            'pdf',
+        )
+        pdf_path = labels_dir / pdf_filename
+        pdf_content = base64.b64decode(report_data[0])
+        with open(pdf_path, "wb") as f:
+            f.write(pdf_content)
+        return pdf_filename, pdf_path
+
+    @staticmethod
+    def label_action_report(label_response):
+        if len(label_response.get('data').get('labels')) > 0:
+            url = label_response.get('data').get('labels')[0].get('url')
+
+        try:
+            response = requests.get(url)
+            response.raise_for_status()
+            return [base64.b64encode(response.content).decode('utf-8')]
+
+        except requests.RequestException as e:
+            return request.not_found()
+
+    @staticmethod
+    def create_zipfile_with_path(data_dir, labels_dir, name):
+        zip_dir = Path(data_dir, "tmp", "label_zip")
+        zip_dir.mkdir(parents=True, exist_ok=True)
+        zip_file_name = "%s" % (
+            name.replace("/", "_") if name else "Shipping_Labels"
+        )
+        zip_path = zip_dir / zip_file_name
+        _logger.debug("zip_path %s zip_file_name %s file_path %s labels_dir %s",
+                      zip_path, zip_file_name, labels_dir, labels_dir)
+        return zip_file_name, zip_path
