@@ -81,17 +81,18 @@ class res_config_settings(models.TransientModel):
             'module_auspost_delivery_carrier': 'auspost_delivery_carrier',
             # Add other boolean fields and their corresponding module names here
         }
-
-        for field_name, module_name in module_mapping.items():
-            if getattr(self, field_name):
-                # Ensure the module is installed
-                module = self.env['ir.module.module'].search([('name', '=', module_name)], limit=1)
-                if module.state != 'installed':
-                    module.button_immediate_install()
-            else:
-                # Prevent uninstallation from settings
-                module = self.env['ir.module.module'].search([('name', '=', module_name)], limit=1)
-                if module.state == 'installed':
-                    # TODO: the view need to be reversed to True value
-                    raise UserError(
-                        f"You cannot uninstall the module '{module.shortdesc}' from the settings. Please uninstall it from the Apps page. ")
+        module_parent = self.env['ir.module.module'].search([('name', '=', 'odoo_shipping_service_apps')], limit=1)
+        if module_parent.state == 'installed':
+            for field_name, module_name in module_mapping.items():
+                if getattr(self, field_name):
+                    # Ensure the module is installed
+                    module = self.env['ir.module.module'].search([('name', '=', module_name)], limit=1)
+                    if module.state != 'installed':
+                        module.button_immediate_install()
+                else:
+                    # Prevent uninstallation from settings
+                    module = self.env['ir.module.module'].search([('name', '=', module_name)], limit=1)
+                    if module.state == 'installed':
+                        # TODO: the view need to be reversed to True value
+                        raise UserError(
+                            f"You cannot uninstall the module '{module.shortdesc}' from the settings. Please uninstall it from the Apps page. ")
