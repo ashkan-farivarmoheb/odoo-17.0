@@ -44,7 +44,7 @@ class AustraliaPostHelper(object):
             'valid_from': account_info['valid_from'],
             'valid_to': account_info['valid_to'],
             'account_number': account_info['account_number'],
-            'expired':  account_info['expired'],
+            'expired': account_info['expired'],
             'merchant_location_id': account_info['merchant_location_id'],
             'credit_blocked': account_info['credit_blocked']
         }
@@ -94,8 +94,8 @@ class AustraliaPostHelper(object):
                 "item_reference": package.name,
                 "product_id": picking.carrier_id.service_product_id,
                 'length': round(package.length, 1),
-                'width':  round(package.width, 1),
-                'height':  round(package.height, 1),
+                'width': round(package.width, 1),
+                'height': round(package.height, 1),
                 'weight': round(shipping_weight, 3),
                 "authority_to_leave": authority_to_leave,
                 "allow_partial_delivery": allow_partial_delivery,
@@ -167,6 +167,7 @@ class AustraliaPostHelper(object):
         :param files_to_append: List of file paths to append into the combined PDF.
         :return: Path to the created combined PDF file.
         """
+
         pdf_path = pdf_dir / pdf_file_name
         merger = PdfMerger()
 
@@ -216,7 +217,8 @@ class AustraliaPostHelper(object):
             return [base64.b64encode(response.content).decode('utf-8')]
 
         except requests.RequestException as e:
-            return request.not_found()
+            _logger.error(f"Error fetching label from {url}: {e}")
+            return None  # Return None to indicate failure
 
     @staticmethod
     def create_zipfile_with_path(data_dir, labels_dir, name):

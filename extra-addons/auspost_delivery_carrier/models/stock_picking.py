@@ -14,10 +14,10 @@ import shutil
 import zipfile
 import base64
 
-
 _logger = logging.getLogger(__name__)
 
 data_dir = tools.config.get("data_dir")
+
 
 class StockPickingAustraliaPost(models.Model):
     _inherit = "stock.picking"
@@ -38,11 +38,10 @@ class StockPickingAustraliaPost(models.Model):
     is_automatic_shipment_mail = fields.Boolean(
         "Automatic Send Shipment Confirmation Mail",
         help="True: Send the shipment confirmation email to customer "
-        "when tracking number is available.",
+             "when tracking number is available.",
         compute='_compute_is_automatic_shipment_mail',
         store=True,
         readonly=False
-
 
     )
 
@@ -97,7 +96,7 @@ class StockPickingAustraliaPost(models.Model):
         res = False
         for picking in self:
             if self.carrier_id.delivery_type in avilable_carriers_list and not len(
-                picking.package_ids
+                    picking.package_ids
             ):
                 raise UserError(
                     "Create the package first for picking %s before sending to shipper."
@@ -191,8 +190,8 @@ class StockPickingAustraliaPost(models.Model):
         )
 
         if (
-            self.carrier_id.delivery_type in ["base_on_rule", "fixed"]
-            or self.carrier_id.delivery_type not in available_carriers_list
+                self.carrier_id.delivery_type in ["base_on_rule", "fixed"]
+                or self.carrier_id.delivery_type not in available_carriers_list
         ):
             return super(StockPickingAustraliaPost, self).send_to_shipper()
 
@@ -318,9 +317,9 @@ class StockPickingAustraliaPost(models.Model):
         try:
             res = super().button_validate()
             if (
-                res
-                and self.batch_id
-                and (self.carrier_id.delivery_type in available_carriers_list)
+                    res
+                    and self.batch_id
+                    and (self.carrier_id.delivery_type in available_carriers_list)
             ):
                 _logger.debug(
                     "button_validate request batch_id= %s", self.batch_id)
@@ -366,9 +365,9 @@ class StockPickingAustraliaPost(models.Model):
         avilable_carriers_list = self.get_all_carriers()
 
         if (
-            self.carrier_id.delivery_type
-            and (self.carrier_id.delivery_type not in ["base_on_rule", "fixed"])
-            and (self.carrier_id.delivery_type in avilable_carriers_list)
+                self.carrier_id.delivery_type
+                and (self.carrier_id.delivery_type not in ["base_on_rule", "fixed"])
+                and (self.carrier_id.delivery_type in avilable_carriers_list)
         ):
             current_tracking_ref = self.carrier_tracking_ref
 
@@ -438,19 +437,20 @@ class StockPickingAustraliaPost(models.Model):
             for carrier, requests in requests.items() for request in requests]
 
         zip_file_name, zip_path = AustraliaPostHelper.create_zipfile_with_path(data_dir, labels_dir, self.name)
+        pdf_paths = []
         try:
             with zipfile.ZipFile(zip_path, "w") as zipf:
                 seq = 0
                 for response in responses:
                     seq += 1
                     report_data = AustraliaPostHelper.label_action_report(response)
-                    if not report_data:
-                        continue
-                    pdf_filename, pdf_path = AustraliaPostHelper.create_pdf_with_path(labels_dir, report_data, self.name, seq)
-                    # Add the PDF file to the ZIP file
-                    zipf.write(pdf_path, pdf_filename)
-                    # Remove the PDF file after adding it to the ZIP
-                    os.remove(pdf_path)
+                    if report_data:
+                        pdf_filename, pdf_path = AustraliaPostHelper.create_pdf_with_path(labels_dir, report_data,
+                                                                                          self.name, seq)
+                        # Add the PDF file to the ZIP file
+                        zipf.write(pdf_path, pdf_filename)
+                        # Remove the PDF file after adding it to the ZIP
+                        os.remove(pdf_path)
 
             attachment = self._create_zipfile_attachment(zip_file_name, zip_path)
 
@@ -467,9 +467,11 @@ class StockPickingAustraliaPost(models.Model):
             # Cleanup the ZIP file after download
             if os.path.exists(zip_path):
                 os.remove(zip_path)
-            # Cleanup the pdf file
-            if os.path.exists(pdf_path):
-                shutil.rmtree(pdf_path)
+            # Cleanup each created PDF file
+            for pdf_path in pdf_paths:
+                if os.path.exists(pdf_path):
+                    os.remove(pdf_path)
+
     def _create_zipfile_attachment(self, zip_file_name, zip_path):
         # Read and encode the ZIP file
         with open(zip_path, "rb") as f:
@@ -487,5 +489,3 @@ class StockPickingAustraliaPost(models.Model):
                 "res_name": self.name,
             }
         )
-
-

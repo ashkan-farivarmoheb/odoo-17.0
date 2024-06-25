@@ -15,6 +15,7 @@ _logger = logging.getLogger(__name__)
 
 data_dir = tools.config.get("data_dir")
 
+
 class StockPickingBatchAustraliaPost(models.Model):
     _inherit = "stock.picking.batch"
     order_id = fields.Char(string="Carrier Order Id", size=256)
@@ -143,7 +144,7 @@ class StockPickingBatchAustraliaPost(models.Model):
 
         pdf = report[0]
         label_attachment = {
-            'datas':  base64.b64encode(pdf).decode('utf-8'),
+            'datas': base64.b64encode(pdf).decode('utf-8'),
             'name': 'picking_report_%s.pdf' % picking.name.replace("/", "_")
         }
 
@@ -184,9 +185,9 @@ class StockPickingBatchAustraliaPost(models.Model):
         # Filter pickings with labels that are outgoing and done
         pickings = self.picking_ids.filtered(
             lambda x: x.picking_type_code == "outgoing"
-            and x.state == "done"
-            and x.carrier_id
-            and x.carrier_tracking_ref
+                      and x.state == "done"
+                      and x.carrier_id
+                      and x.carrier_tracking_ref
         ).sorted(key=lambda x: x.id)
 
         # Raise an error if no pickings are found
@@ -332,19 +333,21 @@ class StockPickingBatchAustraliaPost(models.Model):
             for carrier, requests in requests.items() for request in requests]
 
         zip_file_name, zip_path = AustraliaPostHelper.create_zipfile_with_path(data_dir, labels_dir, self.name)
+        pdf_paths = []
+
         try:
             with zipfile.ZipFile(zip_path, "w") as zipf:
                 seq = 0
                 for response in responses:
                     seq += 1
                     report_data = AustraliaPostHelper.label_action_report(response)
-                    if not report_data:
-                        continue
-                    pdf_filename, pdf_path = AustraliaPostHelper.create_pdf_with_path(labels_dir, report_data, self.name, seq)
-                    # Add the PDF file to the ZIP file
-                    zipf.write(pdf_path, pdf_filename)
-                    # Remove the PDF file after adding it to the ZIP
-                    os.remove(pdf_path)
+                    if report_data:
+                        pdf_filename, pdf_path = AustraliaPostHelper.create_pdf_with_path(labels_dir, report_data,
+                                                                                          self.name, seq)
+                        # Add the PDF file to the ZIP file
+                        zipf.write(pdf_path, pdf_filename)
+                        # Remove the PDF file after adding it to the ZIP
+                        os.remove(pdf_path)
 
             attachment = self._create_zipfile_attachment(zip_file_name, zip_path)
 
@@ -362,8 +365,9 @@ class StockPickingBatchAustraliaPost(models.Model):
             if os.path.exists(zip_path):
                 os.remove(zip_path)
             # Cleanup the pdf file
-            if os.path.exists(pdf_path):
-                shutil.rmtree(pdf_path)
+            for pdf_path in pdf_paths:
+                if os.path.exists(pdf_path):
+                    os.remove(pdf_path)
 
     def download_delivery_slip(self):
         """
@@ -382,9 +386,9 @@ class StockPickingBatchAustraliaPost(models.Model):
         # Filter pickings with labels that are outgoing and done
         pickings = self.picking_ids.filtered(
             lambda x: x.picking_type_code == "outgoing"
-            and x.state == "done"
-            and x.carrier_id
-            and x.carrier_tracking_ref
+                      and x.state == "done"
+                      and x.carrier_id
+                      and x.carrier_tracking_ref
         ).sorted(key=lambda x: x.id)
 
         # Raise an error if no pickings are found
@@ -485,8 +489,9 @@ class StockPickingBatchAustraliaPost(models.Model):
             }
         finally:
             # Log a message about the download
-            msg = _("Delivery slip PDF files have been created and downloaded for Batch Transfer %s. To see the tracking numbers, check the PDF file or the stock picking/package.") % (
-                self.name)
+            msg = _(
+                "Delivery slip PDF files have been created and downloaded for Batch Transfer %s. To see the tracking numbers, check the PDF file or the stock picking/package.") % (
+                      self.name)
             self.message_post(
                 body=msg,
                 subject="Attachments of tracking",
@@ -504,6 +509,7 @@ class StockPickingBatchAustraliaPost(models.Model):
             for file_path in files_to_append:
                 if os.path.exists(file_path):
                     os.remove(file_path)
+
     def _create_zipfile_attachment(self, zip_file_name, zip_path):
         # Read and encode the ZIP file
         with open(zip_path, "rb") as f:
