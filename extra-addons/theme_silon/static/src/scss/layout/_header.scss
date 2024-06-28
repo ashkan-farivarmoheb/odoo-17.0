@@ -67,15 +67,80 @@ main.full-page {
   width: 100%;
   z-index: 100;
   transition: background-color 0.3s ease;
-  background-color: transparent; /* Initial background is transparent */
   border-bottom: 1px solid transparent; /* Add border to differentiate */
+  .btn_cta {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
+/* Change background when not scrolled */
+.o_header_standard.o_top_fixed_element {
+  .navbar {
+    background-color: transparent; /* Change to white when scrolled */
+    &:hover {
+      background-color: $color-white !important;
+
+      .nav-item .nav-link {
+        color: $color-primary !important; // Apply $color-white color to text
+
+      }
+
+      .nav-item.dropdown .nav-link {
+        color: $color-primary !important; // Apply $color-white color to text
+
+      }
+
+      .btn_cta {
+        background-color: transparent !important;
+        color: $color-primary !important;
+        border: 2px solid $color-primary !important;
+      }
+    }
+
+    .btn_cta {
+      background-color: transparent !important;
+      color: $color-white !important;
+      border: 2px solid $color-white !important;
+
+    }
+  }
+
+  .nav-item .nav-link {
+    color: $color-white !important; // Apply $color-white color to text
+
+  }
+
+  .nav-item.dropdown .nav-link {
+    color: $color-white !important; // Apply $color-white color to text
+
+  }
+
 }
 
 /* Change background when scrolled */
-main.scrolled .navbar {
-  background-color: white; /* Change to white when scrolled */
-  border-bottom: 1px solid #ccc; /* Add a bottom border */
+/* SCSS Code */
+.o_header_standard.o_header_affixed {
+  .navbar {
+    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    .btn_cta {
+      background-color: $color-white !important;
+      color: $color-primary !important;
+      border: 2px solid $color-primary !important;
+    }
+  }
+
+  .nav-item .nav-link {
+    color: $color-primary !important; // Apply primary color to text
+
+  }
+
+  .nav-item.dropdown .nav-link {
+    color: $color-primary !important; // Apply primary color to text
+
+  }
 }
+
 
 .navbar-nav {
   font-weight: 500;
@@ -113,7 +178,6 @@ main.scrolled .navbar {
 .nav-item .nav-link {
   text-decoration: none;
   position: relative; // Necessary for ::after to be positioned relative to this element
-  color: $color-primary !important; // Apply primary color to text
   display: inline-block; // Ensure it only takes up the necessary space
   padding: 0; // Remove all padding
 
@@ -139,10 +203,7 @@ main.scrolled .navbar {
 
 .nav-item.dropdown .nav-link {
   position: relative; // Necessary for ::after to be positioned relative to this element
-  color: $color-primary !important; // Apply primary color to text
   display: inline-block; // Ensure it only takes up the necessary space
-  padding: 0; // Remove all padding
-
   &::after {
     content: "";
     position: absolute;
@@ -170,7 +231,8 @@ main.scrolled .navbar {
   position: absolute; // Ensure it is positioned relative to the containing element
   left: 0; // Align to the left edge of the container
   z-index: 1000; // Ensure it is above other content
-  background-color: #fff; // Background color
+  background-color: $color-white; // Background color
   transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
 }
+
 
