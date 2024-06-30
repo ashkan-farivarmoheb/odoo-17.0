@@ -1,5 +1,5 @@
 import logging
-from PyPDF2 import PdfMerger
+from PyPDF2 import PdfFileMerger
 from odoo.exceptions import ValidationError
 from odoo import _
 from pathlib import Path
@@ -22,7 +22,7 @@ class AustraliaPostHelper:
         :return: Path to the created combined PDF file.
         """
         pdf_path = pdf_dir / pdf_file_name
-        merger = PdfMerger()
+        merger = PdfFileMerger()
 
         for file_path in files_to_append:
             if os.path.exists(file_path):
@@ -169,7 +169,7 @@ class AustraliaPostHelper(object):
         """
 
         pdf_path = pdf_dir / pdf_file_name
-        merger = PdfMerger()
+        merger = PdfFileMerger()
 
         for file_path in files_to_append:
             if os.path.exists(file_path):
