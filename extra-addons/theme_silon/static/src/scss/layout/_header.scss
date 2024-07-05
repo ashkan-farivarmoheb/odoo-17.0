@@ -75,20 +75,19 @@ main.full-page {
 }
 
 /* Change background when not scrolled */
-.o_header_standard.o_top_fixed_element {
+.o_header_standard.o_hoverable_dropdown.o_top_fixed_element {
   .navbar {
-    background-color: transparent; /* Change to white when scrolled */
+    background-color: transparent; // Initial background
+
     &:hover {
       background-color: $color-white !important;
 
       .nav-item .nav-link {
-        color: $color-primary !important; // Apply $color-white color to text
-
+        color: $color-primary !important; // Apply $color-primary color to text
       }
 
       .nav-item.dropdown .nav-link {
-        color: $color-primary !important; // Apply $color-white color to text
-
+        color: $color-primary !important; // Apply $color-primary color to text
       }
 
       .btn_cta {
@@ -102,45 +101,40 @@ main.full-page {
       background-color: transparent !important;
       color: $color-white !important;
       border: 2px solid $color-white !important;
-
     }
   }
 
   .nav-item .nav-link {
     color: $color-white !important; // Apply $color-white color to text
-
   }
 
   .nav-item.dropdown .nav-link {
     color: $color-white !important; // Apply $color-white color to text
-
   }
-
 }
 
 /* Change background when scrolled */
-/* SCSS Code */
-.o_header_standard.o_header_affixed {
+.o_header_standard.o_hoverable_dropdown.o_header_affixed,
+.o_header_standard.o_hoverable_dropdown.o_header_affixed.o_header_is_scrolled.o_top_fixed_element {
   .navbar {
-    border-bottom: 1px solid #ccc; /* Add a bottom border */
+    background-color: $color-white !important; // Change background to white
+    border-bottom: 1px solid #ccc; // Add a bottom border
+
     .btn_cta {
       background-color: $color-white !important;
       color: $color-primary !important;
       border: 2px solid $color-primary !important;
     }
-  }
 
-  .nav-item .nav-link {
-    color: $color-primary !important; // Apply primary color to text
+    .nav-item .nav-link {
+      color: $color-primary !important; // Apply $color-primary color to text
+    }
 
-  }
-
-  .nav-item.dropdown .nav-link {
-    color: $color-primary !important; // Apply primary color to text
-
+    .nav-item.dropdown .nav-link {
+      color: $color-primary !important; // Apply $color-primary color to text
+    }
   }
 }
-
 
 .navbar-nav {
   font-weight: 500;
@@ -150,6 +144,11 @@ main.full-page {
   display: flex;
   align-items: center; // Vertically centers the items within the navbar
 
+}
+
+.navbar-expand-lg {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 
 .navbar-brand img {
