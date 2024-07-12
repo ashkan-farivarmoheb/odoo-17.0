@@ -52,7 +52,7 @@
         'views/product_templates.xml',
         'views/products_templates.xml',
         'views/layout_templates.xml',
-      
+
     ],
     'assets': {
         'web.assets_frontend': [
@@ -80,9 +80,7 @@
             'theme_silon/static/src/scss/pages/_cart.scss',
             'theme_silon/static/src/js/most_popular.js',
             'theme_silon/static/src/js/featured_product.js',
-            'theme_silon/static/src/js/trending.js',
-            'theme_silon/static/src/js/navbar_scroll.js',
-        ],
+            'theme_silon/static/src/js/trending.js'],
     },
     'images': [
         'static/description/banner.png',

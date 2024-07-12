@@ -8,7 +8,6 @@
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence" type="int">25</field>
         </record>
-
         <record id="menu_solutions" model="website.menu">
             <field name="name">Solutions</field>
             <field name="url">/Solutions</field>
@@ -25,10 +24,10 @@
                             <!-- Content: Takes full width on screens smaller than large (lg) -->
                             <div class="col-lg-9 col-12">
                                 <div class="row">
-                                    <!-- SOLUTIONS Column -->
-                                    <div class="col-lg-4 col-md-6 col-12 solutions-column">
+                                    <!-- SOLUTIONS Column hide on mibole-->
+                                    <div class="col-lg-4 col-md-6 col-12 d-md-block">
                                         <aside>
-                                            <h2 class="my-4">SOLUTIONS</h2>
+                                            <h2 class="my-4 ">SOLUTIONS</h2>
                                             <p class="my-2 solutions-description">Streamline everyday management of your
                                                 operation - no matter what industry you're in - with Steersman’s suite
                                                 of high-performance business applications for SMBs.
@@ -36,7 +35,7 @@
                                         </aside>
                                     </div>
 
-                                    <!-- First Rooms for Rent Column -->
+                                    <!-- First  Column -->
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="my-2">
                                             <a href="/" class="link-with-image h3">
@@ -69,9 +68,9 @@
                                         <!-- Add other items here -->
                                     </div>
 
-                                    <!-- Second Rooms for Rent Column -->
+                                    <!-- Second  Column -->
                                     <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="pb-2 my-2">
+                                        <div class="my-2">
                                             <a href="/" class="link-with-image h3">
                                                 <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg"
                                                      alt="Image1" class="link-image"/>
@@ -83,9 +82,8 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Horizontal Separator -->
+                        <!--                        Horizontal Separator-->
                         <hr class="full-width-separator"/>
-
                         <div class="container-fluid">
                             <a href="/" class="see_all_link h5">
                                 <span class="see_all_link-text">Rooms for Rent1</span>
@@ -97,7 +95,7 @@
 
             </field>
         </record>
-        <record id="menu_menu_solutions2" model="website.menu">
+        <record id="menu_solutions2" model="website.menu">
             <field name="name">Solutions2</field>
             <field name="url">/Solutions2</field>
             <field name="parent_id" ref="website.main_menu"/>
@@ -114,9 +112,9 @@
                             <div class="col-lg-9 col-12">
                                 <div class="row">
                                     <!-- SOLUTIONS Column -->
-                                    <div class="col-lg-4 col-md-6 col-12 solutions-column">
+                                    <div class="col-lg-4 col-md-6 col-12 d-md-block">
                                         <aside>
-                                            <h2 class="my-4">SOLUTIONS</h2>
+                                            <h2 class="my-4">SOLUTIONS2</h2>
                                             <p class="my-2 solutions-description">Streamline everyday management of your
                                                 operation - no matter what industry you're in - with Steersman’s suite
                                                 of high-performance business applications for SMBs.
@@ -124,30 +122,30 @@
                                         </aside>
                                     </div>
 
-                                    <!-- First Rooms for Rent Column -->
+                                    <!-- First  Column -->
                                     <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="pb-2 my-2">
+                                        <div class="my-2">
                                             <a href="/" class="link-with-image h3">
                                                 <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg"
                                                      alt="Image1" class="link-image"/>
                                                 <span class="link-text">Rooms for Rent1</span>
                                             </a>
                                         </div>
-                                        <div class="pb-2 my-2">
+                                        <div class="my-2">
                                             <a href="/" class="link-with-image h3">
                                                 <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
+                                                     alt="Image2" class="link-image"/>
                                                 <span class="link-text">Rooms for Rent2</span>
                                             </a>
                                         </div>
-                                        <div class="pb-2 my-2">
+                                        <div class="my-2">
                                             <a href="/" class="link-with-image h3">
                                                 <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg"
                                                      alt="Image1" class="link-image"/>
                                                 <span class="link-text">Rooms for Rent3</span>
                                             </a>
                                         </div>
-                                        <div class="pb-2 my-2">
+                                        <div class="my-2">
                                             <a href="/" class="link-with-image h3">
                                                 <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg"
                                                      alt="Image1" class="link-image"/>
@@ -157,9 +155,9 @@
                                         <!-- Add other items here -->
                                     </div>
 
-                                    <!-- Second Rooms for Rent Column -->
+                                    <!-- Second  Column -->
                                     <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="pb-2 my-2">
+                                        <div class="my-2">
                                             <a href="/" class="link-with-image h3">
                                                 <img src="/theme_silon/static/src/img/icons_3/advanced-e-commerce-svg.svg"
                                                      alt="Image1" class="link-image"/>
@@ -171,6 +169,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </section>
 
@@ -178,5 +177,21 @@
             </field>
         </record>
 
+        <template id="custom_menu_button" inherit_id="website.template_header_mobile"
+                  name="Add Contact Us Button to Menu">
+            <xpath expr="//div[@id='top_menu_collapse_mobile']//ul[contains(@class,'navbar-nav')]"
+                   position="after">
+
+                <li>
+                    <section class="oe_unremovable oe_unmovable s_text_block" data-snippet="s_text_block"
+                             data-name="Text">
+                        <div class="container">
+                            <a href="/contactus" class="oe_unremovable btn btn-primary btn_cta">Contact Us</a>
+                        </div>
+                    </section>
+                </li>
+            </xpath>
+
+        </template>
     </data>
 </odoo>

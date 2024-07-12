@@ -19,10 +19,6 @@
                           rel="stylesheet"/>
 
 
-                    <!-- Call to include assets for the frontend -->
-                    <t t-call-assets="web.assets_frontend"/>
-                    <script type="text/javascript" src="/theme_silon/static/src/js/navbar_scroll.js"></script>
-
                 </head>
                 <body>
                     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
