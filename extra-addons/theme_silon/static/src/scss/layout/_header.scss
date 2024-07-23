@@ -81,13 +81,10 @@ main.full-page {
     &:hover {
       background-color: $color-white !important;
 
-      .nav-item .nav-link {
+      .nav-link {
         color: $color-primary !important; // Apply $color-primary color to text
       }
 
-      .nav-item.dropdown .nav-link {
-        color: $color-primary !important; // Apply $color-primary color to text
-      }
 
       .btn {
         background-color: transparent !important;
@@ -106,22 +103,20 @@ main.full-page {
       color: $color-white !important; // Apply $color-white color to text
     }
 
-
-    //.nav-item.dropdown .nav-link {
-    //  color: $color-white !important; // Apply $color-white color to text
-    //}
   }
 
-  .navbar-nav {
+  .nav.navbar-nav {
     font-weight: 500;
     text-transform: uppercase;
     color: $color-black !important;
     height: 70px; // Fixed height for the navbar
     display: flex;
     align-items: center; // Vertically centers the items within the navbar
+    margin-right: 0 !important;
   }
 
-  .navbar-brand img {
+
+  .navbar-brand .img {
     width: 100%;
     max-width: 100px;
   }
@@ -129,7 +124,7 @@ main.full-page {
   .icons-nav {
     &.right {
       @media screen and (max-width: 992px) {
-        display: none;
+        display: none !important;
       }
     }
 
@@ -193,15 +188,7 @@ main.full-page {
     }
   }
 
-  .dropdown-menu.o_mega_menu {
-    top: 100% !important; // Fixed value, adjust as per the actual header height
-    width: 100%; // Ensure it covers the full width of the container
-    position: absolute; // Ensure it is positioned relative to the containing element
-    left: 0; // Align to the left edge of the container
-    z-index: 1000; // Ensure it is above other content
-    background-color: $color-white; // Background color
-    //transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
-  }
+
 }
 
 /* Change background Navbar when scrolled */
@@ -225,16 +212,11 @@ main.full-page {
     .nav-link {
       color: $color-primary !important; // Apply $color-primary color to text
     }
-
-    //.nav-item.dropdown .nav-link {
-    //  color: $color-primary !important; // Apply $color-primary color to text
-    //}
   }
 }
 
 /* Mobile Navbar styles */
 .o_header_mobile.navbar {
-
   background-color: $color-primary; // Set your desired color for the mobile navbar
   .btn {
     background-color: $color-white !important;
@@ -245,4 +227,27 @@ main.full-page {
   .nav-link.btn {
     background-color: $color-white; //hamburger buton color
   }
+}
+
+@media (max-width: 992px) {
+  .nav-item {
+    border-bottom: 1px solid $color-grey; /* Add border-border to all nav-item */
+  }
+  .nav-item:first-child {
+    border-top: 1px solid $color-grey; /* Add border-top to the first nav-item */
+  }
+
+}
+
+@media (min-width: 1440px) {
+  .nav.navbar-nav {
+    margin-left: calc(100vw - 1440px) !important;
+  }
+}
+
+
+#o_main_nav.container {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
 }

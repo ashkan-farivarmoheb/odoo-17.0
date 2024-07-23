@@ -79,41 +79,22 @@
   }
 }
 
-// Media Query for 1024px width
-@media (max-width: 1024px) {
-  .mega-menu .container-fluid {
-    width: 100%;
-    padding: 0;
-  }
-
-  .mega-menu .row {
-    margin: 0;
-  }
-
-  .mega-menu .col-lg-3 {
-    display: none;
-  }
-
-  .mega-menu .col-lg-9,
-  .mega-menu .col-lg-4,
-  .mega-menu .col-md-6,
-  .mega-menu .col-12 {
-    flex: 0 0 100%;
-    max-width: 100%;
-    padding: 0;
-  }
-
-  .mega-menu .solutions-column,
-  .mega-menu .link-with-image {
-    width: 100%;
-    margin-bottom: 15px;
-  }
+.navbar-expand-lg.dropdown-menu.o_mega_menu {
+  top: 100% !important; // Fixed value, adjust as per the actual header height
+  width: 100%; // Ensure it covers the full width of the container
+  position: absolute; // Ensure it is positioned relative to the containing element
+  left: 0; // Align to the left edge of the container
+  z-index: 1000; // Ensure it is above other content
+  background-color: $color-white; // Background color
+  //transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
 }
 
 /* Add styles for the link */
 
 .see_all_link {
-
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 0;
   display: flex; /* Use Flexbox to align items within the link */
   align-items: center; /* Center items vertically */
   justify-content: center; /* Center the link horizontally */
@@ -182,6 +163,56 @@ a.see_all_link:hover {
   width: 100%;
   height: 2px; /* You can adjust the height as needed */
   background-color: $color-border;
-  border: none;
-  margin: 20px 0; /* Adjust the margin to add spacing around the separator */
+  border: 0;
 }
+
+
+// Media Query for 1024px width
+@media (max-width: 1024px) {
+  .mega-menu .container-fluid {
+    width: 100%;
+    padding: 0;
+  }
+
+  .mega-menu .row {
+    margin: 0;
+  }
+
+  .mega-menu .col-lg-3 {
+    display: none;
+  }
+
+  .mega-menu .col-lg-9,
+  .mega-menu .col-lg-4,
+  .mega-menu .col-md-6,
+  .mega-menu .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .mega-menu .solutions-column,
+  .mega-menu .link-with-image {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .dropdown-menu.o_mega_menu.show {
+    border: 0;
+    overflow: hidden;
+
+    .menu-content {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .see_all_link {
+      justify-content: left; /* Left the link horizontally */
+      padding-top: 8px;
+      padding-bottom: 8px;
+
+    }
+
+  }
+}
+
+

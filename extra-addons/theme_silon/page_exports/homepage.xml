@@ -1,0 +1,849 @@
+<t name="Homepage" t-name="website.homepage">
+    <t t-call="website.layout">
+        <t t-set="pageName" t-value="'homepage'"/>
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="s_banner o_colored_level s_parallax_no_overflow_hidden o_full_screen_height pb0 pt32"
+                     data-snippet="s_banner" data-name="Banner"
+                     style="background-color: rgb(2, 48, 61); background-image: none; position: relative;"
+                     data-scroll-background-ratio="0">
+                <div class="container-fluid">
+                    <div class="row s_nb_column_fixed o_grid_mode" data-row-count="13">
+
+
+                        <div class="o_colored_level o_grid_item g-col-lg-6 o_grid_item_image g-height-12 col-lg-6"
+                             style="z-index: 2; --grid-item-padding-x: 0px; --grid-item-padding-y: 0px; grid-area: 2 / 7 / 14 / 13;">
+                            <img src="/theme_silon/static/src/img/banner/homepage-wide-banner.svg" alt=""
+                                 class="img img-fluid o_we_custom_image me-auto float-start"
+                                 data-mimetype="image/svg+xml" data-original-id="4403"
+                                 data-original-src="/theme_silon/static/src/img/banner/homepage-wide-banner.svg"
+                                 data-mimetype-before-conversion="image/svg+xml"
+                                 style="animation-play-state: paused; transition: none 0s ease 0s; transform: translateX(-5.8%) translateY(1.2%) scaleX(1.2) scaleY(1.18); width: 100% !important;"
+                                 loading="lazy"/>
+                        </div>
+                        <div class="justify-content-center o_colored_level o_grid_item g-col-lg-7 g-height-13 col-lg-7"
+                             data-name="Box" style="z-index: 1; grid-area: 1 / 2 / 14 / 9;">
+                            <h1 class="display-3">
+                                <font class="text-o-color-4">
+                                    <strong>Transformative technology solutions that drive success for your business
+                                    </strong>
+
+                                </font>
+                                <br/>
+                            </h1>
+                            <div class="s_hr text-start pb32 pt4" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div>
+                            <p class="lead">
+                                <font class="text-o-color-4">​</font>
+                                <br/>
+                            </p>
+
+                            <p>
+                                <a class="btn btn-primary btn-lg" href="#problem" data-bs-original-title="" title="">
+                                    <span class="o_animated_text o_animate o_animate_both_scroll o_anim_flash o_visible"
+                                          style="--wanim-intensity: 100; animation-duration: 5s;">
+                                        <strong>Start Now</strong>
+                                        <span class="fa fa-angle-right ms-2"/>
+                                    </span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="s_banner pt96 pb96 o_colored_level o_full_screen_height" data-snippet="s_banner"
+                     data-name="Banner" style="background-image: none;">
+                <div class="container">
+                    <div class="row s_nb_column_fixed o_grid_mode" data-row-count="10">
+                        <div class="justify-content-center o_grid_item g-height-8 g-col-lg-5 o_colored_level col-lg-5"
+                             data-name="Box" style="z-index: 1; grid-area: 2 / 1 / 10 / 6;">
+                            <h2>Next-generation SMB technology solutions
+                                <br/>
+                            </h2>
+                            <p>Stay ahead in the ecommerce and traditional distribution sectors with a fully integrated
+                                SaaS solution designed for manufacturers, wholesalers, and retailers.&amp;nbsp;With Odoo
+                                at its core and a suite of industry-specific add-on modules, We are leading the way in
+                                setting a new standard of excellence.
+                                <br/>
+                            </p>
+                            <h1 class="display-3 o_default_snippet_text">
+
+                            </h1>
+                            <div class="s_hr text-start pb32 pt4" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div>
+                            <p>
+                                <br/>
+                            </p>
+                        </div>
+                        <div class="o_grid_item o_grid_item_image g-height-10 o_colored_level g-col-lg-5 col-lg-5"
+                             style="z-index: 2; grid-area: 1 / 8 / 11 / 13; --grid-item-padding-x:0px;">
+                            <img src="/web/image/4406-d5e94407/desktop-mobile-odoo2-png-1456x1456.webp" alt=""
+                                 class="img img-fluid mx-auto shadow rounded o_we_custom_image"
+                                 style="min-height: 1px; width: 100% !important;" data-mimetype="image/webp"
+                                 data-original-id="4404"
+                                 data-original-src="/web/image/4404-7b1d3622/desktop-mobile-odoo2-png-1456x1456.webp"
+                                 data-mimetype-before-conversion="image/webp" data-resize-width="690" data-quality="100"
+                                 loading="lazy"/>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+            <section class="s_call_to_action o_colored_level o_cc o_cc3 pb0 pt0" data-snippet="s_call_to_action"
+                     data-name="Call to Action" style="background-color: rgb(2, 48, 61); background-image: none;">
+                <div class="container">
+                    <div class="row o_grid_mode" data-row-count="2">
+                        <div class="o_colored_level o_grid_item o_draggable g-height-2 g-col-lg-8 col-lg-8"
+                             style="grid-area: 1 / 1 / 3 / 9; z-index: 1; --grid-item-padding-y:20px;">
+
+                            <h3 style="text-align: center;">Ready to get started? Request a consultation!</h3>
+                            <p>
+
+                                <br/>
+                            </p>
+                        </div>
+
+                        <div class="o_colored_level o_grid_item g-height-2 g-col-lg-3 col-lg-3"
+                             style="z-index: 2; --grid-item-padding-x:0px; grid-area: 1 / 9 / 3 / 12;">
+                            <p style="text-align: right;">
+                                <a class="btn btn-primary btn-lg" href="/contactus#top" data-bs-original-title=""
+                                   title="">LET'S CONNECT!
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="s_text_image pt32 o_colored_level pb256 o_full_screen_height" data-snippet="s_image_text"
+                     data-name="Image - Text" style="background-image: none;">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 pt16 pb16 o_colored_level o_draggable">
+                            <img src="/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg" alt=""
+                                 class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/svg+xml"
+                                 data-original-id="4420"
+                                 data-original-src="/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg"
+                                 data-mimetype-before-conversion="image/svg+xml" loading="lazy"
+                                 style="min-height: 1px;"/>
+                        </div>
+                        <div class="col-lg-6 pt16 o_colored_level pb0">
+                            <h2>Business software solutions</h2>
+                            <p>Empower your business with innovative cloud-based tools for managing operations,
+                                marketing, and sales.
+                                <br/>
+                            </p>
+                            <p>
+                                <br/>
+                            </p>
+                            <p>
+                                <span class="h5-fs"
+                                      style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);">
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">&amp;nbsp;
+                                        <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                              class="h5-fs">​
+                                            <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                                  class="h5-fs">​
+                                            </span>
+                                        </span>
+                                        <span style="background-color: var(--body-bg); color: rgb(255, 214, 99); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                              class="h5-fs"/>
+                                    </span>
+                                    Ecommerce
+                                </span>
+                                <br/>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Accounting
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Inventory and supply chains
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Retail sales
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Sales management
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Team collaboration
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Catalog management
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Online marketing
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Reporting
+                                </span>
+                            </p>
+                            <p>
+                                <span class="h5-fs"><span
+                                        style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                        class="h5-fs">&amp;nbsp;</span>Manufacturing
+                                </span>
+                            </p>
+                            <p>
+                                <br/>
+                            </p>
+                            <p style="text-align: center;">
+                                <a href="#" class="o_anim_fade_in btn btn-primary o_animate o_visible"
+                                   data-bs-original-title="" title="" style="">
+                                    <strong>Discover more</strong>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="s_text_image pt32 o_colored_level pb256 o_full_screen_height" data-snippet="s_image_text"
+                     data-name="Image - Text" style="background-image: none;">
+                <div class="container">
+                    <div class="row align-items-center">
+
+                        <div class="col-lg-6 pt16 o_colored_level pb0">
+                            <h2>Professional business services for enterprises</h2>
+                            <p>
+                                Empower your business with the assistance it needs at every growth stage from our team
+                                of ecommerce and operations specialists.&amp;nbsp;
+                                <br/>
+                            </p>
+                            <p>
+                                <br/>
+                            </p>
+                            <ol>
+                                <p>
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">Ecommerce consulting
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">Platform migrations
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">Online store development
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">Supply chain automation
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">SEO and online marketing
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">Business software training
+                                    </span>
+                                </p>
+                                <p>
+                                    <span style="background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"
+                                          class="h5-fs">Odoo support
+                                    </span>
+                                </p>
+                                <p>
+                                    <br/>
+                                </p>
+                            </ol>
+                            <p style="text-align: center;">
+                                <a href="#" class="o_anim_fade_in btn btn-primary o_animate o_visible"
+                                   data-bs-original-title="" title="" style="">
+                                    <strong>Discover more</strong>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-lg-6 pt16 pb16 o_colored_level o_draggable">
+                            <img src="/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg" alt=""
+                                 class="img img-fluid mx-auto o_we_custom_image" data-mimetype="image/svg+xml"
+                                 data-original-id="4420"
+                                 data-original-src="/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg"
+                                 data-mimetype-before-conversion="image/svg+xml" loading="lazy"
+                                 style="min-height: 1px;"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="s_three_columns pb32 o_colored_level pt72 o_cc o_cc2" data-vcss="001"
+                     data-snippet="s_three_columns" data-name="Columns"
+                     style="background-color: rgb(245, 245, 247); background-image: none;">
+                <div class="container">
+                    <div class="row d-flex align-items-stretch">
+
+
+                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                            <div class="card text-bg-white h-100" style="background-color: rgb(245, 245, 247);">
+                                <img src="/web/image/4421-c26a753e/industrial-machinery-svg.svg" alt=""
+                                     class="card-img-top img img-fluid o_we_custom_image mx-auto d-block"
+                                     data-mimetype="image/svg+xml" data-original-id="4421"
+                                     data-original-src="/web/image/4421-c26a753e/industrial-machinery-svg.svg"
+                                     data-mimetype-before-conversion="image/svg+xml"
+                                     style="width: 25% !important; min-height: 1px;" loading="lazy"/>
+                                <div class="card-body">
+                                    <h3>
+                                        <br/>
+                                    </h3>
+                                    <h3>Specialty retail</h3>
+                                    <h3 class="card-title">
+
+                                        <br/>
+                                    </h3>
+                                    <p class="card-text">Leverage .....&amp;nbsp;fully integrated PIM tool to easily
+                                        store all the attributes and product variants that make your product line
+                                        unique.
+                                    </p>
+                                    <p class="card-text">&amp;nbsp;&amp;nbsp;</p>
+                                    <p class="card-text" style="text-align: left;">
+                                        <a href="/test" class="btn btn-secondary" data-bs-original-title="" title="">
+                                            Learn More
+                                        </a>
+                                    </p>
+                                    <p class="card-text">
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                            <div class="card text-bg-white h-100" style="background-color: rgb(245, 245, 247);">
+                                <img src="/web/image/4421-c26a753e/industrial-machinery-svg.svg" alt=""
+                                     class="card-img-top img img-fluid o_we_custom_image mx-auto d-block"
+                                     data-mimetype="image/svg+xml" data-original-id="4421"
+                                     data-original-src="/web/image/4421-c26a753e/industrial-machinery-svg.svg"
+                                     data-mimetype-before-conversion="image/svg+xml"
+                                     style="width: 25% !important; min-height: 1px;" loading="lazy"/>
+                                <div class="card-body">
+                                    <h3>
+                                        <br/>
+                                    </h3>
+                                    <h3>Specialty retail</h3>
+                                    <h3 class="card-title">
+
+                                        <br/>
+                                    </h3>
+                                    <p class="card-text">Leverage .....&amp;nbsp;fully integrated PIM tool to easily
+                                        store all the attributes and product variants that make your product line
+                                        unique.
+                                    </p>
+                                    <p class="card-text">&amp;nbsp;&amp;nbsp;</p>
+                                    <p class="card-text" style="text-align: left;">
+                                        <a href="/test" class="btn btn-secondary" data-bs-original-title="" title="">
+                                            Learn More
+                                        </a>
+                                    </p>
+                                    <p class="card-text">
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                            <div class="card text-bg-white h-100" style="background-color: rgb(245, 245, 247);">
+                                <img src="/web/image/4421-c26a753e/industrial-machinery-svg.svg" alt=""
+                                     class="card-img-top img img-fluid o_we_custom_image mx-auto d-block"
+                                     data-mimetype="image/svg+xml" data-original-id="4421"
+                                     data-original-src="/web/image/4421-c26a753e/industrial-machinery-svg.svg"
+                                     data-mimetype-before-conversion="image/svg+xml"
+                                     style="width: 25% !important; min-height: 1px;" loading="lazy"/>
+                                <div class="card-body">
+                                    <h3>
+                                        <br/>
+                                    </h3>
+                                    <h3>Specialty retail</h3>
+                                    <h3 class="card-title">
+
+                                        <br/>
+                                    </h3>
+                                    <p class="card-text">Leverage .....&amp;nbsp;fully integrated PIM tool to easily
+                                        store all the attributes and product variants that make your product line
+                                        unique.
+                                    </p>
+                                    <p class="card-text">&amp;nbsp;&amp;nbsp;</p>
+                                    <p class="card-text" style="text-align: left;">
+                                        <a href="/test" class="btn btn-secondary" data-bs-original-title="" title="">
+                                            Learn More
+                                        </a>
+                                    </p>
+                                    <p class="card-text">
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="s_three_columns pb32 o_colored_level pt72 o_cc o_cc2" data-vcss="001"
+                     data-snippet="s_three_columns" data-name="Columns"
+                     style="background-color: rgb(245, 245, 247); background-image: none;">
+                <div class="container">
+                    <div class="row d-flex align-items-stretch">
+
+
+                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                            <div class="card text-bg-white h-100" style="background-color: rgb(245, 245, 247);">
+                                <img src="/web/image/4421-c26a753e/industrial-machinery-svg.svg" alt=""
+                                     class="card-img-top img img-fluid o_we_custom_image mx-auto d-block"
+                                     data-mimetype="image/svg+xml" data-original-id="4421"
+                                     data-original-src="/web/image/4421-c26a753e/industrial-machinery-svg.svg"
+                                     data-mimetype-before-conversion="image/svg+xml"
+                                     style="width: 25% !important; min-height: 1px;" loading="lazy"/>
+                                <div class="card-body">
+                                    <h3>
+                                        <br/>
+                                    </h3>
+                                    <h3>Specialty retail</h3>
+                                    <h3 class="card-title">
+
+                                        <br/>
+                                    </h3>
+                                    <p class="card-text">Leverage .....&amp;nbsp;fully integrated PIM tool to easily
+                                        store all the attributes and product variants that make your product line
+                                        unique.
+                                    </p>
+                                    <p class="card-text">&amp;nbsp;&amp;nbsp;</p>
+                                    <p class="card-text" style="text-align: left;">
+                                        <a href="/test" class="btn btn-secondary" data-bs-original-title="" title="">
+                                            Learn More
+                                        </a>
+                                    </p>
+                                    <p class="card-text">
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                            <div class="card text-bg-white h-100" style="background-color: rgb(245, 245, 247);">
+                                <img src="/web/image/4421-c26a753e/industrial-machinery-svg.svg" alt=""
+                                     class="card-img-top img img-fluid o_we_custom_image mx-auto d-block"
+                                     data-mimetype="image/svg+xml" data-original-id="4421"
+                                     data-original-src="/web/image/4421-c26a753e/industrial-machinery-svg.svg"
+                                     data-mimetype-before-conversion="image/svg+xml"
+                                     style="width: 25% !important; min-height: 1px;" loading="lazy"/>
+                                <div class="card-body">
+                                    <h3>
+                                        <br/>
+                                    </h3>
+                                    <h3>Specialty retail</h3>
+                                    <h3 class="card-title">
+
+                                        <br/>
+                                    </h3>
+                                    <p class="card-text">Leverage .....&amp;nbsp;fully integrated PIM tool to easily
+                                        store all the attributes and product variants that make your product line
+                                        unique.
+                                    </p>
+                                    <p class="card-text">&amp;nbsp;&amp;nbsp;</p>
+                                    <ul class="card-text" style="text-align: center;">
+                                        <li style="text-align: left;">
+                                            <a href="/test" class="btn btn-secondary" data-bs-original-title=""
+                                               title="">Learn More
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <p class="card-text">
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 s_col_no_bgcolor pt16 pb16">
+                            <div class="card text-bg-white h-100" style="background-color: rgb(245, 245, 247);">
+                                <img src="/web/image/4421-c26a753e/industrial-machinery-svg.svg" alt=""
+                                     class="card-img-top img img-fluid o_we_custom_image mx-auto d-block"
+                                     data-mimetype="image/svg+xml" data-original-id="4421"
+                                     data-original-src="/web/image/4421-c26a753e/industrial-machinery-svg.svg"
+                                     data-mimetype-before-conversion="image/svg+xml"
+                                     style="width: 25% !important; min-height: 1px;" loading="lazy"/>
+                                <div class="card-body">
+                                    <h3>
+                                        <br/>
+                                    </h3>
+                                    <h3>Specialty retail</h3>
+                                    <h3 class="card-title">
+
+                                        <br/>
+                                    </h3>
+                                    <p class="card-text">Leverage .....&amp;nbsp;fully integrated PIM tool to easily
+                                        store all the attributes and product variants that make your product line
+                                        unique.
+                                    </p>
+                                    <p class="card-text">&amp;nbsp;&amp;nbsp;</p>
+                                    <p>
+                                        <a href="/test" class="btn btn-secondary" data-bs-original-title="" title="">
+                                            Learn More
+                                        </a>
+                                    </p>
+                                    <p class="card-text">
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="s_banner pt96 pb96 o_colored_level" data-snippet="s_banner" data-name="Banner"
+                     style="background-image: none;">
+                <div class="container">
+                    <div class="row s_nb_column_fixed o_grid_mode" data-row-count="11">
+                        <div class="justify-content-center o_grid_item g-height-8 g-col-lg-5 col-lg-5 o_colored_level"
+                             data-name="Box" style="z-index: 1; grid-area: 2 / 1 / 10 / 6;">
+                            <h1 class="display-3 o_default_snippet_text">Sell Online.
+                                <strong class="o_default_snippet_text">Easily.</strong>
+                            </h1>
+                            <p class="lead o_default_snippet_text">This is a simple hero unit, a simple jumbotron-style
+                                component for calling extra attention to featured content or information.
+                            </p>
+                            <div class="s_hr text-start pb32 pt4" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto"/>
+                            </div>
+                            <p>
+                                <a class="btn btn-lg btn-primary o_default_snippet_text" href="/contactus">Start Now
+                                    <span class="fa fa-angle-right ms-2"/>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="o_grid_item o_grid_item_image g-col-lg-4 g-height-10 col-lg-4 o_colored_level"
+                             style="z-index: 2; grid-area: 1 / 8 / 11 / 12;">
+                            <img class="img img-fluid mx-auto shadow rounded"
+                                 src="/web/image/website.s_banner_default_image_2" alt="" loading="lazy"
+                                 data-mimetype="image/jpeg" data-original-id="4157"
+                                 data-original-src="/website/static/src/img/snippets_demo/s_banner_2.jpg"
+                                 data-mimetype-before-conversion="image/jpeg" style="min-height: 1px;"/>
+                        </div>
+                        <div class="o_grid_item o_grid_item_image g-col-lg-2 g-height-5 col-lg-2 d-lg-block d-none o_snippet_mobile_invisible o_colored_level"
+                             style="z-index: 3; grid-area: 2 / 11 / 7 / 13;" data-invisible="1">
+                            <img class="img img-fluid mx-auto shadow rounded"
+                                 src="/web/image/website.s_banner_default_image_3" alt="" loading="lazy"
+                                 data-mimetype="image/jpeg" data-original-id="4158"
+                                 data-original-src="/website/static/src/img/snippets_demo/s_banner_3.jpg"
+                                 data-mimetype-before-conversion="image/jpeg" style="min-height: 1px;"/>
+                        </div>
+                        <div class="o_grid_item o_grid_item_image g-col-lg-3 g-height-5 col-lg-3 d-lg-block d-none o_snippet_mobile_invisible o_colored_level"
+                             style="z-index: 4; grid-area: 7 / 7 / 12 / 10;" data-invisible="1">
+                            <img class="img img-fluid mx-auto shadow rounded"
+                                 src="/web/image/website.s_banner_default_image" alt="" loading="lazy"
+                                 data-mimetype="image/jpeg" data-original-id="4156"
+                                 data-original-src="/website/static/src/img/snippets_demo/s_banner.jpg"
+                                 data-mimetype-before-conversion="image/jpeg" style="min-height: 1px;"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="s_text_cover o_colored_level" data-snippet="s_text_cover" data-name="Text Cover"
+                     style="background-color: rgb(101, 67, 92); background-image: none;">
+                <div class="container">
+                    <div class="row">
+                        <div class="o_colored_level col-lg-5 pt160 pb160 px-5 o_cc o_cc4 bg-white-25 o_draggable">
+                            <h2>Odoo</h2>
+                            <p class="lead">Enhance your business operations with .... tailored software solutions,
+                                leveraging the seamless integration of Odoo's advanced technology.
+                                <br/>
+                            </p>
+                            <a class="btn btn-primary" href="/contactus" data-bs-original-title="" title="">LEARN MORE
+                                ABOUT ODOO
+                            </a>
+                        </div>
+                        <div class="o_not_editable o_colored_level pt160 pb160 col-lg-7 d-none d-md-block o_cc o_cc1 s_parallax_no_overflow_hidden o_anim_fade_in o_animate o_animate_on_scroll o_anim_from_right oe_img_bg o_bg_img_center"
+                             style="background-position: 100% 0px; background-image: url(&quot;/web/image/4422-a52ac316/support-odoo-svg-690x690.svg&quot;); background-color: rgb(101, 67, 92); animation-delay: -0.488544s; position: relative;"
+                             data-scroll-background-ratio="0" data-scroll-zone-start="0" data-scroll-zone-end="100"/>
+                    </div>
+                </div>
+            </section>
+            <section class="s_text_block pt40 o_colored_level pb0" data-snippet="s_text_block" data-name="Text"
+                     style="background-image: none;" id="problem" data-anchor="true">
+                <div class="s_allow_columns container">
+                    <p>
+                        <strong>So what would you like to do?</strong>&amp;nbsp;
+                    </p>
+                    <p>Whether you need help solving business problems or seizing growth opportunities, our consultancy
+                        services can support you.
+                        <br/>
+                    </p>
+                </div>
+            </section>
+            <section class="s_faq_collapse pt32 pb32 o_colored_level s_faq_collapse_boxed" data-snippet="s_faq_collapse"
+                     data-name="Accordion" style="background-image: none;">
+                <div class="container">
+                    <div id="myCollapse" class="accordion" role="tablist">
+
+                        <div class="card" data-name="Item">
+                            <a href="#" role="tab" data-bs-toggle="collapse" aria-expanded="false"
+                               class="card-header collapsed" data-bs-target="#myCollapseTab312087_2">IMPROVE THE
+                                EFFICIENCY OF MY FINANCIAL SYSTEMS AND INTERNAL PROCEDURES
+                            </a>
+                            <div data-bs-parent="#myCollapse" role="tabpanel" id="myCollapseTab312087_2"
+                                 class="collapse">
+                                <div class="card-body">
+                                    <div class="o_text_columns">
+                                        <div class="row">
+                                            <div class="col-6 o_colored_level">
+                                                <p class="card-text">
+                                                    <span class="o_animated_text o_animate o_visible o_anim_fade_in"
+                                                          style="animation-duration: 2s;">If you find yourself
+                                                        struggling with outdated systems and inefficient processes that
+                                                        are holding your business back, it could be the right time to
+                                                        transition to a more suitable ERP solution.
+                                                    </span>
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text"><span class="oe-tabs" style="width: 39px;"></span>​
+                                                    <a href="/" class="btn btn-primary">LEARN MORE</a>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                            <div class="col-6 o_colored_level">
+                                                <p>
+                                                    <img src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         alt="" class="img img-fluid o_we_custom_image" loading="lazy"
+                                                         data-mimetype="image/svg+xml" data-original-id="4422"
+                                                         data-original-src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         data-mimetype-before-conversion="image/svg+xml"
+                                                         style="min-height: 1px;"/>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-name="Item">
+                            <a href="#" role="tab" data-bs-toggle="collapse" aria-expanded="false"
+                               class="card-header collapsed" data-bs-target="#myCollapseTab1720147276043">INCREASE MY
+                                INSIGHT INTO CUSTOMER NEEDS TO DRIVE SALES
+                                <br/>
+                            </a>
+                            <div data-bs-parent="#myCollapse" role="tabpanel" id="myCollapseTab1720147276043"
+                                 class="collapse">
+                                <div class="card-body">
+                                    <div class="o_text_columns">
+                                        <div class="row">
+                                            <div class="col-6 o_colored_level">
+                                                <p class="card-text">To stay ahead of the competition, it's essential to
+                                                    have a strong and interactive relationship with your customers.
+                                                    Equip your sales and marketing teams with the tools they need to
+                                                    gain a competitive edge and deliver exceptional service, ensuring
+                                                    your customers are happy, loyal, and satisfied.
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text"><span class="oe-tabs" style="width: 39px;"></span>​
+                                                    <a href="/" class="btn btn-primary">LEARN MORE</a>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                            <div class="col-6 o_colored_level">
+                                                <p>
+                                                    <img src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         alt="" class="img img-fluid o_we_custom_image" loading="lazy"
+                                                         data-mimetype="image/svg+xml" data-original-id="4422"
+                                                         data-original-src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         data-mimetype-before-conversion="image/svg+xml"
+                                                         style="min-height: 1px;"/>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-name="Item">
+                            <a href="#" role="tab" data-bs-toggle="collapse" aria-expanded="false"
+                               class="card-header collapsed" data-bs-target="#myCollapseTab1720148780691">ENHANCE
+                                EMPLOYEE EXPERIENCES
+                                <br/>
+                            </a>
+                            <div data-bs-parent="#myCollapse" role="tabpanel" id="myCollapseTab1720148780691"
+                                 class="collapse">
+                                <div class="card-body">
+                                    <div class="o_text_columns">
+                                        <div class="row">
+                                            <div class="col-6 o_colored_level">
+                                                <p class="card-text">Modern cloud-based human resource software has
+                                                    become an essential tool for businesses, regardless of their size,
+                                                    to effectively manage their workforce, streamline the recruitment
+                                                    process, boost productivity levels, and ultimately create a more
+                                                    satisfying work environment for employees.
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text"><span class="oe-tabs" style="width: 39px;"></span>​
+                                                    <a href="/" class="btn btn-primary">LEARN MORE</a>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                            <div class="col-6 o_colored_level">
+                                                <p>
+                                                    <img src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         alt="" class="img img-fluid o_we_custom_image" loading="lazy"
+                                                         data-mimetype="image/svg+xml" data-original-id="4422"
+                                                         data-original-src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         data-mimetype-before-conversion="image/svg+xml"
+                                                         style="min-height: 1px;"/>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-name="Item">
+                            <a href="#" role="tab" data-bs-toggle="collapse" aria-expanded="false"
+                               class="card-header collapsed" data-bs-target="#myCollapseTab1720148919028">UNCOVER
+                                VALUABLE INSIGHTS FROM MY DATA
+                                <br/>
+                            </a>
+                            <div data-bs-parent="#myCollapse" role="tabpanel" id="myCollapseTab1720148919028"
+                                 class="collapse">
+                                <div class="card-body">
+                                    <div class="o_text_columns">
+                                        <div class="row">
+                                            <div class="col-6 o_colored_level">
+                                                <p class="card-text">Information serves as the foundation of your
+                                                    business operations. It influences your financial plans,
+                                                    projections, and even your workforce management. However, it is also
+                                                    delicate. We provides a variety of Corporate Performance Management
+                                                    (CPM) solutions and services to eliminate the frustration of dealing
+                                                    with inconsistent data or struggling with historical reporting.
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text"><span class="oe-tabs" style="width: 39px;"></span>​
+                                                    <a href="/" class="btn btn-primary">LEARN MORE</a>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                            <div class="col-6 o_colored_level">
+                                                <p>
+                                                    <img src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         alt="" class="img img-fluid o_we_custom_image" loading="lazy"
+                                                         data-mimetype="image/svg+xml" data-original-id="4422"
+                                                         data-original-src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         data-mimetype-before-conversion="image/svg+xml"
+                                                         style="min-height: 1px;"/>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card" data-name="Item">
+                            <a href="#" role="tab" data-bs-toggle="collapse" aria-expanded="true" class="card-header"
+                               data-bs-target="#myCollapseTab1720149078771">ENSURE THE SUCCESS OF MY DIGITAL
+                                TRANSFORMATION PROJECT
+                                <br/>
+                            </a>
+                            <div data-bs-parent="#myCollapse" role="tabpanel" id="myCollapseTab1720149078771"
+                                 class="collapse show">
+                                <div class="card-body">
+                                    <div class="o_text_columns">
+                                        <div class="row">
+                                            <div class="col-6 o_colored_level">
+                                                <p class="card-text">Our dedicated OCM team recognizes the diverse
+                                                    learning modalities and varying learning paces within your
+                                                    workforce. We are committed to mitigating unnecessary stress,
+                                                    expediting the adoption process, and preventing the need for
+                                                    employees to seek alternative methods. Whether you require strategic
+                                                    leadership or collaboration with your internal change manager, we
+                                                    are prepared to provide expert support.
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text">
+                                                    <br/>
+                                                </p>
+                                                <p class="card-text"><span class="oe-tabs"
+                                                                           style="width: 11.7882px;"></span>​
+                                                    <a href="/" class="btn btn-primary">LEARN MORE</a>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                            <div class="col-6 o_colored_level">
+                                                <p>
+                                                    <img src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         alt="" class="img img-fluid o_we_custom_image" loading="lazy"
+                                                         data-mimetype="image/svg+xml" data-original-id="4422"
+                                                         data-original-src="/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"
+                                                         data-mimetype-before-conversion="image/svg+xml"
+                                                         style="min-height: 1px;"/>
+                                                    <br/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </t>
+</t>

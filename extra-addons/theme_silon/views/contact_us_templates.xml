@@ -1,57 +1,311 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!--  To inherit contact us page  -->
-    <template id="contact_us" inherit_id="website.contactus" active="True" name="Contact 1">
-        <xpath expr="//div[hasclass('oe_structure')]" position="before">
-            <section class="banner contact_banner">
-                <div class="container">
-                    <div class="row">
-                        <h1 class="about_heading">CONTACT US</h1>
-                    </div>
+    <template id="contact_us" inherit_id="website.contactus" active="True" name="Contact_1">
+        <xpath expr="//div[hasclass('oe_structure')]/section[1]" position="replace">
+            <section class="s_cover pt96 o_colored_level s_parallax_no_overflow_hidden pb56"
+                     data-scroll-background-ratio="0" data-snippet="s_cover" data-name="Cover"
+                     style="position: relative; background-color: rgb(2, 48, 61);"
+                     data-oe-shape-data="{&quot;shape&quot;:&quot;web_editor/Floats/12&quot;,&quot;flip&quot;:[],&quot;showOnMobile&quot;:false,&quot;animated&quot;:&quot;true&quot;}">
+                <div class="o_we_shape o_web_editor_Floats_12 o_we_animated"/>
+                <div class="s_allow_columns container">
+                    <p>
+                        <font class="text-o-color-4">
+                            <span style="font-weight: normal;">
+                                <br/>
+                            </span>
+                        </font>
+                    </p>
+                    <h1 class="display-3" style="text-align: center; font-weight: bold;">
+                        <font class="text-o-color-4">
+                            <span style="font-weight: normal;" class="display-2-fs">Contact</span>
+                            <span class="display-2-fs"></span>
+                            <span style="font-weight: normal;" class="display-2-fs">US</span>
+                        </font>
+                        <br/>
+                    </h1>
+                    <p style="text-align: center;">
+                        <font class="text-o-color-4">We are here to help you reach and surpass your targets.</font>
+                        <br/>
+                    </p>
+                    <p style="text-align: center;">
+
+                    </p>
                 </div>
             </section>
         </xpath>
+        <xpath expr="//div[hasclass('oe_structure')]/section[2]" position="replace">
+            <section class="s_text_block pt40 pb40 o_colored_level" data-snippet="s_text_block" data-name="Text"
+                     style="background-image: none;">
+                <div class="s_allow_columns container">
+                    <div class="row o_grid_mode" data-row-count="13">
+                        <div class="mt-4 mt-lg-0 o_colored_level o_grid_item g-height-13 g-col-lg-6 col-lg-6"
+                             style="grid-area: 1 / 1 / 14 / 7; z-index: 1;">
+                            <h1 class="display-4">
+                                <span style="font-size: 2rem;">
+                                    <strong>Request a call</strong>
+                                </span>
+                            </h1>
+                            <p>Contact us about anything related to our company or services.
+                                <br/>
+                                We'll do our best to get back to you as soon as possible.
+                            </p>
+                            <section class="s_website_form" data-vcss="001" data-snippet="s_website_form"
+                                     data-name="Form">
+                                <div class="container">
+                                    <form id="contactus_form" action="/website/form/" method="post"
+                                          enctype="multipart/form-data" class="o_mark_required" data-mark="*"
+                                          data-model_name="mail.mail" data-success-mode="redirect"
+                                          data-success-page="/contactus-thank-you" data-pre-fill="true">
+                                        <div class="s_website_form_rows row s_col_no_bgcolor">
+                                            <div data-name="Field"
+                                                 class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required"
+                                                 data-type="char">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="odrssles7io">
+                                                        <span class="s_website_form_label_content">Full Name</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input class="form-control s_website_form_input" type="text"
+                                                               name="Full Name" required="1" placeholder=""
+                                                               id="odrssles7io" data-fill-with="name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-name="Field"
+                                                 class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required"
+                                                 data-type="char">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="odyuem0gm9f">
+                                                        <span class="s_website_form_label_content">Phone Number</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input class="form-control s_website_form_input" type="text"
+                                                               name="Phone Number" placeholder="" id="odyuem0gm9f"
+                                                               data-fill-with="phone" required=""/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-0 py-2 col-12 s_website_form_field s_website_form_required s_website_form_model_required"
+                                                 data-type="email" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="contact3">
+                                                        <span class="s_website_form_label_content">Email</span>
 
-        <xpath expr="//div[hasclass('oe_structure')]" position="after">
-            <section class="follow-us">
-                <div class="container">
-                    <h2 class="f-product-heading">FOLLOW US</h2>
-                </div>
-                <div class="follow-product">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/artem-gavrysh-ygAujED2tZ4-unsplash.jpg)">
-                                    </div>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="contact3" type="email"
+                                                               class="form-control s_website_form_input"
+                                                               name="email_from" required="" data-fill-with="email"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-0 py-2 col-12 s_website_form_field s_website_form_custom"
+                                                 data-type="char" data-name="Field">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="contact4">
+                                                        <span class="s_website_form_label_content">Company</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input id="contact4" type="text"
+                                                               class="form-control s_website_form_input" name="company"
+                                                               data-fill-with="commercial_company_name"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-name="Field" class="s_website_form_field mb-3 col-12"
+                                                 data-type="char">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="o5hmi40vexk6">
+                                                        <span class="s_website_form_label_content">Subject</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input class="form-control s_website_form_input" type="text"
+                                                               name="subject" placeholder="" id="o5hmi40vexk6"
+                                                               data-fill-with="undefined"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div data-name="Field"
+                                                 class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required"
+                                                 data-type="text">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px" for="o4sajuxb0p4t">
+                                                        <span class="s_website_form_label_content">Message</span>
+                                                        <span class="s_website_form_mark">*</span>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <textarea class="form-control s_website_form_input"
+                                                                  name="Message" required="1" placeholder=""
+                                                                  id="o4sajuxb0p4t" rows="2"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div data-name="Field"
+                                                 class="s_website_form_field mb-3 col-12 s_website_form_dnone">
+                                                <div class="row s_col_no_resize s_col_no_bgcolor">
+                                                    <label class="col-form-label col-sm-auto s_website_form_label"
+                                                           style="width: 200px">
+                                                        <span class="s_website_form_label_content"/>
+                                                    </label>
+                                                    <div class="col-sm">
+                                                        <input type="hidden" class="form-control s_website_form_input"
+                                                               name="email_to" value="info@yourcompany.example.com"/>
+                                                        <input type="hidden"
+                                                               value="3b0982fc9a6f6922ed86f9362567664e6f93c20873596d7e39b80342b6e92319"
+                                                               class="form-control s_website_form_input s_website_form_custom"
+                                                               name="website_form_signature"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-0 py-2 col-12 s_website_form_submit"
+                                                 data-name="Submit Button">
+                                                <div style="width: 200px;" class="s_website_form_label"/>
+                                                <a href="#" role="button" class="btn btn-primary s_website_form_send"
+                                                   data-bs-original-title="" title="">Submit
+                                                </a>
+                                                <span id="s_website_form_result"/>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/edu-lauton-TyQ-0lPp6e4-unsplash.jpg)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/philipe-cavalcante-Ugpcxb0jG4Q-unsplash.jpg)">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">
-                                <div class="product">
-                                    <div class="product__image"
-                                         style="background-image: url(/theme_silon/static/src/img/followus/remy_loz-rT5LrFoNeA0-unsplash1.jpg)">
-                                    </div>
-                                </div>
-                            </div>
+                            </section>
+                        </div>
+
+                        <div class="mt-4 mt-lg-0 o_colored_level o_grid_item g-col-lg-5 g-height-8 col-lg-5"
+                             style="z-index: 2; grid-area: 1 / 8 / 9 / 13;">
+                            <ul class="list-unstyled mb-0 ps-2">
+                                <li>
+                                    <br/>
+                                </li>
+                                <li>
+                                    <img src="theme_silon/static/src/img/contact/au-map.svg" alt=""
+                                         class="img img-fluid o_we_custom_image" data-mimetype="image/svg+xml"
+                                         data-original-id="623" data-original-src="/web/image/623-a796d859/au-map.svg"
+                                         data-mimetype-before-conversion="image/svg+xml" loading="lazy"/>
+                                </li>
+                            </ul>
+                            <p>
+                                <br/>
+                            </p>
+                            <ul class="list-unstyled mb-0 ps-2">
+                                <i class="fa fa-map-marker fa-fw me-2"/>
+                                <span class="o_force_ltr">
+                                    <span style="font-size: 1.125rem;">3575 Fake Buena Vista Avenue&amp;nbsp;</span>
+                                </span>
+                                <li>
+                                    <i class="fa fa-phone fa-fw me-2"/>
+                                    <span class="o_force_ltr">
+                                        <span style="font-size: 1.125rem;">+1 (650) 555-0111</span>
+                                    </span>
+                                </li>
+                                <i class="fa fa-fw fa-envelope me-2"/>
+                                <span style="font-size: 1.125rem;">
+                                    <a href="mailto:info@yourcompany.example.com">info@yourcompany.example.com</a>
+                                </span>
+                                <br/>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </section>
+
         </xpath>
+
+        <!--        <xpath expr="//div[hasclass('oe_structure')]" position="after">-->
+        <!--            <section class="follow-us">-->
+        <!--                <div class="container">-->
+        <!--                    <h2 class="f-product-heading">FOLLOW US</h2>-->
+        <!--                </div>-->
+        <!--                <div class="follow-product">-->
+        <!--                    <div class="container">-->
+        <!--                        <div class="row">-->
+        <!--                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">-->
+        <!--                                <div class="product">-->
+        <!--                                    <div class="product__image"-->
+        <!--                                         style="background-image: url(/theme_silon/static/src/img/followus/artem-gavrysh-ygAujED2tZ4-unsplash.jpg)">-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">-->
+        <!--                                <div class="product">-->
+        <!--                                    <div class="product__image"-->
+        <!--                                         style="background-image: url(/theme_silon/static/src/img/followus/edu-lauton-TyQ-0lPp6e4-unsplash.jpg)">-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">-->
+        <!--                                <div class="product">-->
+        <!--                                    <div class="product__image"-->
+        <!--                                         style="background-image: url(/theme_silon/static/src/img/followus/philipe-cavalcante-Ugpcxb0jG4Q-unsplash.jpg)">-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                            <div class="col-12 col-sm-6 col-lg-3 col-md-6">-->
+        <!--                                <div class="product">-->
+        <!--                                    <div class="product__image"-->
+        <!--                                         style="background-image: url(/theme_silon/static/src/img/followus/remy_loz-rT5LrFoNeA0-unsplash1.jpg)">-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </section>-->
+        <!--        </xpath>-->
+
+
     </template>
+
+    <template id="contact_us_thanks" inherit_id="website.contactus_thanks_ir_ui_view" active="True"
+              name="Contact_us_thanks">
+        <xpath expr="//div[hasclass('oe_structure')]/section[1]" position="replace">
+            <section class="s_cover pt96 o_colored_level s_parallax_no_overflow_hidden pb56"
+                     data-scroll-background-ratio="0" data-snippet="s_cover" data-name="Cover"
+                     style="position: relative; background-color: rgb(2, 48, 61);"
+                     data-oe-shape-data="{&quot;shape&quot;:&quot;web_editor/Floats/12&quot;,&quot;flip&quot;:[],&quot;showOnMobile&quot;:false,&quot;animated&quot;:&quot;true&quot;}">
+                <div class="o_we_shape o_web_editor_Floats_12 o_we_animated"/>
+                <div class="s_allow_columns container">
+                    <p>
+                        <font class="text-o-color-2">
+                            <span class="d-block fa fa-4x fa-thumbs-up mx-auto rounded-circle bg-primary"/>
+                            <br/>
+                        </font>
+                    </p>
+                    <h1 class="display-3" style="text-align: center; font-weight: bold;">
+                        <font class="text-o-color-4">
+                            <span style="font-weight: normal;" class="display-2-fs">Thank You!</span>
+                        </font>
+                        <br/>
+                    </h1>
+                    <p style="text-align: center;">
+
+                        <font class="text-o-color-4">
+                            <span class="fa fa-check-circle "/>
+                            Your message has been sent
+                            <b>successfully</b>
+                        </font>
+                        <br/>
+                    </p>
+                    <p style="text-align: center;">
+                        <font class="text-o-color-4">
+                            We will get back to you shortly.
+                        </font>
+                    </p>
+                </div>
+            </section>
+        </xpath>
+
+    </template>
+
 </odoo>
