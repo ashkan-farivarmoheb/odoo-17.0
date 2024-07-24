@@ -74,34 +74,51 @@ main.full-page {
     padding-right: 22px;
   }
 
+
   /* Change background when not scrolled */
   &.d-none.d-lg-block.shadow-sm {
     background-color: transparent; // Initial background
 
-    &:hover {
-      background-color: $color-white !important;
+    .nav-link {
+      color: $color-primary !important;
+    }
 
-      .nav-link {
-        color: $color-primary !important; // Apply $color-primary color to text
+    .btn {
+      border: 2px solid $color-primary !important;
+      color: $color-primary !important;
+      background-color: transparent !important;
+    }
+
+    // Conditional styles for specific URLs
+    // Apply styles to pages with URLs containing  "/contactus" or the exact home page URL "/"
+    [data-page-url*="/contactus"] &, [data-page-url="/"] & {
+      .btn {
+        background-color: transparent !important;
+        color: $color-white !important;
+        border: 2px solid $color-white !important;
       }
 
+      .nav-link {
+        color: $color-white !important; // Apply $color-white color to text
+      }
+    }
+
+    &:hover {
+      background-color: $color-white !important;
 
       .btn {
         background-color: transparent !important;
         color: $color-primary !important;
         border: 2px solid $color-primary !important;
       }
+
+      .nav-link {
+        color: $color-primary !important; // Apply $color-primary color to text
+      }
+
+
     }
 
-    .btn {
-      background-color: transparent !important;
-      color: $color-white !important;
-      border: 2px solid $color-white !important;
-    }
-
-    .nav-link {
-      color: $color-white !important; // Apply $color-white color to text
-    }
 
   }
 
@@ -251,3 +268,5 @@ main.full-page {
   margin-right: 0 !important;
 
 }
+
+
