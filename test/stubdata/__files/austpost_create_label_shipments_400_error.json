@@ -1,0 +1,9 @@
+{
+    "errors": [
+        {
+            "code": "44013",
+            "name": "SHIPMENT_NOT_FOUND_ERROR",
+            "message": "The shipment with shipment id {{jsonPath request.body '$.shipments[0].shipment_id'}} you requested can not be found. Please check the shipment id requested and submit the request again."
+        }
+    ]
+}

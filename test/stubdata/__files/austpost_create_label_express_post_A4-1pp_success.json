@@ -1,0 +1,20 @@
+{
+  "labels": [
+    {
+      "request_id": "c2991876-9596-42ed-aed3-dd11dcfb03ba",
+      "url": "http://{{request.host}}:8887/lodgement4/labels/c2991876-9596-42ed-aed3-dd11dcfb03ba.pdf",
+      "status": "AVAILABLE",
+      "request_date": "11-09-2019 17:43:46",
+      "url_creation_date": "11-09-2019 17:43:46",
+      "shipments": [
+        {
+          "shipment_id": "{{jsonPath request.body '$.shipments[0].shipment_id'}}",
+          "options": {}
+        }
+      ],
+      "shipment_ids": [
+        "{{jsonPath request.body '$.shipments[0].shipment_id'}}"
+      ]
+    }
+  ]
+}

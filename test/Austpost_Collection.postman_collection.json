@@ -1,0 +1,204 @@
+{
+	"info": {
+		"_postman_id": "7031356b-aea5-44bd-9d34-ee92bc5645cd",
+		"name": "Austpost_Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33814175"
+	},
+	"item": [
+		{
+			"name": "services_austpost_shipmentPrice_path",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authentication",
+						"value": "invalid_code",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"shipments\":[\n        {\n            \"from\":{\n                \"suburb\": \"MELBOURNE\",\n                \"state\": \"VIC\",\n                \"postcode\": \"3000\"\n            },\n            \"to\":{\n                \"suburb\":\"SYDNEY\",\n                \"state\":\"NSW\",\n                \"postcode\":\"2000\"\n            },  \n            \"items\":[\n                {\n                    \"product_id\":\"2334\",\n                    \"length\":\"5\",\n                    \"height\":\"1\",\n                    \"width\":\"10\",\n                    \"weight\":\"2\"\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8887/shipping/v1/prices/shipments"
+			},
+			"response": []
+		},
+		{
+			"name": "services_austpost_accountDetails_path",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authentication",
+						"value": "invalid_code",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"shipments\":[\n        {\n            \"from\":{\n                \"suburb\": \"MELBOURNE\",\n                \"state\": \"VIC\",\n                \"postcode\": \"3000\"\n            },\n            \"to\":{\n                \"suburb\":\"SYDNEY\",\n                \"state\":\"NSW\",\n                \"postcode\":\"2000\"\n            },\n            \"items\":[\n                {\n                    \"product_id\":\"2134\",\n                    \"length\":\"5\",\n                    \"height\":\"1\",\n                    \"width\":\"10\",\n                    \"weight\":\"2\"\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8887/shipping/v1/accounts/0000123457"
+			},
+			"response": []
+		},
+		{
+			"name": "services_austpost_createShipment_path",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"shipments\":[\n        {\n            \"shipment_reference\":\"XYZ-001-01\",\n            \"customer_reference_1\":\"Order 001\",\n            \"customer_reference_2\":\"SKU-1, SKU-2, SKU-3\",\n            \"email_tracking_enabled\":true,\n            \"from\":{\n                \"name\":\"John Citizen\",\n                \"lines\": [\n                    \"1 Main Street\"\n                ],\n                \"suburb\": \"MELBOURNE\",\n                \"state\": \"VIC\",\n                \"postcode\": \"3000\",\n                \"phone\": \"0401234567\",\n                \"email\":\"john.citizen@citizen.com\"\n            },\n            \"to\":{\n                \"name\":\"Jane Smith\",\n                \"business_name\":\"Smith Pty Ltd\",\n                \"lines\":[\n                    \"123 Centre Road\"\n                ],\n                \"suburb\":\"Sydney\",\n                \"state\":\"NSW\",\n                \"postcode\":\"2000\",\n                \"phone\":\"0412345678\",\n                \"email\":\"jane.smith@smith.com\"\n            },\n            \"items\":[\n                {\n                    \"item_reference\":\"SKU-1\",\n                    \"product_id\":\"T28S\",\n                    \"length\":\"10\",\n                    \"height\":\"10\",\n                    \"width\":\"10\",\n                    \"weight\":\"1\",\n                    \"authority_to_leave\":false,\n                    \"allow_partial_delivery\":true,\n                    \"features\":{\n                        \"TRANSIT_COVER\":{\n                             \"attributes\":{\n                                 \"cover_amount\":1000\n                              }\n                         }\n                     }\n                },\n                {\n                    \"item_reference\":\"SKU-2\",\n                    \"product_id\":\"T28S\",\n                    \"length\":\"10\",\n                    \"height\":\"10\",\n                    \"width\":\"10\",\n                    \"weight\":\"1\",\n                    \"authority_to_leave\":false,\n                    \"allow_partial_delivery\":true\n                },\n                {\n                    \"item_reference\":\"SKU-3\",\n                    \"product_id\":\"T28S\",\n                    \"length\":\"10\",\n                    \"height\":\"10\",\n                    \"width\":\"10\",\n                    \"weight\":\"1\",\n                    \"authority_to_leave\":false,\n                    \"allow_partial_delivery\":true\n                }\n            ]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8887/shipping/v1/shipments"
+			},
+			"response": []
+		},
+		{
+			"name": "services_austpost_createOrder_path",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n  \"order_reference\":\"My order reference\",\n  \"payment_method\":\"CHARGE_TO_ACCOUNT\",\n  \"shipments\": [\n    {\n      \"shipment_id\": \"569b9a3accdc791c4ba34d6f\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8887/shipping/v1/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "services_austpost_get_item_prices_path",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"from\": {\n        \"postcode\": \"3207\"\n    },\n    \"to\": {\n        \"postcode\": \"2001\"\n    },\n    \"items\": [\n        {\n            \"length\": 5,\n            \"height\": 5,\n            \"width\": 5,\n            \"weight\": 5,\n            \"item_reference\" : \"abc xyz\",\n            \"features\":{\n                 \"TRANSIT_COVER\": {\n                     \"attributes\": {\n                      \t\"cover_amount\":1000\n                      }\n                  }\n            },\n            \"product_ids\" : [\"E34\", \"T28S\", \"E34S\"]\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://127.0.0.1:8887/shipping/v1/prices/items"
+			},
+			"response": []
+		},
+		{
+			"name": "services_austpost_serviceRate_path",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8887/postage/parcel/domestic/calculate.json?length=5&width=5&height=5&weight=5&from_postcode=3000&to_postcode=2000&service_code=AUS_PARCEL_REGULAR",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8887",
+					"path": [
+						"postage",
+						"parcel",
+						"domestic",
+						"calculate.json"
+					],
+					"query": [
+						{
+							"key": "length",
+							"value": "5"
+						},
+						{
+							"key": "width",
+							"value": "5"
+						},
+						{
+							"key": "height",
+							"value": "5"
+						},
+						{
+							"key": "weight",
+							"value": "5"
+						},
+						{
+							"key": "from_postcode",
+							"value": "3000"
+						},
+						{
+							"key": "to_postcode",
+							"value": "2000"
+						},
+						{
+							"key": "service_code",
+							"value": "AUS_PARCEL_REGULAR"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "services_austpost_delete_shipment_path",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8887/shipping/v1/shipments/54kjEFSvIo4759AJGsaaMNBE",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8887",
+					"path": [
+						"shipping",
+						"v1",
+						"shipments",
+						"54kjEFSvIo4759AJGsaaMNBE"
+					],
+					"query": [
+						{
+							"key": "shipment_ids",
+							"value": "9lesEAOvOm4AAAFI3swaDRYB,54kjEFSvIo4759AJGsaaMNBF",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

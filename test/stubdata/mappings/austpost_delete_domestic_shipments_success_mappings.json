@@ -1,0 +1,27 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "DELETE",
+                "urlPathPattern": "/shipping/v1/shipments/[a-zA-Z0-9]+"
+            },
+            "response": {
+                "status": 200
+            }
+        },
+        {
+            "request": {
+                "method": "DELETE",
+                "urlPath": "/shipping/v1/shipments",
+                "queryParameters": {
+                    "shipment_ids": {
+                        "matches": "^54kjEFSvIo4759AJGsaa[a-zA-Z0-9]{4}$"
+                    }
+                }
+            },
+            "response": {
+                "status": 200
+            }
+        }
+    ]
+}

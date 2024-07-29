@@ -1,0 +1,81 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "POST",
+                "urlPath": "/shipping/v1/prices/items",
+                "bodyPatterns": [
+                    {
+                        "and": [
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].item_reference",
+                                    "matches": ".*"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].length",
+                                    "matches": "^(\\d{0,4})(.?)(\\d{0,1})"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].height",
+                                    "matches": "^(\\d{0,4})(.?)(\\d{0,1})"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].width",
+                                    "matches": "^(\\d{0,4})(.?)(\\d{0,1})"
+                                }
+                            },
+                            {
+                                "matchesJsonPath": {
+                                    "expression": "$.items[0].weight",
+                                    "matches": "^(\\d{0,5})(.?)(\\d{0,3})"
+                                }
+                            },
+                            {
+                                "or": [
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*E34.*"
+                                        }
+                                    },
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*T28S.*"
+                                        }
+                                    },
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*T28.*"
+                                        }
+                                    },
+                                    {
+                                        "matchesJsonPath": {
+                                            "expression": "$.items[0].product_ids",
+                                            "matches": ".*E34S.*"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 200,
+                "bodyFileName": "austpost_get_item_prices_success.json"
+            }
+        }
+    ]
+}

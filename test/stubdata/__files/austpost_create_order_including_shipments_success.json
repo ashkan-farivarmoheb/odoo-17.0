@@ -1,0 +1,102 @@
+ {
+  "order": {
+    "order_id": "AP0000002422",
+    "order_reference": " XYZ-001",
+    "order_creation_date": "2014-08-27T13:55:47+10:00",
+    "order_summary": {
+      "total_cost": 36.87,
+      "total_cost_ex_gst": 33.52,
+      "total_gst": 3.35,
+      "status": "Initiated",
+      "tracking_summary": {
+        "Sealed": 3
+      },
+      "number_of_shipments": 1,
+      "number_of_items": 3,
+      "dangerous_goods_included": false,
+      "total_weight": 3.000,
+      "shipping_methods": {
+        "T28S": 3
+      }
+    },
+    "shipments": [{
+      "shipment_id": "iM6sEAOnb7EAAAFI2ukaDRWa",
+      "shipment_reference": "XYZ-001-01",
+      "shipment_creation_date": "2014-08-27T13:55:47+10:00",
+      "email_tracking_enabled": "{{jsonPath request.body '$.shipments[0].email_tracking_enabled'}}",
+      "items": [{
+          "weight": 1.000,
+          "authority_to_leave": false,
+          "safe_drop_enabled": true,
+          "allow_partial_delivery": true,
+          "item_id": "NfMK1UnLtDcAAAFyJ1IF297V",
+          "item_reference": "SKU-1",
+          "tracking_details": {
+            "article_id": "2JD541813301000870901",
+            "consignment_id": "2JD5418133"
+          },
+          "product_id": "T28S",
+          "item_summary": {
+            "total_cost": 11.79,
+            "total_cost_ex_gst": 11.61,
+            "total_gst": 0.18,
+            "status": "Sealed"
+          }
+        },
+        {
+          "weight": 1.000,
+          "authority_to_leave": false,
+          "safe_drop_enabled": true,
+          "allow_partial_delivery": true,
+          "item_id": "JGEW1UnLtDcAAAFyJ1IF297V",
+          "item_reference": "SKU-2",
+          "tracking_details": {
+            "article_id": "2JD541813301000870902",
+            "consignment_id": "2JD5418133"
+          },
+          "product_id": "T28S",
+          "item_summary": {
+            "total_cost": 13.29,
+            "total_cost_ex_gst": 12.08,
+            "total_gst": 1.21,
+            "status": "Sealed"
+          }
+        },
+        {
+          "weight": 1.000,
+          "authority_to_leave": false,
+          "safe_drop_enabled": true,
+          "allow_partial_delivery": true,
+          "item_id": "OEJQ1UnLtDcAAAFyJ1IF297V",
+          "item_reference": "SKU-3",
+          "tracking_details": {
+            "article_id": "2JD541813301000870903",
+            "consignment_id": "2JD5418133"
+          },
+          "product_id": "T28S",
+          "item_summary": {
+            "total_cost": 11.79,
+            "total_cost_ex_gst": 11.61,
+            "total_gst": 0.18,
+            "status": "Sealed"
+          }
+        }
+      ],
+      "shipment_summary": {
+        "total_cost": 36.87,
+        "total_cost_ex_gst": 33.52,
+        "fuel_surcharge": 0.00,
+        "total_gst": 3.35,
+        "status": "Sealed",
+        "number_of_items": 3,
+        "tracking_summary": {
+          "Sealed": 3
+        }
+      },
+      "movement_type": "DESPATCH",
+      "charge_to_account": "0000000000",
+      "shipment_modified_date": "2014-08-27T13:55:47+10:00"
+    }],
+    "payment_method": "CHARGE_TO_ACCOUNT"
+  }
+}
