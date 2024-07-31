@@ -10,13 +10,15 @@
     font-family: $font-default;
   }
 
-  .solutions-description {
+  .menu-description {
     display: block;
     width: 100%;
     min-width: 300px;
     font-family: $font-default;
     font-size: $font-size-h4;
     color: $color-black;
+    padding-right: 1rem;
+    padding-left: 0;
   }
 
   h2 {
@@ -40,6 +42,7 @@
     text-decoration: none;
     color: $color-black !important;
     position: relative;
+    padding-left: 1rem;
 
     font-size: $font-size-h4;
     font-family: $font-default;
@@ -166,13 +169,17 @@ a.see_all_link:hover {
   border: 0;
 }
 
+.mega-menu .container-fluid {
+  width: 80%;
+  padding: 0;
+}
 
 // Media Query for 1024px width
 @media (max-width: 1024px) {
-  .mega-menu .container-fluid {
-    width: 100%;
-    padding: 0;
-  }
+  //.mega-menu .container-fluid {
+  //  width: 80%;
+  //  padding: 0;
+  //}
 
   .mega-menu .row {
     margin: 0;
@@ -203,6 +210,7 @@ a.see_all_link:hover {
     .menu-content {
       padding-top: 0 !important;
       padding-bottom: 0 !important;
+
     }
 
     .see_all_link {

@@ -55,6 +55,9 @@
 
     ],
     'assets': {
+        'web._assets_primary_variables': [
+            "theme_silon/static/src/scss/primary_variables.scss",
+        ],
         'web.assets_frontend': [
             'theme_silon/static/src/css/font-awesome.min.css',
             'theme_silon/static/src/scss/_variables.scss',

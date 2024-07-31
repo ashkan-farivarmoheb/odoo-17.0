@@ -1,27 +1,96 @@
-.banner{
-    background-size: cover;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-top: 20px;
-    padding:155px 0;
+.banner {
+  background-size: cover;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  //margin-top: 20px;
+  padding: 0;
+  position: relative;
 }
-.banner .card{
-    background-color:transparent ;
-    border:none;
+
+.banner .card {
+  background-color: transparent;
+  border: none;
 }
-.banner .card-header{
-    border: none;
-    padding-bottom: 7px;
-    font-size:$font-size-h4;
-    font-weight: 400;
-    color:$color-offwhite;
+
+.banner .card-title {
+  border: none;
+  padding-bottom: 7px;
+  font-size: 4rem;
+  color: $color-offwhite;
 }
-.banner .card-title{
-    font-size:$font-size-banner;
-    margin-bottom: 1.75rem;
+
+
+.card-body {
+  background: transparent !important;
+  text-align: left;
+  z-index: 2; /* Ensure the text is above the image */
+  position: relative; /* Ensure positioning context */
 }
-.card-body{
-    padding: 0.25rem;
-    background: transparent !important;
+
+.image-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 75%;
+  height: 100%;
+}
+
+.custom_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+
+}
+
+/* Media queries for responsive font sizes and image adjustments */
+@media (max-width: 1200px) {
+  .banner .card-title {
+    font-size: 3.5rem; /* Slightly smaller for large screens */
+  }
+}
+
+@media (max-width: 992px) {
+  .banner .card-title {
+    font-size: 3rem; /* Smaller font size for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .banner .card-title {
+    font-size: 2.5rem; /* Smaller font size for small screens */
+  }
+
+  .image-container {
+    width: 50%; /* Scale down the image container */
+    height: 100%;
+  }
+
+  .custom_image {
+    width: 100%; /* Scale down the image */
+    height: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner .card-title {
+    font-size: 2rem; /* Smallest font size for extra small screens */
+  }
+
+  .image-container {
+    position: relative; /* Change from absolute to relative */
+    width: 100%; /* Full width for small screens */
+    height: auto; /* Height adjusts based on content */
+    margin-top: 20px; /* Add some space between text and image */
+  }
+
+  .banner_image {
+    width: 100%; /* Full width for the image */
+    height: auto; /* Maintain aspect ratio */
+  }
+
+  .banner .card-body {
+    text-align: center; /* Center text on small screens */
+  }
 }

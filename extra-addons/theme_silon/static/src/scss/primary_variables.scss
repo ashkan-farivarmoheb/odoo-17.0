@@ -1,0 +1,39 @@
+$o-color-palettes: map-merge($o-color-palettes,
+        (
+                'airproof': (
+                        'o-color-1': #02303d,
+                        'o-color-2': #ceefe6,
+                        'o-color-3': #f2f2f2,
+                        'o-color-4': #ffffff,
+                        'o-color-5': #000000,
+                ),
+        )
+);
+$o-selected-color-palettes-names: append($o-selected-color-palettes-names, 'airproof');
+$o-website-values-palettes: (
+        (
+                'color-palettes-name': 'airproof',
+        ),
+);
+
+
+$o-theme-font-configs: (
+        'Poppins': (
+                'family': ('Poppins', sans-serif),
+                'url': 'Poppins:400,500',
+                'properties' : (
+                        'base': (
+                                'font-size-base': 1rem,
+                        ),
+                ),
+        ),
+        'Permanent Marker': (
+                'family': ('Permanent Marker', cursive),
+                'url': 'Permanent Marker:400',
+                'properties' : (
+                        'base': (
+                                'font-size-base': 1rem,
+                        ),
+                ),
+        ),
+);
