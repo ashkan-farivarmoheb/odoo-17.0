@@ -136,6 +136,8 @@ RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt && chown -R odoo:odoo ${APP_CON
 #install aws rds ca bundle
 RUN curl -o ${APP_CONF}/${AWS_RDS_CA_BUNDLE} ${AWS_RDS_CA_BUNDLE_URL}/${AWS_REGION}/${AWS_RDS_CA_BUNDLE}
 
+RUN chmod 644 ${APP_CONF}/${AWS_RDS_CA_BUNDLE} && chown odoo:odoo ${APP_CONF}/${AWS_RDS_CA_BUNDLE}
+
 ADD extra-addons /mnt/extra-addons
 # Expose Odoo services
 EXPOSE 8069 8071 8072
