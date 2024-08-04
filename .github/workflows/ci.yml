@@ -31,7 +31,6 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-
   build:
     name: CI
     runs-on: ubuntu-latest
@@ -202,14 +201,14 @@ jobs:
         echo 'Artifact Name is ${{ steps.deb_package_step.outputs.artifact_name}}'
         echo 'Github SHA is ${{ github.sha }}'
         echo 'Branch is ${{ env.BRANCH }}'
+#  cd:
+#    needs: build
+#    uses: ./.github/workflows/cd.yml
+#    if: needs.build.outputs.branch == 'develop'
+#    with:
+#      target-env: ${{needs.build.outputs.branch}}
+#      artifact-id: ${{ fromJson(needs.build.outputs.artifact-id) }}
+#      github_sha: ${{ github.sha }}
+#      snapshot: false
+#    secrets: inherit
 
-  cd:
-    needs: build
-    uses: ./.github/workflows/cd.yml
-    if: needs.build.outputs.branch == 'develop'
-    with:
-      target-env: ${{needs.build.outputs.branch}}
-      artifact-id: ${{ fromJson(needs.build.outputs.artifact-id) }}
-      github_sha: ${{ github.sha }}
-      snapshot: false
-    secrets: inherit

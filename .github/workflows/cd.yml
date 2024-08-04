@@ -11,6 +11,8 @@ on:
       github_sha:
         required: true
         type: string
+      nfs_access_point_id:
+        type: string
       snapshot:
         default: false
         type: boolean
@@ -24,6 +26,8 @@ on:
         type: number
       github_sha:
         required: true
+        type: string
+      nfs_access_point_id:
         type: string
       snapshot:
         default: false
@@ -54,7 +58,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Variables
         id: vars
         uses: actions/github-script@v3
@@ -65,7 +69,7 @@ jobs:
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
-      
+
       - name: Set ecr_image_tag
         id: set-ecr-image-tag
         run: |
@@ -121,19 +125,25 @@ jobs:
       - name: Initialize Terraform
         run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
         working-directory: infrastructure
-        
+
       - name: Validate Terraform configuration
         run: terraform validate
         working-directory: infrastructure
-        
+
       - name: Plan Terraform changes
-        run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-        working-directory: infrastructure
-        
-      - name: Apply Terraform changes
-        run: terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+        run: |
+            if [ -n "${{ inputs.nfs_access_point_id }}" ]; then
+                terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="nfs_access_point_id=${{ inputs.nfs_access_point_id }}"
+            else
+                terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+            fi
         working-directory: infrastructure
 
-      # - name: Destroy Terraform changes
-      #   run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
-      #   working-directory: infrastructure
+      - name: Apply Terraform changes
+        run: |
+            if [ -n "${{ inputs.nfs_access_point_id }}" ]; then
+                terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="nfs_access_point_id=${{ inputs.nfs_access_point_id }}"
+            else
+                terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+            fi
+        working-directory: infrastructure

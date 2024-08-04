@@ -15,7 +15,7 @@
           ],
           "mountPoints": [
               {
-                  "sourceVolume": "${project}-${environment}-efs",
+                  "sourceVolume": "${environment}-${project}-efs",
                   "containerPath": "/mnt/efs",
                   "readOnly": false
               }

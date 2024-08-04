@@ -50,6 +50,8 @@ package.json
 .vscode/
 .venv/
 odoo-venv/
+
+
 # terraform
 .terraform/
 .terraform.lock.hcl

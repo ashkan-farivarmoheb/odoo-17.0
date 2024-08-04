@@ -29,11 +29,6 @@ variable "nginx_repository_name" {
   type = string
 }
 
-variable "vpc_id" {
-  description = "Odoo vpc id"
-  type = string
-}
-
 variable "desired_task_count" {
   description = "Desired number of tasks for the ECS service"
   default     = 2
@@ -54,23 +49,8 @@ variable "ec2_key_name" {
   type        = string
 }
 
-variable "nfs_file_system_id" {
-  description = "NFS file system"
-  type        = string
-}
-
 variable "nfs_access_point_id" {
   description = "NFS access point"
-  type        = string
-}
-
-variable "taskRole" {
-  description = "ECS task role"
-  type        = string
-}
-
-variable "executionRole" {
-  description = "ECS execution role"
   type        = string
 }
 
