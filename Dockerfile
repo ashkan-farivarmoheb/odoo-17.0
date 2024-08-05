@@ -21,12 +21,13 @@ ARG ARTIFACT_ID
 
 
 # Install pip for Python 3.10 and Upgrade pip and setuptools
-RUN apt-get update && \
+RUN apt-get update --no-cache && \
     apt-get install -y curl \
     python3.10 \
     python3.10-distutils \
     && curl -sSL https://bootstrap.pypa.io/get-pip.py | python3.10 - \
-    && python3.10 -m pip install --upgrade pip setuptools
+    && python3.10 -m pip install --upgrade pip setuptools \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install some deps, lessc and less-plugin-clean-css, and wkhtmltopdf
 RUN  apt-get update && \
@@ -114,35 +115,35 @@ RUN npm install -g rtlcss
 RUN useradd --no-log-init -u 10000 odoo
 
 RUN curl -LJO -H "Authorization: Bearer ${GITHUB_TOKEN}" \
-"https://api.github.com/repos/${REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip"
-
-RUN unzip *.zip \
+"https://api.github.com/repos/${REPOSITORY}/actions/artifacts/${ARTIFACT_ID}/zip" \
+    && unzip *.zip \
     && mv *.deb odoo.deb \
-    && apt-get update \
+    && apt-get update --no-cache \
     && apt-get -y install --no-install-recommends ./odoo.deb \
-    && rm -rf /var/lib/apt/lists/* odoo.deb
+    && apt-get clean && rm -rf /var/lib/apt/lists/* odoo.deb
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
 ADD resources /etc/odoo/
+COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
-# Set permissions and Mount /var/lib/odoo to allow restoring filestore and /mnt/extra-addons for users addons
-RUN chown odoo /etc/odoo/odoo*.conf \
-    && mkdir -p /mnt/{extra-addons,sources} \
-    && mkdir -p ${APP_CONF}
+# Set permissions
+RUN chmod +x /entrypoint.sh && \
+    chown odoo /etc/odoo/odoo*.conf && \
+    mkdir -p /mnt/{extra-addons,sources} && \
+    mkdir -p ${APP_CONF} && \
+    chmod -R 775 /mnt && \
+    chown -R odoo:odoo /mnt && \
+    chown -R odoo:odoo ${APP_CONF}
 
-RUN chmod -R 775 /mnt && chown -R odoo:odoo /mnt && chown -R odoo:odoo ${APP_CONF}
-
-#install aws rds ca bundle
-RUN curl -o ${APP_CONF}/${AWS_RDS_CA_BUNDLE} ${AWS_RDS_CA_BUNDLE_URL}/${AWS_REGION}/${AWS_RDS_CA_BUNDLE}
-
-RUN chmod 644 ${APP_CONF}/${AWS_RDS_CA_BUNDLE} && chown odoo:odoo ${APP_CONF}/${AWS_RDS_CA_BUNDLE}
+# Install AWS RDS CA bundle
+RUN curl -o ${APP_CONF}/${AWS_RDS_CA_BUNDLE} ${AWS_RDS_CA_BUNDLE_URL}/${AWS_REGION}/${AWS_RDS_CA_BUNDLE} && \
+    chmod 644 ${APP_CONF}/${AWS_RDS_CA_BUNDLE} && \
+    chown odoo:odoo ${APP_CONF}/${AWS_RDS_CA_BUNDLE}
 
 ADD extra-addons /mnt/extra-addons
 # Expose Odoo services
 EXPOSE 8069 8071 8072
-
-COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
 # Set default user when running the container
 USER odoo
