@@ -11,6 +11,13 @@ ENV APP_CONF /opt/app/conf
 ENV AWS_RDS_CA_BUNDLE_URL https://truststore.pki.rds.amazonaws.com
 ENV AWS_REGION global
 ENV AWS_RDS_CA_BUNDLE global-bundle.pem
+ENV AMZ_ROOT_CA_1 AmazonRootCA1.pem
+ENV AMZ_ROOT_CA_2 AmazonRootCA2.pem
+ENV AMZ_ROOT_CA_3 AmazonRootCA3.pem
+ENV AMZ_ROOT_CA_4 AmazonRootCA4.pem
+ENV AMZ_ROOT_CA_1 AmazonRootCA1.pem
+ENV SFS_ROOT_CA_G2 SFSRootCAG2.pem
+ENV AMZ_TRUST_REPO https://www.amazontrust.com/repository
 
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
@@ -135,10 +142,24 @@ RUN chmod +x /entrypoint.sh && \
     chown -R odoo:odoo /mnt && \
     chown -R odoo:odoo ${APP_CONF}
 
-# Install AWS RDS CA bundle
-RUN curl -o ${APP_CONF}/${AWS_RDS_CA_BUNDLE} ${AWS_RDS_CA_BUNDLE_URL}/${AWS_REGION}/${AWS_RDS_CA_BUNDLE} && \
-    chmod 644 ${APP_CONF}/${AWS_RDS_CA_BUNDLE} && \
-    chown odoo:odoo ${APP_CONF}/${AWS_RDS_CA_BUNDLE}
+# Download the individual PEM files
+RUN curl -o ${APP_CONF}/${AMZ_ROOT_CA_1} ${AMZ_TRUST_REPO}/${AMZ_ROOT_CA_1} && \
+    curl -o ${APP_CONF}/${AMZ_ROOT_CA_2} ${AMZ_TRUST_REPO}/${AMZ_ROOT_CA_2} && \
+    curl -o ${APP_CONF}/${AMZ_ROOT_CA_3} ${AMZ_TRUST_REPO}/${AMZ_ROOT_CA_3} && \
+    curl -o ${APP_CONF}/${AMZ_ROOT_CA_4} ${AMZ_TRUST_REPO}/${AMZ_ROOT_CA_4} && \
+    curl -o ${APP_CONF}/${SFS_ROOT_CA_G2} ${AMZ_TRUST_REPO}/${SFS_ROOT_CA_G2} && \
+    curl -o ${APP_CONF}/${AWS_RDS_CA_BUNDLE} ${AWS_RDS_CA_BUNDLE_URL}/${AWS_REGION}/${AWS_RDS_CA_BUNDLE}
+
+# Append the PEM files into a single CA bundle & Install CA bundle
+RUN cat ${APP_CONF}/${AMZ_ROOT_CA_1} \
+        ${APP_CONF}/${AMZ_ROOT_CA_2} \
+        ${APP_CONF}/${AMZ_ROOT_CA_3} \
+        ${APP_CONF}/${AMZ_ROOT_CA_4} \
+        ${APP_CONF}/${SFS_ROOT_CA_G2}   \
+        ${APP_CONF}/${AWS_RDS_CA_BUNDLE} > \
+        ${APP_CONF}/combined-ca-bundle.pem && \
+        chmod 644 ${APP_CONF}/combined-ca-bundle.pem && \
+        chown odoo:odoo ${APP_CONF}/combined-ca-bundle.pem
 
 ADD extra-addons /mnt/extra-addons
 # Expose Odoo services
