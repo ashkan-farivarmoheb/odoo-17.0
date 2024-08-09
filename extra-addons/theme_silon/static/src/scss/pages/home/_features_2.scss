@@ -1,42 +1,41 @@
 .features_2 {
   .card {
-    //padding: 25px;
     text-align: center;
     height: 100%;
-
 
     .top-card {
       position: relative;
       background: o-color('o-color-1');
-      margin-bottom: 40px;
       min-height: 100px;
+      display: flex;
+      align-items: flex-end; /* Align items to the bottom */
+      justify-content: flex-start; /* Align items to the start */
 
       .card-icon {
         font-size: 80px;
         background: $color-gradiant;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        position: relative;
-        bottom: -40px;
         display: block;
+        margin-right: 10px; /* Adjust the spacing between the icon and the title */
+        margin-left: 20px; /* Move the icon further to the left */
 
       }
 
-    }
+      .card-title {
+        font-size: $font-size-h3;
+        color: $color-whitesmoke;
+        margin-bottom: 10px; /* Reset any default margin */
+        margin-top: auto; /* Push the title to the bottom */
 
-    //.top-card img {
-    //  position: relative;
-    //  bottom: -40px;
-    //  max-width: 80px; /* Adjust size as needed */
-    //}
-    //style=" position: relative;bottom: -40px;max-width: 80px;"
+      }
+    }
 
     .card-body {
       margin-top: 20px;
 
       .card-title {
-        text-transform: uppercase;
-        font-size: $font-size-s;
+        font-size: $font-size-h3;
 
 
       }
@@ -44,8 +43,6 @@
       .card-text {
         color: $color-grey;
       }
-
-
     }
   }
 }

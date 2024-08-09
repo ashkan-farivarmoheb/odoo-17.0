@@ -10,6 +10,7 @@
     "website": "https://github.com/OCA/server-tools",
     "author": "Camptocamp,Creu Blanca,Odoo Community Association (OCA)",
     "depends": ["web"],
+
     "assets": {
         "web.assets_common": [
             (
@@ -21,6 +22,8 @@
             "base_fontawesome/static/lib/fontawesome-6.5.1/css/v4-shims.css",
             "base_fontawesome/static/src/js/form_renderer.js",
             "base_fontawesome/static/src/js/list_renderer.js",
+            'base_fontawesome/static/src/js/font_extension.js',
+
         ],
         "web.assets_frontend": [
             (
@@ -30,8 +33,9 @@
             ),
             "base_fontawesome/static/lib/fontawesome-6.5.1/css/all.css",
             "base_fontawesome/static/lib/fontawesome-6.5.1/css/v4-shims.css",
-            "base_fontawesome/static/src/js/form_renderer.js",
-            "base_fontawesome/static/src/js/list_renderer.js",
+            # "base_fontawesome/static/src/js/form_renderer.js",
+            # "base_fontawesome/static/src/js/list_renderer.js",
+
         ],
         "web.report_assets_common": [
             (

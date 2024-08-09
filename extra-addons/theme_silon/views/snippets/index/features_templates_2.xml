@@ -14,12 +14,13 @@
                     <div class="col-12 col-sm-6 col-lg-4 col-md-4">
                         <div class="card mb-4">
                             <div class="top-card">
-                                <span class="fas fa-wind card-icon card-img-top"
-                                      style="position: relative;bottom: -40px;"
+                                <span class="fas fa-wind card-icon"
+                                      style="position: relative;bottom: -20px;"
                                 />
+                                <h4 class="card-title">Implementation</h4>
+
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">MONEY BACK GUARANTEE</h5>
                                 <p class="card-text">Great signs fill he evening</p>
 
                             </div>
@@ -32,12 +33,14 @@
                             <!--                                     alt="Card image cap"/>-->
                             <!--                            </div>-->
                             <div class="top-card">
-                                <span class="fa fa-check card-icon card-img-top"
-                                      style="position: relative;bottom: -40px;"
-                                />
+                                <!--                                <span class="fa fa-check card-icon card-img-top"-->
+                                <!--                                      style="position: relative;bottom: -40px;"-->
+                                <!--                                />-->
+                                <i class="material-icons card-icon" style="position: relative;bottom: -20px;">cloud</i>
+                                <h4 class="card-title">Implementation2</h4>
+
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">FREE DELIVERY</h5>
                                 <p class="card-text">Great signs fill he evening</p>
 
                             </div>
@@ -46,8 +49,59 @@
                     <div class="col-12 col-sm-6 col-lg-4 col-md-4">
                         <div class="card mb-4">
                             <div class="top-card">
-                                <img class="card-img-top" src="/theme_silon/static/src/img/icons 2/headphones.svg"
+                                <span class="fa fa-user card-icon fa-3x"/>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">ALWAYS SUPPORT</h5>
+                                <p class="card-text">Great signs fill he evening</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-lg-4 col-md-4">
+                        <div class="card mb-4">
+                            <div class="top-card">
+                                <span class="fas fa-wind card-icon"
+                                      style="position: relative;bottom: -40px;"
+                                />
+                                <h4 class="card-title">Implementation</h4>
+
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Great signs fill he evening</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-4 col-md-4">
+                        <div class="card mb-4">
+                            <!--                            <div class="top-card">-->
+                            <!--                                <img class="card-img-top" src="/theme_silon/static/src/img/icons 2/delivery-truck.svg"-->
+                            <!--                                     alt="Card image cap"/>-->
+                            <!--                            </div>-->
+                            <div class="top-card">
+                                <!--                                <span class="fa fa-check card-icon card-img-top"-->
+                                <!--                                      style="position: relative;bottom: -40px;"-->
+                                <!--                                />-->
+                                <i class="material-icons card-icon card-img-top">cloud</i>
+
+                            </div>
+                            <div class="card-body">
+                                <h4 class="card-title">Implementationsss</h4>
+                                <p class="card-text">Great signs fill he evening</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-4 col-md-4">
+                        <div class="card mb-4">
+                            <div class="top-card">
+                                <img class="card-icon" src="/theme_silon/static/src/img/icons 2/headphones.svg"
                                      alt="Card image cap"/>
+                                <h5 class="card-title">FREE DELIVERY</h5>
+
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">ALWAYS SUPPORT</h5>
