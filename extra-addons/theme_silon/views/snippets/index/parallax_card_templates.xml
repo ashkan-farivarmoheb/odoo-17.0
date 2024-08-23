@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="parallax_card" inherit_id="website.snippets" name="Parallax card">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_silon.parallax_card_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg"
+            />
+        </xpath>
+    </template>
+    <template id="parallax_card_snippet" name="Parallax Card">
+        <section class="parallax_card">
+            <div class="container">
+                <div class="row d-flex o_grid_mode" data-row-count="12">
+                    <div class="s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-12 col-lg-4 parallax-effect-parent-container"
+                         style="grid-area: 1 / 5 / 13 / 9; z-index: 3;">
+                        <div class="card text-bg-white h-100 border bg-white-25 card-hover"
+                             style="background-image: url(&quot;/theme_silon/static/src/img/home/optimized-1001.jpg&quot;); background-size: cover; background-position: center center; display: none; position: relative; z-index: 10; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="image-overlay"></div>
+                            <div class="card-body">
+
+
+                                <p style="text-align: center;">We guide you and train you to generate real-time
+                                    financial reports, enabling better decision-making.
+                                    <br/>
+                                </p>
+
+
+                            </div>
+                        </div>
+                        <div class="card text-bg-white h-100 border hide-on-hover"
+                             style="background-color: rgb(245, 245, 247); display: block; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="card-body">
+
+                                <h3>Specialty retail</h3>
+
+
+                                <p class="card-text">Leverage .....fully integrated PIM tool to easily
+                                    store all the attributes and product variants that make your product line
+                                    unique.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-6 col-lg-4 parallax-effect-parent-container"
+                         style="z-index: 3; grid-area: 1 / 9 / 7 / 13;">
+                        <div class="card text-bg-white h-100 border bg-white-25 card-hover"
+                             style="background-image: url(&quot;/theme_silon/static/src/img/home/optimized-1001.jpg&quot;); background-size: cover; background-position: center center; display: none; position: relative; z-index: 10; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="image-overlay"></div>
+                            <div class="card-body">
+
+
+                                <p style="text-align: center;">We guide you and train you to generate real-time
+                                    financial reports, enabling better decision-making.
+                                    <br/>
+                                </p>
+
+
+                            </div>
+                        </div>
+                        <div class="card text-bg-white h-100 border hide-on-hover"
+                             style="background-color: rgb(245, 245, 247); display: block; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="card-body">
+
+                                <h3>Specialty retail</h3>
+
+
+                                <p class="card-text">Leverage .....fully integrated PIM tool to easily
+                                    store all the attributes and product variants that make your product line
+                                    unique.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-6 col-lg-4 parallax-effect-parent-container"
+                         style="z-index: 3; grid-area: 7 / 9 / 13 / 13;">
+                        <div class="card text-bg-white h-100 border bg-white-25 card-hover"
+                             style="background-image: url(&quot;/theme_silon/static/src/img/home/optimized-1001.jpg&quot;); background-size: cover; background-position: center center; display: none; position: relative; z-index: 10; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="image-overlay"></div>
+                            <div class="card-body">
+
+
+                                <p style="text-align: center;">We guide you and train you to generate real-time
+                                    financial reports, enabling better decision-making.
+                                    <br/>
+                                </p>
+
+
+                            </div>
+                        </div>
+                        <div class="card text-bg-white h-100 border hide-on-hover"
+                             style="background-color: rgb(245, 245, 247); display: block; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="card-body">
+
+                                <h3>Specialty retail</h3>
+
+
+                                <p class="card-text">Leverage .....fully integrated PIM tool to easily
+                                    store all the attributes and product variants that make your product line
+                                    unique.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-6 col-lg-4 parallax-effect-parent-container"
+                         style="z-index: 3; grid-area: 7 / 1 / 13 / 5;">
+                        <div class="card text-bg-white h-100 border bg-white-25 card-hover"
+                             style="background-image: url(&quot;/theme_silon/static/src/img/home/optimized-1001.jpg&quot;); background-size: cover; background-position: center center; display: none; position: relative; z-index: 10; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="image-overlay"></div>
+                            <div class="card-body">
+
+
+                                <p style="text-align: center;">We guide you and train you to generate real-time
+                                    financial reports, enabling better decision-making.
+                                    <br/>
+                                </p>
+
+
+                            </div>
+                        </div>
+                        <div class="card text-bg-white h-100 border hide-on-hover"
+                             style="background-color: rgb(245, 245, 247); display: block; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="card-body">
+
+                                <h3>Specialty retail</h3>
+
+
+                                <p class="card-text">Leverage .....fully integrated PIM tool to easily
+                                    store all the attributes and product variants that make your product line
+                                    unique.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-6 col-lg-4 parallax-effect-parent-container"
+                         style="z-index: 3; grid-area: 1 / 1 / 7 / 5;">
+                        <div class="card text-bg-white h-100 border bg-white-25 card-hover"
+                             style="background-image: url(&quot;/theme_silon/static/src/img/home/optimized-1001.jpg&quot;); background-size: cover; background-position: center center; display: none; position: relative; z-index: 10; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="image-overlay"></div>
+                            <div class="card-body">
+
+
+                                <p style="text-align: center;">We guide you and train you to generate real-time
+                                    financial reports, enabling better decision-making.
+                                    <br/>
+                                </p>
+
+
+                            </div>
+                        </div>
+                        <div class="card text-bg-white h-100 border hide-on-hover"
+                             style="background-color: rgb(245, 245, 247); display: block; border-width: 2px !important; border-color: rgb(2, 48, 61) !important;">
+                            <div class="card-body">
+
+                                <h3>Specialty retail</h3>
+
+
+                                <p class="card-text">Leverage .....fully integrated PIM tool to easily
+                                    store all the attributes and product variants that make your product line
+                                    unique.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+</odoo>

@@ -21,7 +21,7 @@
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                           rel="stylesheet"/>
 
-                    <!--                    <meta property="og:url" t-att-content="request.httprequest.url"/>-->
+                    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
                 </head>
                 <body t-att-data-page-url="request.httprequest.path">

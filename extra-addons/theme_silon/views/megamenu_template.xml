@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <data>
-        <!--        <record id="menu_services" model="website.menu">-->
-        <!--            <field name="name">services</field>-->
-        <!--            <field name="url">/services</field>-->
-        <!--            <field name="parent_id" ref="website.main_menu"/>-->
-        <!--            <field name="sequence" type="int">1</field>-->
-        <!--        </record>-->
+
         <record id="menu_pricing" model="website.menu">
             <field name="name">Pricing</field>
             <field name="url">/odoo-pricing</field>
@@ -24,7 +19,7 @@
         <!--         Mega Menu for Solutions2 -->
         <record id="menu_services" model="website.menu">
             <field name="name">Services</field>
-            <field name="url">/Services</field>
+            <field name="url">/services</field>
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence" type="int">21</field>
             <field name="is_mega_menu">True</field>
@@ -41,12 +36,12 @@
                                     <!-- SOLUTIONS Column (hidden on mobile) -->
                                     <div class="col-lg-4 col-md-6 col-12 d-none d-md-block">
                                         <aside class="menu-description">
-                                            <a href="/Services" class="h3">
+                                            <a href="/services" class="h3">
                                                 <h2 class="my-4">Services</h2>
                                             </a>
-                                            <p class="my-2">Streamline everyday management of your
-                                                operation - no matter what industry you're in - with Steersman’s suite
-                                                of high-performance business applications for SMBs.
+                                            <p class="my-2">Optimize your business operations with our tailored Odoo
+                                                solutions. We specialize in providing comprehensive consulting, seamless
+                                                implementation, and ongoing support to ensure your success.
                                             </p>
                                         </aside>
                                     </div>
@@ -74,7 +69,6 @@
                                                 <span class="link-text">upgrade</span>
                                             </a>
                                         </div>
-
                                     </div>
 
                                     <!-- Second Column -->
@@ -112,6 +106,7 @@
                         </div>
                     </div>
                 </section>
+
             </field>
         </record>
         <record id="menu_odoo" model="website.menu">
@@ -136,9 +131,10 @@
                                             <a href="/odoo-erp" class="h3">
                                                 <h2 class="my-4">ODOO</h2>
                                             </a>
-                                            <p class="my-2">Streamline everyday management of your
-                                                operation - no matter what industry you're in - with Steersman’s suite
-                                                of high-performance business applications for SMBs.
+                                            <p class="my-2">Unlock the full potential of your business with Odoo's
+                                                powerful, all-in-one business applications. We provide expert guidance
+                                                on pricing, implementation, customization, and more to ensure your Odoo
+                                                journey is successful.
                                             </p>
                                         </aside>
                                     </div>
@@ -236,9 +232,9 @@
                                             <a href="/industries" class="h3">
                                                 <h2 class="my-4">INDUSTRIES</h2>
                                             </a>
-                                            <p class="my-2">Streamline everyday management of your
-                                                operation - no matter what industry you're in - with Steersman’s suite
-                                                of high-performance business applications for SMBs.
+                                            <p class="my-2">Empower your industry with tailored Odoo solutions designed
+                                                to streamline operations, enhance efficiency, and drive growth across
+                                                various sectors.
                                             </p>
                                         </aside>
                                     </div>
@@ -303,11 +299,11 @@
                                 <span class="see_all_link-text">Explore Industries</span>
                             </a>
                         </div>
-
                     </div>
                 </section>
             </field>
         </record>
+
         <!-- Template for Mobile Menu Button -->
         <!--        <template id="custom_menu_button" inherit_id="website.template_header_mobile"-->
         <!--                  name="Add Contact Us Button to Menu">-->
