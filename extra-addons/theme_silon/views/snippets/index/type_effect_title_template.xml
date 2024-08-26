@@ -9,16 +9,16 @@
     </template>
     <template id="type_effect_title_snippet" name="type effect title">
         <section class="s_title type_effect_title pt40 pb40">
-            <div class="container s_allow_columns">
+            <div class="s_allow_columns container">
                 <div class="row">
-                    <h2 class="autotyping">We <em>Simplify</em> Odoo
-                        <br/> <!-- Line break to move the typing effect to the second line -->
-                        <span class="typing_text"></span>
+                    <h2 class="autotyping">
+                        We <em class="o_default_snippet_text">Simplify</em> Odoo
+                        <br/>
+                        <span class="typing_text">Go</span>
                     </h2>
                 </div>
 
-                <!-- JavaScript to initiate the typing effect -->
-                <script type="text/javascript">
+                <script type="text/javascript" class="o_default_snippet_text">
                     document.addEventListener('DOMContentLoaded', function () {
                     var typed = new Typed(".typing_text", {
                     strings: [
@@ -40,10 +40,12 @@
                     });
                 </script>
 
-                <!-- Optional CSS for styling -->
-                <style>
+                <style class="o_default_snippet_text">
                     .autotyping {
-                    font-size: 2rem; font-weight: 600;
+                    font-size: 55px;
+                    font-weight: 600;
+                    line-height: 1.2; /* Adjust line height as needed */
+                    min-height: 120px; /* Set a minimum height to prevent layout shift */
                     }
                     .typing_text {
                     color: var(--o-color-6); /* Using Odoo's theme color variable */
@@ -51,9 +53,9 @@
                     font-size: 55px;
                     font-weight: 600;
                     }
-
                 </style>
             </div>
+
         </section>
     </template>
 
