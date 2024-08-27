@@ -20,13 +20,15 @@
                     <!--                    Google Material Ui Icons-->
                     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                           rel="stylesheet"/>
-                    <!--Typed.js cdn for type_effect_title_template snippet-->
-                    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
                 </head>
                 <body t-att-data-page-url="request.httprequest.path">
                     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
                     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+                    <!--                    &lt;!&ndash;Typed.js cdn for type_effect_title_template snippet&ndash;&gt;-->
+                    <!--                    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>-->
+
+
                     <script>
                         $(function () {
                         $("#slider-range").slider({

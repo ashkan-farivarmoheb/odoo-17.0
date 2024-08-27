@@ -9,51 +9,13 @@
     </template>
     <template id="type_effect_title_snippet" name="type effect title">
         <section class="s_title type_effect_title pt40 pb40">
-            <div class="s_allow_columns container">
+            <div class="container s_allow_columns">
                 <div class="row">
-                    <h2 class="autotyping">
-                        We <em class="o_default_snippet_text">Simplify</em> Odoo
-                        <br/>
-                        <span class="typing_text">Go</span>
+                    <h2 class="autotyping">We <em>Simplify</em> Odoo
+                        <br/> <!-- Line break to move the typing effect to the second line -->
+                        <span class="typing_text"></span>
                     </h2>
                 </div>
-
-                <script type="text/javascript" class="o_default_snippet_text">
-                    document.addEventListener('DOMContentLoaded', function () {
-                    var typed = new Typed(".typing_text", {
-                    strings: [
-                    "Implementation",
-                    "Go-Live and Adoption",
-                    "Training",
-                    "Customisation",
-                    "Migration",
-                    "Integration",
-                    "Optimisation",
-                    "Configuration",
-                    "Scoping and Licensing"
-                    ],
-                    typeSpeed: 80,
-                    backSpeed: 40,
-                    loop: true,
-                    cursorChar: '_️',
-                    });
-                    });
-                </script>
-
-                <style class="o_default_snippet_text">
-                    .autotyping {
-                    font-size: 55px;
-                    font-weight: 600;
-                    line-height: 1.2; /* Adjust line height as needed */
-                    min-height: 120px; /* Set a minimum height to prevent layout shift */
-                    }
-                    .typing_text {
-                    color: var(--o-color-6); /* Using Odoo's theme color variable */
-                    display: inline-block;
-                    font-size: 55px;
-                    font-weight: 600;
-                    }
-                </style>
             </div>
 
         </section>

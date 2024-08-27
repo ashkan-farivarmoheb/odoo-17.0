@@ -78,6 +78,7 @@
             'theme_silon/static/src/scss/pages/home/_features_2.scss',
             'theme_silon/static/src/scss/pages/home/_sticky_onScroll.scss',
             'theme_silon/static/src/scss/pages/home/_parallax-card.scss',
+            'theme_silon/static/src/scss/pages/home/_type_effect.scss',
             'theme_silon/static/src/scss/pages/odoo-erp/s_tabs.scss',
             'theme_silon/static/src/scss/pages/home/_journal.scss',
             'theme_silon/static/src/scss/pages/home/_trending.scss',
@@ -92,7 +93,8 @@
             'theme_silon/static/src/js/most_popular.js',
             'theme_silon/static/src/js/featured_product.js',
             'theme_silon/static/src/js/trending.js',
-            '/theme_silon/static/src/js/parallax-effect.js',
+            'theme_silon/static/src/js/parallax-effect.js',
+            'theme_silon/static/src/js/type_effect.js',
         ],
     },
     'images': [
