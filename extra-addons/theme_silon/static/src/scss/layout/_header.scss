@@ -126,7 +126,7 @@ main.full-page {
     font-weight: 500;
     text-transform: uppercase;
     color: $color-black !important;
-    height: 70px; // Fixed height for the navbar
+    height: $navbar-height; // Fixed height for the navbar
     display: flex;
     align-items: center; // Vertically centers the items within the navbar
     margin-right: 0 !important;

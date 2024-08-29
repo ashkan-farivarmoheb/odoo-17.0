@@ -1,7 +1,5 @@
 .sticky_onScroll {
-  .o_custom_section {
-    padding: 50px 0;
-  }
+  margin-top: 50px;
 
   .custom-left-column {
     position: relative;
@@ -15,12 +13,13 @@
   }
 
   .custom-right-column {
-    /* No overflow or max-height here, so it scrolls naturally with the page */
+    @media (min-width: 992px) { // Bootstrap breakpoint for lg and above
+      margin-top: 400px; // Add margin-top when on large screens
+    }
   }
 
   .icon-box {
     margin-bottom: 20px;
-
     display: flex;
     align-items: flex-start; /* Align the icon and content at the top */
     border-bottom: 1px solid o-color('o-color-3'); /* Grey border at the bottom */

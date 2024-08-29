@@ -1,0 +1,69 @@
+
+.stacked_cards {
+  padding-top: 256px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+
+  .container {
+    position: relative;
+    height: 300vh;
+  }
+
+  .text-container {
+    position: sticky;
+    top: $navbar-height+8px; /* Align with the top of the card */
+    z-index: 1; /* Ensure it appears above other content */
+    padding: 20px 0; /* Add padding as needed */
+    margin-bottom: calc(45vh - 150px); /* Adjusted margin to prevent overlap */
+
+  }
+
+
+  .card {
+    position: sticky;
+    top: 50%;
+    transform: translateY(-45%);
+    z-index: 2;
+    //margin-top: 200px;
+    padding: 30px;
+    border-radius: 20px; // Apply curved borders
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: Add a soft shadow
+    margin-top: 80px;
+
+    @media (min-width: 992px) { // Bootstrap breakpoint for lg and above
+      margin-top: 200px;
+
+
+      @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+          $translate-y: -45% + (3% * ($i - 1));
+          $z-index: $i + 2;
+          transform: translateY($translate-y);
+          z-index: $z-index;
+        }
+      }
+    }
+  }
+
+  .card-body {
+    @media (min-width: 992px) { // Bootstrap breakpoint for lg and above
+      padding-inline: 80px; // Apply 80px padding on the left and right
+    }
+    text-align: left; // Align text to the left inside the card-body
+  }
+
+
+  .card-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: auto; // Ensure the image doesn’t stretch
+      max-width: 100%; // Ensure the image doesn’t exceed the container width
+      height: auto; // Maintain aspect ratio
+      border-radius: 20px; // Apply curved borders
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: Add a soft shadow
+    }
+  }
+}

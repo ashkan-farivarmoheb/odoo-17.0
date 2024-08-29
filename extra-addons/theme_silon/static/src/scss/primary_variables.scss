@@ -39,3 +39,44 @@ $o-theme-font-configs: (
                 ),
         ),
 );
+
+.o-text-h1 {
+  font-size: var(--o-font-size-h1);
+}
+
+.o-text-h2 {
+  font-size: var(--o-font-size-h2);
+}
+
+.o-text-h3 {
+  font-size: var(--o-font-size-h3);
+}
+
+.o-text-h4 {
+  font-size: var(--o-font-size-h4);
+}
+
+.o-text-subheading {
+  font-size: var(--o-font-size-subheading);
+}
+
+.o-text-text {
+  font-size: var(--o-font-size-text);
+}
+
+.o-text-s {
+  font-size: var(--o-font-size-s);
+}
+
+.o-text-banner {
+  font-size: var(--o-font-size-banner);
+}
+
+.o-text-form {
+  font-size: var(--o-font-size-form);
+}
+
+.o-text-bold {
+  font-size: var(--o-font-size-bold);
+  font-weight: bold; /* Make it bold as well */
+}

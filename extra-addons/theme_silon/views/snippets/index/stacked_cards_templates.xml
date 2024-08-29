@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="stacked_cards" inherit_id="website.snippets" name="Stacked Cards">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_silon.stacked_cards_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg"
+            />
+        </xpath>
+    </template>
+    <template id="stacked_cards_snippet" name="Stacked Cards">
+        <section class="stacked_cards">
+            <div class="container">
+                <div class="text-container">
+                    <h2 class="card-title" style="text-align: center;padding-bottom: 0px;">
+                        Industries We Specialize In
+                    </h2>
+                </div>
+
+                <div class="card o_card">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 d-flex flex-column justify-content-center">
+                            <div class="card-body">
+                                <h2 class="card-title">Card 1 Header</h2>
+                                <p class="card-text">
+                                    This is some sample text content for Card 1. It uses Odoo's built-in classes for
+                                    styling and layout.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-image-container">
+                                <img src="/theme_silon/static/src/img/home/optimized-1001.jpg" alt="Image 1"
+                                     class="img-fluid"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more cards here if needed -->
+                <div class="card o_card">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 d-flex flex-column justify-content-center">
+                            <div class="card-body">
+                                <h2 class="card-title">Card 1 Header</h2>
+                                <p class="card-text">
+                                    This is some sample text content for Card 1. It uses Odoo's built-in classes for
+                                    styling and layout.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-image-container">
+                                <img src="/theme_silon/static/src/img/home/optimized-1001.jpg" alt="Image 1"
+                                     class="img-fluid"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card o_card">
+                    <div class="row align-items-center">
+                        <div class="col-md-6 d-flex flex-column justify-content-center">
+                            <div class="card-body">
+                                <h2 class="card-title">Card 1 Header</h2>
+                                <p class="card-text">
+                                    This is some sample text content for Card 1. It uses Odoo's built-in classes for
+                                    styling and layout.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-image-container">
+                                <img src="/theme_silon/static/src/img/home/optimized-1001.jpg" alt="Image 1"
+                                     class="img-fluid"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+
+</odoo>

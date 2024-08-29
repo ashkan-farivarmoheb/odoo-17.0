@@ -21,15 +21,6 @@ $color-secondary: o-color('o-color-2');
 $color-thirdly: #00855f;
 $color-gradiant: linear-gradient(to right, #02303d, #ceefe6);
 
-//fon-size
-// $font-size-h1: 36px;
-// $font-size-h4:18px;
-// $font-size-subheading:25px;
-// $font-size-text: 14px;
-// $font-size-s:15px;
-// $font-size-banner:53px;
-// $font-size-form:12px;
-// $font-bold:18px;
 
 $font-size-h1: 2.25rem; // 36px / 16
 $font-size-h2: 1.5rem; // 24px / 16
@@ -42,19 +33,4 @@ $font-size-banner: 3.3125rem; // 53px / 16
 $font-size-form: 0.875rem; // 14px / 16
 $font-bold: 1.125rem; // 18px / 16
 
-// $o-theme-font-configs: (
-//     'Roboto': (
-//         'family': ('Roboto', sans-serif),
-//         'url': 'Roboto:300,300i,400,400i,500,500i,700,700i',
-//     ),
-// );
-
-// $o-website-values-palettes: (
-//     (
-//         // Fonts
-//         'font': 'Roboto',
-//         'headings-font': 'Roboto',
-//         'navbar-font': 'Roboto',
-//         'buttons-font': 'Roboto',
-//     ),
-// );
+$navbar-height: 70px;
