@@ -1,0 +1,45 @@
+.continues-carousel-section {
+  .continues-carousel {
+    margin: 20px 0; // Adds spacing between items.
+  }
+
+  .continues-carousel-inner {
+    transition: transform 0.5s ease;
+  }
+
+  .continues-carousel-item {
+    margin: 0 20px; // Adds spacing between items.
+    .card {
+      border-radius: 20px !important;
+    }
+  }
+
+  .card-img-wrapper {
+    position: relative;
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px; /* Apply border-radius here if needed */
+  }
+
+  .card-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+    color: var(--o-color-5);
+    padding: 15px;
+    border-radius: 0 0 20px 20px; /* Match the border-radius of the card */
+    z-index: 1; /* Ensure it's on top of the image */
+  }
+
+  .card-title,
+  .card-text {
+    margin: 0;
+  }
+
+}

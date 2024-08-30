@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="continues_carousal_cards" inherit_id="website.snippets" name="continues Carousel Cards">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_silon.continues_carousal_cards_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_carousel.svg"
+            />
+        </xpath>
+    </template>
+
+    <template id="continues_carousal_cards_snippet" name="continues Carousel Cards">
+        <section class="continues-carousel-section">
+            <div class="container-fluid" style="overflow:hidden">
+                <div id="continues_carousal_sample" class="carousel continues-carousel slide" data-bs-ride="carousel"
+                     data-bs-interval="0">
+                    <div class="continues-carousel-inner d-flex flex-nowrap transition-transform">
+                        <!-- All cards are now direct children of a single carousel-inner -->
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_03" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 1</h5>
+                                        <p class="card-text">This is a description for the first card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_02" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 2</h5>
+                                        <p class="card-text">This is a description for the second card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_01" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 3</h5>
+                                        <p class="card-text">This is a description for the third card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_10" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 4</h5>
+                                        <p class="card-text">This is a description for the fourth card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_05" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 5</h5>
+                                        <p class="card-text">This is a description for the fifth card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_06" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 6</h5>
+                                        <p class="card-text">This is a description for the sixth card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_07" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 7</h5>
+                                        <p class="card-text">This is a description for the seventh card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="continues-carousel-item col-md-3">
+                            <div class="card scale-up-hover">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_08" class="card-img-top"
+                                         alt="Card image"/>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card Title 8</h5>
+                                        <p class="card-text">This is a description for the eighth card.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Indicators for each card :hidden-->
+                    <ul class="carousel-indicators continues-carousel-indicators d-none">
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="2"></li>
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="3"></li>
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="4"></li>
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="5"></li>
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="6"></li>
+                        <li data-bs-target="#continues_carousal_sample" data-bs-slide-to="7"></li>
+                    </ul>
+
+                    <a class="carousel-control-prev o_we_no_overlay o_not_editable" href="#continues_carousal_sample"
+                       data-bs-slide="prev" aria-label="Previous" title="Previous">
+                        <span class="fas fa-chevron-circle-left fa-3x"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next o_we_no_overlay o_not_editable" href="#continues_carousal_sample"
+                       data-bs-slide="next" aria-label="Next" title="Next">
+                        <span class="fas fa-chevron-circle-right fa-3x"></span>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

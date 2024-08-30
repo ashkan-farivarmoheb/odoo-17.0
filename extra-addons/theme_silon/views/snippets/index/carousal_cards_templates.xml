@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="carousal_cards" inherit_id="website.snippets" name="Carousal Cards">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_silon.carousal_cards_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_carousel.svg"
+            />
+        </xpath>
+    </template>
+    <template id="carousal_cards_snippet" name="Carousal Cards">
+        <section class="carousal_cards">
+            <div class="container">
+                <div id="slideshow_sample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0"
+                     style="margin: 0 12px;">
+                    <div class="carousel-inner" style="padding: 0;">
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_03" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 1</h5>
+                                            <p class="card-text">This is a description for the first card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_02" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 2</h5>
+                                            <p class="card-text">This is a description for the second card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_01" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 3</h5>
+                                            <p class="card-text">This is a description for the third card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_03" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 1</h5>
+                                            <p class="card-text">This is a description for the first card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_03" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 1</h5>
+                                            <p class="card-text">This is a description for the first card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_02" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 2</h5>
+                                            <p class="card-text">This is a description for the second card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_01" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 3</h5>
+                                            <p class="card-text">This is a description for the third card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_03" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 1</h5>
+                                            <p class="card-text">This is a description for the first card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_03" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 1</h5>
+                                            <p class="card-text">This is a description for the first card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_02" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 2</h5>
+                                            <p class="card-text">This is a description for the second card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_01" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 3</h5>
+                                            <p class="card-text">This is a description for the third card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="/web/image/website.library_image_03" class="card-img-top"
+                                             alt="Card image"/>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Card Title 1</h5>
+                                            <p class="card-text">This is a description for the first card.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="carousel-indicators">
+                        <li class="o_indicators_left text-center d-none" aria-label="Previous" title="Previous">
+                            <i class="oi oi-chevron-left"/>
+                        </li>
+                        <li data-bs-target="#slideshow_sample" data-bs-slide-to="0"
+                            style="background-image: url(/web/image/website.library_image_08)" class="active"/>
+                        <li data-bs-target="#slideshow_sample" data-bs-slide-to="1"
+                            style="background-image: url(/web/image/website.library_image_03)"/>
+                        <li data-bs-target="#slideshow_sample" data-bs-slide-to="2"
+                            style="background-image: url(/web/image/website.library_image_02)"/>
+                        <li class="o_indicators_right text-center d-none" aria-label="Next" title="Next">
+                            <i class="oi oi-chevron-right"/>
+                        </li>
+                    </ul>
+                    <a class="carousel-control-prev o_we_no_overlay o_not_editable" href="#slideshow_sample"
+                       data-bs-slide="prev" aria-label="Previous" title="Previous">
+                        <span class="oi oi-chevron-left fa-2x text-white"/>
+                        <span class="visually-hidden">Previous</span>
+                    </a>
+                    <a class="carousel-control-next o_we_no_overlay o_not_editable" href="#slideshow_sample"
+                       data-bs-slide="next" aria-label="Next" title="Next">
+                        <span class="oi oi-chevron-right fa-2x text-white"/>
+                        <span class="visually-hidden">Next</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </template>
+
+
+</odoo>
+        <!--         <section class="carousal_cards">-->
+        <!--                    <div class="container">-->
+        <!--                        <div id="slideshow_sample" class="carousel slide" data-bs-ride="carousel" data-bs-interval="0"-->
+        <!--                             style="margin: 0 12px;">-->
+        <!--                            <div class="carousel-inner" style="padding: 0;">-->
+        <!--                                <div class="carousel-item active">-->
+        <!--                                    <div class="row">-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_03" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 1</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the first card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_02" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 2</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the second card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_01" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 3</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the third card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_03" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 1</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the first card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                                <div class="carousel-item">-->
+        <!--                                    <div class="row">-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_03" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 1</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the first card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_02" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 2</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the second card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_01" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 3</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the third card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_03" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 1</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the first card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                                <div class="carousel-item">-->
+        <!--                                    <div class="row">-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_03" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 1</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the first card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_02" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 2</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the second card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_01" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 3</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the third card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="col-md-3">-->
+        <!--                                            <div class="card">-->
+        <!--                                                <img src="/web/image/website.library_image_03" class="card-img-top"-->
+        <!--                                                     alt="Card image"/>-->
+        <!--                                                <div class="card-body">-->
+        <!--                                                    <h5 class="card-title">Card Title 1</h5>-->
+        <!--                                                    <p class="card-text">This is a description for the first card.</p>-->
+        <!--                                                </div>-->
+        <!--                                            </div>-->
+        <!--                                        </div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                            <ul class="carousel-indicators">-->
+        <!--                                <li class="o_indicators_left text-center d-none" aria-label="Previous" title="Previous">-->
+        <!--                                    <i class="oi oi-chevron-left"/>-->
+        <!--                                </li>-->
+        <!--                                <li data-bs-target="#slideshow_sample" data-bs-slide-to="0"-->
+        <!--                                    style="background-image: url(/web/image/website.library_image_08)" class="active"/>-->
+        <!--                                <li data-bs-target="#slideshow_sample" data-bs-slide-to="1"-->
+        <!--                                    style="background-image: url(/web/image/website.library_image_03)"/>-->
+        <!--                                <li data-bs-target="#slideshow_sample" data-bs-slide-to="2"-->
+        <!--                                    style="background-image: url(/web/image/website.library_image_02)"/>-->
+        <!--                                <li class="o_indicators_right text-center d-none" aria-label="Next" title="Next">-->
+        <!--                                    <i class="oi oi-chevron-right"/>-->
+        <!--                                </li>-->
+        <!--                            </ul>-->
+        <!--                            <a class="carousel-control-prev o_we_no_overlay o_not_editable" href="#slideshow_sample"-->
+        <!--                               data-bs-slide="prev" aria-label="Previous" title="Previous">-->
+        <!--                                <span class="oi oi-chevron-left fa-2x text-white"/>-->
+        <!--                                <span class="visually-hidden">Previous</span>-->
+        <!--                            </a>-->
+        <!--                            <a class="carousel-control-next o_we_no_overlay o_not_editable" href="#slideshow_sample"-->
+        <!--                               data-bs-slide="next" aria-label="Next" title="Next">-->
+        <!--                                <span class="oi oi-chevron-right fa-2x text-white"/>-->
+        <!--                                <span class="visually-hidden">Next</span>-->
+        <!--                            </a>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </section>-->
