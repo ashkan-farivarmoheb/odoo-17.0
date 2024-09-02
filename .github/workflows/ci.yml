@@ -18,19 +18,8 @@ permissions:
 env:
   service_name: odoo
   service_version: 17.0
-jobs:
-  docker-login:
-    name: Docker Login
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
 
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+jobs:
   build:
     name: CI
     runs-on: ubuntu-latest
@@ -90,8 +79,10 @@ jobs:
         script: |
           const tag = context.sha.substring(0,7)
           const branch = context.ref.split('/').pop()
+          const ecr_repository = `${process.env.service_name}-${process.env.service_version}`;
           const { owner, repo } = context.repo;
           core.exportVariable('BRANCH', branch);
+          core.exportVariable('ecr_repository', ecr_repository);
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -193,6 +184,36 @@ jobs:
       id: convert_artifact_id_tonumber
       run: |
         echo "artifact-id=${{ fromJSON(steps.artifact-upload-step.outputs.artifact-id) }}" >> "$GITHUB_OUTPUT"
+
+    - name: Log in to Docker Hub
+      id: login-dockerhub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Create Private Docker Repository
+      run: |
+        curl -X POST -H "Authorization: Bearer ${{ secrets.DOCKER_HUB_TOKEN }}" \
+        -H "Content-Type: application/json" \
+        -d '{"name": "${{ env.ecr_repository }}", "is_private": true}' \
+        https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/ || echo "${{ env.ecr_repository }} Repository already exists."
+
+    - name: Build, tag, and push image to DockerHub
+      id: build-image
+      env:
+        DOCKER_REGISTRY: ${{ steps.login-dockerhub.outputs.registry }}
+        DOCKER_REPOSITORY: ${{ env.ecr_repository }}
+        IMAGE_TAG: ${{ env.ecr_image_tag }}
+      run: |
+            docker build -t $DOCKER_REGISTRY/$DOCKER_REPOSITORY:$IMAGE_TAG \
+              --build-arg REPOSITORY=${{ github.repository }} \
+              --build-arg ODOO_VERSION=${{env.service_version}} \
+              --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
+              --build-arg GITHUB_SHA=${{ github.sha }} \
+              --build-arg ARTIFACT_ID=${{ steps.convert_artifact_id_tonumber.outputs.artifact-id }} .
+            docker push $DOCKER_REGISTRY/$DOCKER_REPOSITORY:$IMAGE_TAG
+            echo "::set-output name=image::$DOCKER_REGISTRY/$DOCKER_REPOSITORY:$IMAGE_TAG"
 
     - name: Outputs
       run:  |
