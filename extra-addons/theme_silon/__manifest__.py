@@ -33,6 +33,7 @@
     'depends': ['web', 'website', 'website_mass_mailing', 'website_sale_wishlist'],
     'data': [
         'data/silon_configuration_data.xml',
+        'data/theme_data.xml',
         'security/ir.model.access.csv',
         'views/silon_configuration_views.xml',
         'views/snippets/index/most_popular_templates.xml',

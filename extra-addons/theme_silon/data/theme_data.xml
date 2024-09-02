@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="test" model="ir.attachment">
+        <field name="name">optimized-1001.jpg</field>
+        <field name="type">url</field>
+        <field name="url">/theme_silon/static/src/img/home/optimized-1001.jpg</field>
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+</odoo>
