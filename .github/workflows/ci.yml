@@ -195,10 +195,13 @@ jobs:
 
     - name: Create Private Docker Repository
       run: |
-        curl -X POST -H "Authorization: Bearer ${{ steps.get-jwt-token.outputs.docker_jwt_token }}" \
-        -H "Content-Type: application/json" \
-        -d '{"name": "${{ env.ecr_repository }}", "is_private": true}' \
-        https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/ || echo "${{ env.ecr_repository }} Repository already exists."
+        curl --location 'https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/' \
+        --header 'Authorization: Bearer ${{ steps.get-jwt-token.outputs.docker_jwt_token }}' \
+        --header 'Content-Type: application/json' \
+        --data '{
+            "name": "${{ env.ecr_repository }}",
+            "is_private": true
+        }' || echo "${{ env.ecr_repository }} Repository already exists."
 
     - name: Build, tag, and push image to DockerHub
       id: build-image
