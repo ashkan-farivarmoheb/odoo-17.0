@@ -23,7 +23,6 @@ jobs:
   build:
     name: CI
     runs-on: ubuntu-latest
-    needs: docker-login
     outputs:
       artifact-id: ${{ steps.convert_artifact_id_tonumber.outputs.artifact-id }}
       artifact_name: ${{ steps.deb_package_step.outputs.artifact_name}}
