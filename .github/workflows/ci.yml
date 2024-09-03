@@ -118,6 +118,14 @@ jobs:
           core.exportVariable('ecr_repository', ecr_repository);
           core.exportVariable('image_tag', image_tag);
 
+    - name: Scan Source Code for Vulnerabilities
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        trivy-config: trivy.yaml
+        scan-options: '--scanners vuln'
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -191,13 +199,6 @@ jobs:
         && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
         pip install -r requirements.txt
 
-    - name: Scan Source Code for Vulnerabilities
-      uses: aquasecurity/trivy-action@0.20.0
-      with:
-        scan-type: 'fs'
-        scan-ref: '.'
-        trivy-config: trivy.yaml
-
     - name: Build Odoo Module
       run: |
         ./odoo-bin -c resources/odoo-local.conf --without-demo=all --stop-after-init
@@ -246,6 +247,7 @@ jobs:
         scan-type: 'image'
         scan-ref: ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
         trivy-config: trivy.yaml
+        scan-options: '--scanners vuln'
 
     - name: Push Docker image to Docker Hub
       env:
