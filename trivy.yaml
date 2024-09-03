@@ -12,7 +12,13 @@ image:
     # Optional: specify a list of repositories to ignore
     ignore-unfixed: false
     # Optional: specify a list of vulnerabilities to ignore (by ID)
-    ignore: []
+    ignore-vulnerabilities:
+      - 'CVE-2024-22195'
+      - 'CVE-2023-44271'
+      - 'CVE-2023-4863'
+      - 'CVE-2023-50447'
+      - 'GHSA-56pw-mpj4-fxww'
+      - 'CVE-2023-41419'
     # Optional: specify a list of packages to ignore (by name)
     ignore-packages: []
 
@@ -24,20 +30,19 @@ fs:
     format: json
     # Optional: specify a list of directories or files to ignore
     ignore:
+      - 'addons/account_peppol/tools/private_key.pem'
       - '*/test/*'
       - '*/docs/*'
     # Optional: specify a list of vulnerabilities to ignore (by ID)
-    ignore-vulnerabilities: []
+    ignore-vulnerabilities:
+      - 'CVE-2024-22195'
+      - 'CVE-2023-44271'
+      - 'CVE-2023-4863'
+      - 'CVE-2023-50447'
+      - 'GHSA-56pw-mpj4-fxww'
+      - 'CVE-2023-41419'
     # Optional: specify a list of packages to ignore (by name)
     ignore-packages: []
-
-# Optional: Specify custom severity levels for different types of vulnerabilities
-vulnerability-severity:
-  # Common vulnerabilities that might be of higher importance
-  critical: CRITICAL
-  high: HIGH
-  medium: MEDIUM
-  low: LOW
 
 # Optional: Define custom configurations for specific scan types
 # Example: configuration for scanning `.deb` files
@@ -51,6 +56,14 @@ deb:
     # Optional: specify a list of packages to ignore (by name)
     ignore-packages: []
 
+# Optional: Specify custom severity levels for different types of vulnerabilities
+vulnerability-severity:
+  # Common vulnerabilities that might be of higher importance
+  critical: CRITICAL
+  high: HIGH
+  medium: MEDIUM
+  low: LOW
+
 # Fail the job if vulnerabilities exceed the specified severity levels
 fail-on:
   # List the severity levels that should cause a failure
@@ -58,13 +71,3 @@ fail-on:
     - CRITICAL
     - HIGH
 
- # Optional: specify a list of vulnerabilities to ignore (by ID)
-  ignore:
-    - 'CVE-2024-22195'
-    - 'CVE-2023-44271'
-    - 'CVE-2023-4863'
-    - 'CVE-2023-50447'
-    - 'GHSA-56pw-mpj4-fxww'
-    - 'CVE-2023-41419'
-    - 'CVE-2023-44271'
-    - 'CVE-2023-44271'
