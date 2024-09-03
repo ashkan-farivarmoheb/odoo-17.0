@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="magical_hover_cards" inherit_id="website.snippets" name="Magical Hover Cards">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_silon.magical_hover_cards_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_carousel.svg"
+            />
+        </xpath>
+    </template>
+
+    <template id="magical_hover_cards_snippet" name="Magical Hover Cards">
+        <section class="magical_hover-section">
+            <div class="container" style="overflow:hidden">
+                <div class="magical_hover_cards">
+                    <div class="row justify-content-center">
+                        <div class="magical_hover_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="magical_hover_card_content">
+                                <div class="card-image">
+                                    <i class="fa-solid fa-building"></i>
+                                </div>
+                                <div class="card-info-wrapper">
+                                    <div class="card-info">
+                                        <i class="fa-solid fa-building"></i>
+                                        <div class="card-info-title">
+                                            <h3>Apartments</h3>
+                                            <h4>Places to be apart. Wait, what?</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="magical_hover_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="magical_hover_card_content">
+                                <div class="card-image">
+                                    <i class="fa-solid fa-handshake"></i>
+                                </div>
+                                <div class="card-info-wrapper">
+                                    <div class="card-info">
+                                        <i class="fa-solid fa-handshake"></i>
+                                        <div class="card-info-title">
+                                            <h3>Unicorns</h3>
+                                            <h4>A single corn. Er, I mean horn.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="magical_hover_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="magical_hover_card_content">
+                                <div class="card-image">
+                                    <i class="fa-solid fa-person"></i>
+                                </div>
+                                <div class="card-info-wrapper">
+                                    <div class="card-info">
+                                        <i class="fa-solid fa-person"></i>
+                                        <div class="card-info-title">
+                                            <h3>Blender Phones</h3>
+                                            <h4>These absolutely deserve to exist.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="magical_hover_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="magical_hover_card_content">
+                                <div class="card-image">
+                                    <i class="fa-solid fa-address-book"></i>
+                                </div>
+                                <div class="card-info-wrapper">
+                                    <div class="card-info">
+                                        <i class="fa-solid fa-address-book"></i>
+                                        <div class="card-info-title">
+                                            <h3>Adios</h3>
+                                            <h4>See you...</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="magical_hover_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="magical_hover_card_content">
+                                <div class="card-image">
+                                    <i class="fa-solid fa-sliders"></i>
+                                </div>
+                                <div class="card-info-wrapper">
+                                    <div class="card-info">
+                                        <i class="fa-solid fa-sliders"></i>
+                                        <div class="card-info-title">
+                                            <h3>I mean hello</h3>
+                                            <h4>...over here.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="magical_hover_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="magical_hover_card_content">
+                                <div class="card-image">
+                                    <i class="fa-solid fa-flask"></i>
+                                </div>
+                                <div class="card-info-wrapper">
+                                    <div class="card-info">
+                                        <i class="fa-solid fa-flask"></i>
+                                        <div class="card-info-title">
+                                            <h3>Otters</h3>
+                                            <h4>Look at me, imma cute lil fella.</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

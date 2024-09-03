@@ -1,0 +1,122 @@
+.magical_hover-section {
+  --bg-color: rgb(255, 255, 255); // Background color for the card
+  --card-color: rgb(23, 23, 23); // Color for the card content
+
+  .magical_hover_cards {
+    max-width: 900px; // Maximum width of the card container
+    margin: auto; // Center the container horizontally
+
+    &:hover .magical_hover_card::after {
+      opacity: 1; // Ensure the effect shows when the container is hovered
+    }
+  }
+
+  .magical_hover_card {
+    background-color: var(--bg-color); // Set the background color for the card
+    border-radius: 20px; // Rounded corners for the card
+    cursor: pointer; // Change the cursor to a pointer on hover
+    display: flex; // Flexbox layout for the card
+    height: 260px; // Fixed height for the card
+    flex-direction: column; // Stack children vertically
+    position: relative; // Set positioning context for pseudo-elements
+    width: 300px; // Fixed width for the card
+
+    &:hover::before {
+      opacity: 1; // Show the ::before element when the card is hovered
+    }
+
+    &::before,
+    &::after {
+      border-radius: inherit; // Inherit border-radius from the card
+      content: ""; // Required to create the pseudo-element
+      height: 100%; // Full height of the card
+      left: 0px; // Align to the left of the card
+      opacity: 0; // Start hidden
+      position: absolute; // Absolute positioning relative to the card
+      top: 0px; // Align to the top of the card
+      transition: opacity 500ms; // Smooth transition for opacity changes
+      width: 100%; // Full width of the card
+    }
+
+    &::before {
+      background: radial-gradient(
+                      800px circle at var(--mouse-x) var(--mouse-y),
+                      rgba(255, 255, 255, 0.06), // Light white gradient
+                      transparent 1%
+      );
+      z-index: 3; // Position behind the card content
+    }
+
+    &::after {
+      background: radial-gradient(
+                      600px circle at var(--mouse-x) var(--mouse-y),
+                      rgba(255, 255, 255, 0.4), // Slightly more opaque gradient
+                      transparent 40%
+      );
+      z-index: 5; // Position in front of ::before but behind content
+    }
+
+    & .magical_hover_card_content {
+      background-color: var(--card-color); // Background color for the card content
+      border-radius: inherit; // Inherit the border-radius from the card
+      inset: 1px; // Slightly inset the content within the card
+      padding: 10px; // Padding inside the card content
+      position: absolute; // Position relative to the card
+      z-index: 2; // Ensure content is above ::before but below ::after
+    }
+
+    h1, h2, h3, h4, span {
+      color: rgb(240, 240, 240); // Text color
+    }
+
+    i {
+      color: rgb(240, 240, 240); // icons color
+    }
+
+    .card-image {
+      align-items: center; // Center items vertically
+      display: flex; // Flexbox layout
+      height: 140px; // Fixed height for the image area
+      justify-content: center; // Center items horizontally
+      overflow: hidden; // Hide overflow content
+
+      > i {
+        font-size: 6em; // Large icon size
+        opacity: 0.25; // Slight transparency for the icon
+      }
+    }
+
+    .card-info-wrapper {
+      align-items: center; // Center items vertically
+      display: flex; // Flexbox layout
+      flex-grow: 1; // Allow the wrapper to grow to fill space
+      justify-content: flex-start; // Align items to the start
+      padding: 0px 20px; // Padding on the left and right
+    }
+
+    .card-info {
+      align-items: flex-start; // Align items to the start vertically
+      display: flex; // Flexbox layout
+      gap: 10px; // Space between items
+
+      > i {
+        font-size: 1em; // Icon size
+        height: 20px; // Fixed height for icons
+        line-height: 20px; // Line height to center icons vertically
+      }
+    }
+
+    .card-info-title {
+      > h3 {
+        font-size: 1.1em; // Font size for the main title
+        line-height: 20px; // Line height matching the icon height
+      }
+
+      > h4 {
+        color: rgba(255, 255, 255, 0.5); // Slightly faded text color
+        font-size: 0.85em; // Smaller font size for the subtitle
+        margin-top: 8px; // Space above the subtitle
+      }
+    }
+  }
+}
