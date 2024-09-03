@@ -123,7 +123,7 @@ jobs:
       with:
         scan-type: 'fs'
         scan-ref: '.'
-        trivy-config: trivy.yaml
+        trivy-config: './trivy.yaml'
         scan-options: '--scanners vuln'
 
     - name: Set up Python 3.10
@@ -249,7 +249,7 @@ jobs:
       with:
         scan-type: 'image'
         scan-ref: ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
-        trivy-config: trivy.yaml
+        trivy-config: './trivy.yaml'
         scan-options: '--scanners vuln'
 
     - name: Push Docker image to Docker Hub
