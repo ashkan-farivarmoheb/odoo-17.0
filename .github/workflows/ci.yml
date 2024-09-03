@@ -195,7 +195,6 @@ jobs:
 
     - name: Create Private Docker Repository
       run: |
-        echo ${{ steps.get-jwt-token.outputs.docker_jwt_token }} \
         curl --location 'https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/' \
         --header 'Authorization: Bearer ${{ steps.get-jwt-token.outputs.docker_jwt_token }}' \
         --header 'Content-Type: application/json' \
