@@ -1,0 +1,52 @@
+# General settings applicable to all scan types
+trivy:
+  # Default to high severity and above
+  severity: CRITICAL,HIGH
+
+# Docker image scanning configuration
+image:
+  # Define settings for Docker image scanning
+  image:
+    # The format of the output report, can be json, template, etc.
+    format: json
+    # Optional: specify a list of repositories to ignore
+    ignore-unfixed: false
+    # Optional: specify a list of vulnerabilities to ignore (by ID)
+    ignore: []
+    # Optional: specify a list of packages to ignore (by name)
+    ignore-packages: []
+
+# Filesystem scanning configuration (for source code and .deb files)
+fs:
+  # Define settings for filesystem scanning
+  fs:
+    # The format of the output report, can be json, template, etc.
+    format: json
+    # Optional: specify a list of directories or files to ignore
+    ignore:
+      - '*/test/*'
+      - '*/docs/*'
+    # Optional: specify a list of vulnerabilities to ignore (by ID)
+    ignore-vulnerabilities: []
+    # Optional: specify a list of packages to ignore (by name)
+    ignore-packages: []
+
+# Optional: Specify custom severity levels for different types of vulnerabilities
+vulnerability-severity:
+  # Common vulnerabilities that might be of higher importance
+  critical: CRITICAL
+  high: HIGH
+  medium: MEDIUM
+  low: LOW
+
+# Optional: Define custom configurations for specific scan types
+# Example: configuration for scanning `.deb` files
+deb:
+  # Define settings for `.deb` file scanning
+  deb:
+    # The format of the output report, can be json, template, etc.
+    format: json
+    # Optional: specify a list of vulnerabilities to ignore (by ID)
+    ignore: []
+    # Optional: specify a list of packages to ignore (by name)
+    ignore-packages: []

@@ -191,6 +191,13 @@ jobs:
         && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
         pip install -r requirements.txt
 
+    - name: Scan Source Code for Vulnerabilities
+      uses: aquasecurity/trivy-action@v0.20.0
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        trivy-config: trivy.yaml
+
     - name: Build Odoo Module
       run: |
         ./odoo-bin -c resources/odoo-local.conf --without-demo=all --stop-after-init
@@ -219,10 +226,9 @@ jobs:
       run: |
         echo "artifact-id=${{ fromJSON(steps.artifact-upload-step.outputs.artifact-id) }}" >> "$GITHUB_OUTPUT"
 
-    - name: Build, tag, and push image to DockerHub
+    - name: Build, tag image
       id: build-image
       env:
-        DOCKER_REGISTRY: ${{ steps.login-dockerhub.outputs.registry }}
         DOCKER_REPOSITORY: ${{ env.ecr_repository }}
         IMAGE_TAG: ${{ env.image_tag }}
       run: |
@@ -233,7 +239,21 @@ jobs:
               --build-arg GITHUB_SHA=${{ github.sha }} \
               --build-arg ARTIFACT_ID=${{ steps.convert_artifact_id_tonumber.outputs.artifact-id }} .
             docker push ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
-            echo "::set-output name=image::${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG"
+
+    - name: Scan Docker image for vulnerabilities
+      uses: aquasecurity/trivy-action@v0.20.0
+      with:
+        scan-type: 'image'
+        scan-ref: ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
+        trivy-config: trivy.yaml
+
+    - name: Push Docker image to Docker Hub
+      env:
+        DOCKER_REPOSITORY: ${{ env.ecr_repository }}
+        IMAGE_TAG: ${{ env.image_tag }}
+      run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG"
 
     - name: Outputs
       run:  |
