@@ -192,7 +192,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Scan Source Code for Vulnerabilities
-      uses: aquasecurity/trivy-action@v0.20.0
+      uses: aquasecurity/trivy-action@0.20.0
       with:
         scan-type: 'fs'
         scan-ref: '.'
@@ -241,7 +241,7 @@ jobs:
             docker push ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
 
     - name: Scan Docker image for vulnerabilities
-      uses: aquasecurity/trivy-action@v0.20.0
+      uses: aquasecurity/trivy-action@0.20.0
       with:
         scan-type: 'image'
         scan-ref: ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
