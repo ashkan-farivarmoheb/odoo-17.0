@@ -50,3 +50,21 @@ deb:
     ignore: []
     # Optional: specify a list of packages to ignore (by name)
     ignore-packages: []
+
+# Fail the job if vulnerabilities exceed the specified severity levels
+fail-on:
+  # List the severity levels that should cause a failure
+  severity:
+    - CRITICAL
+    - HIGH
+
+ # Optional: specify a list of vulnerabilities to ignore (by ID)
+  ignore:
+    - 'CVE-2024-22195'
+    - 'CVE-2023-44271'
+    - 'CVE-2023-4863'
+    - 'CVE-2023-50447'
+    - 'GHSA-56pw-mpj4-fxww'
+    - 'CVE-2023-41419'
+    - 'CVE-2023-44271'
+    - 'CVE-2023-44271'

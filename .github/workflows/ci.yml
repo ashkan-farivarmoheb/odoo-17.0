@@ -243,6 +243,9 @@ jobs:
 
     - name: Scan Docker image for vulnerabilities
       uses: aquasecurity/trivy-action@0.20.0
+      env:
+        DOCKER_REPOSITORY: ${{ env.ecr_repository }}
+        IMAGE_TAG: ${{ env.image_tag }}
       with:
         scan-type: 'image'
         scan-ref: ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
