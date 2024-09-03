@@ -203,12 +203,22 @@ jobs:
             "is_private": true
         }' || echo "${{ env.ecr_repository }} Repository already exists."
 
+    - name: Set ecr_image_tag
+      id: set-image-tag
+      run: |
+          if [[ "${{ env.BRANCH }}'}" == "develop" ]]; then
+            image_tag="develop-${{ github.sha }}"
+          else
+            image_tag="snapshot-${{ github.sha }}"
+          fi
+          echo "image_tag=$image_tag" >> "$GITHUB_ENV"
+
     - name: Build, tag, and push image to DockerHub
       id: build-image
       env:
         DOCKER_REGISTRY: ${{ steps.login-dockerhub.outputs.registry }}
         DOCKER_REPOSITORY: ${{ env.ecr_repository }}
-        IMAGE_TAG: ${{ env.ecr_image_tag }}
+        IMAGE_TAG: ${{ env.image_tag }}
       run: |
             docker build -t ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG \
               --build-arg REPOSITORY=${{ github.repository }} \
