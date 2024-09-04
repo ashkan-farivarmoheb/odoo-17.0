@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="glowing_blob" inherit_id="website.snippets" name="Glowing Blob">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_silon.glowing_blob_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_title.svg"
+            />
+        </xpath>
+    </template>
+    <template id="glowing_blob_snippet" name="Glowing Blob">
+        <section class="glowing_blob_section">
+            <div class="container d-flex justify-content-center align-items-center h-100">
+                <div class="row w-100">
+                    <div class="col-12 d-flex justify-content-center align-items-center">
+                        <h1 class="display-1" data-value="MOUSEMOVE">MOUSEMOVE</h1>
+                    </div>
+                </div>
+                <div class="blob"></div>
+            </div>
+        </section>
+    </template>
+
+
+</odoo>

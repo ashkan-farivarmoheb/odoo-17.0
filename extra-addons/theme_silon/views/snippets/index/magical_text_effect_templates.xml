@@ -11,7 +11,7 @@
         <section class="magical_text_effect_section">
             <div class="container">
                 <div class="magic-body">
-                    <h1>
+                    <h1 class="display-1">
                         Sometimes I'll start a line of code and I
                         <span class="magic">
                             <span class="magic-star">
