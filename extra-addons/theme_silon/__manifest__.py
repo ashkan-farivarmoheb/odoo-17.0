@@ -91,7 +91,7 @@
             'theme_silon/static/src/scss/pages/home/_trending.scss',
             'theme_silon/static/src/scss/pages/home/_follow-us.scss',
             'theme_silon/static/src/scss/pages/home/_most-popular.scss',
-            'theme_silon/static/src/scss/pages/home/magical_hover_cards.scss',
+            'theme_silon/static/src/scss/pages/home/_magical_hover_cards.scss',
             'theme_silon/static/src/scss/pages/_maincontents.scss',
             'theme_silon/static/src/scss/pages/_product.scss',
             'theme_silon/static/src/scss/pages/_about.scss',
