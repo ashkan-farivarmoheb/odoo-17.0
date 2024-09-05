@@ -1,0 +1,25 @@
+.video_onScroll_section {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  .sticky-video-container {
+    position: sticky;
+    top: $navbar-height; // Ensure the video sticks to the top of the viewport
+    height: 100vh; // Full viewport height
+    //display: flex;
+    //align-items: center; // Vertically center the video
+    //justify-content: center; // Horizontally center the video
+    overflow: hidden; // Ensure the video doesn't overflow
+  }
+
+  video {
+    width: 100%; // Video takes full width of the container
+    height: 100%; // Constrain video height to match the container height
+    //object-fit: cover; // Ensure video maintains aspect ratio and fits within the container
+  }
+
+  .scroll-section {
+    background: transparent;
+    min-height: 300vh; // Provide enough scrolling space for sticky effect
+  }
+}

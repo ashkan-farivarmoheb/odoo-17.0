@@ -55,6 +55,7 @@
         'views/snippets/index/magical_hover_templates.xml',
         'views/snippets/index/magical_text_effect_templates.xml',
         'views/snippets/index/glowing_blob_templates.xml',
+        'views/snippets/index/video_onScroll_templates.xml',
         'views/megamenu_template.xml',
         'views/footer_templates.xml',
         'views/header_templates.xml',
@@ -96,6 +97,7 @@
             'theme_silon/static/src/scss/pages/home/_magical_hover_cards.scss',
             'theme_silon/static/src/scss/pages/home/_magical_text_effect.scss',
             'theme_silon/static/src/scss/pages/home/glowing_blob_effect.scss',
+            'theme_silon/static/src/scss/pages/home/_video_onScroll.scss',
             'theme_silon/static/src/scss/pages/_maincontents.scss',
             'theme_silon/static/src/scss/pages/_product.scss',
             'theme_silon/static/src/scss/pages/_about.scss',
@@ -111,6 +113,7 @@
             'theme_silon/static/src/js/magical_hover_effect.js',
             'theme_silon/static/src/js/magical_text_effect.js',
             'theme_silon/static/src/js/glowing_blob_effect.js',
+            'theme_silon/static/src/js/video_onScroll.js',
         ],
     },
     'images': [

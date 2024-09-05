@@ -1,0 +1,26 @@
+<odoo>
+    <template id="video_onScroll" inherit_id="website.snippets" name="Video on Scroll">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_silon.video_onScroll_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_video.svg"
+            />
+        </xpath>
+    </template>
+
+    <template id="video_onScroll_snippet" name="Video on Scroll">
+        <section class="video_onScroll_section">
+            <div class="scroll-section">
+                <div class="sticky-video-container">
+                    <video muted="muted" preload="preload">
+                        <source type="video/mp4; codecs=&quot;avc1.42E01E, mp4a.40.2&quot;"
+                                src="/web/content/theme_silon.apple_video"/>
+                        <p>Your browser does not support the HTML5 Video element.</p>
+                    </video>
+                </div>
+            </div>
+
+        </section>
+
+
+    </template>
+</odoo>
