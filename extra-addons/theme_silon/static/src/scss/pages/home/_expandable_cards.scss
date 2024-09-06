@@ -1,0 +1,107 @@
+.expandable_cards_section {
+  --bg-color: rgb(255, 255, 255); /* Background color for the card */
+  --card-color: rgb(23, 23, 23); /* Color for the card content */
+
+  .expandable_cards {
+    margin: auto; /* Center the container horizontally */
+    max-width: 900px; // Maximum width of the card container
+
+  }
+
+  .expandable_card {
+    background-color: var(--bg-color); /* Set the background color for the card */
+    border-radius: 20px; /* Rounded corners for the card */
+    cursor: pointer; /* Change the cursor to a pointer on hover */
+    display: flex; /* Flexbox layout for the card */
+    height: 260px; /* Fixed height for the card */
+    flex-direction: column; /* Stack children vertically */
+    position: relative; /* Set positioning context for pseudo-elements */
+    width: 300px; /* Fixed width for the card */
+
+    .expandable_card_content {
+      position: relative; /* Position the image container relative */
+      height: 100%; /* Ensure it fills the available space */
+      width: 100%; /* Ensure it fills the available space */
+      z-index: 2; /* Ensure content is above ::before but below ::after */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between; /* Ensure content like the plus icon stays at the bottom */
+    }
+
+
+    .icon-plus {
+      position: absolute;
+      bottom: 15px; /* Adjust as needed */
+      right: 15px; /* Adjust as needed */
+      font-size: 18px; /* Adjust icon size as needed */
+      background-color: rgba(255, 255, 255, 0.8); /* Add a background for contrast */
+      padding: 5px; /* Padding for better clickability */
+      border-radius: 50%; /* Make the icon circular */
+      transition: transform 0.3s ease-in-out; /* Smooth rotation */
+      z-index: 2; /* Ensure it’s on top of other content */
+    }
+
+    .card-img-wrapper {
+      position: relative; /* Position the image container relative */
+      height: 100%; /* Ensure it fills the available space */
+      width: 100%; /* Ensure it fills the available space */
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)); /* Gradient overlay */
+        z-index: 1; /* Ensure overlay is on top of the image but below the card body */
+        border-radius: 20px; /* Match the card border-radius */
+      }
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 20px; /* Apply border-radius here if needed */
+      object-fit: cover; /* Ensure the image covers the entire area */
+    }
+
+    .card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+      color: var(--o-color-4);
+      padding: 15px;
+      border-radius: 0 0 20px 20px; /* Match the border-radius of the card */
+      z-index: 2; /* Ensure it's on top of the overlay */
+      transition: height 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Add transition for height and opacity */
+      height: 60px; /* Initial height to only show the title */
+      overflow: hidden; /* Hide the overflowing text */
+    }
+
+    .card-title {
+      margin: 0;
+    }
+
+    .card-text {
+      margin: 0;
+      opacity: 0; /* Initially hide the text */
+      transition: opacity 0.3s ease-in-out; /* Smooth opacity transition */
+    }
+
+    &.expanded .card-body {
+      height: 160px; /* Increase height when expanded */
+    }
+
+    &.expanded .card-text {
+      opacity: 1; /* Show text when expanded */
+    }
+
+    &.expanded .icon-plus {
+      transform: rotate(45deg); /* Rotate the plus icon when expanded */
+    }
+  }
+}
