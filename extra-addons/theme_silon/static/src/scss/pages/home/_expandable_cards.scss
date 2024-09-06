@@ -9,7 +9,7 @@
   }
 
   .expandable_card {
-    background-color: var(--bg-color); /* Set the background color for the card */
+    background-color: transparent; /* Set the background color for the card */
     border-radius: 20px; /* Rounded corners for the card */
     cursor: pointer; /* Change the cursor to a pointer on hover */
     display: flex; /* Flexbox layout for the card */

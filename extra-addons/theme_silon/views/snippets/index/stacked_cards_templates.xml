@@ -16,10 +16,10 @@
                     </h2>
                 </div>
 
-                <div class="card o_card">
+                <div class="card o_colored_level o_cc o_cc4">
                     <div class="row align-items-center">
                         <div class="col-md-6 d-flex flex-column justify-content-center">
-                            <div class="card-body">
+                            <div class="card-body o_colored_level o_cc o_cc4">
                                 <h2 class="card-title">Card 1 Header</h2>
                                 <p class="card-text">
                                     This is some sample text content for Card 1. It uses Odoo's built-in classes for
@@ -36,10 +36,10 @@
                     </div>
                 </div>
                 <!-- Add more cards here if needed -->
-                <div class="card o_card">
+                <div class="card o_colored_level o_cc o_cc4">
                     <div class="row align-items-center">
                         <div class="col-md-6 d-flex flex-column justify-content-center">
-                            <div class="card-body">
+                            <div class="card-body o_colored_level o_cc o_cc4">
                                 <h2 class="card-title">Card 1 Header</h2>
                                 <p class="card-text">
                                     This is some sample text content for Card 1. It uses Odoo's built-in classes for
@@ -55,10 +55,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="card o_card">
+                <div class="card o_colored_level o_cc o_cc4">
                     <div class="row align-items-center">
                         <div class="col-md-6 d-flex flex-column justify-content-center">
-                            <div class="card-body">
+                            <div class="card-body o_colored_level o_cc o_cc4">
                                 <h2 class="card-title">Card 1 Header</h2>
                                 <p class="card-text">
                                     This is some sample text content for Card 1. It uses Odoo's built-in classes for
