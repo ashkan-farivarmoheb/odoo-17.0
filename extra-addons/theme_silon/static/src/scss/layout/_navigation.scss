@@ -91,15 +91,15 @@
   }
 }
 
-.navbar-expand-lg.dropdown-menu.o_mega_menu {
-  top: 100% !important; // Fixed value, adjust as per the actual header height
-  width: 100%; // Ensure it covers the full width of the container
-  position: absolute; // Ensure it is positioned relative to the containing element
-  left: 0; // Align to the left edge of the container
-  z-index: 1000; // Ensure it is above other content
-  background-color: $color-white; // Background color
-  //transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
-}
+//.navbar-expand-lg.dropdown-menu.o_mega_menu {
+//  top: 100% !important; // Fixed value, adjust as per the actual header height
+//  width: 100%; // Ensure it covers the full width of the container
+//  position: absolute; // Ensure it is positioned relative to the containing element
+//  left: 0; // Align to the left edge of the container
+//  z-index: 1000; // Ensure it is above other content
+//  background-color: $color-white; // Background color
+//  //transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
+//}
 
 /* Add styles for the link */
 
