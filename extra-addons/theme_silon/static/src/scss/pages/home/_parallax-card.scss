@@ -5,6 +5,10 @@
     position: relative;
   }
 
+  .card {
+    background-color: $color-white;
+  }
+
   .card-hover {
     z-index: 2; /* Card with higher z-index shows on hover */
     display: none; /* Initially hidden */

@@ -10,7 +10,7 @@ $color-pink: #fab4bf;
 $color-black: #000000;
 $color-grey: #858585;
 $color-offwhite: #e6e4e4d1;
-$color-footer: #081c21;
+$color-footer: o-color('o-color-1');
 $color-banner_product: #0b393edb;
 $color-border: #cfcdcd;
 $color-bg-heading: #e6e4e4d1;
@@ -19,7 +19,7 @@ $color-whitesmoke: #f5f5f5;
 $color-primary: o-color('o-color-1');
 $color-secondary: o-color('o-color-2');
 $color-thirdly: o-color('o-color-3');
-$color-gradiant: linear-gradient(to right, #02303d, #ceefe6);
+$color-gradiant: linear-gradient(to right, o-color('o-color-1'), o-color('o-color-2'));
 
 
 $font-size-h1: 2.25rem; // 36px / 16

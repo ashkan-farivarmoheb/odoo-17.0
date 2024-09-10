@@ -1,9 +1,11 @@
 .s_tabs {
+  background: o-color('o-color-1');
+
   .s_tabs_main {
 
     border-radius: 0.4rem;
     overflow: hidden;
-    box-shadow: -2px 8px 25px rgba(155, 165, 207, 0.21);
+    box-shadow: 15px 15px 30px rgba(255, 255, 255, 0.3);
 
     .s_tabs_content {
       background: o-color('o-color-4');
@@ -17,6 +19,20 @@
         .nav-link {
           border-bottom-right-radius: 0px;
           border-top-right-radius: 0px;
+          color: o-color('o-color-2');
+
+          //span {
+          //  color: o-color('o-color-2');
+          //
+          //}
+          //
+          //#text {
+          //  color: o-color('o-color-2');
+          //
+          //}
+
+          //background-color: $color-white !important;
+
 
           //display: flex;
           //align-items: center;
@@ -28,8 +44,8 @@
 
         .nav-link.active {
           background: o-color('o-color-4');
-          border-left: 4px solid o-color('o-color-7');
-          color: o-color('o-color-7');
+          border-left: 4px solid o-color('o-color-2');
+          color: o-color('o-color-2');
         }
       }
     }
