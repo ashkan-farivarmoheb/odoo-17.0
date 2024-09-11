@@ -1,6 +1,6 @@
 timeout: 10m
 format: json
-dependency-tree: true
+dependency-tree: false
 list-all-pkgs: true
 exit-code: 1
 output: vulnerability.json
@@ -15,10 +15,10 @@ scan:
       - '*/docs/*'
     skip-files:
       - requirements.txt
-    security-checks:
+    scanners:
       - vuln
       - secret
-      - config
+      - misconfig
     vulnerability:
         type:
           - os
