@@ -1,73 +1,26 @@
-# General settings applicable to all scan types
-trivy:
-  # Default to high severity and above
-  severity: CRITICAL,HIGH
-
-# Docker image scanning configuration
-image:
-  # Define settings for Docker image scanning
-  image:
-    # The format of the output report, can be json, template, etc.
-    format: json
-    # Optional: specify a list of repositories to ignore
-    ignore-unfixed: false
-    # Optional: specify a list of vulnerabilities to ignore (by ID)
-    ignore-vulnerabilities:
-      - 'CVE-2024-22195'
-      - 'CVE-2023-44271'
-      - 'CVE-2023-4863'
-      - 'CVE-2023-50447'
-      - 'GHSA-56pw-mpj4-fxww'
-      - 'CVE-2023-41419'
-    # Optional: specify a list of packages to ignore (by name)
-    ignore-packages: []
-
-# Filesystem scanning configuration (for source code and .deb files)
-fs:
-  # Define settings for filesystem scanning
-  fs:
-    # The format of the output report, can be json, template, etc.
-    format: json
-    # Optional: specify a list of directories or files to ignore
-    ignore:
-      - 'addons/account_peppol/tools/private_key.pem'
+timeout: 10m
+format: json
+dependency-tree: true
+list-all-pkgs: true
+exit-code: 1
+output: vulnerability.json
+severity:
+  - HIGH
+  - CRITICAL
+scan:
+    skip-dirs:
+      - addons/
+      - odoo/
       - '*/test/*'
       - '*/docs/*'
-    # Optional: specify a list of vulnerabilities to ignore (by ID)
-    ignore-vulnerabilities:
-      - 'CVE-2024-22195'
-      - 'CVE-2023-44271'
-      - 'CVE-2023-4863'
-      - 'CVE-2023-50447'
-      - 'GHSA-56pw-mpj4-fxww'
-      - 'CVE-2023-41419'
-    # Optional: specify a list of packages to ignore (by name)
-    ignore-packages: []
-
-# Optional: Define custom configurations for specific scan types
-# Example: configuration for scanning `.deb` files
-deb:
-  # Define settings for `.deb` file scanning
-  deb:
-    # The format of the output report, can be json, template, etc.
-    format: json
-    # Optional: specify a list of vulnerabilities to ignore (by ID)
-    ignore: []
-    # Optional: specify a list of packages to ignore (by name)
-    ignore-packages: []
-
-# Optional: Specify custom severity levels for different types of vulnerabilities
-vulnerability-severity:
-  # Common vulnerabilities that might be of higher importance
-  critical: CRITICAL
-  high: HIGH
-  medium: MEDIUM
-  low: LOW
-
-# Fail the job if vulnerabilities exceed the specified severity levels
-fail-on:
-  # List the severity levels that should cause a failure
-  severity:
-    - CRITICAL
-    - HIGH
-
+    skip-files:
+      - requirements.txt
+    security-checks:
+      - vuln
+      - secret
+      - config
+    vulnerability:
+        type:
+          - os
+          - library
+        ignore-unfixed: false

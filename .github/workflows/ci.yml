@@ -123,8 +123,7 @@ jobs:
       with:
         scan-type: 'fs'
         scan-ref: '.'
-        trivy-config: './trivy.yaml'
-        scan-options: '--scanners vuln'
+        trivy-config: 'trivy.yaml'
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -239,7 +238,6 @@ jobs:
               --build-arg GITHUB_TOKEN=${{secrets.GITHUB_TOKEN}} \
               --build-arg GITHUB_SHA=${{ github.sha }} \
               --build-arg ARTIFACT_ID=${{ steps.convert_artifact_id_tonumber.outputs.artifact-id }} .
-            docker push ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
 
     - name: Scan Docker image for vulnerabilities
       uses: aquasecurity/trivy-action@0.20.0
@@ -247,10 +245,9 @@ jobs:
         DOCKER_REPOSITORY: ${{ env.ecr_repository }}
         IMAGE_TAG: ${{ env.image_tag }}
       with:
-        scan-type: 'image'
-        scan-ref: ${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG
-        trivy-config: './trivy.yaml'
-        scan-options: '--scanners vuln'
+        scan-type: image
+        image-ref: "${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG"
+        trivy-config: 'trivy.yaml'
 
     - name: Push Docker image to Docker Hub
       env:
