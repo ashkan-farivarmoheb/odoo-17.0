@@ -1,6 +1,4 @@
 FROM ubuntu:jammy
-MAINTAINER Ashkan Farivarmoheb <ashkan.farivarmoheb@gmail.com>
-
 SHELL ["/bin/bash", "-xo", "pipefail", "-c"]
 
 # Generate locale C.UTF-8 for postgres and general locale data
@@ -29,7 +27,7 @@ ARG ARTIFACT_ID
 
 # Install pip for Python 3.10 and Upgrade pip and setuptools
 RUN apt-get update && \
-    apt-get install -y curl \
+    apt-get install --no-install-recommends -y curl \
     python3.10 \
     python3.10-distutils \
     && curl -sSL https://bootstrap.pypa.io/get-pip.py | python3.10 - \

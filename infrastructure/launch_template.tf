@@ -15,6 +15,11 @@ resource "aws_launch_template" "odoo_launch_template" {
               EOF
             )
 
+  metadata_options {
+    http_tokens = "required"
+    http_endpoint = "enabled"
+  }
+
   depends_on = [
     data.aws_security_groups.vpc-odoo-asg,
     aws_ecs_cluster.ecs_cluster

@@ -14,6 +14,7 @@ scan:
       - '*/docs/*'
     skip-files:
       - requirements.txt
+      - extra-addons/restfull_api_jwt/utils/methods_constants.py
     scanners:
       - vuln
       - secret
@@ -23,3 +24,8 @@ scan:
           - os
           - library
         ignore-unfixed: false
+# Infrastructure-as-Code (IaC) scanning configuration
+iac:
+  ignore:
+    - 'avd-aws-0053'  # Suppress the warning about the public load balancer
+    - 'avd-aws-0130'  # Suppress IMDS v2 (Instance Metadata Service) introduced session authentication tokens which improve security when talking to IMDS

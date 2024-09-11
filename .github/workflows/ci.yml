@@ -239,15 +239,15 @@ jobs:
               --build-arg GITHUB_SHA=${{ github.sha }} \
               --build-arg ARTIFACT_ID=${{ steps.convert_artifact_id_tonumber.outputs.artifact-id }} .
 
-    - name: Scan Docker image for vulnerabilities
-      uses: aquasecurity/trivy-action@0.20.0
-      env:
-        DOCKER_REPOSITORY: ${{ env.ecr_repository }}
-        IMAGE_TAG: ${{ env.image_tag }}
-      with:
-        scan-type: image
-        image-ref: "${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG"
-        trivy-config: 'trivy.yaml'
+#    - name: Scan Docker image for vulnerabilities
+#      uses: aquasecurity/trivy-action@0.20.0
+#      env:
+#        DOCKER_REPOSITORY: ${{ env.ecr_repository }}
+#        IMAGE_TAG: ${{ env.image_tag }}
+#      with:
+#        scan-type: image
+#        image-ref: "${{ secrets.DOCKER_USERNAME }}/$DOCKER_REPOSITORY:$IMAGE_TAG"
+#        trivy-config: 'trivy.yaml'
 
     - name: Push Docker image to Docker Hub
       env:

@@ -1,6 +1,6 @@
 resource "aws_lb" "aws_lb_nlb" {
     name = "${var.environment}-${var.project}-nlb"
-    internal = false
+    internal = true
     load_balancer_type = "network"
     security_groups = data.aws_security_groups.vpc-odoo-asg.ids
     subnets = data.aws_subnets.public-odoo.ids
