@@ -27,7 +27,7 @@ ARG ARTIFACT_ID
 
 # Install pip for Python 3.10 and Upgrade pip and setuptools
 RUN apt-get update && \
-    apt-get install --no-install-recommends -y curl \
+    apt-get install -y curl \
     python3.10 \
     python3.10-distutils \
     && curl -sSL https://bootstrap.pypa.io/get-pip.py | python3.10 - \
