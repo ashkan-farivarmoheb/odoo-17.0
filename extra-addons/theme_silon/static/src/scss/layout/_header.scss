@@ -60,8 +60,92 @@ main.full-page {
   overflow: auto; /* Ensure main tag can scroll */
 }
 
+//common css for navbar
+.nav.navbar-nav {
+  font-weight: 500;
+  text-transform: uppercase;
+  //color: $color-black !important;
+  height: $navbar-height; // Fixed height for the navbar
+  display: flex;
+  align-items: center; // Vertically centers the items within the navbar
+  margin-right: 0 !important;
+}
+
+.navbar-brand .img {
+  width: 100%;
+  max-width: 100px;
+}
+
+.icons-nav {
+  &.right {
+    @media screen and (max-width: 992px) {
+      display: none !important;
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+  }
+
+  img {
+    width: 100%;
+    max-width: 24px;
+  }
+}
+
+.nav-item .nav-link {
+  text-decoration: none;
+  position: relative; // Necessary for ::after to be positioned relative to this element
+  display: inline-block; // Ensure it only takes up the necessary space
+  //padding: 0; // Remove all padding
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; // Position the underline just below the text
+    left: 0;
+    width: 0; // Start with no width
+    height: 2px; // Set the height of the underline
+    background-color: $color-thirdly; // Set the underline color to the third color
+    transition: width 0.3s ease-in-out; // Smooth transition for the width
+    box-shadow: none; // Remove any shadow
+    text-shadow: none; // Remove any text shadow
+    border: none; // Remove any border
+    outline: none; // Remove any outline
+  }
+
+  &:hover::after {
+    width: 100%; // Expand the underline to the full width on hover
+  }
+}
+
+.nav-item.dropdown .nav-link {
+  position: relative; // Necessary for ::after to be positioned relative to this element
+  display: inline-block; // Ensure it only takes up the necessary space
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; // Position the underline just below the text
+    left: 0;
+    width: 0; // Start with no width
+    height: 2px; // Set the height of the underline
+    background-color: $color-thirdly; // Set the underline color to the third color
+    transition: width 0.3s ease-in-out; // Smooth transition for the width
+    box-shadow: none; // Remove any shadow
+    text-shadow: none; // Remove any text shadow
+    border: none; // Remove any border
+    outline: none; // Remove any outline
+  }
+
+  &:hover::after {
+    width: 100%; // Expand the underline to the full width on hover
+  }
+}
+
+
 /* Main Navbar styles */
-.o_header_fixed {
+.o_header_fixed:not(.o_header_is_scrolled) {
   .navbar-expand-lg {
     position: fixed;
     top: 0;
@@ -92,9 +176,9 @@ main.full-page {
 
       // Conditional styles for specific URLs
       // Apply styles to pages with URLs containing  "/contactus" or the exact home page URL "/"
-      [data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/"] & {
+      [data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/home"] & {
         .btn {
-          background-color: transparent !important;
+          //background-color: transparent !important;
           color: $color-white !important;
           border: 2px solid $color-white !important;
         }
@@ -123,92 +207,8 @@ main.full-page {
 
     }
 
-    .nav.navbar-nav {
-      font-weight: 500;
-      text-transform: uppercase;
-      color: $color-black !important;
-      height: $navbar-height; // Fixed height for the navbar
-      display: flex;
-      align-items: center; // Vertically centers the items within the navbar
-      margin-right: 0 !important;
-    }
-
-
-    .navbar-brand .img {
-      width: 100%;
-      max-width: 100px;
-    }
-
-    .icons-nav {
-      &.right {
-        @media screen and (max-width: 992px) {
-          display: none !important;
-        }
-      }
-
-      ul {
-        display: flex;
-        list-style: none;
-      }
-
-      img {
-        width: 100%;
-        max-width: 24px;
-      }
-    }
-
-    .nav-item .nav-link {
-      text-decoration: none;
-      position: relative; // Necessary for ::after to be positioned relative to this element
-      display: inline-block; // Ensure it only takes up the necessary space
-      //padding: 0; // Remove all padding
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: -2px; // Position the underline just below the text
-        left: 0;
-        width: 0; // Start with no width
-        height: 2px; // Set the height of the underline
-        background-color: $color-thirdly; // Set the underline color to the third color
-        transition: width 0.3s ease-in-out; // Smooth transition for the width
-        box-shadow: none; // Remove any shadow
-        text-shadow: none; // Remove any text shadow
-        border: none; // Remove any border
-        outline: none; // Remove any outline
-      }
-
-      &:hover::after {
-        width: 100%; // Expand the underline to the full width on hover
-      }
-    }
-
-    .nav-item.dropdown .nav-link {
-      position: relative; // Necessary for ::after to be positioned relative to this element
-      display: inline-block; // Ensure it only takes up the necessary space
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: -2px; // Position the underline just below the text
-        left: 0;
-        width: 0; // Start with no width
-        height: 2px; // Set the height of the underline
-        background-color: $color-thirdly; // Set the underline color to the third color
-        transition: width 0.3s ease-in-out; // Smooth transition for the width
-        box-shadow: none; // Remove any shadow
-        text-shadow: none; // Remove any text shadow
-        border: none; // Remove any border
-        outline: none; // Remove any outline
-      }
-
-      &:hover::after {
-        width: 100%; // Expand the underline to the full width on hover
-      }
-    }
-
 
   }
-
 }
 
 /* Change background Navbar when scrolled */
@@ -220,7 +220,7 @@ main.full-page {
     background-color: $color-white !important; // Change background to white
     border-bottom: 1px solid #ccc; // Add a bottom border
     .btn {
-      background-color: $color-white !important;
+      //background-color: transparent !important;
       color: $color-primary !important;
       border: 2px solid $color-primary !important;
     }
@@ -268,7 +268,7 @@ main.full-page {
 }
 
 
-/* Main Navbar styles disapears regular */
+///* Main Navbar styles disapears regular */
 .o_header_disappears:not(.o_top_fixed_element):not(.o_header_is_scrolled):not(.o_header_affixed),
 .o_header_disappears.o_top_fixed_element {
   .navbar-expand-lg {
@@ -287,7 +287,7 @@ main.full-page {
       background-color: transparent !important;
     }
 
-    [data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/"] & {
+    [data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/home"] & {
 
       .nav-link {
         color: $color-white !important;
@@ -416,7 +416,7 @@ main.full-page {
 
 }
 
-/* Change background Navbar when scrolled */
+///* Change background Navbar when scrolled */
 .o_header_disappears.o_top_fixed_element.o_header_is_scrolled {
   background-color: $color-white !important; // Change background to white
   border-bottom: 1px solid #ccc; // Add a bottom border
@@ -425,7 +425,7 @@ main.full-page {
     background-color: $color-white !important; // Change background to white
     border-bottom: 1px solid #ccc; // Add a bottom border
     .btn {
-      background-color: $color-white !important;
+      //background-color: $color-white !important;
       color: $color-primary !important;
       border: 2px solid $color-primary !important;
     }
