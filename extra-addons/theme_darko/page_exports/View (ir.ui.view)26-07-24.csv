@@ -1,0 +1,857 @@
+"Website/ID","Website/Website Name","View Name","Key","View Type","Sequence","View inheritance mode","Base View Architecture","Page/ID","Page/View Name","Page/Page URL","Active","Inherited View","Model","Website meta keywords","Website meta description","Website meta title","Page/Website meta description","Page/Website meta keywords","Page/Website meta title"
+"website.default_website","My Website","Home","website.homepage","QWeb","16","Base view","<t name=""Homepage"" t-name=""website.homepage"">
+    <t t-call=""website.layout"">
+        <t t-set=""pageName"" t-value=""'homepage'""/>
+        <div id=""wrap"" class=""oe_structure oe_empty""><section class=""s_banner o_colored_level s_parallax_no_overflow_hidden o_full_screen_height pb0 pt32"" data-snippet=""s_banner"" data-name=""Banner"" style=""background-color: rgb(2, 48, 61); background-image: none; position: relative;"" data-scroll-background-ratio=""0"">
+        <div class=""container-fluid"">
+            <div class=""row s_nb_column_fixed o_grid_mode"" data-row-count=""13"">
+                
+                
+                
+                
+            <div class=""o_colored_level o_grid_item g-col-lg-6 o_grid_item_image g-height-12 col-lg-6"" style=""z-index: 2; --grid-item-padding-x: 0px; --grid-item-padding-y: 0px; grid-area: 2 / 7 / 14 / 13;""><img src=""/theme_darko/static/src/img/banner/homepage-wide-banner.svg"" alt="""" class=""img img-fluid o_we_custom_image me-auto float-start"" data-mimetype=""image/svg+xml"" data-original-id=""4403"" data-original-src=""/theme_darko/static/src/img/banner/homepage-wide-banner.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""animation-play-state: paused; transition: none 0s ease 0s; transform: translateX(-5.8%) translateY(1.2%) scaleX(1.2) scaleY(1.18); width: 100% !important;"" loading=""lazy""/></div><div class=""justify-content-center o_colored_level o_grid_item g-col-lg-7 g-height-13 col-lg-7"" data-name=""Box"" style=""z-index: 1; grid-area: 1 / 2 / 14 / 9;"">
+                    <h1 class=""display-3""><font class=""text-o-color-4"">
+<strong>Transformative technology solutions that drive success for your business</strong>
+
+</font><br/></h1><div class=""s_hr text-start pb32 pt4"" data-snippet=""s_hr"" data-name=""Separator"">
+                        <hr class=""w-100 mx-auto"" contenteditable=""false""/>
+                    </div>
+                    <p class=""lead""><font class=""text-o-color-4"">​</font><br/></p>
+                    
+                    <p>
+                        <a class=""btn btn-primary btn-lg"" href=""#problem"" data-bs-original-title="""" title=""""><span class=""o_animated_text o_animate o_animate_both_scroll o_anim_flash"" style=""--wanim-intensity: 100; animation-duration: 5s; animation-name: o_anim_flash; animation-play-state: paused;""><strong>Start Now </strong><span class=""fa fa-angle-right ms-2"" contenteditable=""false"">​</span></span></a>
+                    </p>
+                </div></div>
+        </div>
+    </section><section class=""s_banner pt96 pb96 o_colored_level o_full_screen_height"" data-snippet=""s_banner"" data-name=""Banner"" style=""background-image: none; position: relative;"" data-oe-shape-data=""{&quot;shape&quot;:&quot;web_editor/Floats/09&quot;,&quot;colors&quot;:{&quot;c1&quot;:&quot;#00855F&quot;,&quot;c2&quot;:&quot;#8595A2&quot;,&quot;c3&quot;:&quot;#F3F2F2&quot;},&quot;flip&quot;:[&quot;x&quot;],&quot;showOnMobile&quot;:false,&quot;animated&quot;:&quot;true&quot;}""><div class=""o_we_shape o_web_editor_Floats_09 o_we_animated"" style=""background-image: url(&quot;/web_editor/shape/web_editor%2FFloats%2F09.svg?c1=%2300855F&amp;c2=%238595A2&amp;c3=%23F3F2F2&amp;flip=x&quot;); background-position: 0% 50%;""/>
+        <div class=""container"">
+            <div class=""row s_nb_column_fixed o_grid_mode"" data-row-count=""10"">
+                <div class=""justify-content-center o_grid_item g-height-8 g-col-lg-5 o_colored_level col-lg-5"" data-name=""Box"" style=""z-index: 1; grid-area: 2 / 1 / 10 / 6;"">
+                    <h2>Next-generation SMB technology solutions<br/></h2><p>Stay ahead in the ecommerce and traditional distribution sectors with a fully integrated SaaS solution designed for manufacturers, wholesalers, and retailers.&amp;nbsp;With Odoo at its core and a suite of industry-specific add-on modules, We are leading the way in setting a new standard of excellence.<br/></p><h1 class=""display-3 o_default_snippet_text"">
+
+</h1><div class=""s_hr text-start pb32 pt4"" data-snippet=""s_hr"" data-name=""Separator"">
+                        <hr class=""w-100 mx-auto"" contenteditable=""false""/>
+                    </div>
+                    <p>
+                        <br/></p>
+                </div>
+                <div class=""o_grid_item o_grid_item_image g-height-10 o_colored_level g-col-lg-5 col-lg-5"" style=""z-index: 2; grid-area: 1 / 8 / 11 / 13; --grid-item-padding-x:0px;"">
+                    <img src=""/web/image/4406-d5e94407/desktop-mobile-odoo2-png-1456x1456.webp"" alt="""" class=""img img-fluid mx-auto shadow rounded o_we_custom_image"" style=""min-height: 1px; width: 100% !important;"" data-mimetype=""image/webp"" data-original-id=""4404"" data-original-src=""/web/image/4404-7b1d3622/desktop-mobile-odoo2-png-1456x1456.webp"" data-mimetype-before-conversion=""image/webp"" data-resize-width=""690"" data-quality=""100"" loading=""lazy""/>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section><section class=""s_call_to_action o_colored_level o_cc o_cc3 pb0 pt0"" data-snippet=""s_call_to_action"" data-name=""Call to Action"" style=""background-color: rgb(2, 48, 61); background-image: none;"">
+        <div class=""container"">
+            <div class=""row o_grid_mode"" data-row-count=""2"">
+                <div class=""o_colored_level o_grid_item o_draggable g-height-2 g-col-lg-8 col-lg-8"" style=""grid-area: 1 / 1 / 3 / 9; z-index: 1; --grid-item-padding-y:20px;"">
+                    
+                    <h3 style=""text-align: center;"">Ready to get started? Request a consultation!</h3><p>
+
+<br/></p>
+                </div>
+                
+            <div class=""o_colored_level o_grid_item g-height-2 g-col-lg-3 col-lg-3"" style=""z-index: 2; --grid-item-padding-x:0px; grid-area: 1 / 9 / 3 / 12;"">
+                    <p style=""text-align: right;"">
+                        <a class=""btn btn-primary btn-lg"" href=""/contactus#top"" data-bs-original-title="""" title="""">LET'S CONNECT!</a>
+                    </p>
+                </div></div>
+        </div>
+    </section><section class=""s_text_image pt32 o_colored_level o_full_screen_height pb256"" data-snippet=""s_image_text"" data-name=""Image - Text"" style=""background-image: none; position: relative;"" data-oe-shape-data=""{&quot;shape&quot;:&quot;web_editor/Floats/09&quot;,&quot;colors&quot;:{&quot;c1&quot;:&quot;#00855F&quot;,&quot;c2&quot;:&quot;#8595A2&quot;,&quot;c3&quot;:&quot;#F3F2F2&quot;},&quot;flip&quot;:[&quot;x&quot;,&quot;y&quot;],&quot;showOnMobile&quot;:false,&quot;animated&quot;:&quot;true&quot;}""><div class=""o_we_shape o_web_editor_Floats_09 o_we_animated"" style=""background-image: url(&quot;/web_editor/shape/web_editor%2FFloats%2F09.svg?c1=%2300855F&amp;c2=%238595A2&amp;c3=%23F3F2F2&amp;flip=xy&quot;); background-position: 0% 50%;""/>
+        <div class=""container"">
+            <div class=""row align-items-center"">
+                <div class=""col-lg-6 pt16 pb16 o_colored_level"">
+                    <img src=""/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg"" alt="""" class=""img img-fluid mx-auto o_we_custom_image"" data-mimetype=""image/svg+xml"" data-original-id=""4420"" data-original-src=""/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg"" data-mimetype-before-conversion=""image/svg+xml"" loading=""lazy"" style=""min-height: 1px;""/>
+                </div>
+                <div class=""col-lg-6 pt16 o_colored_level pb0"">
+                    <h2>Business software solutions</h2><p>Empower your business with innovative cloud-based tools for managing operations, marketing, and sales.<br/></p><p><br/></p><p><span class=""h5-fs"" style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;<span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">​<span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">​</span></span><span style=""background-color: var(--body-bg); color: rgb(255, 214, 99); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs""/></span>Ecommerce</span><br/></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Accounting</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Inventory and supply chains</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Retail sales</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Sales management</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Team collaboration</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Catalog management</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Online marketing</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Reporting</span></p><p><span class=""h5-fs""><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">&amp;nbsp;</span>Manufacturing</span></p><p><br/></p>
+                    <p style=""text-align: center;""><a href=""#"" class=""o_anim_fade_in btn btn-primary o_animate o_visible"" data-bs-original-title="""" title=""""><strong>Discover more</strong></a></p>
+                </div>
+            </div>
+        </div>
+    </section><section class=""s_text_image pt32 o_colored_level pb256 o_full_screen_height"" data-snippet=""s_image_text"" data-name=""Image - Text"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row align-items-center"">
+                
+                <div class=""col-lg-6 pt16 o_colored_level pb0"">
+                    <h2>Professional business services for enterprises</h2><p>
+Empower your business with the assistance it needs at every growth stage from our team of ecommerce and operations specialists.&amp;nbsp;<br/></p><p><br/></p><ol><p><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">Ecommerce consulting</span></p><p><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">Platform migrations</span></p><p><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">Online store development</span></p><p><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">Supply chain automation</span></p><p><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">SEO and online marketing</span></p><p><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">Business software training</span></p><p><span style=""background-color: var(--body-bg); color: var(--body-color); font-weight: var(--body-font-weight); text-align: var(--body-text-align);"" class=""h5-fs"">Odoo support</span></p><p><br/></p></ol><p style=""text-align: center;""><a href=""#"" class=""o_anim_fade_in btn btn-primary o_animate o_visible"" data-bs-original-title="""" title=""""><strong>Discover more</strong></a> </p>
+                </div><div class=""col-lg-6 pt16 pb16 o_colored_level o_draggable"">
+                    <img src=""/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg"" alt="""" class=""img img-fluid mx-auto o_we_custom_image"" data-mimetype=""image/svg+xml"" data-original-id=""4420"" data-original-src=""/web/image/4420-c4803a49/ecommerce-homepage-teal-svg-690x690.svg"" data-mimetype-before-conversion=""image/svg+xml"" loading=""lazy"" style=""min-height: 1px;""/>
+                </div>
+            </div>
+        </div>
+    </section><section class=""s_three_columns pb32 o_colored_level pt72 o_cc o_cc2"" data-vcss=""001"" data-snippet=""s_three_columns"" data-name=""Columns"" style=""background-color: rgb(245, 245, 247); background-image: none;"">
+        <div class=""container"">
+            <div class=""row d-flex align-items-stretch"">
+                
+                
+                <div class=""col-lg-4 s_col_no_bgcolor pt16 pb16"">
+                    <div class=""card text-bg-white h-100"" style=""background-color: rgb(245, 245, 247);"">
+                        <img src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" alt="""" class=""card-img-top img img-fluid o_we_custom_image mx-auto d-block"" data-mimetype=""image/svg+xml"" data-original-id=""4421"" data-original-src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""width: 25% !important; min-height: 1px;"" loading=""lazy""/>
+                        <div class=""card-body"">
+                            <h3><br/></h3><h3>Specialty retail</h3><h3 class=""card-title"">
+
+<br/></h3>
+                            <p class=""card-text"">Leverage .....&amp;nbsp;fully integrated PIM tool to easily store all the attributes and product variants that make your product line unique.</p><p class=""card-text"">&amp;nbsp;&amp;nbsp;</p><p class=""card-text"" style=""text-align: left;""><a href=""/test"" class=""btn btn-secondary"" data-bs-original-title="""" title="""">Learn More</a></p><p class=""card-text""><br/></p>
+                        </div>
+                    </div>
+                </div><div class=""col-lg-4 s_col_no_bgcolor pt16 pb16"">
+                    <div class=""card text-bg-white h-100"" style=""background-color: rgb(245, 245, 247);"">
+                        <img src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" alt="""" class=""card-img-top img img-fluid o_we_custom_image mx-auto d-block"" data-mimetype=""image/svg+xml"" data-original-id=""4421"" data-original-src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""width: 25% !important; min-height: 1px;"" loading=""lazy""/>
+                        <div class=""card-body"">
+                            <h3><br/></h3><h3>Specialty retail</h3><h3 class=""card-title"">
+
+<br/></h3>
+                            <p class=""card-text"">Leverage .....&amp;nbsp;fully integrated PIM tool to easily store all the attributes and product variants that make your product line unique.</p><p class=""card-text"">&amp;nbsp;&amp;nbsp;</p><p class=""card-text"" style=""text-align: left;""><a href=""/test"" class=""btn btn-secondary"" data-bs-original-title="""" title="""">Learn More</a></p><p class=""card-text""><br/></p>
+                        </div>
+                    </div>
+                </div><div class=""col-lg-4 s_col_no_bgcolor pt16 pb16"">
+                    <div class=""card text-bg-white h-100"" style=""background-color: rgb(245, 245, 247);"">
+                        <img src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" alt="""" class=""card-img-top img img-fluid o_we_custom_image mx-auto d-block"" data-mimetype=""image/svg+xml"" data-original-id=""4421"" data-original-src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""width: 25% !important; min-height: 1px;"" loading=""lazy""/>
+                        <div class=""card-body"">
+                            <h3><br/></h3><h3>Specialty retail</h3><h3 class=""card-title"">
+
+<br/></h3>
+                            <p class=""card-text"">Leverage .....&amp;nbsp;fully integrated PIM tool to easily store all the attributes and product variants that make your product line unique.</p><p class=""card-text"">&amp;nbsp;&amp;nbsp;</p><p class=""card-text"" style=""text-align: left;""><a href=""/test"" class=""btn btn-secondary"" data-bs-original-title="""" title="""">Learn More</a></p><p class=""card-text""><br/></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><section class=""s_three_columns pb32 o_colored_level pt72 o_cc o_cc2"" data-vcss=""001"" data-snippet=""s_three_columns"" data-name=""Columns"" style=""background-color: rgb(245, 245, 247); background-image: none;"">
+        <div class=""container"">
+            <div class=""row d-flex align-items-stretch"">
+                
+                
+                <div class=""col-lg-4 s_col_no_bgcolor pt16 pb16"">
+                    <div class=""card text-bg-white h-100"" style=""background-color: rgb(245, 245, 247);"">
+                        <img src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" alt="""" class=""card-img-top img img-fluid o_we_custom_image mx-auto d-block"" data-mimetype=""image/svg+xml"" data-original-id=""4421"" data-original-src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""width: 25% !important; min-height: 1px;"" loading=""lazy""/>
+                        <div class=""card-body"">
+                            <h3><br/></h3><h3>Specialty retail</h3><h3 class=""card-title"">
+
+<br/></h3>
+                            <p class=""card-text"">Leverage .....&amp;nbsp;fully integrated PIM tool to easily store all the attributes and product variants that make your product line unique.</p><p class=""card-text"">&amp;nbsp;&amp;nbsp;</p><p class=""card-text"" style=""text-align: left;""><a href=""/test"" class=""btn btn-secondary"" data-bs-original-title="""" title="""">Learn More</a></p><p class=""card-text""><br/></p>
+                        </div>
+                    </div>
+                </div><div class=""col-lg-4 s_col_no_bgcolor pt16 pb16"">
+                    <div class=""card text-bg-white h-100"" style=""background-color: rgb(245, 245, 247);"">
+                        <img src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" alt="""" class=""card-img-top img img-fluid o_we_custom_image mx-auto d-block"" data-mimetype=""image/svg+xml"" data-original-id=""4421"" data-original-src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""width: 25% !important; min-height: 1px;"" loading=""lazy""/>
+                        <div class=""card-body"">
+                            <h3><br/></h3><h3>Specialty retail</h3><h3 class=""card-title"">
+
+<br/></h3>
+                            <p class=""card-text"">Leverage .....&amp;nbsp;fully integrated PIM tool to easily store all the attributes and product variants that make your product line unique.</p><p class=""card-text"">&amp;nbsp;&amp;nbsp;</p><ul class=""card-text"" style=""text-align: center;""><li style=""text-align: left;""><a href=""/test"" class=""btn btn-secondary"" data-bs-original-title="""" title="""">Learn More</a></li></ul><p class=""card-text""><br/></p>
+                        </div>
+                    </div>
+                </div><div class=""col-lg-4 s_col_no_bgcolor pt16 pb16"">
+                    <div class=""card text-bg-white h-100"" style=""background-color: rgb(245, 245, 247);"">
+                        <img src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" alt="""" class=""card-img-top img img-fluid o_we_custom_image mx-auto d-block"" data-mimetype=""image/svg+xml"" data-original-id=""4421"" data-original-src=""/web/image/4421-c26a753e/industrial-machinery-svg.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""width: 25% !important; min-height: 1px;"" loading=""lazy""/>
+                        <div class=""card-body"">
+                            <h3><br/></h3><h3>Specialty retail</h3><h3 class=""card-title"">
+
+<br/></h3>
+                            <p class=""card-text"">Leverage .....&amp;nbsp;fully integrated PIM tool to easily store all the attributes and product variants that make your product line unique.</p><p class=""card-text"">&amp;nbsp;&amp;nbsp;</p><p><a href=""/test"" class=""btn btn-secondary"" data-bs-original-title="""" title="""">Learn More</a></p><p class=""card-text""><br/></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><section class=""s_call_to_action o_colored_level pb0 pt0 o_cc o_cc3"" data-snippet=""s_call_to_action"" data-name=""Call to Action"" style=""background-color: rgb(2, 48, 61);"">
+        <div class=""container"">
+            <div class=""row o_grid_mode"" data-row-count=""2"">
+                <div class=""o_colored_level o_grid_item g-height-2 g-col-lg-8 col-lg-8"" style=""grid-area: 1 / 1 / 3 / 9; z-index: 1; --grid-item-padding-y:20px;"">
+                    
+                    <h3 style=""text-align: center;"">Ready to get started? Request a consultation!</h3><p>
+
+<br/></p>
+                </div>
+                
+            <div class=""o_colored_level o_grid_item g-height-2 g-col-lg-3 col-lg-3"" style=""z-index: 2; --grid-item-padding-x:0px; grid-area: 1 / 9 / 3 / 12;"">
+                    <p style=""text-align: right;"">
+                        <a class=""btn btn-primary btn-lg"" href=""/contactus#top"" data-bs-original-title="""" title="""">LET'S CONNECT!</a>
+                    </p>
+                </div></div>
+        </div>
+    </section><section class=""s_text_cover o_colored_level"" data-snippet=""s_text_cover"" data-name=""Text Cover"" style=""background-color: rgb(101, 67, 92); background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""o_colored_level col-lg-5 pt160 pb160 px-5 o_cc o_cc4 bg-white-25 o_draggable"">
+                    <h2>Odoo</h2><p class=""lead"">Enhance your business operations with .... tailored software solutions, leveraging the seamless integration of Odoo's advanced technology.<br/></p>
+                    <a class=""btn btn-primary"" href=""/contactus"" data-bs-original-title="""" title="""">LEARN MORE ABOUT ODOO</a>
+                </div>
+                <div class=""o_not_editable o_colored_level pt160 pb160 col-lg-7 d-none d-md-block o_cc o_cc1 s_parallax_no_overflow_hidden o_anim_fade_in o_animate o_animate_on_scroll o_anim_from_right oe_img_bg o_bg_img_center"" style=""background-position: 100% 0px; background-image: url(&quot;/web/image/4422-a52ac316/support-odoo-svg-690x690.svg&quot;); background-color: rgb(101, 67, 92); animation-delay: -1.42793s; position: relative;"" data-scroll-background-ratio=""0"" data-scroll-zone-start=""0"" data-scroll-zone-end=""100""/>
+            </div>
+        </div>
+    </section><section class=""s_text_block pt40 o_colored_level pb0"" data-snippet=""s_text_block"" data-name=""Text"" style=""background-image: none;"" id=""problem"" data-anchor=""true"">
+        <div class=""s_allow_columns container"">
+            <p>
+<strong>So what would you like to do?</strong>&amp;nbsp;</p><p>Whether you need help solving business problems or seizing growth opportunities, our consultancy services can support you.<br/></p>
+        </div>
+    </section><section class=""s_faq_collapse pt32 pb32 o_colored_level s_faq_collapse_boxed"" data-snippet=""s_faq_collapse"" data-name=""Accordion"" style=""background-image: none;"">
+        <div class=""container"">
+            <div id=""myCollapse"" class=""accordion"" role=""tablist"">
+                
+                <div class=""card"" data-name=""Item"">
+                    <a href=""#"" role=""tab"" data-bs-toggle=""collapse"" aria-expanded=""false"" class=""card-header collapsed"" data-bs-target=""#myCollapseTab312087_2"">IMPROVE THE EFFICIENCY OF MY FINANCIAL SYSTEMS AND INTERNAL PROCEDURES</a><div data-bs-parent=""#myCollapse"" role=""tabpanel"" id=""myCollapseTab312087_2"" class=""collapse"">
+                        <div class=""card-body"">
+                            <div class=""o_text_columns""><div class=""row""><div class=""col-6 o_colored_level""><p class=""card-text""><span class=""o_animated_text o_animate o_visible o_anim_fade_in"" style=""animation-duration: 2s;"">If you find yourself struggling with outdated systems and inefficient processes that are holding your business back, it could be the right time to transition to a more suitable ERP solution.</span><br/></p><p class=""card-text""><br/></p><p class=""card-text""><br/></p><p class=""card-text""><span class=""oe-tabs"" style=""width: 39px;"">	</span>​<a href=""/"" class=""btn btn-primary"">LEARN MORE</a><br/></p></div><div class=""col-6 o_colored_level""><p><img src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" alt="""" class=""img img-fluid o_we_custom_image"" loading=""lazy"" data-mimetype=""image/svg+xml"" data-original-id=""4422"" data-original-src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""min-height: 1px;""/><br/></p></div></div></div>
+                            
+                        </div>
+                    </div>
+                </div><div class=""card"" data-name=""Item"">
+                    <a href=""#"" role=""tab"" data-bs-toggle=""collapse"" aria-expanded=""false"" class=""card-header collapsed"" data-bs-target=""#myCollapseTab1720147276043"">INCREASE MY INSIGHT INTO CUSTOMER NEEDS TO DRIVE SALES<br/></a><div data-bs-parent=""#myCollapse"" role=""tabpanel"" id=""myCollapseTab1720147276043"" class=""collapse"">
+                        <div class=""card-body"">
+                            <div class=""o_text_columns""><div class=""row""><div class=""col-6 o_colored_level""><p class=""card-text"">To stay ahead of the competition, it's essential to have a strong and interactive relationship with your customers. Equip your sales and marketing teams with the tools they need to gain a competitive edge and deliver exceptional service, ensuring your customers are happy, loyal, and satisfied.<br/></p><p class=""card-text""><br/></p><p class=""card-text""><br/></p><p class=""card-text""><span class=""oe-tabs"" style=""width: 39px;"">	</span>​<a href=""/"" class=""btn btn-primary"">LEARN MORE</a><br/></p></div><div class=""col-6 o_colored_level""><p><img src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" alt="""" class=""img img-fluid o_we_custom_image"" loading=""lazy"" data-mimetype=""image/svg+xml"" data-original-id=""4422"" data-original-src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""min-height: 1px;""/><br/></p></div></div></div>
+                            
+                        </div>
+                    </div>
+                </div><div class=""card"" data-name=""Item"">
+                    <a href=""#"" role=""tab"" data-bs-toggle=""collapse"" aria-expanded=""false"" class=""card-header collapsed"" data-bs-target=""#myCollapseTab1720148780691"">ENHANCE EMPLOYEE EXPERIENCES<br/></a><div data-bs-parent=""#myCollapse"" role=""tabpanel"" id=""myCollapseTab1720148780691"" class=""collapse"">
+                        <div class=""card-body"">
+                            <div class=""o_text_columns""><div class=""row""><div class=""col-6 o_colored_level""><p class=""card-text"">Modern cloud-based human resource software has become an essential tool for businesses, regardless of their size, to effectively manage their workforce, streamline the recruitment process, boost productivity levels, and ultimately create a more satisfying work environment for employees.<br/></p><p class=""card-text""><br/></p><p class=""card-text""><br/></p><p class=""card-text""><span class=""oe-tabs"" style=""width: 39px;"">	</span>​<a href=""/"" class=""btn btn-primary"">LEARN MORE</a><br/></p></div><div class=""col-6 o_colored_level""><p><img src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" alt="""" class=""img img-fluid o_we_custom_image"" loading=""lazy"" data-mimetype=""image/svg+xml"" data-original-id=""4422"" data-original-src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""min-height: 1px;""/><br/></p></div></div></div>
+                            
+                        </div>
+                    </div>
+                </div><div class=""card"" data-name=""Item"">
+                    <a href=""#"" role=""tab"" data-bs-toggle=""collapse"" aria-expanded=""false"" class=""card-header collapsed"" data-bs-target=""#myCollapseTab1720148919028"">UNCOVER VALUABLE INSIGHTS FROM MY DATA<br/></a><div data-bs-parent=""#myCollapse"" role=""tabpanel"" id=""myCollapseTab1720148919028"" class=""collapse"">
+                        <div class=""card-body"">
+                            <div class=""o_text_columns""><div class=""row""><div class=""col-6 o_colored_level""><p class=""card-text"">Information serves as the foundation of your business operations. It influences your financial plans, projections, and even your workforce management. However, it is also delicate. We provides a variety of Corporate Performance Management (CPM) solutions and services to eliminate the frustration of dealing with inconsistent data or struggling with historical reporting.<br/></p><p class=""card-text""><br/></p><p class=""card-text""><br/></p><p class=""card-text""><span class=""oe-tabs"" style=""width: 39px;"">	</span>​<a href=""/"" class=""btn btn-primary"">LEARN MORE</a><br/></p></div><div class=""col-6 o_colored_level""><p><img src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" alt="""" class=""img img-fluid o_we_custom_image"" loading=""lazy"" data-mimetype=""image/svg+xml"" data-original-id=""4422"" data-original-src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""min-height: 1px;""/><br/></p></div></div></div>
+                            
+                        </div>
+                    </div>
+                </div><div class=""card"" data-name=""Item"">
+                    <a href=""#"" role=""tab"" data-bs-toggle=""collapse"" aria-expanded=""false"" class=""card-header collapsed"" data-bs-target=""#myCollapseTab1720149078771"">ENSURE THE SUCCESS OF MY DIGITAL TRANSFORMATION PROJECT<br/></a><div data-bs-parent=""#myCollapse"" role=""tabpanel"" id=""myCollapseTab1720149078771"" class=""collapse"">
+                        <div class=""card-body"">
+                            <div class=""o_text_columns""><div class=""row""><div class=""col-6 o_colored_level""><p class=""card-text"">Our dedicated OCM team recognizes the diverse learning modalities and varying learning paces within your workforce. We are committed to mitigating unnecessary stress, expediting the adoption process, and preventing the need for employees to seek alternative methods. Whether you require strategic leadership or collaboration with your internal change manager, we are prepared to provide expert support.<br/></p><p class=""card-text""><br/></p><p class=""card-text""><br/></p><p class=""card-text""><span class=""oe-tabs"" style=""width: 11.7882px;"">	</span>​<a href=""/"" class=""btn btn-primary"">LEARN MORE</a><br/></p></div><div class=""col-6 o_colored_level""><p><img src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" alt="""" class=""img img-fluid o_we_custom_image"" loading=""lazy"" data-mimetype=""image/svg+xml"" data-original-id=""4422"" data-original-src=""/web/image/4422-a52ac316/support-odoo-svg-690x690.svg"" data-mimetype-before-conversion=""image/svg+xml"" style=""min-height: 1px;""/><br/></p></div></div></div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section><section class=""s_title pt40 pb40 o_colored_level"" data-vcss=""001"" data-snippet=""s_title"" data-name=""Title"">
+        <div class=""container s_allow_columns"">
+            <h2 class=""display-3-fs"" style=""text-align: center;"">Odoo Apps</h2>
+        </div>
+    </section><section class=""s_tabs o_colored_level pt32 pb0 o_half_screen_height"" data-vcss=""001"" data-snippet=""s_tabs"" data-name=""Tabs"" style=""position: relative; background-color: rgb(216, 253, 221); background-image: none;"">
+        <div class=""container"">
+            <div class=""s_tabs_main row s_col_no_resize s_col_no_bgcolor"">
+                <div class=""s_tabs_nav mb-3 col-md-3"">
+                    <ul class=""nav nav-fill nav-pills flex-column"" role=""tablist"">
+                        <li class=""nav-item"">
+                            <a class=""nav-link"" id=""nav_tabs_link_1721971916412_694"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_694"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_694"" aria-selected=""false""><br/><span class=""fa fa-list-alt mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Website Application</a>
+                        </li><li class=""nav-item"">
+                            <a class=""nav-link"" id=""nav_tabs_link_1721971916412_695"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_695"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_695"" aria-selected=""false""><br/><span class=""fa fa-bar-chart-o mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Sales</a>
+                        </li><li class=""nav-item"">
+                            <a class=""nav-link"" id=""nav_tabs_link_1721971916412_696"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_696"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_696"" aria-selected=""false""><br/><span class=""fa fa-percent mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Finance</a>
+                        </li><li class=""nav-item"">
+                            <a class=""nav-link active"" id=""nav_tabs_link_1721971916412_697"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_697"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_697"" aria-selected=""true""><br/><span class=""fa fa-dropbox mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Inventory &amp;amp; Manufacturing</a>
+                        </li><li class=""nav-item"">
+                            <a class=""nav-link"" id=""nav_tabs_link_1721971916412_698"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_698"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_698"" aria-selected=""false""><br/><span class=""fa fa-list-alt mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Human Resource</a>
+                        </li><li class=""nav-item"">
+                            <a class=""nav-link"" id=""nav_tabs_link_1721971916412_699"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_699"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_699"" aria-selected=""false""><br/><span class=""fa fa-bullhorn mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Marketing</a>
+                        </li><li class=""nav-item"">
+                            <a class=""nav-link"" id=""nav_tabs_link_1721971916412_700"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_700"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_700"" aria-selected=""true""><br/><span class=""fa fa-suitcase mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Services</a>
+                        </li><li class=""nav-item"">
+                            <a class=""nav-link"" id=""nav_tabs_link_1721971916412_701"" data-bs-toggle=""tab"" href=""#nav_tabs_content_1721971916412_701"" role=""tab"" aria-controls=""nav_tabs_content_1721971916412_701"" aria-selected=""false""><br/><span class=""fa fa-suitcase mx-auto d-block fa-3x"" style=""color: rgb(0, 133, 95);"" contenteditable=""false"">​</span><br/>Productivity</a>
+                        </li>
+                        
+                        
+                    </ul>
+                </div>
+                <div class=""s_tabs_content tab-content col-md-9 s_tabs_slide_right"">
+                    <div class=""tab-pane fade"" id=""nav_tabs_content_1721971916412_694"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_694"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;""><section style=""background-image: none;"" data-name=""Features Grid"" data-snippet=""s_features_grid"" class=""s_features_grid pb24 pt0"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-internet-explorer rounded-circle s_features_grid_icon bg-white-25 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Website Builder</h5>
+                                <p>Create a professional website with hosting and a domain name. Includes marketing tools, live chat, social media integration, and web push notifications. AI suggests layouts and content based on your industry. User-friendly interface allows drag-and-drop, layout adjustments, filters, and animations.</p><p><br/></p>
+                            </div>
+                        </div>
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-opencart rounded-circle s_features_grid_icon bg-white-25 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eCommerce</h4>
+                                <p>
+Design templates, set up your store, and apply sales tax rates automatically. The platform is mobile-friendly, SEO optimized, and integrates with Google Analytics. Create product pages with a top page builder and drag-and-drop blocks. Use a unified platform for marketing and operations with real-time stock updates. Increase revenue and retention effortlessly, and build advanced reports.
+
+<br/></p>
+                            </div>
+                        </div>
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_draggable o_colored_level"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-newspaper-o rounded-circle s_features_grid_icon fa-3x bg-white-25"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Blog</h4>
+                                <p>
+Odoo Blog is an excellent content management system for showcasing ideas, engaging audiences, and building communities. Create and format text, insert media, and structure content directly from the frontend. Produce appealing content easily and improve your search engine ranking to attract more visitors.
+
+<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24""><div class=""row"">
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-eyedropper rounded s_features_grid_icon bg-white-50 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Forum</h4><p style=""margin-bottom: 0px;"">Understand and respond to leads and customers. Reward active members. Improve ranking with Google Analytics.</p><p style=""margin-bottom: 0px;""><br/></p><p>Odoo Forum builds community, boosts traffic, and enhances support. Enable user discussions, gain insights, and reward with Karma points. Use the advanced text editor for content creation.<br/></p>
+                            </div>
+                        </div>
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-comments rounded s_features_grid_icon bg-white-25 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Live Chat</h4>
+                                <p>Odoo Live Chat lets you engage with customers and visitors in real time, boosting satisfaction and efficiency. Receive notifications and chat across all Odoo apps, converting conversations into support tickets seamlessly. Turn visitors into potential sales effortlessly.</p><p><br/></p><p><br/></p></div></div><div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-picture-o s_features_grid_icon rounded fa-3x bg-white-25"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eLearning</h4>
+                                <p>Odoo's open-source Learning Management System (LMS) lets tutors share content, perform assessments, and provide certifications. Easily create courses, upload content, and engage students. Assess progress and offer certifications to validate skills.</p></div></div></div></div></div></div></section></section></div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721971916412_695"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_695"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;""><section class=""s_features_grid pb24 pt0"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div class=""col-lg-12 pt16 o_colored_level pb32"" data-name=""Box"">
+                            <i class=""fa fa-tags rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Sales</h5><p>Odoo’s Sales platform sends online quotations, automates contracts, and manages pricing. Customers access documents online. Save time with online payments and e-signatures. AI scores leads and generates them from various sources. Integrates pricing with eCommerce, Inventory, and Manufacturing. Includes promotions, loyalty programs, coupons, gift cards, and eWallet.</p></div></div><div class=""col-lg-12 pt16 o_colored_level pb32"" data-name=""Box"">
+                            <i class=""fa fa-shopping-cart rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Point of Sale
+                                <br/></h5><p>Self-ordering via kiosk or smartphone for seamless customer experience. Streamline cross-channel sales with online orders and in-store pickups. Enhance loyalty with points, rewards, gift cards, and easy payment methods.<br/></p><p><br/></p></div></div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-key rounded-circle s_features_grid_icon fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Rental</h4>
+                                <p>
+Odoo’s rental platform streamlines operations from scheduling to tracking and profitability analysis. Manage products, schedule pickups, and sign documents in one place. Integrate with Odoo’s eCommerce for easy online booking and reservations. Customize pricing for different time frames, and track rentals and invoices with a simple dashboard.&amp;nbsp;<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24""><div class=""row"">
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-handshake-o rounded s_features_grid_icon bg-white-50 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>CRM</h4><p style=""margin-bottom: 0px;"">Odoo’s CRM tracks potential customers, schedules activities, and enhances collaboration. Automate calls, meetings, mailings, and quotations. Integrates with email, live chat, SMS, and VoIP. Create quotations quickly and use real-time data for smart decisions.<br/></p><p><br/></p><p><br/></p><p><br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-edit rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Subscriptions</h4><p>Manage subscriptions effortlessly with Odoo. Increase customers through easy signup, create lasting relationships, and optimise operations. Automate recurring sales, clear contracts, and invoices. Handle taxes and payments automatically. Speed up sales with contract templates. Focus on providing great services while Odoo handles the rest.<br/></p></div></div></div></div></div></div></section><br/></section></div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721971916412_696"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_696"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;""><section class=""s_features_grid pb24 pt0"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-calculator rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Accounting</h5>
+                                <p>Simplify complex accounting with Odoo’s finance application. The dashboard organizes invoices and bills, with AI-powered invoice capture for 98% accuracy. Use your mobile device for expenses, with AI handling the details. Enjoy smart bank reconciliation, integrating with 28,000 banks. Access real-time financial reports for informed decisions. Odoo ensures tax compliance for cross-border transactions.</p><p><br/></p></div></div><div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-dollar rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Expenses</h5>
+                                <p>Simplify complex accounting with Odoo’s finance application. The dashboard organizes invoices and bills, with AI-powered invoice capture for 98% accuracy. Use your mobile device for expenses, with AI handling the details. Enjoy smart bank reconciliation, integrating with 28,000 banks. Access real-time financial reports for informed decisions. Odoo ensures tax compliance for cross-border transactions.</p><p><br/></p></div></div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-edit rounded-circle s_features_grid_icon fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Sign</h4>
+                                <p>&amp;nbsp;Odoo enables swift, legally valid electronic signatures for contracts. Odoo Sign simplifies sending, signing, and approving documents online with drag-and-drop fields and pre-filled templates. Track document status, send reminders, and monitor progress. Ensure cryptographic traceability and SMS authentication.<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24""><div class=""row"">
+                        <div class=""col-lg-12 pb16 o_colored_level pt4"" data-name=""Box"">
+                            <i class=""fa fa-wpforms rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Invoicing</h4><p>Odoo's accounting dashboard lets you create, manage, and track invoices with detailed payment reports. Prepped with customer details and tax rates, invoicing is one click away. Use the mobile app for invoicing, payment updates, and batch payments. Enable online payments, handle recurring invoices, issue refunds, and accept multiple currencies with automatic conversion rate updates.<br/></p><p><br/></p><p><br/></p></div></div><div class=""col-lg-12 pb16 o_colored_level pt4"" data-name=""Box"">
+                            <i class=""fa fa-paste rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Documents</h4>
+                                <p>Go paperless with Odoo. Manage, convert, and operate on electronic documents effortlessly. Odoo Documents centralizes file management, eliminating the need for scanning, manual recording, and lengthy approvals. Enjoy automatic dispatch, digitalization, and automated actions. Sign documents online, categorize them by workspace, and use tags to keep track. Instantly access all files and clear your mind and desktop.</p></div></div><div class=""col-lg-12 pb16 o_colored_level pt4"" data-name=""Box"">
+                            <i class=""fa fa-table rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Spreadsheet</h4>
+                                <p>No export-import hassle with Odoo. Data updates automatically in charts and spreadsheets. Create dynamic reports with real-time updates using a pivot view. Access all information from one customizable dashboard with visual representations. Use easy menus for formulas, transform data into charts, and apply smart filters to find specific information quickly.<br/></p></div></div></div></div></div></div></section><br/></section></div>
+                    </div><div class=""tab-pane fade active show"" id=""nav_tabs_content_1721971916412_697"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_697"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;""><section class=""s_features_grid pb24 pt0"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-cubes rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Inventory</h5>
+                                <p>Odoo's warehouse management app reduces stockouts, speeds up operations, and offers real-time visibility. Boost efficiency with streamlined stocking, smart replenishment, and automated purchase orders. Enhance receipt, quality control, and storage with real-time inventory management. Instantly locate products, minimize picking movements, and integrate with carriers for shipping labels and packing units.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-hourglass-2 rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Product Lifecycle Management (PLM)</h4>
+                                <p>
+Design templates, set up your store, and apply sales tax rates automatically. The platform is mobile-friendly, SEO optimized, and integrates with Google Analytics. Create product pages with a top page builder and drag-and-drop blocks. Use a unified platform for marketing and operations with real-time stock updates. Increase revenue and retention effortlessly, and build advanced reports.
+
+<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_draggable o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-newspaper-o rounded-circle s_features_grid_icon fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Maintenance</h4>
+                                <p>
+Odoo Blog is an excellent content management system for showcasing ideas, engaging audiences, and building communities. Create and format text, insert media, and structure content directly from the frontend. Produce appealing content easily and improve your search engine ranking to attract more visitors.
+
+<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24""><div class=""row"">
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-industry rounded s_features_grid_icon bg-white-50 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Manufacturing (MRP)</h4><p style=""margin-bottom: 0px;"">Understand and respond to leads and customers. Reward active members. Improve ranking with Google Analytics.</p><p style=""margin-bottom: 0px;""><br/></p><p>Odoo Forum builds community, boosts traffic, and enhances support. Enable user discussions, gain insights, and reward with Karma points. Use the advanced text editor for content creation.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-shopping-bag rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Purchase</h4>
+                                <p>Odoo Live Chat lets you engage with customers and visitors in real time, boosting satisfaction and efficiency. Receive notifications and chat across all Odoo apps, converting conversations into support tickets seamlessly. Turn visitors into potential sales effortlessly.<br/></p></div></div><div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-dashboard s_features_grid_icon rounded fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Quality</h4>
+                                <p>Odoo's open-source Learning Management System (LMS) lets tutors share content, perform assessments, and provide certifications. Easily create courses, upload content, and engage students. Assess progress and offer certifications to validate skills.</p></div></div></div></div></div></div></section><br/></section></div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721971916412_698"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_698"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;""><section class=""s_features_grid pb24 pt0"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-internet-explorer rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Website Builder</h5>
+                                <p>Create a professional website with hosting and a domain name. Includes marketing tools, live chat, social media integration, and web push notifications. AI suggests layouts and content based on your industry. User-friendly interface allows drag-and-drop, layout adjustments, filters, and animations.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-opencart rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eCommerce</h4>
+                                <p>
+Design templates, set up your store, and apply sales tax rates automatically. The platform is mobile-friendly, SEO optimized, and integrates with Google Analytics. Create product pages with a top page builder and drag-and-drop blocks. Use a unified platform for marketing and operations with real-time stock updates. Increase revenue and retention effortlessly, and build advanced reports.
+
+<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_draggable o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-newspaper-o rounded-circle s_features_grid_icon fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Blog</h4>
+                                <p>
+Odoo Blog is an excellent content management system for showcasing ideas, engaging audiences, and building communities. Create and format text, insert media, and structure content directly from the frontend. Produce appealing content easily and improve your search engine ranking to attract more visitors.
+
+<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24 o_draggable""><div class=""row"">
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-eyedropper rounded s_features_grid_icon bg-white-50 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Forum</h4><p style=""margin-bottom: 0px;"">Understand and respond to leads and customers. Reward active members. Improve ranking with Google Analytics.</p><p style=""margin-bottom: 0px;""><br/></p><p>Odoo Forum builds community, boosts traffic, and enhances support. Enable user discussions, gain insights, and reward with Karma points. Use the advanced text editor for content creation.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-comments rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Live Chat</h4>
+                                <p>Odoo Live Chat lets you engage with customers and visitors in real time, boosting satisfaction and efficiency. Receive notifications and chat across all Odoo apps, converting conversations into support tickets seamlessly. Turn visitors into potential sales effortlessly.<br/></p></div></div><div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-picture-o s_features_grid_icon rounded fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eLearning</h4>
+                                <p>Odoo's open-source Learning Management System (LMS) lets tutors share content, perform assessments, and provide certifications. Easily create courses, upload content, and engage students. Assess progress and offer certifications to validate skills.</p></div></div></div></div></div></div></section><br/></section></div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721971916412_699"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_699"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;""><section class=""s_features_grid pb24 pt0"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-internet-explorer rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Website Builder</h5>
+                                <p>Create a professional website with hosting and a domain name. Includes marketing tools, live chat, social media integration, and web push notifications. AI suggests layouts and content based on your industry. User-friendly interface allows drag-and-drop, layout adjustments, filters, and animations.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-opencart rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eCommerce</h4>
+                                <p>
+Design templates, set up your store, and apply sales tax rates automatically. The platform is mobile-friendly, SEO optimized, and integrates with Google Analytics. Create product pages with a top page builder and drag-and-drop blocks. Use a unified platform for marketing and operations with real-time stock updates. Increase revenue and retention effortlessly, and build advanced reports.
+
+<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_draggable o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-newspaper-o rounded-circle s_features_grid_icon fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Blog</h4>
+                                <p>
+Odoo Blog is an excellent content management system for showcasing ideas, engaging audiences, and building communities. Create and format text, insert media, and structure content directly from the frontend. Produce appealing content easily and improve your search engine ranking to attract more visitors.
+
+<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24 o_draggable""><div class=""row"">
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-eyedropper rounded s_features_grid_icon bg-white-50 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Forum</h4><p style=""margin-bottom: 0px;"">Understand and respond to leads and customers. Reward active members. Improve ranking with Google Analytics.</p><p style=""margin-bottom: 0px;""><br/></p><p>Odoo Forum builds community, boosts traffic, and enhances support. Enable user discussions, gain insights, and reward with Karma points. Use the advanced text editor for content creation.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-comments rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Live Chat</h4>
+                                <p>Odoo Live Chat lets you engage with customers and visitors in real time, boosting satisfaction and efficiency. Receive notifications and chat across all Odoo apps, converting conversations into support tickets seamlessly. Turn visitors into potential sales effortlessly.<br/></p></div></div><div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-picture-o s_features_grid_icon rounded fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eLearning</h4>
+                                <p>Odoo's open-source Learning Management System (LMS) lets tutors share content, perform assessments, and provide certifications. Easily create courses, upload content, and engage students. Assess progress and offer certifications to validate skills.</p></div></div></div></div></div></div></section><br/></section></div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721971916412_700"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_700"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div class=""col-lg-12 pt16 pb16 o_draggable o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-internet-explorer rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Website Builder</h5>
+                                <p>Create a professional website with hosting and a domain name. Includes marketing tools, live chat, social media integration, and web push notifications. AI suggests layouts and content based on your industry. User-friendly interface allows drag-and-drop, layout adjustments, filters, and animations.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-opencart rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eCommerce</h4>
+                                <p>
+Design templates, set up your store, and apply sales tax rates automatically. The platform is mobile-friendly, SEO optimized, and integrates with Google Analytics. Create product pages with a top page builder and drag-and-drop blocks. Use a unified platform for marketing and operations with real-time stock updates. Increase revenue and retention effortlessly, and build advanced reports.
+
+<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-newspaper-o rounded-circle s_features_grid_icon fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Blog</h4>
+                                <p>
+Odoo Blog is an excellent content management system for showcasing ideas, engaging audiences, and building communities. Create and format text, insert media, and structure content directly from the frontend. Produce appealing content easily and improve your search engine ranking to attract more visitors.
+
+<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24 o_draggable""><div class=""row"">
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-eyedropper rounded s_features_grid_icon bg-white-50 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Forum</h4><p style=""margin-bottom: 0px;"">Understand and respond to leads and customers. Reward active members. Improve ranking with Google Analytics.</p><p style=""margin-bottom: 0px;""><br/></p><p>Odoo Forum builds community, boosts traffic, and enhances support. Enable user discussions, gain insights, and reward with Karma points. Use the advanced text editor for content creation.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-comments rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Live Chat</h4>
+                                <p>Odoo Live Chat lets you engage with customers and visitors in real time, boosting satisfaction and efficiency. Receive notifications and chat across all Odoo apps, converting conversations into support tickets seamlessly. Turn visitors into potential sales effortlessly.<br/></p></div></div><div class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"" data-name=""Box"">
+                            <i class=""fa fa-picture-o s_features_grid_icon rounded fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eLearning</h4>
+                                <p>Odoo's open-source Learning Management System (LMS) lets tutors share content, perform assessments, and provide certifications. Easily create courses, upload content, and engage students. Assess progress and offer certifications to validate skills.<br/></p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section></div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721971916412_701"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721971916412_701"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            
+                        <section class=""s_features_grid pt48 pb24"" data-snippet=""s_features_grid"" data-name=""Features Grid"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24"">
+                    <div class=""row"">
+                        
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-internet-explorer rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Website Builder</h5>
+                                <p>Create a professional website with hosting and a domain name. Includes marketing tools, live chat, social media integration, and web push notifications. AI suggests layouts and content based on your industry. User-friendly interface allows drag-and-drop, layout adjustments, filters, and animations.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-opencart rounded-circle s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eCommerce</h4>
+                                <p>
+Design templates, set up your store, and apply sales tax rates automatically. The platform is mobile-friendly, SEO optimized, and integrates with Google Analytics. Create product pages with a top page builder and drag-and-drop blocks. Use a unified platform for marketing and operations with real-time stock updates. Increase revenue and retention effortlessly, and build advanced reports.
+
+<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-newspaper-o rounded-circle s_features_grid_icon fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Blog</h4>
+                                <p>
+Odoo Blog is an excellent content management system for showcasing ideas, engaging audiences, and building communities. Create and format text, insert media, and structure content directly from the frontend. Produce appealing content easily and improve your search engine ranking to attract more visitors.
+
+<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24""><div class=""row"">
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-eyedropper rounded s_features_grid_icon bg-white-50 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Forum</h4><p style=""margin-bottom: 0px;"">Understand and respond to leads and customers. Reward active members. Improve ranking with Google Analytics.</p><p style=""margin-bottom: 0px;""><br/></p><p>Odoo Forum builds community, boosts traffic, and enhances support. Enable user discussions, gain insights, and reward with Karma points. Use the advanced text editor for content creation.<br/></p>
+                            </div>
+                        </div>
+                        <div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-comments rounded s_features_grid_icon bg-white-25 fa-3x"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Live Chat</h4>
+                                <p>Odoo Live Chat lets you engage with customers and visitors in real time, boosting satisfaction and efficiency. Receive notifications and chat across all Odoo apps, converting conversations into support tickets seamlessly. Turn visitors into potential sales effortlessly.<br/></p></div></div><div class=""col-lg-12 pt16 pb16 o_colored_level"" data-name=""Box"">
+                            <i class=""fa fa-picture-o s_features_grid_icon rounded fa-3x bg-white-25"" style=""color: rgb(2, 48, 61);"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eLearning</h4>
+                                <p>Odoo's open-source Learning Management System (LMS) lets tutors share content, perform assessments, and provide certifications. Easily create courses, upload content, and engage students. Assess progress and offer certifications to validate skills.<br/></p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section></div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781769076_177"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781769076_177"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE""><section class=""s_text_image pt32 pb0"" data-snippet=""s_text_image"" data-name=""Text - Image"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row"">
+                
+                
+            <div class=""o_colored_level col-lg-6"">
+                    <h3>Scale Your Online Stores Confidently</h3>
+                    <p style=""margin-bottom: 0px;""><br/>Delivering exceptional experiences to your buyers and sellers, all in one place.</p><p style=""margin-bottom: 0px;""><br/></p><p style=""margin-bottom: 0px;""><span class=""fa fa-check-circle"" contenteditable=""false"">​</span>&amp;nbsp; Seamless Order Processing</p><p style=""margin-bottom: 0px;"" class=""o_default_snippet_text""><span class=""fa fa-check-circle"" contenteditable=""false"">​</span>&amp;nbsp; Smart Inventory Management<a href=""""/></p><p style=""margin-bottom: 0px;""><span class=""fa fa-check-circle"" contenteditable=""false"">​</span>&amp;nbsp; Efficient Shipping Integration</p><p style=""margin-bottom: 0px;""><span class=""fa fa-check-circle"" contenteditable=""false"">​</span>&amp;nbsp; Automated Financial Insights</p><p><span class=""fa fa-check-circle"" contenteditable=""false"">​</span>&amp;nbsp; Enhanced Customer Service<br/></p><p><a href=""#"" class=""btn btn-secondary o_default_snippet_text"">Learn more</a></p>
+                </div><div class=""o_colored_level col-lg-6"">
+                    <h3><br/></h3><section class=""s_embed_code pt64 pb64 text-center"" data-snippet=""s_embed_code"" data-name=""Embed Code"">
+        <div class=""s_embed_code_embedded container o_not_editable""><div class=""video-container"">
+  <video class=""responsive-video"" autoplay="""" loop="""" muted="""" playsinline="""">
+    <source src=""http://localhost:8069/web/content/794?download=true"" type=""video/mp4"">
+    Your browser does not support the video tag.
+  </source></video>
+</div>
+
+<style>
+  .video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 200px; /* Adjust as needed */
+  }
+  video.responsive-video {
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    max-height: 200px;
+  }
+</style></div>
+    </section></div></div>
+        </div>
+    </section>
+                            
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_149"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_149"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p>Write one or two paragraphs describing your product or services.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_150"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_150"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p>Write one or two paragraphs describing your product or services.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_151"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_151"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p>Write one or two paragraphs describing your product or services.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_152"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_152"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p>Write one or two paragraphs describing your product or services.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_153"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_153"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p>Write one or two paragraphs describing your product or services.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_154"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_154"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""s_allow_columns container""><p>
+
+<br/></p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_154"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_154"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""s_allow_columns container""><p>
+
+<br/></p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781590913_154"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781590913_154"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""s_allow_columns container""><p>
+
+<br/></p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class=""tab-pane fade"" id=""nav_tabs_content_1721781555278_99"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781555278_99"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p class=""o_default_snippet_text"">To be successful your content needs to be useful to your readers.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class=""tab-pane fade"" id=""nav_tabs_content_1721781555278_100"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781555278_100"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p class=""o_default_snippet_text"">Start with the customer – find out what they want and give it to them.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781555278_100"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781555278_100"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p class=""o_default_snippet_text"">Start with the customer – find out what they want and give it to them.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781555278_100"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781555278_100"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p class=""o_default_snippet_text"">Start with the customer – find out what they want and give it to them.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781555278_100"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781555278_100"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p class=""o_default_snippet_text"">Start with the customer – find out what they want and give it to them.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781555278_100"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781555278_100"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p class=""o_default_snippet_text"">Start with the customer – find out what they want and give it to them.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div><div class=""tab-pane fade"" id=""nav_tabs_content_1721781555278_100"" role=""tabpanel"" aria-labelledby=""nav_tabs_link_1721781555278_100"">
+                        <div class=""oe_structure oe_empty"" data-editor-message-default=""true"" data-editor-message=""DRAG BUILDING BLOCKS HERE"">
+                            <section class=""s_text_block"" style=""background-image: none;"" data-name=""Text"">
+                                <div class=""container s_allow_columns"">
+                                    <p class=""o_default_snippet_text"">Start with the customer – find out what they want and give it to them.</p>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><section class=""s_tabs o_colored_level pb256 pt32 o_half_screen_height"" data-vcss=""001"" data-snippet=""s_tabs"" data-name=""Tabs"" style=""position: relative; background-image: none;"" data-oe-shape-data=""{&quot;shape&quot;:&quot;web_editor/Floats/07&quot;,&quot;colors&quot;:{&quot;c1&quot;:&quot;#00855F&quot;,&quot;c2&quot;:&quot;#8595A2&quot;,&quot;c3&quot;:&quot;#F3F2F2&quot;,&quot;c5&quot;:&quot;#111827&quot;},&quot;flip&quot;:[],&quot;showOnMobile&quot;:false,&quot;animated&quot;:&quot;true&quot;}""><section style=""background-image: none;"" data-name=""Features Grid"" data-snippet=""s_features_grid"" class=""s_features_grid pt48 pb24"">
+        <div class=""container"">
+            <div class=""row"">
+                <div class=""col-lg-6 s_col_no_bgcolor pb24 o_draggable"">
+                    <div class=""row"">
+                        
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_draggable o_colored_level"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-internet-explorer rounded-circle s_features_grid_icon bg-white-25 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h5>Website Builder</h5>
+                                <p>Create a professional website with hosting and a domain name. Includes marketing tools, live chat, social media integration, and web push notifications. AI suggests layouts and content based on your industry. User-friendly interface allows drag-and-drop, layout adjustments, filters, and animations.<br/></p>
+                            </div>
+                        </div>
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-opencart rounded-circle s_features_grid_icon bg-white-25 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eCommerce</h4>
+                                <p>
+Design templates, set up your store, and apply sales tax rates automatically. The platform is mobile-friendly, SEO optimized, and integrates with Google Analytics. Create product pages with a top page builder and drag-and-drop blocks. Use a unified platform for marketing and operations with real-time stock updates. Increase revenue and retention effortlessly, and build advanced reports.
+
+<br/></p>
+                            </div>
+                        </div>
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_draggable o_colored_level"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-newspaper-o rounded-circle s_features_grid_icon fa-3x bg-white-25"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Blog</h4>
+                                <p>
+Odoo Blog is an excellent content management system for showcasing ideas, engaging audiences, and building communities. Create and format text, insert media, and structure content directly from the frontend. Produce appealing content easily and improve your search engine ranking to attract more visitors.
+
+<br/></p></div></div></div></div><div class=""col-lg-6 s_col_no_bgcolor pb24 o_draggable""><div class=""row"">
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-eyedropper rounded s_features_grid_icon bg-white-50 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Forum</h4><p style=""margin-bottom: 0px;"">Understand and respond to leads and customers. Reward active members. Improve ranking with Google Analytics.</p><p style=""margin-bottom: 0px;""><br/></p><p>Odoo Forum builds community, boosts traffic, and enhances support. Enable user discussions, gain insights, and reward with Karma points. Use the advanced text editor for content creation.<br/></p>
+                            </div>
+                        </div>
+                        <div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-comments rounded s_features_grid_icon bg-white-25 fa-3x"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>Live Chat</h4>
+                                <p>Odoo Live Chat lets you engage with customers and visitors in real time, boosting satisfaction and efficiency. Receive notifications and chat across all Odoo apps, converting conversations into support tickets seamlessly. Turn visitors into potential sales effortlessly.<br/></p></div></div><div data-name=""Box"" class=""col-lg-12 pt16 pb16 o_colored_level o_draggable"">
+                            <i style=""color: rgb(2, 48, 61);"" class=""fa fa-picture-o s_features_grid_icon rounded fa-3x bg-white-25"" contenteditable=""false"">​</i>
+                            <div class=""s_features_grid_content"">
+                                <h4>eLearning</h4>
+                                <p>Odoo's open-source Learning Management System (LMS) lets tutors share content, perform assessments, and provide certifications. Easily create courses, upload content, and engage students. Assess progress and offer certifications to validate skills.<br/></p></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><br/></section></div>
+    </t>
+</t>","__export__.website_page_42_6259fa71","Home","/","True","","","","","","","",""

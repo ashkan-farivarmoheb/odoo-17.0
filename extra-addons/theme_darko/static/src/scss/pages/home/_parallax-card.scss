@@ -1,0 +1,50 @@
+
+.parallax_card {
+  .hide-on-hover {
+    z-index: 1; /* Initial card visible */
+    position: relative;
+  }
+
+  .card {
+    background-color: $color-white;
+  }
+
+  .card-hover {
+    z-index: 2; /* Card with higher z-index shows on hover */
+    display: none; /* Initially hidden */
+    position: relative;
+
+    .card-body {
+      color: white;
+      z-index: 20; /* Ensures the text appears above the overlay */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%; /* Ensure the body takes up the full height */
+      padding-bottom: 1rem; /* Optional: Add some padding at the bottom */
+    }
+
+  }
+
+
+  .parent-container:hover .hide-on-hover {
+    display: none;
+  }
+
+  .parent-container:hover .card-hover {
+    display: block;
+  }
+
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 33%, rgba(0, 0, 0, 0.2) 100%);
+    z-index: 15;
+    pointer-events: none; /* Ensure it doesn't interfere with any other elements' interactivity */
+  }
+
+
+}

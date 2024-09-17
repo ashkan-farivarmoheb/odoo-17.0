@@ -1,0 +1,52 @@
+.sticky_onScroll {
+  margin-top: 50px;
+
+  .custom-left-column {
+    position: relative;
+  }
+
+  .custom-sticky-widget {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .custom-right-column {
+    @media (min-width: 992px) { // Bootstrap breakpoint for lg and above
+      margin-top: 400px; // Add margin-top when on large screens
+    }
+  }
+
+  .icon-box {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start; /* Align the icon and content at the top */
+    border-bottom: 1px solid o-color('o-color-3'); /* Grey border at the bottom */
+    padding-bottom: 16px; /* Optional: Add some padding to ensure spacing between content and the border */
+  }
+
+  .icon-box .icon {
+    font-size: 24px;
+    margin-right: 15px;
+    display: inline-block;
+    vertical-align: top;
+    color: o-color('o-color-1');
+  }
+
+  .icon-box .content {
+    display: inline-block;
+    vertical-align: top;
+    max-width: calc(100% - 40px);
+  }
+
+  .icon-box h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+  }
+
+  .icon-box p {
+    margin: 0;
+  }
+
+}

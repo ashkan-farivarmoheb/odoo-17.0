@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="banners" inherit_id="website.snippets" name="Banner Snippet">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_darko.banner_snippet"
+               t-thumbnail="/theme_darko/static/src/img/snippets/banner_block.jpg"/>
+        </xpath>
+    </template>
+    <template id="banner_snippet" name="Banner snippet">
+        <section class="banner o_full_screen_height" style="background-color: rgb(2, 48, 61)">
+            <div class="container-fluid">
+                <div class="row position-relative">
+                    <div class="col-6 offset-md-1 d-flex align-items-center">
+                        <div class="card-body" style="position: relative; z-index: 2;">
+                            <h1 class="card-title ">
+                                <font class="text-o-color-4">
+                                    <strong>Transformative technology solutions that drive success for your business
+                                    </strong>
+                                </font>
+                            </h1>
+                            <a href="#" class="btn btn-primary btn-lg">
+                                <span class="o_animated_text o_animate o_animate_both_scroll o_anim_flash o_visible o_animated"
+                                      style="--wanim-intensity: 100; animation-duration: 5s; animation-name: o_anim_flash; visibility: visible; animation-play-state: running;">
+                                    <strong>Start now</strong>
+                                    <span class="fa fa-angle-right ms-2"/>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="image-container">
+                <img src="/theme_darko/static/src/img/banner/homepage-wide-banner.svg" alt=""
+                     class="img img-fluid banner_image"
+                     loading="lazy"/>
+            </div>
+        </section>
+
+    </template>
+</odoo>

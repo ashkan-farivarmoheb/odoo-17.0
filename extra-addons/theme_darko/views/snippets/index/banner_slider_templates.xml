@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="banner_slider" inherit_id="website.snippets" name="Banner Slider">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_darko.banner_slider_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_carousel.svg"
+            />
+        </xpath>
+    </template>
+
+    <template id="banner_slider_snippet" name="Banner Slider">
+        <section class="banner_slider_section">
+            <div class="container-fluid px-0">
+                <div class="carousel">
+                    <!-- list item -->
+                    <div class="list">
+                        <div class="item" data-index="0">
+                            <img src="theme_darko/static/src/img/banner_slider/img1.jpg"/>
+                            <div class="content">
+                                <div class="author">LUNDEV</div>
+                                <div class="title">DESIGN SLIDER</div>
+                                <div class="topic">ANIMAL</div>
+                                <div class="des">
+                                    <!-- lorem 50 -->
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam
+                                    nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid
+                                    assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo,
+                                    laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum
+                                    aperiam illo illum laudantium?
+                                </div>
+                                <div class="buttons">
+                                    <a href="/" class="btn btn-primary" title="SEE MORE">SEE MORE</a>
+                                    <a href="/" class="btn btn-custom"
+                                       title="SUBSCRIPTION">SUBSCRIPTION
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" data-index="1">
+                            <img src="theme_darko/static/src/img/banner_slider/img2.jpg"/>
+                            <div class="content">
+                                <div class="author">LUNDEV</div>
+                                <div class="title">DESIGN SLIDER</div>
+                                <div class="topic">ANIMAL</div>
+                                <div class="des">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam
+                                    nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid
+                                    assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo,
+                                    laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum
+                                    aperiam illo illum laudantium?
+                                </div>
+                                <div class="buttons">
+                                    <a href="/" class="btn btn-primary" title="SEE MORE">SEE MORE</a>
+                                    <a href="/" class="btn btn-custom"
+                                       title="SUBSCRIPTION">SUBSCRIPTION
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" data-index="2">
+                            <img src="theme_darko/static/src/img/banner_slider/img3.jpg"/>
+                            <div class="content">
+                                <div class="author">LUNDEV</div>
+                                <div class="title">DESIGN SLIDER</div>
+                                <div class="topic">ANIMAL</div>
+                                <div class="des">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam
+                                    nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid
+                                    assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo,
+                                    laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum
+                                    aperiam illo illum laudantium?
+                                </div>
+                                <div class="buttons">
+                                    <a href="/" class="btn btn-primary" title="SEE MORE">SEE MORE</a>
+                                    <a href="/" class="btn btn-custom"
+                                       title="SUBSCRIPTION">SUBSCRIPTION
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" data-index="3">
+                            <img src="theme_darko/static/src/img/banner_slider/img4.jpg"/>
+                            <div class="content">
+                                <div class="author">LUNDEV</div>
+                                <div class="title">DESIGN SLIDER</div>
+                                <div class="topic">ANIMAL</div>
+                                <div class="des">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut sequi, rem magnam
+                                    nesciunt minima placeat, itaque eum neque officiis unde, eaque optio ratione aliquid
+                                    assumenda facere ab et quasi ducimus aut doloribus non numquam. Explicabo,
+                                    laboriosam nisi reprehenderit tempora at laborum natus unde. Ut, exercitationem eum
+                                    aperiam illo illum laudantium?
+                                </div>
+                                <div class="buttons">
+                                    <a href="/" class="btn btn-primary" title="SEE MORE">SEE MORE</a>
+                                    <a href="/" class="btn btn-custom"
+                                       title="SUBSCRIPTION">SUBSCRIPTION
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- list thumnail -->
+                    <div class="thumbnail">
+                        <div class="item" data-index="0">
+                            <img src="theme_darko/static/src/img/banner_slider/img1.jpg"/>
+                            <div class="content">
+                                <div class="title">
+                                    Name Slider
+                                </div>
+                                <div class="description">
+                                    Description
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" data-index="1">
+                            <img src="theme_darko/static/src/img/banner_slider/img2.jpg"/>
+                            <div class="content">
+                                <div class="title">
+                                    Name Slider
+                                </div>
+                                <div class="description">
+                                    Description
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" data-index="2">
+                            <img src="theme_darko/static/src/img/banner_slider/img3.jpg"/>
+                            <div class="content">
+                                <div class="title">
+                                    Name Slider
+                                </div>
+                                <div class="description">
+                                    Description
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item" data-index="3">
+                            <img src="theme_darko/static/src/img/banner_slider/img4.jpg"/>
+                            <div class="content">
+                                <div class="title">
+                                    Name Slider
+                                </div>
+                                <div class="description">
+                                    Description
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- next prev -->
+
+                    <div class="arrows">
+                        <button id="prev">&lt;</button>
+                        <button id="next">&gt;</button>
+                    </div>
+                    <!-- time running -->
+                    <div class="time"></div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

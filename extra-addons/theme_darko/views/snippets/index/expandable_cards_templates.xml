@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="expandable_cards" inherit_id="website.snippets" name="Expandable Cards">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_darko.expandable_cards_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_carousel.svg"
+            />
+        </xpath>
+    </template>
+
+    <template id="expandable_cards_snippet" name="Expandable Cards">
+        <section class="expandable_cards_section">
+            <div class="container" style="overflow:hidden">
+                <div class="expandable_cards">
+                    <div class="row justify-content-center g-2">
+                        <div class="expandable_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="expandable_card_content">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_03" class="card-img-top"
+                                         alt="Card image"/>
+                                    <!-- Icon is now placed over the image -->
+                                    <i class="fas fa-plus icon-plus"></i> <!-- Plus icon -->
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Card Title 1
+                                        </h5>
+                                        <p class="card-text">This is a description for the first card.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="expandable_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="expandable_card_content">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_03" class="card-img-top"
+                                         alt="Card image"/>
+                                    <!-- Icon is now placed over the image -->
+                                    <i class="fas fa-plus icon-plus"></i> <!-- Plus icon -->
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Card Title 1
+                                        </h5>
+                                        <p class="card-text">This is a description for the first card.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="expandable_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="expandable_card_content">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_03" class="card-img-top"
+                                         alt="Card image"/>
+                                    <!-- Icon is now placed over the image -->
+                                    <i class="fas fa-plus icon-plus"></i> <!-- Plus icon -->
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Card Title 1
+                                        </h5>
+                                        <p class="card-text">This is a description for the first card.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="expandable_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="expandable_card_content">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_03" class="card-img-top"
+                                         alt="Card image"/>
+                                    <!-- Icon is now placed over the image -->
+                                    <i class="fas fa-plus icon-plus"></i> <!-- Plus icon -->
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Card Title 1
+                                        </h5>
+                                        <p class="card-text">This is a description for the first card.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="expandable_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="expandable_card_content">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_03" class="card-img-top"
+                                         alt="Card image"/>
+                                    <!-- Icon is now placed over the image -->
+                                    <i class="fas fa-plus icon-plus"></i> <!-- Plus icon -->
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Card Title 1
+                                        </h5>
+                                        <p class="card-text">This is a description for the first card.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="expandable_card col-lg-4 col-md-6 col-12 d-flex justify-content-center">
+                            <div class="expandable_card_content">
+                                <div class="card-img-wrapper">
+                                    <img src="/web/image/website.library_image_03" class="card-img-top"
+                                         alt="Card image"/>
+                                    <!-- Icon is now placed over the image -->
+                                    <i class="fas fa-plus icon-plus"></i> <!-- Plus icon -->
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Card Title 1
+                                        </h5>
+                                        <p class="card-text">This is a description for the first card.</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

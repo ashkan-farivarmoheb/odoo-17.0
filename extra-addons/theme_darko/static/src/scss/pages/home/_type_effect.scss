@@ -1,0 +1,15 @@
+.type_effect_title {
+  .autotyping {
+    font-size: 55px;
+    font-weight: 600;
+    line-height: 1.2; /* Adjust line height as needed */
+    min-height: 120px; /* Set a minimum height to prevent layout shift */
+  }
+
+  .typing_text {
+    color: var(--o-color-6); /* Using Odoo's theme color variable */
+    display: inline-block;
+    font-size: 55px;
+    font-weight: 600;
+  }
+}

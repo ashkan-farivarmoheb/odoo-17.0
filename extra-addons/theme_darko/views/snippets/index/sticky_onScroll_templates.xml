@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sticky_onScroll" inherit_id="website.snippets" name="Sticky On Scroll">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_darko.sticky_onScroll_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg"
+            />
+        </xpath>
+    </template>
+    <template id="sticky_onScroll_snippet" name="Sticky On Scroll">
+        <section class="sticky_onScroll pt256">
+            <div class="container">
+                <div class="row">
+                    <!-- Left Column: Stays fixed on scroll -->
+                    <div class="col-lg-6 col-md-12 custom-left-column">
+                        <div class="custom-sticky-widget">
+                            <h2 style="font-size: 3.125rem;">Benefits</h2>
+                            <p>We are a skilled team specializing in <strong>Odoo</strong>, with expertise in
+                                IT, <strong>business analysis</strong>, and
+                                <strong>data</strong>
+                                <br/>
+                            </p>
+                            <p>Our team understand numbers and <strong>Odoo</strong>.
+                            </p>
+                            <p>Our platform is designed to
+                                <strong>streamline your accounting processes.</strong>
+                                <br/>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Right Column: Scrolls with the main page -->
+                    <div class="col-lg-6 col-md-12 custom-right-column">
+                        <div class="icon-box">
+                            <div class="icon">
+                                <i class="far fa-circle"></i>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <span style="font-size: 1.625rem;">Financial Compliance</span>
+                                </h3>
+                                <p>Tailor your general ledger to meet the compliance requirements of Accounting and
+                                    Auditing Standards (AAS) and International Financial Reporting Standards (IFRS).
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon">
+                                <i class="far fa-circle"></i>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <span style="font-size: 1.625rem;">Optimised Payments</span>
+                                </h3>
+                                <p>Automate your accounts payable workflows to ensure payments are timely, taking
+                                    advantage of discounts and improving cash flow management.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon">
+                                <i class="far fa-circle"></i>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <span style="font-size: 1.625rem;">Prevent Asset Overstatement</span>
+                                </h3>
+                                <p>Enhance your fixed asset management with accurate depreciation methods and precise
+                                    tracking to avoid overstating assets.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon">
+                                <i class="far fa-circle"></i>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <span style="font-size: 1.625rem;">Forecasting and Analysis</span>
+                                </h3>
+                                <p>Leverage your company data to fuel demand planning and analytics, enabling precise
+                                    and reliable forecasts.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon">
+                                <i class="far fa-circle"></i>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <span style="font-size: 1.625rem;">Supply Management</span>
+                                </h3>
+                                <p>Implement systems that adapt supply levels dynamically, keeping inventory optimised
+                                    and readily available.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon">
+                                <i class="far fa-circle"></i>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <span style="font-size: 1.625rem;">Hassle-Free Purchasing</span>
+                                </h3>
+                                <p>Simplify your purchase order workflows and approvals, making procurement processes
+                                    more efficient and smoother.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="icon-box">
+                            <div class="icon">
+                                <i class="far fa-circle"></i>
+                            </div>
+                            <div class="content">
+                                <h3>
+                                    <span style="font-size: 1.625rem;">Inventory Visibility</span>
+                                </h3>
+                                <p>Maintain smooth sales and cash flow by monitoring inventory across all locations,
+                                    reducing carrying costs, and preventing shortages.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </template>
+
+
+</odoo>

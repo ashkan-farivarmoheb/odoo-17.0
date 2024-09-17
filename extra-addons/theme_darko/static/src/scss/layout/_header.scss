@@ -1,0 +1,222 @@
+/* Ensure the header contents remain unaffected */
+header {
+  position: relative; /* Ensure proper positioning for the pseudo-element */
+  z-index: 10; /* Ensure content stays on top */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $nav-gradient-when-unblurred; /* Ensure this is a valid gradient */
+    backdrop-filter: $nav-filter; /* Apply blur filter */
+    z-index: -1; /* Ensure it's behind the content */
+    pointer-events: none; /* Prevent the pseudo-element from blocking clicks */
+    border-bottom: 2px solid $color-border; /* Add border to differentiate */
+
+  }
+}
+
+.o_mega_menu {
+  border: none;
+
+}
+
+/* Full-page class for body */
+main.full-page {
+  margin: 0;
+  padding: 0;
+  height: 200vh; /* Adjust height for content */
+  overflow: auto; /* Ensure main tag can scroll */
+}
+
+//common css for navbar
+.nav.navbar-nav {
+  font-weight: 500;
+  text-transform: capitalize;
+  //color: $color-black !important;
+  height: $navbar-height; // Fixed height for the navbar
+  display: flex;
+  align-items: center; // Vertically centers the items within the navbar
+  margin-right: 0 !important;
+
+
+}
+
+.navbar-nav .nav-link {
+  color: $nav-text-color !important; //phone color
+  &:hover {
+    color: $color-whitesmoke !important; // Apply $nav-text-color to the link when it's hoverd
+  }
+}
+
+.navbar-brand .img {
+  width: 100%;
+  max-width: 100px;
+}
+
+.icons-nav {
+  &.right {
+    @media screen and (max-width: 992px) {
+      display: none !important;
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+  }
+
+  img {
+    width: 100%;
+    max-width: 24px;
+  }
+}
+
+.nav-item .nav-link {
+  text-decoration: none;
+  position: relative; // Necessary for ::after to be positioned relative to this element
+  display: inline-block; // Ensure it only takes up the necessary space
+  //padding: 0; // Remove all padding
+  &:not(.active) {
+    color: $nav-text-color !important; // Apply $nav-text-color to the link when it's not active
+  }
+
+
+  &:hover {
+    color: $color-whitesmoke !important; // Apply $nav-text-color to the link when it's hoverd
+  }
+
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; // Position the underline just below the text
+    left: 0;
+    width: 0; // Start with no width
+    height: 2px; // Set the height of the underline
+    background-color: $color-accent; // Set the underline color to the third color
+    transition: width 0.3s ease-in-out; // Smooth transition for the width
+    box-shadow: none; // Remove any shadow
+    text-shadow: none; // Remove any text shadow
+    border: none; // Remove any border
+    outline: none; // Remove any outline
+  }
+
+  &:hover::after {
+    width: 100%; // Expand the underline to the full width on hover
+
+  }
+}
+
+.navbar-expand-lg {
+  top: 0;
+  width: 100%;
+  z-index: 100;
+
+
+  .dropdown .btn {
+    padding-left: 22px;
+    padding-right: 22px;
+    //border: 2px solid $color-primary !important;
+    color: $nav-text-color !important;
+    background-color: transparent !important;
+
+    &:hover {
+      color: $color-whitesmoke !important; // Apply $nav-text-color to the link when it's hoverd
+    }
+
+
+  }
+
+  .btn-check:focus + .btn,
+  .btn:focus,
+  .btn-check:focus + .btn-outline-secondary,
+  .btn-outline-secondary:focus,
+  .btn-outline-secondary.show:focus,
+  .btn-outline-secondary:focus {
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+
+
+  .navbar-brand .img {
+    width: 100%;
+    max-width: 100px;
+  }
+
+  .icons-nav {
+    &.right {
+      @media screen and (max-width: 992px) {
+        display: none !important;
+      }
+    }
+
+    ul {
+      display: flex;
+      list-style: none;
+    }
+
+    img {
+      width: 100%;
+      max-width: 24px;
+    }
+  }
+}
+
+
+header .navbar .dropdown-menu, header .navbar .o_dropdown_menu {
+  //top: 100%;
+  //overflow-y: hidden;
+  //overflow-x: hidden;
+
+}
+
+/* Mobile Navbar styles */
+.o_header_mobile.navbar {
+  //background-color: $color-primary; // Set your desired color for the mobile navbar
+  .btn {
+    //background-color: $color-white !important;
+    //color: $color-primary !important;
+    //border: 2px solid $color-primary !important;
+  }
+
+
+  .nav-link.btn {
+    //background-color: $color-white; //hamburger buton color
+  }
+
+
+  .btn-check:focus + .btn,
+  .btn:focus,
+  .btn-check:focus + .btn-outline-secondary,
+  .btn-outline-secondary:focus,
+  .btn-outline-secondary.show:focus,
+  .btn-outline-secondary:focus {
+    box-shadow: none !important;
+    outline: 0 !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-item {
+    border-bottom: 1px solid $color-grey; /* Add border-border to all nav-item */
+  }
+  .nav-item:first-child {
+    border-top: 1px solid $color-grey; /* Add border-top to the first nav-item */
+  }
+
+}
+
+@media (min-width: 1440px) {
+  .nav.navbar-nav {
+    margin-left: calc(100vw - 1440px) !important;
+  }
+}
+
+#o_main_nav.container {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+}

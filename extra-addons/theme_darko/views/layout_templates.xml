@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="custom_message" inherit_id="website.layout" name="Custom Header">
+        <!-- Add an element after the top menu  -->
+        <xpath expr="//div[@id='wrapwrap']/main" position="before">
+            <html lang="en">
+                <head>
+                    <meta charset="UTF-8"/>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+                    <title>Darko</title>
+                    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+
+                    <!--google font css-->
+                    <!--                    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&amp;display=swap"-->
+                    <!--                          rel="stylesheet"/>-->
+                    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&amp;display=swap"
+                          rel="stylesheet"/>
+                    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swaphttps://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+                          rel="stylesheet"/>
+                    <!--                    Google Material Ui Icons-->
+                    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+                          rel="stylesheet"/>
+                </head>
+                <body t-att-data-page-url="request.httprequest.path">
+                    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+                    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+                    <!--                    &lt;!&ndash;Typed.js cdn for type_effect_title_template snippet&ndash;&gt;-->
+                    <!--                    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>-->
+
+
+                    <script>
+                        $(function () {
+                        $("#slider-range").slider({
+                        range: true,
+                        min: 0,
+                        max: 100000,
+                        values: [0, 100000],
+                        slide: function (event, ui) {
+                        $("#amount").val(ui.values[0] + "-" + ui.values[1]);
+                        }
+                        });
+                        $("#amount").val($("#slider-range").slider("values", 0) + $("#slider-range").slider("values",
+                        1));
+                        });
+                    </script>
+
+                </body>
+            </html>
+        </xpath>
+    </template>
+</odoo>
