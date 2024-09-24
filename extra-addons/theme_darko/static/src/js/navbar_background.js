@@ -36,7 +36,7 @@ publicWidget.registry.NavbarExtension = publicWidget.Widget.extend({
         // Flag to indicate if a transition is in progress
         let isTransitioning = false;
         // Transition duration in milliseconds
-        const TRANSITION_DURATION = 20; // Adjusted to 300ms for realistic transitions
+        const TRANSITION_DURATION = 0; // Adjusted to 300ms for realistic transitions
 
         /**
          * Opens the specified dropdown menu.

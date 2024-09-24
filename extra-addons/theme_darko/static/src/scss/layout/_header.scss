@@ -299,12 +299,12 @@ main.full-page {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    //bottom: 0;
     z-index: -1; /* Keep the overlay behind the content */
     backdrop-filter: $nav-filter !important; /* Apply backdrop-filter */
     border-bottom: 1px solid $color-border;
     background: $nav-gradient-when-unblurred;
-    transition: $navbar-height-without-pad 300ms ease; /* Smooth transition for height changes */
+    transition: height 300ms ease; /* Smooth transition for height changes */
 
   }
 
@@ -451,12 +451,12 @@ main.full-page {
     top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    //bottom: 0;
     z-index: -1; /* Keep the overlay behind the content */
     backdrop-filter: $nav-filter !important; /* Apply backdrop-filter */
     border-bottom: 1px solid $color-border;
     background: $nav-gradient-when-unblurred;
-    transition: $navbar-height-without-pad 300ms ease; /* Smooth transition for height changes */
+    transition: height 300ms ease; /* Smooth transition for height changes */
 
   }
 
