@@ -104,7 +104,10 @@ $font-size-banner: 3.3125rem; // 53px / 16
 $font-size-form: 0.875rem; // 14px / 16
 $font-bold: 1.125rem; // 18px / 16
 
-$navbar-height: calc(70px - 2 * 0.5rem);
+$navbar-height: 70px;
+$navbar-height-without-pad: calc(#{$navbar-height} - 2 * 0.5rem);
+$sub_navbar-height: 36px;
+$total_navbar-height: calc(#{$navbar-height} + #{$sub_navbar-height}); /* Correct calculation */
 $nav-saturate: 150%;
 $nav-blur: 15px;
 $nav-text-color-light: $color-grey-80;
@@ -115,4 +118,5 @@ $nav-gradient-when-blurred: transparent;
 $nav-gradient-when-unblurred: linear-gradient(180deg, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .5));
 
 $bottom-border-radius: 10rem;
+$button-border-color: $color-cobalt-light;
 $border-radius: 10rem;

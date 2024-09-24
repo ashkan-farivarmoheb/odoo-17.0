@@ -11,7 +11,7 @@
 
   .text-container {
     position: sticky;
-    top: $navbar-height+8px; /* Align with the top of the card */
+    top: $navbar-height-without-pad+8px; /* Align with the top of the card */
     z-index: 1; /* Ensure it appears above other content */
     padding: 20px 0; /* Add padding as needed */
     margin-bottom: calc(45vh - 150px); /* Adjusted margin to prevent overlap */

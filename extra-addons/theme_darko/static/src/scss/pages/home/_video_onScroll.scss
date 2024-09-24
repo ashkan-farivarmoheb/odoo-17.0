@@ -4,7 +4,7 @@
 
   .sticky-video-container {
     position: sticky;
-    top: $navbar-height; // Ensure the video sticks to the top of the viewport
+    top: $navbar-height-without-pad; // Ensure the video sticks to the top of the viewport
     height: 100vh; // Full viewport height
     //display: flex;
     //align-items: center; // Vertically center the video

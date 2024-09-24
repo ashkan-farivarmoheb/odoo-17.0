@@ -19,18 +19,15 @@
   // }
   &-primary {
     border-radius: $bottom-border-radius;
-    //background-color: $color-white !important;
-    //color: $color-primary !important;
-    //border: 2px solid $color-primary !important;
+    background-color: $color-primary !important;
+    color: $color-grey-97 !important;
+    border: 2px solid $button-border-color !important;
     // padding: 9px 35px;
-    //&:hover {
-    //  background-color: darken(
-    //                  $color-white,
-    //                  10%
-    //  ) !important; // Slightly darker white for hover
-    //  color: darken($color-primary, 20%) !important;
-    //  border: 2px solid darken($color-primary, 20%);
-    //}
+    &:hover {
+      background-color: $color-cobalt-dark !important; // Slightly darker white for hover
+      color: $color-grey-97 !important;
+      border: 2px solid darken($color-cobalt-light, 20%);
+    }
   }
 
   &-secondary {
@@ -42,6 +39,16 @@
       background-color: darken($color-primary, 20%) !important;
       color: darken($color-white, 10%) !important;
       border: 2px solid darken($color-white, 10%);
+    }
+  }
+
+  &-outline-secondary {
+    color: $color-grey-80 !important;
+    border-color: transparent;
+
+    &:hover {
+      color: $color-grey-100 !important;
+      background-color: transparent !important;
     }
   }
 

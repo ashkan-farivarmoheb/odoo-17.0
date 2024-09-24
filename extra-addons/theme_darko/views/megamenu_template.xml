@@ -24,86 +24,59 @@
             <field name="sequence" type="int">21</field>
             <field name="is_mega_menu">True</field>
             <field name="mega_menu_content" type="html">
-                <section class="o_cc5 mega-menu">
+                <section class="mega-menu">
                     <div class="container-fluid">
-                        <div class="row py-5 menu-content">
-                            <!-- Blank Space: Takes 3 columns on large screens only -->
-                            <div class="col-lg-3 d-none d-lg-block"></div>
+                        <!-- Content: Takes full width on screens smaller than large (lg) -->
+                        <div class="row d-flex flex-column flex-lg-row justify-content-center">
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/services-consulting" class="link-with-image">
+                                        <span class="link-text">consulting</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/services-implementation" class="link-with-image">
+                                        <span class="link-text">implementation</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/services-upgrade" class="link-with-image">
 
-                            <!-- Content: Takes full width on screens smaller than large (lg) -->
-                            <div class="col-lg-9 col-12">
-                                <div class="row">
-                                    <!-- SOLUTIONS Column (hidden on mobile) -->
-                                    <div class="col-lg-4 col-md-6 col-12 d-none d-md-block">
-                                        <aside class="menu-description">
-                                            <a href="/services" class="h3">
-                                                <h2 class="my-4">Services</h2>
-                                            </a>
-                                            <p class="my-2">Optimize your business operations with our tailored Odoo
-                                                solutions. We specialize in providing comprehensive consulting, seamless
-                                                implementation, and ongoing support to ensure your success.
-                                            </p>
-                                        </aside>
-                                    </div>
+                                        <span class="link-text">upgrade</span>
+                                    </a>
+                                </div>
 
-                                    <!-- First Column -->
-                                    <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="my-2">
-                                            <a href="/services-consulting" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">consulting</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/services-implementation" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image2" class="link-image"/>
-                                                <span class="link-text">implementation</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/services-upgrade" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">upgrade</span>
-                                            </a>
-                                        </div>
-                                    </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/services-support" class="link-with-image">
 
-                                    <!-- Second Column -->
-                                    <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="my-2">
-                                            <a href="/services-support" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">support</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/services-audit" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">audit</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/services-training" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">training</span>
-                                            </a>
-                                        </div>
-                                    </div>
+                                        <span class="link-text">support</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/services-audit" class="link-with-image">
+
+                                        <span class="link-text">audit</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/services-training" class="link-with-image">
+
+                                        <span class="link-text">training</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
-                        <hr class="full-width-separator d-none d-md-block"/>
-                        <div class="container-fluid">
-                            <a href="/services" class="see_all_link h5">
-                                <span class="see_all_link-text">Explore Services</span>
-                            </a>
-                        </div>
+
                     </div>
                 </section>
 
@@ -116,94 +89,63 @@
             <field name="sequence" type="int">22</field>
             <field name="is_mega_menu">True</field>
             <field name="mega_menu_content" type="html">
-                <section class="o_cc5 mega-menu">
+                <section class="mega-menu">
                     <div class="container-fluid">
-                        <div class="row py-5 menu-content">
-                            <!-- Blank Space: Takes 3 columns on large screens only -->
-                            <div class="col-lg-3 d-none d-lg-block"></div>
+                        <!-- Content: Takes full width on screens smaller than large (lg) -->
+                        <div class="row d-flex flex-column flex-lg-row justify-content-center">
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/odoo-pricing" class="link-with-image">
+                                        <span class="link-text">Odoo Pricing</span>
+                                    </a>
+                                </div>
+                                <div class="col-auto">
 
-                            <!-- Content: Takes full width on screens smaller than large (lg) -->
-                            <div class="col-lg-9 col-12">
-                                <div class="row">
-                                    <!-- SOLUTIONS Column (hidden on mobile) -->
-                                    <div class="col-lg-4 col-md-6 col-12 d-none d-md-block">
-                                        <aside class="menu-description">
-                                            <a href="/odoo-erp" class="h3">
-                                                <h2 class="my-4">ODOO</h2>
-                                            </a>
-                                            <p class="my-2">Unlock the full potential of your business with Odoo's
-                                                powerful, all-in-one business applications. We provide expert guidance
-                                                on pricing, implementation, customization, and more to ensure your Odoo
-                                                journey is successful.
-                                            </p>
-                                        </aside>
-                                    </div>
-
-                                    <!-- First Column -->
-                                    <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="my-2">
-                                            <a href="/odoo-pricing" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Odoo Pricing</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/odoo-implementation" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Odoo Implementation</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/odoo-customisation" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image2" class="link-image"/>
-                                                <span class="link-text">Odoo Customisation</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/odoo-migration" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Odoo Migration</span>
-                                            </a>
-                                        </div>
-                                        <!-- Add other items here -->
-                                    </div>
-
-                                    <!-- Second Column -->
-                                    <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="my-2">
-                                            <a href="/odoo-integration" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Odoo Integration</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/odoo-licence" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Odoo Licence</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Code Audit</span>
-                                            </a>
-                                        </div>
+                                    <div class="my-2">
+                                        <a href="/odoo-implementation" class="link-with-image">
+                                            <span class="link-text">Odoo Implementation</span>
+                                        </a>
                                     </div>
                                 </div>
+                                <div class="col-auto">
+                                    <div class="my-2">
+                                        <a href="/odoo-customisation" class="link-with-image">
+                                            <span class="link-text">Odoo Customisation</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="my-2">
+                                        <a href="/odoo-migration" class="link-with-image">
+                                            <span class="link-text">Odoo Migration</span>
+                                        </a>
+                                    </div>
+                                    <!-- Add other items here -->
+                                </div>
                             </div>
-                        </div>
-                        <hr class="full-width-separator d-none d-md-block"/>
-                        <div class="container-fluid">
-                            <a href="/odoo-erp" class="see_all_link h5">
-                                <span class="see_all_link-text">Explore Odoo ERP</span>
-                            </a>
+
+                            <!-- Second Column -->
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/odoo-integration" class="link-with-image">
+                                        <span class="link-text">Odoo Integration</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/odoo-licence" class="link-with-image">
+                                        <span class="link-text">Odoo Licence</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/" class="link-with-image">
+                                        <span class="link-text">Code Audit</span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -217,94 +159,235 @@
             <field name="sequence" type="int">23</field>
             <field name="is_mega_menu">True</field>
             <field name="mega_menu_content" type="html">
-                <section class="o_cc5 mega-menu">
+                <section class="mega-menu">
                     <div class="container-fluid">
-                        <div class="row py-5 menu-content">
-                            <!-- Blank Space: Takes 3 columns on large screens only -->
-                            <div class="col-lg-3 d-none d-lg-block"></div>
+                        <!-- Responsive Flex Direction: Column on small, Row on large -->
+                        <div class="row d-flex flex-column flex-lg-row justify-content-center">
+
 
                             <!-- Content: Takes full width on screens smaller than large (lg) -->
-                            <div class="col-lg-9 col-12">
-                                <div class="row">
-                                    <!-- SOLUTIONS Column (hidden on mobile) -->
-                                    <div class="col-lg-4 col-md-6 col-12 d-none d-md-block">
-                                        <aside class="menu-description">
-                                            <a href="/industries" class="h3">
-                                                <h2 class="my-4">INDUSTRIES</h2>
-                                            </a>
-                                            <p class="my-2">Empower your industry with tailored Odoo solutions designed
-                                                to streamline operations, enhance efficiency, and drive growth across
-                                                various sectors.
-                                            </p>
-                                        </aside>
+                            <div class="col-auto">
+                                <div class="my-2">
+                                    <a href="/industries-ecommerce" class="link-with-image">
+                                        <span class="link-text">Ecommerce</span>
+                                    </a>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="my-2">
+                                        <a href="/industries-startups" class="link-with-image">
+                                            <span class="link-text">Startups</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="my-2">
+                                        <a href="/industries-professional-services" class="link-with-image">
+                                            <span class="link-text">Professional Services</span>
+                                        </a>
                                     </div>
 
-                                    <!-- First Column -->
-                                    <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="my-2">
-                                            <a href="/industries-ecommerce" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Ecommerce</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/industries-startups" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Startups</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/industries-professional-services" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image2" class="link-image"/>
-                                                <span class="link-text">Professional Services</span>
-                                            </a>
-                                        </div>
+                                </div>
 
-                                        <!-- Add other items here -->
+                                <!-- Second Column -->
+                                <div class="col-auto">
+                                    <div class="my-2">
+                                        <a href="/industries-food-beverages" class="link-with-image">
+                                            <span class="link-text">Food &amp; Beverages</span>
+                                        </a>
                                     </div>
-
-                                    <!-- Second Column -->
-                                    <div class="col-lg-4 col-md-6 col-12">
-                                        <div class="my-2">
-                                            <a href="/industries-food-beverages" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Food &amp; Beverages</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/industries-finance" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Finance</span>
-                                            </a>
-                                        </div>
-                                        <div class="my-2">
-                                            <a href="/industries-retail" class="link-with-image h3">
-                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"
-                                                     alt="Image1" class="link-image"/>
-                                                <span class="link-text">Retail</span>
-                                            </a>
-                                        </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="my-2">
+                                        <a href="/industries-finance" class="link-with-image">
+                                            <span class="link-text">Finance</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="my-2">
+                                        <a href="/industries-retail" class="link-with-image">
+                                            <span class="link-text">Retail</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
-                        <hr class="full-width-separator d-none d-md-block"/>
-                        <div class="container-fluid">
-                            <a href="/industries" class="see_all_link h5">
-                                <span class="see_all_link-text">Explore Industries</span>
-                            </a>
-                        </div>
+
                     </div>
                 </section>
             </field>
         </record>
 
-        <!-- Template for Mobile Menu Button -->
+        <!--        <record id="menu_odoo" model="website.menu">-->
+        <!--            <field name="name">Odoo</field>-->
+        <!--            <field name="url">/odoo-erp</field>-->
+        <!--            <field name="parent_id" ref="website.main_menu"/>-->
+        <!--            <field name="sequence" type="int">22</field>-->
+        <!--            <field name="is_mega_menu">True</field>-->
+        <!--            <field name="mega_menu_content" type="html">-->
+        <!--                <section class="o_cc5 mega-menu">-->
+        <!--                    <div class="container-fluid">-->
+        <!--                        <div class="row py-5 menu-content">-->
+
+        <!--                            &lt;!&ndash; Content: Takes full width on screens smaller than large (lg) &ndash;&gt;-->
+        <!--                            <div class="col-lg-9 col-12">-->
+        <!--                                <div class="row">-->
+
+        <!--                                    &lt;!&ndash; First Column &ndash;&gt;-->
+        <!--                                    <div class="col-auto">-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/odoo-pricing" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Odoo Pricing</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/odoo-implementation" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Odoo Implementation</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/odoo-customisation" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image2" class="link-image"/>-->
+        <!--                                                <span class="link-text">Odoo Customisation</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/odoo-migration" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Odoo Migration</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        &lt;!&ndash; Add other items here &ndash;&gt;-->
+        <!--                                    </div>-->
+
+        <!--                                    &lt;!&ndash; Second Column &ndash;&gt;-->
+        <!--                                    <div class="col-auto">-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/odoo-integration" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Odoo Integration</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/odoo-licence" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Odoo Licence</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Code Audit</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <hr class="full-width-separator d-none d-md-block"/>-->
+        <!--                        <div class="container-fluid">-->
+        <!--                            <a href="/odoo-erp" class="see_all_link h5">-->
+        <!--                                <span class="see_all_link-text">Explore Odoo ERP</span>-->
+        <!--                            </a>-->
+        <!--                        </div>-->
+
+        <!--                    </div>-->
+        <!--                </section>-->
+        <!--            </field>-->
+        <!--        </record>-->
+        <!--        <record id="menu_industries" model="website.menu">-->
+        <!--            <field name="name">Industries</field>-->
+        <!--            <field name="url">/industries</field>-->
+        <!--            <field name="parent_id" ref="website.main_menu"/>-->
+        <!--            <field name="sequence" type="int">23</field>-->
+        <!--            <field name="is_mega_menu">True</field>-->
+        <!--            <field name="mega_menu_content" type="html">-->
+        <!--                <section class="o_cc5 mega-menu">-->
+        <!--                    <div class="container-fluid">-->
+        <!--                        <div class="row py-5 menu-content">-->
+
+
+        <!--                            &lt;!&ndash; Content: Takes full width on screens smaller than large (lg) &ndash;&gt;-->
+        <!--                            <div class="col-lg-9 col-12">-->
+        <!--                                <div class="row">-->
+
+
+        <!--                                    &lt;!&ndash; First Column &ndash;&gt;-->
+        <!--                                    <div class="col-auto">-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/industries-ecommerce" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Ecommerce</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/industries-startups" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Startups</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/industries-professional-services" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image2" class="link-image"/>-->
+        <!--                                                <span class="link-text">Professional Services</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+
+        <!--                                        &lt;!&ndash; Add other items here &ndash;&gt;-->
+        <!--                                    </div>-->
+
+        <!--                                    &lt;!&ndash; Second Column &ndash;&gt;-->
+        <!--                                    <div class="col-auto">-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/industries-food-beverages" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Food &amp; Beverages</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/industries-finance" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Finance</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                        <div class="my-2">-->
+        <!--                                            <a href="/industries-retail" class="link-with-image">-->
+        <!--                                                <img src="/theme_darko/static/src/img/icons_3/advanced-e-commerce-svg.svg"-->
+        <!--                                                     alt="Image1" class="link-image"/>-->
+        <!--                                                <span class="link-text">Retail</span>-->
+        <!--                                            </a>-->
+        <!--                                        </div>-->
+        <!--                                    </div>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                        <hr class="full-width-separator d-none d-md-block"/>-->
+        <!--                        <div class="container-fluid">-->
+        <!--                            <a href="/industries" class="see_all_link h5">-->
+        <!--                                <span class="see_all_link-text">Explore Industries</span>-->
+        <!--                            </a>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </section>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+        <!--         Template for Mobile Menu Button -->
         <!--        <template id="custom_menu_button" inherit_id="website.template_header_mobile"-->
         <!--                  name="Add Contact Us Button to Menu">-->
         <!--            <xpath expr="//div[@id='top_menu_collapse_mobile']//ul[contains(@class,'navbar-nav')]" position="after">-->
@@ -318,5 +401,21 @@
         <!--                </li>-->
         <!--            </xpath>-->
         <!--        </template>-->
+        <template id="custom_mobile_header" inherit_id="website.template_header_mobile"
+                  name="Add brand to mobile header menu">
+            <xpath expr="//div[@id='top_menu_collapse_mobile']//div[contains(@class,'offcanvas-header')]//button[contains(@class,'btn-close')]"
+                   position="before">
+                <li class="me-auto">
+                    <a data-name="Navbar Logo" href="/" class="navbar-brand logo">
+                        <span role="img" aria-label="Logo of My Website" title="My Website" data-oe-model="website.menu"
+                              data-oe-id="1" data-oe-field="logo" data-oe-type="image"
+                              data-oe-expression="website.logo">
+                            <img src="/web/image/website/1/logo/My%20Website?unique=eddae40" class="img img-fluid"
+                                 width="95" height="40" alt="My Website" loading="lazy"/>
+                        </span>
+                    </a>
+                </li>
+            </xpath>
+        </template>
     </data>
 </odoo>

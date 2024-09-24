@@ -99,6 +99,7 @@
             'theme_darko/static/src/js/expandable_cards.js',
             'theme_darko/static/src/js/banner_slider.js',
             'theme_darko/static/src/js/video_onScroll.js',
+            'theme_darko/static/src/js/navbar_background.js',
         ],
     },
     'images': [

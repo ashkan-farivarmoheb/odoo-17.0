@@ -1,36 +1,12 @@
 .mega-menu {
-  background: $nav-gradient-when-unblurred; /* Ensure this is a valid gradient */
-  backdrop-filter: $nav-filter; /* Apply blur filter */
+  position: relative;
   color: $nav-text-color;
   padding: 0 20px;
-  overflow-y: hidden;
-  top: 100%;
-  //top: 23px;
+  overflow: hidden;
+  //height: $sub_navbar-height;
+  height: 0; /* Initially collapsed */
+  transition: height 0.2s ease; /* Smooth transition */
 
-  .solutions-column {
-    min-width: 300px;
-    font-family: $font-default;
-  }
-
-  .menu-description {
-    display: block;
-    width: 100%;
-    min-width: 300px;
-    font-family: $font-default;
-    font-size: $font-size-h4;
-    color: $nav-text-color;
-    padding-right: 1rem;
-    padding-left: 0;
-
-    a {
-      text-decoration: none; /* No underline for the link */
-      color: inherit; /* Inherit color from parent */
-
-      &:hover {
-        text-decoration: none; /* No underline on hover */
-      }
-    }
-  }
 
   h2 {
     color: $nav-text-color !important;
@@ -40,12 +16,12 @@
     margin-bottom: 32px;
   }
 
-  p {
-    color: $nav-text-color;
-    font-size: $font-size-h4;
-    text-transform: none;
-    font-family: $font-default;
-  }
+  //p {
+  //  color: $nav-text-color;
+  //  font-size: $font-size-h4;
+  //  text-transform: none;
+  //  font-family: $font-default;
+  //}
 
   .link-with-image {
     display: flex;
@@ -55,7 +31,7 @@
     position: relative;
     padding-left: 1rem;
 
-    font-size: $font-size-h4;
+    font-size: $font-size-text;
     font-family: $font-default;
 
     .link-text {
@@ -63,10 +39,6 @@
       position: relative;
       color: $nav-text-color !important;
       font-family: $font-default;
-    }
-
-    .link-text:hover {
-      color: $color-whitesmoke !important;
     }
 
     .link-text::after {
@@ -83,25 +55,33 @@
     .link-text:hover::after {
       width: 100%;
     }
-
   }
 
-  .link-image {
-    width: 48px;
-    height: 48px;
-    margin-right: 10px;
-    flex-shrink: 0;
-  }
 
-  .border-bottom {
-    border-bottom: 1px solid $color-black;
-  }
 }
 
-.dropdown-menu {
-  border-bottom: 2px solid $border-color; /* Add border to differentiate */
-
+/* When the dropdown is open */
+#top.dropdown-open .mega-menu {
+  height: $sub_navbar-height; /* Adjust based on maximum expected dropdown height */
 }
+
+
+.o_mega_menu {
+  border: 0;
+  border-top: 1px solid $color-border;
+  overflow: hidden; /* Hide overflowing content */
+}
+
+
+//.navbar-expand-lg.dropdown-menu.o_mega_menu {
+//  top: 100% !important; // Fixed value, adjust as per the actual header height
+//  width: 100%; // Ensure it covers the full width of the container
+//  position: absolute; // Ensure it is positioned relative to the containing element
+//  left: 0; // Align to the left edge of the container
+//  z-index: 1000; // Ensure it is above other content
+//  background-color: $color-red; // Background color
+//  //transition: opacity 0.3s ease, transform 0.3s ease; // Smooth transition for opening
+//}
 
 /* Add styles for the link */
 
@@ -165,7 +145,6 @@ a.see_all_link {
 
   &:hover::after {
     width: 100%; /* Expand underline to full width on hover */
-
   }
 }
 
@@ -184,15 +163,19 @@ a.see_all_link:hover {
 .mega-menu .container-fluid {
   width: 80%;
   padding: 0;
-
+  z-index: 1; /* Ensures the text stays on top and is not blurred */
 }
 
 // Media Query for 1024px width
 @media (max-width: 1024px) {
-
+  //.mega-menu .container-fluid {
+  //  width: 80%;
+  //  padding: 0;
+  //}
 
   .mega-menu .row {
     margin: 0;
+
   }
 
   .mega-menu .col-lg-3 {
@@ -214,9 +197,8 @@ a.see_all_link:hover {
     margin-bottom: 15px;
   }
   .dropdown-menu.o_mega_menu.show {
-    border-bottom: 0;
+    border: 0;
     overflow: hidden;
-
 
     .menu-content {
       padding-top: 0 !important;
@@ -232,6 +214,6 @@ a.see_all_link:hover {
     }
 
   }
-}
 
+}
 

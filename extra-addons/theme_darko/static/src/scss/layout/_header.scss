@@ -1,27 +1,56 @@
-/* Ensure the header contents remain unaffected */
-header {
-  position: relative; /* Ensure proper positioning for the pseudo-element */
-  z-index: 10; /* Ensure content stays on top */
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: $nav-gradient-when-unblurred; /* Ensure this is a valid gradient */
-    backdrop-filter: $nav-filter; /* Apply blur filter */
-    z-index: -1; /* Ensure it's behind the content */
-    pointer-events: none; /* Prevent the pseudo-element from blocking clicks */
-    border-bottom: 2px solid $color-border; /* Add border to differentiate */
+.top-nav {
+  list-style-type: none;
+}
 
+.header-top {
+  color: $nav-text-color;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: $font-size-text;
+  font-weight: 300;
+
+  &-wrap {
+    display: flex;
+    justify-content: space-between;
+
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .info {
+    a {
+      color: $nav-text-color;
+
+      &:hover {
+        color: $nav-text-color;
+        text-decoration: none;
+      }
+    }
+  }
+
+  ul {
+    @media screen and (max-width: 768px) {
+      padding-left: 0px;
+    }
+  }
+
+  li {
+    cursor: pointer;
+    margin-right: 12px;
+
+    a {
+      color: $nav-text-color;
+
+      &:hover {
+        color: $nav-text-color;
+        text-decoration: none;
+      }
+    }
   }
 }
 
-.o_mega_menu {
-  border: none;
-
-}
 
 /* Full-page class for body */
 main.full-page {
@@ -34,21 +63,14 @@ main.full-page {
 //common css for navbar
 .nav.navbar-nav {
   font-weight: 500;
-  text-transform: capitalize;
+  text-transform: uppercase;
   //color: $color-black !important;
-  height: $navbar-height; // Fixed height for the navbar
+  height: $navbar-height-without-pad; // Fixed height for the navbar
   display: flex;
   align-items: center; // Vertically centers the items within the navbar
   margin-right: 0 !important;
 
 
-}
-
-.navbar-nav .nav-link {
-  color: $nav-text-color !important; //phone color
-  &:hover {
-    color: $color-whitesmoke !important; // Apply $nav-text-color to the link when it's hoverd
-  }
 }
 
 .navbar-brand .img {
@@ -79,15 +101,6 @@ main.full-page {
   position: relative; // Necessary for ::after to be positioned relative to this element
   display: inline-block; // Ensure it only takes up the necessary space
   //padding: 0; // Remove all padding
-  &:not(.active) {
-    color: $nav-text-color !important; // Apply $nav-text-color to the link when it's not active
-  }
-
-
-  &:hover {
-    color: $color-whitesmoke !important; // Apply $nav-text-color to the link when it's hoverd
-  }
-
 
   &::after {
     content: "";
@@ -106,117 +119,359 @@ main.full-page {
 
   &:hover::after {
     width: 100%; // Expand the underline to the full width on hover
-
   }
 }
 
-.navbar-expand-lg {
-  top: 0;
-  width: 100%;
-  z-index: 100;
-
-
-  .dropdown .btn {
-    padding-left: 22px;
-    padding-right: 22px;
-    //border: 2px solid $color-primary !important;
-    color: $nav-text-color !important;
-    background-color: transparent !important;
-
-    &:hover {
-      color: $color-whitesmoke !important; // Apply $nav-text-color to the link when it's hoverd
-    }
-
-
+.nav-item.dropdown .nav-link {
+  position: relative; // Necessary for ::after to be positioned relative to this element
+  display: inline-block; // Ensure it only takes up the necessary space
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -2px; // Position the underline just below the text
+    left: 0;
+    width: 0; // Start with no width
+    height: 2px; // Set the height of the underline
+    background-color: $color-accent; // Set the underline color to the third color
+    transition: width 0.3s ease-in-out; // Smooth transition for the width
+    box-shadow: none; // Remove any shadow
+    text-shadow: none; // Remove any text shadow
+    border: none; // Remove any border
+    outline: none; // Remove any outline
   }
 
-  .btn-check:focus + .btn,
-  .btn:focus,
-  .btn-check:focus + .btn-outline-secondary,
-  .btn-outline-secondary:focus,
-  .btn-outline-secondary.show:focus,
-  .btn-outline-secondary:focus {
-    box-shadow: none !important;
-    outline: 0 !important;
-  }
-
-
-  .navbar-brand .img {
-    width: 100%;
-    max-width: 100px;
-  }
-
-  .icons-nav {
-    &.right {
-      @media screen and (max-width: 992px) {
-        display: none !important;
-      }
-    }
-
-    ul {
-      display: flex;
-      list-style: none;
-    }
-
-    img {
-      width: 100%;
-      max-width: 24px;
-    }
+  &:hover::after {
+    width: 100%; // Expand the underline to the full width on hover
   }
 }
 
 
-header .navbar .dropdown-menu, header .navbar .o_dropdown_menu {
-  //top: 100%;
-  //overflow-y: hidden;
-  //overflow-x: hidden;
-
-}
+///* Main Navbar styles */
+//.o_header_fixed:not(.o_header_is_scrolled) {
+//  .navbar-expand-lg {
+//    position: fixed;
+//    top: 0;
+//    width: 100%;
+//    z-index: 10;
+//    transition: background-color 0.3s ease;
+//    border-bottom: 1px solid transparent; /* Add border to differentiate */
+//
+//    .btn {
+//      padding-left: 22px;
+//      padding-right: 22px;
+//    }
+//
+//
+//    /* Change background when not scrolled */
+//    &.d-none.d-lg-block.shadow-sm {
+//      background-color: transparent; // Initial background
+//
+//      .nav-link {
+//        color: $nav-text-color !important;
+//      }
+//
+//      .btn {
+//        border: 2px solid $nav-text-color !important;
+//        color: $nav-text-color !important;
+//        background-color: transparent !important;
+//      }
+//
+//      // Conditional styles for specific URLs
+//      // Apply styles to pages with URLs containing  "/contactus" or the exact home page URL "/"
+//      //[data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/home"] & {
+//      //  .btn {
+//      //    //background-color: transparent !important;
+//      //    color: $color-white !important;
+//      //    border: 2px solid $color-white !important;
+//      //  }
+//      //
+//      //  .nav-link {
+//      //    color: $color-white !important; // Apply $color-white color to text
+//      //  }
+//      //}
+//
+//      &:hover {
+//        background-color: $nav-gradient-when-unblurred !important;
+//
+//        .btn {
+//          background-color: transparent !important;
+//          color: $nav-text-color !important;
+//          border: 2px solid $nav-text-color !important;
+//        }
+//
+//        .nav-link {
+//          color: $nav-text-color !important; // Apply $color-primary color to text
+//        }
+//
+//
+//      }
+//
+//
+//    }
+//
+//
+//  }
+//}
+//
+///* Change background Navbar when scrolled */
+//.o_header_fixed.o_top_fixed_element.o_header_is_scrolled.o_header_affixed {
+//  background-color: $nav-gradient-when-unblurred !important; // Change background to white
+//  border-bottom: 1px solid #ccc; // Add a bottom border
+//
+//  .navbar-expand-lg {
+//    background-color: $nav-gradient-when-unblurred !important; // Change background to white
+//    border-bottom: 1px solid #ccc; // Add a bottom border
+//    .btn {
+//      //background-color: transparent !important;
+//      color: $nav-text-color !important;
+//      border: 2px solid $nav-text-color !important;
+//    }
+//
+//    .nav-link {
+//      color: $nav-text-color !important; // Apply $color-primary color to text
+//    }
+//  }
+//}
 
 /* Mobile Navbar styles */
 .o_header_mobile.navbar {
-  //background-color: $color-primary; // Set your desired color for the mobile navbar
-  .btn {
-    //background-color: $color-white !important;
-    //color: $color-primary !important;
-    //border: 2px solid $color-primary !important;
+  background-color: $nav-gradient-when-unblurred; // Set your desired color for the mobile navbar
+
+
+  .nav.navbar-nav {
+    align-items: flex-start;
+
+    .mega-menu {
+      padding: 0;
+
+      .container-fluid {
+        margin: 0;
+
+      }
+    }
   }
 
-
-  .nav-link.btn {
-    //background-color: $color-white; //hamburger buton color
+  .o_navbar_mobile {
+    background-color: transparent;
   }
 
+  .offcanvas {
+    backdrop-filter: $nav-filter !important; /* Apply backdrop-filter */
+    border-bottom: 1px solid $color-border;
 
-  .btn-check:focus + .btn,
-  .btn:focus,
-  .btn-check:focus + .btn-outline-secondary,
-  .btn-outline-secondary:focus,
-  .btn-outline-secondary.show:focus,
-  .btn-outline-secondary:focus {
-    box-shadow: none !important;
-    outline: 0 !important;
+    background-color: unset !important;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1; /* Keep the overlay behind the content */
+      backdrop-filter: $nav-filter !important; /* Apply backdrop-filter */
+      background: $nav-gradient-when-unblurred;
+
+
+    }
+
   }
+
 }
 
 @media (max-width: 992px) {
   .nav-item {
-    border-bottom: 1px solid $color-grey; /* Add border-border to all nav-item */
+    border-bottom: 1px solid $color-border; /* Add border-border to all nav-item */
   }
   .nav-item:first-child {
-    border-top: 1px solid $color-grey; /* Add border-top to the first nav-item */
+    border-top: 1px solid $color-border; /* Add border-top to the first nav-item */
   }
 
 }
 
-@media (min-width: 1440px) {
-  .nav.navbar-nav {
-    margin-left: calc(100vw - 1440px) !important;
+
+/* Main Navbar styles disapears regular */
+.o_header_disappears:not(.o_top_fixed_element):not(.o_header_is_scrolled):not(.o_header_affixed),
+.o_header_disappears.o_top_fixed_element {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Keep the overlay behind the content */
+    backdrop-filter: $nav-filter !important; /* Apply backdrop-filter */
+    border-bottom: 1px solid $color-border;
+    background: $nav-gradient-when-unblurred;
+    transition: $navbar-height-without-pad 300ms ease; /* Smooth transition for height changes */
+
+  }
+
+  &.dropdown-open::before {
+    height: $total_navbar-height; /* Increased height when dropdown is open */
+  }
+
+
+  .navbar-expand-lg {
+    border-bottom: 1px solid transparent; /* Add border to differentiate */
+
+    .btn {
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+
+    //[data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/home"] & {
+    //
+    //  .nav-link {
+    //    color: $nav-text-color !important;
+    //  }
+    //
+    //  .btn {
+    //    border: 2px solid $nav-text-color !important;
+    //    color: $nav-text-color !important;
+    //    background-color: transparent !important;
+    //  }
+    //}
+
+    //.btn {
+    //  border: 2px solid $color-primary !important;
+    //  color: $color-primary !important;
+    //  background-color: transparent !important;
+    //}
+
+
+    .nav.navbar-nav {
+      font-weight: 500;
+      text-transform: uppercase;
+      color: $nav-text-color !important;
+      //height: $navbar-height-without-pad; // Fixed height for the navbar
+      display: flex;
+      align-items: center; // Vertically centers the items within the navbar
+      margin-right: 0 !important;
+
+
+    }
+
+
+    .navbar-brand .img {
+      width: 100%;
+      max-width: 100px;
+    }
+
+    .icons-nav {
+      &.right {
+        @media screen and (max-width: 992px) {
+          display: none !important;
+        }
+      }
+
+      ul {
+        display: flex;
+        list-style: none;
+      }
+
+      img {
+        width: 100%;
+        max-width: 24px;
+      }
+    }
+
+    .nav-item .nav-link {
+      text-decoration: none;
+      position: relative; // Necessary for ::after to be positioned relative to this element
+      display: inline-block; // Ensure it only takes up the necessary space
+      //padding: 0; // Remove all padding
+      &:hover {
+        color: $color-grey-100 !important; // Expand the underline to the full width on hover
+      }
+
+      &.active {
+        color: $color-grey-100 !important;
+        font-weight: bolder;
+
+      }
+
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -2px; // Position the underline just below the text
+        left: 0;
+        width: 0; // Start with no width
+        height: 2px; // Set the height of the underline
+        background-color: $color-accent; // Set the underline color to the third color
+        transition: width 0.3s ease-in-out; // Smooth transition for the width
+        box-shadow: none; // Remove any shadow
+        text-shadow: none; // Remove any text shadow
+        border: none; // Remove any border
+        outline: none; // Remove any outline
+      }
+
+      &:hover::after {
+        width: 100%; // Expand the underline to the full width on hover
+      }
+
+
+    }
+
+    .nav-item.dropdown .nav-link {
+      position: relative; // Necessary for ::after to be positioned relative to this element
+      display: inline-block; // Ensure it only takes up the necessary space
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: -2px; // Position the underline just below the text
+        left: 0;
+        width: 0; // Start with no width
+        height: 2px; // Set the height of the underline
+        background-color: $color-accent; // Set the underline color to the third color
+        transition: width 0.3s ease-in-out; // Smooth transition for the width
+        box-shadow: none; // Remove any shadow
+        text-shadow: none; // Remove any text shadow
+        border: none; // Remove any border
+        outline: none; // Remove any outline
+      }
+
+      &:hover::after {
+        width: 100%; // Expand the underline to the full width on hover
+      }
+    }
+
+
+  }
+
+}
+
+
+/////* Change background Navbar when scrolled */
+.o_header_disappears.o_top_fixed_element.o_header_is_scrolled {
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1; /* Keep the overlay behind the content */
+    backdrop-filter: $nav-filter !important; /* Apply backdrop-filter */
+    border-bottom: 1px solid $color-border;
+    background: $nav-gradient-when-unblurred;
+    transition: $navbar-height-without-pad 300ms ease; /* Smooth transition for height changes */
+
+  }
+
+  &.dropdown-open::before {
+    height: $total_navbar-height; /* Increased height when dropdown is open */
+  }
+
+
+  .navbar-expand-lg {
+    border-bottom: 1px solid $color-border; // Add a bottom border
+
+
+    .nav-link {
+      color: $nav-text-color !important; // Apply $color-primary color to text
+    }
   }
 }
 
-#o_main_nav.container {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-
-}
