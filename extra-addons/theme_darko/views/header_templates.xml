@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!--  To inherit website layout  -->
+    <!--    To inherit website layout-->
     <!--    <template id="header_1" inherit_id="website.layout" active="True" name="Header 1">-->
     <!--        <xpath expr="//header" position="before">-->
     <!--            <div class="container">-->
@@ -37,7 +37,7 @@
     <!--            </div>-->
     <!--        </xpath>-->
     <!--    </template>-->
-    <!--  To inherit header cart button  -->
+    <!--    To inherit header cart button-->
     <!--    <template id="darko_cart" inherit_id="website_sale.header_cart_link">-->
     <!--        <xpath expr="//i[@t-if='_icon']" position="replace">-->
     <!--            <i t-if="_icon" class="icons-nav right">-->
@@ -45,7 +45,7 @@
     <!--            </i>-->
     <!--        </xpath>-->
     <!--    </template>-->
-    <!--  To inherit wishlist button  -->
+    <!--    To inherit wishlist button-->
     <!--    <template id="darko_wishlist" inherit_id="website_sale_wishlist.header_wishlist_link">-->
     <!--        <xpath expr="//i[@t-if='_icon']" position="replace">-->
     <!--            <i t-if="_icon" class="icons-nav right">-->
