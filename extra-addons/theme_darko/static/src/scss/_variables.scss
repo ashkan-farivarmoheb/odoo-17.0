@@ -106,7 +106,7 @@ $font-bold: 1.125rem; // 18px / 16
 
 $navbar-height: 70px;
 $navbar-height-without-pad: calc(#{$navbar-height} - 2 * 0.5rem);
-$sub_navbar-height: 36px;
+$sub_navbar-height: 52px;
 $total_navbar-height: calc(#{$navbar-height} + #{$sub_navbar-height}); /* Correct calculation */
 $nav-saturate: 150%;
 $nav-blur: 15px;

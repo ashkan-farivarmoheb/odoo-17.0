@@ -31,12 +31,13 @@
   }
 
   &-secondary {
-    background-color: $color-primary !important;
-    color: $color-white !important;
-    border: 2px solid $color-white !important;
+    border-radius: $bottom-border-radius;
+    background-color: $color-grey-97 !important;
+    color: $color-grey-15 !important;
+    border: 2px solid $color-grey-100 !important;
     // padding: 9px 35px;
     &:hover {
-      background-color: darken($color-primary, 20%) !important;
+      background-color: $color-grey-88 !important; // Slightly darker white for hover
       color: darken($color-white, 10%) !important;
       border: 2px solid darken($color-white, 10%);
     }
@@ -45,10 +46,18 @@
   &-outline-secondary {
     color: $color-grey-80 !important;
     border-color: transparent;
+    background-color: transparent !important;
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem red;
+    }
+
 
     &:hover {
       color: $color-grey-100 !important;
       background-color: transparent !important;
+      border-color: transparent;
+
     }
   }
 
