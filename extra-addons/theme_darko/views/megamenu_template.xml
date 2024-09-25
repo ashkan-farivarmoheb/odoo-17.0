@@ -10,7 +10,7 @@
         </record>
 
         <record id="menu_resources-insight" model="website.menu">
-            <field name="name">resources &amp; insights</field>
+            <field name="name">Resources &amp; Insights</field>
             <field name="url">/resources-insights</field>
             <field name="parent_id" ref="website.main_menu"/>
             <field name="sequence" type="int">28</field>
@@ -420,9 +420,7 @@
                    position="before">
                 <li class="me-auto">
                     <a data-name="Navbar Logo" href="/" class="navbar-brand logo">
-                        <span role="img" aria-label="Logo of My Website" title="My Website" data-oe-model="website.menu"
-                              data-oe-id="1" data-oe-field="logo" data-oe-type="image"
-                              data-oe-expression="website.logo">
+                        <span role="img" aria-label="Logo of My Website" title="My Website">
                             <img src="/web/image/website/1/logo/My%20Website?unique=eddae40" class="img img-fluid"
                                  width="95" height="40" alt="My Website" loading="lazy"/>
                         </span>

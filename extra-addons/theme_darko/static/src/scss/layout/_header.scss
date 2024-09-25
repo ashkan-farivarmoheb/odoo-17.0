@@ -379,10 +379,16 @@ main.full-page {
       }
     }
 
+    .nav-link {
+      color: $nav-text-color !important; // Apply $color-primary color to text
+
+    }
+
     .nav-item .nav-link {
       text-decoration: none;
       position: relative; // Necessary for ::after to be positioned relative to this element
       display: inline-block; // Ensure it only takes up the necessary space
+
       //padding: 0; // Remove all padding
       &:hover {
         color: $color-grey-100 !important; // Expand the underline to the full width on hover
@@ -412,8 +418,6 @@ main.full-page {
       &:hover::after {
         width: 100%; // Expand the underline to the full width on hover
       }
-
-
     }
 
     .nav-item.dropdown .nav-link {
@@ -438,7 +442,6 @@ main.full-page {
         width: 100%; // Expand the underline to the full width on hover
       }
     }
-
 
   }
 
@@ -469,7 +472,6 @@ main.full-page {
 
   .navbar-expand-lg {
     border-bottom: 1px solid $color-border; // Add a bottom border
-
 
     .nav-link {
       color: $nav-text-color !important; // Apply $color-primary color to text
