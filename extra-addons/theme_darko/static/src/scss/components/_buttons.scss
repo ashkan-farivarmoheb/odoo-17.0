@@ -1,6 +1,16 @@
+
 .btn {
-  border: none !important;
+  //border: none !important;
   outline: none !important;
+  border-radius: $button-border-radius;
+  //box-shadow: inset 0 0 0 .2rem var(--button-border-color);
+  transition-property: opacity;
+  border: 1px solid var(--button-border-color) !important;
+
+  &.border-0 {
+    border: none !important;
+  }
+
   // &-primary {
   //     background-color: $color-red !important;
   //     border-color: $color-red;
@@ -18,73 +28,71 @@
   //     }
   // }
   &-primary {
-    border-radius: $bottom-border-radius;
+    --button-border-color: #{$color-cobalt-light};
     background-color: $color-primary !important;
     color: $color-grey-97 !important;
-    border: 2px solid $button-border-color !important;
     // padding: 9px 35px;
     &:hover {
+      --button-border-color: darken($color-cobalt-light, 20%);
       background-color: $color-cobalt-dark !important; // Slightly darker white for hover
-      color: $color-grey-97 !important;
-      border: 2px solid darken($color-cobalt-light, 20%);
     }
   }
 
   &-secondary {
-    border-radius: $bottom-border-radius;
+    --button-border-color: #{$color-grey-100};
     background-color: $color-grey-97 !important;
     color: $color-grey-15 !important;
-    border: 2px solid $color-grey-100 !important;
     // padding: 9px 35px;
     &:hover {
-      background-color: $color-grey-88 !important; // Slightly darker white for hover
-      color: darken($color-white, 10%) !important;
-      border: 2px solid darken($color-white, 10%);
+      background-color: $color-grey-88 !important;
     }
   }
 
   &-outline-secondary {
-    color: $color-grey-80 !important;
-    border-color: transparent;
-    background-color: transparent !important;
+    --button-border-color: #{$color-alpha-hawkes-20};
+    background-color: $color-alpha-light-5 !important;
+    color: $color-grey-100 !important;
 
     &:focus {
-      box-shadow: 0 0 0 0.25rem red;
+      box-shadow: 0 0 0 0.25rem var(--button-border-color);
     }
 
-
     &:hover {
-      color: $color-grey-100 !important;
-      background-color: transparent !important;
-      border-color: transparent;
-
+      --button-border-color: #{$color-alpha-hawkes-20};
+      background-color: $color-alpha-light-10 !important;
     }
   }
 
-  &-outline-primary {
-    color: red !important;
-    border-color: #35979c;
-
+  &-dark { // this one can be changed later
+    --button-border-color: #{$color-grey-100};
+    background-color: $color-grey-97 !important;
+    color: $color-grey-15 !important;
+    // padding: 9px 35px;
     &:hover {
-      background-color: #f7071e !important;
-      color: #ffffff !important;
+      background-color: $color-grey-88 !important;
     }
   }
 
-  &-light {
-    margin-left: 20px;
-    color: #fff;
-    padding: 9px 25px !important;
-    cursor: pointer;
-    background-color: $color-grey !important;
-    border-color: $color-primary;
-    padding: 9px 35px;
+  &-outline-dark {
+    --button-border-color: #{$color-alpha-light-20};
+    background-color: $color-alpha-light-10 !important;
+    color: $color-grey-97 !important;
+
+    &:before {
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    &:after {
+      box-shadow: inset 0 0 0 .1rem var(--button-border-color);
+      transition-property: box-shadow
+    }
 
     &:hover {
-      background-color: darken($color-grey, 20%) !important;
-      color: #fff;
+      background-color: $color-alpha-light-40 !important; // Slightly darker white for hover
     }
   }
+
 
   &-new {
     color: #fff;
@@ -135,4 +143,80 @@
 
 .btn-link {
   color: $color-primary !important;
+}
+
+
+* {
+  list-style-type: none;
+
+  font-family: $font-default;
+
+  &:focus, &:active {
+    outline: none !important;
+  }
+}
+
+.bordered_header {
+  //font-size: 18px;
+  //position: relative;
+  //
+  //&::after {
+  //  position: absolute;
+  //  left: 0;
+  //  bottom: -4px;
+  //  height: 2px;
+  //  width: 70px;
+  //  background: #db4242;
+  //  content: "";
+  //  display: block;
+  //}
+}
+
+.modal-open #wrapwrap {
+  overflow: auto !important;
+}
+
+.modal {
+  color: #{$modal-body-color};
+}
+
+
+.accent {
+  color: #{$color-accent};
+}
+
+//scrollbar starts
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .19);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .2);
+  background-color: #c9ccd6;
+}
+
+//scrollbar ends
+.scale-up-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-origin: center center; /* Ensures scaling from the center */
+}
+
+.scale-up-hover:hover {
+  transform: scale(1.04); /* Scale the element */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Add shadow */
+}
+
+a {
+
+  &:hover {
+    color: red; // Change to the hover state colour
+  }
 }

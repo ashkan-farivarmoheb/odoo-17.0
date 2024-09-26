@@ -57,6 +57,13 @@ $color-alpha-light-70: rgba(233, 233, 255, .7);
 $color-alpha-light-80: rgba(240, 240, 255, .8);
 $color-alpha-light-90: rgba(241, 244, 255, .9);
 
+$color-alpha-grey-80: rgba(46, 47, 64, .8);
+$color-alpha-grey-30: rgba(54, 56, 74, .2);
+$color-alpha-perano-10: rgba(189, 189, 244, .1);
+$color-alpha-cinder-50: rgba(13, 13, 24, .5);
+$color-alpha-hawkes-60: rgba(209, 209, 251, .6);
+$color-alpha-hawkes-20: rgba(209, 209, 251, .2);
+
 //colors
 $color-coral-light: #fca493;
 $color-coral-dark: #e36b52;
@@ -93,16 +100,27 @@ $color-accent: o-color('o-color-3');
 $color-gradiant: linear-gradient(to right, o-color('o-color-1'), o-color('o-color-2'));
 
 
-$font-size-h1: 2.25rem; // 36px / 16
-$font-size-h2: 1.5rem; // 24px / 16
-$font-size-h3: 1.125rem; // 18px / 16
-$font-size-h4: 1rem; // 16px / 16
 $font-size-subheading: 1.25rem; // 20px / 16
 $font-size-text: 0.875rem; // 14px / 16
 $font-size-s: 0.75rem; // 12px / 16
 $font-size-banner: 3.3125rem; // 53px / 16
 $font-size-form: 0.875rem; // 14px / 16
 $font-bold: 1.125rem; // 18px / 16
+
+
+$font-size-lead: 1rem; // 16px
+$font-size-h6: 1rem; // 16px
+$font-size-h5: $font-size-h6 * $o-theme-h5-font-size-multiplier; // 19.2px (16px * 1.2)
+$font-size-h4: $font-size-h6 * $o-theme-h4-font-size-multiplier; // 24px (16px * 1.5)
+$font-size-h3: $font-size-h6 * $o-theme-h3-font-size-multiplier; // 32px (16px * 2)
+$font-size-h2: $font-size-h6 * $o-theme-h2-font-size-multiplier; // 40px (16px * 2.5)
+$font-size-h1: $font-size-h6 * $o-theme-h1-font-size-multiplier; // 48px (16px * 3)
+$font-size-display-6: $font-size-h1 * 1.25; // 60px (48px * 1.25)
+$font-size-display-5: $font-size-h1 * 1.5; // 72px (48px * 1.5)
+$font-size-display-4: $font-size-h1 * 1.75; // 84px (48px * 1.75)
+$font-size-display-3: $font-size-h1 * 2; // 96px (48px * 2)
+$font-size-display-2: $font-size-h1 * 2.5; // 120px (48px * 2.5)
+$font-size-display-1: $font-size-h1 * 2.75; // 132px (48px * 2.75)
 
 $navbar-height: 70px;
 $navbar-height-without-pad: calc(#{$navbar-height} - 2 * 0.5rem);
@@ -116,7 +134,33 @@ $nav-text-color: $nav-text-color-dark;
 $nav-filter: saturate($nav-saturate) blur($nav-blur);
 $nav-gradient-when-blurred: transparent;
 $nav-gradient-when-unblurred: linear-gradient(180deg, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .5));
+$button-border-color: $color-cobalt-light;
+$modal-body-color: $color-black;
 
 $bottom-border-radius: 10rem;
+$button-border-radius: 10rem;
 $button-border-color: $color-cobalt-light;
 $border-radius: 10rem;
+$font-size-s: 0.75rem; // 12px / 16
+$font-size-banner: 3.3125rem; // 53px / 16
+$font-size-form: 0.875rem; // 14px / 16
+$font-bold: 1.125rem; // 18px / 16
+
+
+/* Common border radii */
+$border-radius-2: 0.2rem;
+$border-radius-5: 0.5rem;
+$border-radius-6: 0.6rem;
+$border-radius-8: 0.8rem;
+$border-radius-10: 1rem;
+$border-radius-12: 1.2rem;
+$border-radius-16: 1.6rem;
+$border-radius-18: 1.8rem;
+$border-radius-20: 2rem;
+$border-radius-40: 4rem;
+$border-radius-large: 10rem;
+$icons-border-radius: 22%;
+$card-border-radius: 2rem;
+$testimonial-card-radius: 1.2rem;
+
+

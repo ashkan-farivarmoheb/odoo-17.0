@@ -1,3 +1,4 @@
+
 .mega-menu {
   position: relative;
   color: $nav-text-color;
@@ -39,6 +40,11 @@
       position: relative;
       color: $nav-text-color !important;
       font-family: $font-default;
+    }
+
+    .link-text:hover {
+      color: $color-grey-100 !important; // Expand the underline to the full width on hover
+
     }
 
     .link-text::after {
@@ -216,4 +222,3 @@ a.see_all_link:hover {
   }
 
 }
-
