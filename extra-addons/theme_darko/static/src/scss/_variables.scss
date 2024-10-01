@@ -88,7 +88,7 @@ $color-grey: #858585;
 $color-offwhite: #e6e4e4d1;
 $color-footer: o-color('o-color-4');
 $color-link: o-color('o-cc1-link');
-$color-link-hover: #c1c2d9;
+$color-link-hover: $color-grey-100;
 $color-banner_product: #0b393edb;
 $color-border: $color-alpha-light-30;
 $color-bg-heading: #e6e4e4d1;
@@ -128,16 +128,20 @@ $sub_navbar-height: 52px;
 $total_navbar-height: calc(#{$navbar-height} + #{$sub_navbar-height}); /* Correct calculation */
 $nav-saturate: 150%;
 $nav-blur: 15px;
+
 $nav-text-color-light: $color-grey-80;
 $nav-text-color-dark: $color-grey-60;
 $nav-text-color: $nav-text-color-dark;
+$nav-text-color-hover: $color-grey-100;
+
 $nav-filter: saturate($nav-saturate) blur($nav-blur);
 $nav-gradient-when-blurred: transparent;
 $nav-gradient-when-unblurred: linear-gradient(180deg, rgba(0, 0, 0, .9) 50%, rgba(0, 0, 0, .5));
+
 $button-border-color: $color-cobalt-light;
 $modal-body-color: $color-black;
 
-$bottom-border-radius: 10rem;
+//$bottom-border-radius: 10rem;
 $button-border-radius: 10rem;
 $button-border-color: $color-cobalt-light;
 $border-radius: 10rem;

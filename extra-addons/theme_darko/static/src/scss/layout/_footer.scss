@@ -85,11 +85,11 @@
     text-align: center;
 
     a {
-      color: $color_whitesmoke;
+      color: $color-link;
 
       &:hover {
-        color: $color-secondary;
-        text-decoration: underline;
+        color: $color-link-hover;
+        text-decoration: none;
       }
     }
 

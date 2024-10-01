@@ -321,6 +321,8 @@ main.full-page {
     .btn {
       padding-left: 22px;
       padding-right: 22px;
+
+      
     }
 
     //[data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/home"] & {
@@ -391,11 +393,11 @@ main.full-page {
 
       //padding: 0; // Remove all padding
       &:hover {
-        color: $color-grey-100 !important; // Expand the underline to the full width on hover
+        color: $nav-text-color-hover !important; // nav text color  on hover
       }
 
       &.active {
-        color: $color-grey-100 !important;
+        color: $nav-text-color-hover !important;
         font-weight: bolder;
 
       }
