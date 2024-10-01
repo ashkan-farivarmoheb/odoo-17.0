@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="test" model="ir.attachment">
+        <field name="name">optimized-1001.jpg</field>
+        <field name="type">url</field>
+        <field name="url">/theme_darko/static/src/img/home/optimized-1001.jpg</field>
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="apple_video" model="ir.attachment">
+        <field name="name">apple-video.mp4</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">https://www.apple.com/media/us/mac-pro/2013/16C1b6b5-1d91-4fef-891e-ff2fc1c1bb58/videos/macpro_main_desktop.mp4</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+</odoo>
