@@ -73,6 +73,16 @@ main.full-page {
 
 }
 
+// shining telephone number
+.navbar .navbar-nav .o_nav-link_secondary {
+  background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #868686 20%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  // animation Shine in button sccc file
+  animation: shine 5s infinite linear;
+  animation-fill-mode: forwards;
+}
+
 .navbar-brand .img {
   width: 100%;
   max-width: 100px;
@@ -322,7 +332,7 @@ main.full-page {
       padding-left: 22px;
       padding-right: 22px;
 
-      
+
     }
 
     //[data-page-url*="/contactus"] &, [data-page-url*="/services"] &, [data-page-url="/home"] & {

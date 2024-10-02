@@ -30,6 +30,11 @@
 
 .modal {
   color: #{$modal-body-color};
+
+  .modal-title {
+    color: #{$modal-body-color};
+  }
+
 }
 
 
@@ -72,3 +77,55 @@ a {
     color: $color-grey-100; // Change to the hover state colour
   }
 }
+
+
+/* Custom img Wrapper */
+.media-element-wrapper {
+  position: relative; /* Establishes positioning context */
+  overflow: hidden; /* Clips the overlay to maintain rounded corners */
+  box-shadow: var(--box-shadow, $shadow-lg);
+
+}
+
+/* Pseudo-element for Inset Border Overlay */
+.media-element-wrapper::after {
+  content: ''; /* Necessary for the pseudo-element */
+  position: absolute; /* Positions the overlay relative to the parent */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid $color-alpha-light-10; /* Semi-transparent inset border */
+  box-sizing: border-box; /* Includes the border within the element's dimensions */
+  z-index: 1; /* Places the overlay above the image */
+  border-radius: inherit;
+}
+
+/* Bordered Image Styling */
+.bordered-image {
+  display: block; /* Ensures the image behaves like a block-level element */
+  //width: 100%; /* Makes the image take up the full width of the container */
+  height: auto; /* Maintains the aspect ratio */
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+  position: relative; /* Establishes stacking context */
+}
+
+
+.card {
+  border: 1px solid var($color-alpha-light-5);
+  border-radius: var(--border-radius-20, $border-radius-card);
+  background-color: #090910;
+  box-shadow: var(--box-shadow, $shadow-md);;
+
+
+  .card-body {
+    color: var(--color-bodies, $main-font-body-color);
+
+    .text-muted {
+      color: rgba(129, 133, 159, 0.7) !important
+    }
+  }
+}
+
+
+

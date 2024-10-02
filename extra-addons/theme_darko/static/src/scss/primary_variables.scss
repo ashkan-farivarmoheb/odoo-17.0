@@ -78,7 +78,6 @@
 //  width: 100%;
 //}
 
-
 //.NavItem_navItem__CQKRB {
 //  margin: 0;
 //  color: var(--color-grey-80);
@@ -87,6 +86,7 @@
 //  text-decoration: none;
 //  transition: color var(--duration-200ms) var(--ease-out);
 //}
+
 $o-color-palettes: map-merge($o-color-palettes,
         (
                 'airproof': (
@@ -97,7 +97,9 @@ $o-color-palettes: map-merge($o-color-palettes,
                         'o-color-5': #ffffff,
                         'o-color-6': #fd9a0b,
                         'o-color-7': #00855F,
-                        'o-cc1-link': #81859f,
+                        'o-cc1-link': #81859f, //$color-grey-60
+                        'o-cc1-text': #81859f, //$color-grey-60
+                        'o-cc1-headings':#fcfcfc, //$color-grey-100
                   //#c1c2d9
                 )
         )

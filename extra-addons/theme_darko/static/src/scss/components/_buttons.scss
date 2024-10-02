@@ -2,7 +2,7 @@
 .btn {
   //border: none !important;
   outline: none !important;
-  border-radius: $button-border-radius;
+  border-radius: $border-radius-button;
   //box-shadow: inset 0 0 0 .2rem var(--button-border-color);
   box-shadow: none;
   transition-property: opacity;
@@ -168,5 +168,62 @@
 }
 
 
+/* From Uiverse.io by neerajbaniwal */
+.btn-shine {
+  background: linear-gradient(to right, #9f9f9f 0, #fff 10%, #868686 20%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s infinite linear;
+  animation-fill-mode: forwards;
+}
 
+@-moz-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+
+@-webkit-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+
+@-o-keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position: 0;
+  }
+  60% {
+    background-position: 180px;
+  }
+  100% {
+    background-position: 180px;
+  }
+}
+
+/* From Uiverse.io by neerajbaniwal */
 
