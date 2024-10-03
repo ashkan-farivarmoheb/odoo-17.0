@@ -91,6 +91,9 @@ h3 {
 
 h4 {
   font-size: $font-size-h4;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0;
   //margin: 0.67em 0;
 }
 
@@ -101,6 +104,8 @@ h5 {
 
 h6 {
   font-size: $font-size-h6;
+
+
   //margin: 0.67em 0;
 }
 
@@ -122,10 +127,14 @@ p.lead {
 
 .display-3 {
   font-size: $font-size-display-3; // 96px
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -.045em;
 }
 
 .display-2 {
   font-size: $font-size-display-2; // 120px
+
 }
 
 .display-1 {
@@ -161,6 +170,7 @@ p.lead {
   box-shadow: $shadow-lg !important;
 }
 
+///////////media blurred border inset /////////////////////////////////////////////////////////////////////////////
 /* Custom img Wrapper */
 .media-element-wrapper {
   position: relative; /* Establishes positioning context */
@@ -186,13 +196,12 @@ p.lead {
 /* Bordered Image Styling */
 .bordered-image {
   display: block; /* Ensures the image behaves like a block-level element */
-  //width: 100%; /* Makes the image take up the full width of the container */
   height: auto; /* Maintains the aspect ratio */
   box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
   position: relative; /* Establishes stacking context */
 }
 
-
+////////////////media blurred border inset//////////////////////////////////////////////////////////////////
 .card {
   border: 1px solid var($color-alpha-light-5);
   border-radius: var(--border-radius-20, $border-radius-card);
@@ -208,6 +217,4 @@ p.lead {
     }
   }
 }
-
-
 

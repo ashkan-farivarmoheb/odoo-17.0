@@ -61,6 +61,7 @@
             'theme_darko/static/src/scss/layout/_navigation.scss',
             'theme_darko/static/src/scss/components/_banner.scss',
             'theme_darko/static/src/scss/components/_product.scss',
+            'theme_darko/static/src/scss/components/_animation.scss',
             'theme_darko/static/src/scss/pages/home/_offers.scss',
             'theme_darko/static/src/scss/pages/home/_features.scss',
             'theme_darko/static/src/scss/pages/home/_features_2.scss',

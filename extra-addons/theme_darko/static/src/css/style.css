@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");
+/*@import url("https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap");*/
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -768,7 +768,7 @@ template {
 }
 
 .offer .card-header {
-    font-family: "Kaushan Script", cursive;
+    font-family: "Permanent Marker", cursive;
     border: none;
     margin-bottom: 19px;
     font-size: 43px;
