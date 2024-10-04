@@ -9,12 +9,11 @@
     position: -webkit-sticky; /* For Safari */
     position: sticky;
     top: 50%;
-    transform: translateY(-50%);
   }
 
   .custom-right-column {
-    @media (min-width: 992px) { // Bootstrap breakpoint for lg and above
-      margin-top: 400px; // Add margin-top when on large screens
+    @media (max-width: 992px) { // Bootstrap breakpoint for lg and above
+      margin-top: 100px; // Add margin-top when on large screens
     }
   }
 

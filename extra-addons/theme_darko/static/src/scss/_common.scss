@@ -89,13 +89,27 @@ h3 {
   //margin: 0.67em 0;
 }
 
-h4 {
-  font-size: $font-size-h4;
+.h4 {
+  font-size: $font-size-h4; // Default font size for h4
   font-weight: 500;
   line-height: 1.45;
   letter-spacing: 0;
-  //margin: 0.67em 0;
+
+  // First breakpoint for medium devices and smaller (up to 768px)
+  @media (max-width: 768px) {
+    font-size: $font-size-h5; // Adjust font size to h5 size for medium devices
+    line-height: 1.5; // Adjust line-height for medium devices
+    letter-spacing: 0.01em; // Adjust letter-spacing for medium devices
+  }
+
+  // Second breakpoint for small devices (up to 576px)
+  @media (max-width: 576px) {
+    font-size: $font-size-h6; // Adjust font size to h6 size for small devices
+    line-height: 1.6; // Adjust line-height for small devices
+    letter-spacing: 0.02em; // Adjust letter-spacing for small devices
+  }
 }
+
 
 h5 {
   font-size: $font-size-h5;
@@ -125,11 +139,25 @@ p.lead {
   font-size: $font-size-display-4; // 84px
 }
 
+
 .display-3 {
-  font-size: $font-size-display-3; // 96px
+  font-size: $font-size-h2; // Use predefined 48px font size for small devices by default
   font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -.045em;
+  line-height: 1.2; // Adjust line-height for small devices by default
+  letter-spacing: -.02em; // Adjust letter-spacing for small devices by default
+
+  @media (min-width: 576px) {
+    font-size: $font-size-display-5; // Use predefined 72px font size for medium devices and larger
+    line-height: 1.1; // Adjust line-height for medium devices and larger
+    letter-spacing: -.03em; // Adjust letter-spacing for medium devices and larger
+  }
+
+  // Second breakpoint for large devices and larger (768px and up)
+  @media #{$md} {
+    font-size: $font-size-display-3; // Use predefined 96px font size for large devices and larger
+    line-height: 1.04; // Adjust line-height for large devices and larger
+    letter-spacing: -.045em; // Adjust letter-spacing for large devices and larger
+  }
 }
 
 .display-2 {
@@ -192,6 +220,20 @@ p.lead {
   z-index: 1; /* Places the overlay above the image */
   border-radius: inherit;
 }
+
+.img-overlay:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: var(--backdrop-filter, blur(2px)); /* Adjust the blur amount as needed */
+  z-index: 1;
+  background: var(--overlay, $overlay-medium);
+
+}
+
 
 /* Bordered Image Styling */
 .bordered-image {

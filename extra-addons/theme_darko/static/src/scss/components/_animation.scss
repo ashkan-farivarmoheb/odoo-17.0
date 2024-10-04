@@ -62,3 +62,11 @@
   /* Ensure the element is visible before animations start */
   visibility: visible;
 }
+
+@media (max-width: 768px) {
+  .disable-animation-mobile {
+    animation: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+}

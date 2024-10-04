@@ -115,17 +115,13 @@ $font-size-h4: $font-size-h6 * $o-theme-h4-font-size-multiplier; // 24px (16px *
 $font-size-h3: $font-size-h6 * $o-theme-h3-font-size-multiplier; // 32px (16px * 2)
 $font-size-h2: $font-size-h6 * $o-theme-h2-font-size-multiplier; // 40px (16px * 2.5)
 $font-size-h1: $font-size-h6 * $o-theme-h1-font-size-multiplier; // 48px (16px * 3) 3rem
-$font-size-display-6: $font-size-h1 * 1.25; // 60px (48px * 1.25)
-$font-size-display-5: $font-size-h1 * 1.5; // 72px (48px * 1.5)
-$font-size-display-4: $font-size-h1 * 1.75; // 84px (48px * 1.75)
-$font-size-display-3: $font-size-h1 * 2; // 96px (48px * 2)
+$font-size-display-6: $font-size-h1 * 1.25; // 60px (48px * 1.25) 3.75
+$font-size-display-5: $font-size-h1 * 1.5; // 72px (48px * 1.5) 4.5 rem
+$font-size-display-4: $font-size-h1 * 1.75; // 84px (48px * 1.75) 5.25rem
+$font-size-display-3: $font-size-h1 * 2; // 96px (48px * 2) 6rem
 $font-size-display-2: $font-size-h1 * 2.5; // 120px (48px * 2.5)
 $font-size-display-1: $font-size-h1 * 2.75; // 132px (48px * 2.75)
 
-$font-size-s: 0.75rem; // 12px / 16
-$font-size-banner: 3.3125rem; // 53px / 16
-$font-size-form: 0.875rem; // 14px / 16
-$font-bold: 1.125rem; // 18px / 16
 
 /* Common border radii */
 $border-radius-2: 0.2rem;
@@ -170,4 +166,17 @@ $nav-gradient-when-unblurred: linear-gradient(180deg, rgba(0, 0, 0, .9) 50%, rgb
 $border-radius-button: $border-radius-large;
 $border-radius-card: $border-radius-20;
 
+$sm: "(min-width: 576px)";
+$md: "(min-width: 768px)";
+$lg: "(min-width: 992px)";
+$xl: "(min-width: 1200px)";
+$xxl: "(min-width: 1400px)";
 
+$overlay-heavy: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(180deg, transparent 50%, #000), linear-gradient(7.96deg, #000 14.71%, transparent 78.17%);
+$overlay-medium: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(18.61deg, rgba(0, 0, 0, .672) 21.85%, transparent 73.55%);
+$overlay-light: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(18.61deg, rgba(0, 0, 0, .504) 21.85%, transparent 73.55%);
+$overlay-dim80: rgba(0, 0, 0, .8);
+$overlay-dim60: rgba(0, 0, 0, .6);
+$overlay-dim40: rgba(0, 0, 0, .4);
+$overlay-dim: rgba(0, 0, 0, .2);
+$overlay-none: none;

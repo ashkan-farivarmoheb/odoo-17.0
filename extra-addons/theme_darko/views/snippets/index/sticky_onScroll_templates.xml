@@ -8,7 +8,7 @@
         </xpath>
     </template>
     <template id="sticky_onScroll_snippet" name="Sticky On Scroll">
-        <section class="sticky_onScroll pt256">
+        <section class="sticky_onScroll pt-md-5">
             <div class="container">
                 <div class="row">
                     <!-- Left Column: Stays fixed on scroll -->
