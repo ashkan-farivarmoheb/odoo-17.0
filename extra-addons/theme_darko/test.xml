@@ -1,38 +1,23 @@
 <section class="sticky_onScroll o_colored_level pt64" data-snippet="sticky_onScroll_snippet" data-name="Sticky On Scroll" style="background-image: none;">
             <div class="container">
-                <div class="row o_grid_mode" data-row-count="43">
+                <div class="row o_grid_mode" data-row-count="33">
 
-                    <div class="custom-left-column o_colored_level o_animate o_animate_on_scroll o_anim_fade_in o_animate_out o_grid_item g-height-26 col-lg-6 g-col-lg-12 col-lg-12 o_animating" data-scroll-zone-start="0" data-scroll-zone-end="40" style="animation-delay: -15.5163s; --wanim-intensity: 100; grid-area: 1 / 1 / 27 / 13; z-index: 1; visibility: visible;">
-                        <div class="custom-sticky-widget">
-                            <h2 style="font-size: 3.125rem; text-align: center;">Benefits</h2><h1 style="font-size: 3.125rem; text-align: center;">asdasd</h1>
-                            <p style="text-align: center;">We are a skilled team specializing in <strong class="o_default_snippet_text">Odoo</strong>, with expertise in
-                                IT, <strong>business analysis</strong>, and
-                                <strong>data</strong>
-                                <br>
-                            </p>
-                            <p style="text-align: center;">Our team understand numbers and <strong>Odoo</strong>.
-                            </p>
-                            <p style="text-align: center;">Our platform is designed to
-                                <strong>streamline your accounting processes.</strong>
-                                <br>
-                            </p>
+                    <div class="custom-left-column o_colored_level disable-animation-mobile o_animate o_animate_on_scroll o_anim_fade_zoom_in o_animate_out o_grid_item g-height-26 col-lg-6 g-col-lg-12 col-lg-12 o_animating" data-scroll-zone-start="0" data-scroll-zone-end="20" style="animation-delay: -5.31084s; --wanim-intensity: 100; grid-area: 1 / 1 / 27 / 13; z-index: 1; visibility: visible;">
+                        <div class="custom-sticky-widget" style="top:10%;">
+                            <h1 class="display-3 text-left text-md-center">Next generation<br>digital transformation.</h1>
+                            <h4 class="text-left text-md-center">Solwings is a skilled team specialising in Odoo, with expertise in IT, business analysis, and data. Our team understands numbers and Odoo. We streamline your operations, ecommerce, accounting processes, and change management</h4>
+                       <div class="text-left text-md-center mt-4"><a href="/contactus" class="btn btn-secondary btn-lg" data-bs-original-title="" title="">Schedule a free consultation</a></div>
+
                         </div>
                     </div>
 
 
 
-                <div class="custom-right-column o_colored_level o_grid_item g-col-lg-12 g-height-22 col-lg-12" style="z-index: 2; grid-area: 22 / 1 / 44 / 13;">
-                        <div class="icon-box">
-
-                            <div class="content">
-
-                                <p>Tailor your general ledger to meet the compliance requirements of Accounting and
-                                    Auditing Standards (AAS) and International Financial Reporting Standards (IFRS).</p>
- <img src="/theme_darko/static/src/img/JOURNAL/ali-yahya-11L8NPBXxCA-unsplash.jpg" class="mx-auto d-block" style="width: 50% !important;" loading="lazy">
-                            </div>
-                        </div>
+                <div class="o_colored_level o_grid_item g-col-lg-12 g-height-14 col-lg-12" style="z-index: 2; grid-area: 20 / 1 / 34 / 13;">
 
 
-                    </div></div>
+          <div class="media-element-wrapper rounded-3">
+        <img src="/theme_darko/static/src/img/banner/banner.png" class="mx-auto d-block bordered-image w-100" loading="auto" alt="Banner Image">
+    </div></div></div>
             </div>
         </section>

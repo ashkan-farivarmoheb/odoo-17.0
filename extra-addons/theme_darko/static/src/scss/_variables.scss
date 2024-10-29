@@ -1,6 +1,6 @@
 //font
-//$font-default: "Roboto", sans-serif;
-$font-default: "Poppins", sans-serif;
+//$font-main: "Roboto", sans-serif;
+$font-main: "Poppins", sans-serif;
 $font-offer: "Permanent Marker", cursive;
 //Greys
 $color-grey-100: #fcfcfc;
@@ -166,11 +166,6 @@ $nav-gradient-when-unblurred: linear-gradient(180deg, rgba(0, 0, 0, .9) 50%, rgb
 $border-radius-button: $border-radius-large;
 $border-radius-card: $border-radius-20;
 
-$sm: "(min-width: 576px)";
-$md: "(min-width: 768px)";
-$lg: "(min-width: 992px)";
-$xl: "(min-width: 1200px)";
-$xxl: "(min-width: 1400px)";
 
 $overlay-heavy: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(180deg, transparent 50%, #000), linear-gradient(7.96deg, #000 14.71%, transparent 78.17%);
 $overlay-medium: linear-gradient(0deg, rgba(0, 0, 0, .2), rgba(0, 0, 0, .2)), linear-gradient(18.61deg, rgba(0, 0, 0, .672) 21.85%, transparent 73.55%);
@@ -180,3 +175,8 @@ $overlay-dim60: rgba(0, 0, 0, .6);
 $overlay-dim40: rgba(0, 0, 0, .4);
 $overlay-dim: rgba(0, 0, 0, .2);
 $overlay-none: none;
+
+
+/* Bentos & Footer V4 bg */
+$card-background: linear-gradient(var(--bento-gradient-angle, 162deg), #1b1b26 var(--bento-gradient-start, -70%), #09090d var(--bento-gradient-end, 92%));
+

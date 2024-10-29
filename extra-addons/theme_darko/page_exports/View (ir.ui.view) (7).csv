@@ -1,0 +1,221 @@
+"id","active","inherit_id","key","model","priority","name","type","website_id","arch_db"
+"website.homepage","True","","website.homepage","","16","Home","QWeb","","<t name=""Home"" t-name=""website.homepage"">
+        <t t-call=""website.layout"">
+            <t t-set=""pageName"" t-value=""'homepage'""/>
+            <div id=""wrap"" class=""oe_structure oe_empty""/>
+        </t>
+    </t>"
+"__export__.ir_ui_view_15336_f303629a","True","","website.homepage","","16","Homeweb1","QWeb","My Website","<t name=""Homepage"" t-name=""website.homepage"">
+    <t t-call=""website.layout"">
+        <t t-set=""pageName"" t-value=""'homepage'""/>
+        <div id=""wrap"" class=""oe_structure oe_empty""><section class=""sticky_onScroll o_colored_level pt64"" data-snippet=""sticky_onScroll_snippet"" data-name=""Sticky On Scroll"" style=""background-image: none;"">
+            <div class=""container"">
+                <div class=""row o_grid_mode"" data-row-count=""33"">
+
+                    <div class=""custom-left-column o_colored_level disable-animation-mobile o_animate o_animate_on_scroll o_anim_fade_zoom_in o_animate_out o_grid_item g-height-26 col-lg-6 g-col-lg-12 col-lg-12"" data-scroll-zone-start=""0"" data-scroll-zone-end=""20"" style=""animation-delay: 3.6498s; --wanim-intensity: 100; grid-area: 1 / 1 / 27 / 13; z-index: 1;"">
+                        <div class=""custom-sticky-widget"" style=""top:10%;"">
+                            <h1 class=""display-3 title2 text-left text-md-center"">Next generation<br/>digital transformation.</h1>
+                            <h4 class=""body text-left text-md-center"">Solwings is a skilled team specialising in Odoo, with expertise in IT, business analysis, and data. Our team understands numbers and Odoo. We streamline your operations, ecommerce, accounting processes, and change management</h4>
+                       <div class=""text-left text-md-center mt-4""><a href=""/contactus"" class=""btn btn-secondary btn-lg mb-2"" data-bs-original-title="""" title="""" aria-describedby=""popover490832"">Book a demo</a>&amp;nbsp;<a href=""/contactus"" class=""btn btn-primary btn-lg mb-2"" data-bs-original-title="""" title="""">Let's chat</a></div>     
+                            
+                        </div>
+                    </div>
+
+
+
+                <div class=""o_colored_level o_grid_item g-col-lg-12 g-height-14 col-lg-12"" style=""z-index: 2; grid-area: 20 / 1 / 34 / 13;"">
+
+
+          <div class=""media-element-wrapper rounded-3"">
+        <img src=""/theme_darko/static/src/img/banner/banner.png"" class=""mx-auto d-block bordered-image w-100"" loading=""auto"" alt=""Banner Image""/>
+    </div></div></div>
+            </div>
+        </section><section class=""s_banner pt96 pb96 o_colored_level"" data-snippet=""s_banner"" data-name=""Banner"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row s_nb_column_fixed o_grid_mode"" data-row-count=""14"">
+                
+                
+                
+                
+            <div class=""o_colored_level o_grid_item g-col-lg-12 g-height-14 col-lg-12"" style=""z-index: 2; grid-area: 1 / 1 / 15 / 13;"">
+
+
+          <div class=""media-element-wrapper img-overlay rounded-3"">
+        <img src=""https://cdn.sanity.io/images/s6lu43cv/production-v2/36e47fb40e1b0ac7c5f48021f48a4646261d69ce-3840x2160.png?rect=213,392,3291,1768&amp;w=1100&amp;h=591&amp;q=80&amp;auto=format"" class=""mx-auto d-block bordered-image w-100"" loading=""auto"" alt=""Banner Image""/>
+    </div></div><div class=""justify-content-center o_grid_item g-col-lg-5 o_colored_level g-height-7 col-lg-5"" data-name=""Box"" style=""z-index: 3; grid-area: 6 / 2 / 13 / 7;"">
+    <h6>Odoo VERSION 18 IS HERE</h6>
+                    <h1 class=""mt-2"">Introducing the all-new Odoo Version 18 features</h1>
+<a class=""btn btn-link learn-more-btn px-0"" href=""/odoo-implementation"" data-bs-original-title="""" title="""">Learn More<span class=""material-icons arrow-icon"">arrow_right_alt</span>
+  </a>
+
+                    
+                    
+                    
+                </div></div>
+        </div>
+    </section><section class=""s_title pb40 o_colored_level pt152"" data-vcss=""001"" data-snippet=""s_title"" data-name=""Title"" style=""background-image: none;"">
+        <div class=""s_allow_columns container"">
+            <h2 class=""title2"" style=""text-align: left;"">Odoo Services</h2><p class=""title4"" style=""text-align: left;""> <em class=""fst-normal"">featuring seamless transformation</em></p>
+        </div>
+    </section><section class=""o_colored_level"" data-snippet=""parallax_card_snippet"" data-name=""Parallax Card"" style=""background-image: none;"">
+            <div class=""container"">
+                <div class=""row d-flex o_grid_mode"" data-row-count=""14"">
+                    
+                    
+                    
+                <div class=""s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-14 col-lg-4 o_animate o_animate_on_scroll o_anim_slide_in o_anim_from_bottom"" style=""z-index: 3; grid-area: 1 / 5 / 15 / 9; animation-delay: -1.70915s; --wanim-intensity: 5;"" data-scroll-zone-start=""0"" data-scroll-zone-end=""100"">
+                        
+                        <div class=""card text-bg-white h-100 border"" style=""display: block; --box-shadow:0px"">
+                            <img class=""w-100"" src=""https://cdn.sanity.io/images/s6lu43cv/production-v4/13e33d2445cf4b666d78aa2a3c01b92711569585-4096x2156.png?rect=2110,0,1986,2021&amp;w=400&amp;h=407&amp;q=80&amp;auto=format"" loading=""eager""/><div class=""card-body  h-50"">
+     <h6 class=""text-center"" style=""color:white"">Implementation<br/></h6>
+                            <p class=""card-text text-center"">Transform your business operations with reliable Odoo implementation services. Our skilled teams are proficient in on-site, hybrid, or remote models, ensuring seamless and successful implementations.</p><br/><a class=""btn btn-link learn-more-btn text-left"" href=""/odoo-implementation"" data-bs-original-title="""" title="""">Learn More<span class=""material-icons arrow-icon"">arrow_right_alt</span></a></div></div></div><div class=""s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-14 col-lg-4 o_animate o_animate_on_scroll o_anim_slide_in o_anim_from_bottom"" style=""z-index: 3; grid-area: 1 / 9 / 15 / 13; animation-delay: -1.70915s; --wanim-intensity: 5;"" data-scroll-zone-start=""0"" data-scroll-zone-end=""100"">
+                        
+                        <div class=""card text-bg-white h-100 border"" style=""display: block; --box-shadow:0px"">
+                            <img class=""w-100"" src=""https://cdn.sanity.io/images/s6lu43cv/production-v4/13e33d2445cf4b666d78aa2a3c01b92711569585-4096x2156.png?rect=2110,0,1986,2021&amp;w=400&amp;h=407&amp;q=80&amp;auto=format"" loading=""eager""/><div class=""card-body  h-50"">
+     <h6 class=""text-center"" style=""color:white"">Upgrade<br/></h6>
+                            <p class=""card-text text-center"" style=""margin-bottom: 0px;"">Boost your business impact with our Odoo upgrade services. Depend on us to proficiently upgrade your current system, ensuring a seamless transition, minimal disturbances, and optimized performance for future expansion.&amp;nbsp;</p><br/><a class=""learn-more-btn btn btn-link"" href=""/odoo-upgrade"" data-bs-original-title="""" title="""">Learn More<span class=""material-icons arrow-icon"">arrow_right_alt</span></a></div></div></div><div class=""s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-14 col-lg-4 o_animate o_animate_on_scroll o_anim_slide_in o_anim_from_bottom"" style=""z-index: 3; grid-area: 1 / 1 / 15 / 5; animation-delay: -1.70915s; --wanim-intensity: 5;"" data-scroll-zone-start=""0"" data-scroll-zone-end=""100"">
+                        
+                        <div class=""card text-bg-white h-100 border"" style=""display: block; --box-shadow:0px"">
+                            <img class=""w-100"" src=""https://cdn.sanity.io/images/s6lu43cv/production-v4/13e33d2445cf4b666d78aa2a3c01b92711569585-4096x2156.png?rect=2110,0,1986,2021&amp;w=400&amp;h=407&amp;q=80&amp;auto=format"" loading=""eager""/><div class=""card-body h-50"">
+     <h6 class=""text-center"" style=""color:white"">Consulting</h6>
+                            <p class=""card-text text-center"">Maximise the potential of your Odoo project with our expert consulting services: module customization, thorough assessments, strategic planning, roadmap development, migration strategies, system health checks, and license management.</p><a class=""learn-more-btn btn btn-link"" href=""/odoo-consulting"" data-bs-original-title="""" title="""">Learn More<span class=""material-icons arrow-icon"">arrow_right_alt</span></a></div></div></div></div>
+            </div>
+        </section><section class=""o_colored_level"" data-snippet=""parallax_card_snippet"" data-name=""Parallax Card"" style=""background-image: none;"">
+            <div class=""container"">
+                <div class=""row d-flex o_grid_mode"" data-row-count=""14"">
+                    
+                    <div class=""s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-14 col-lg-4 o_animate o_animate_on_scroll o_anim_slide_in o_anim_from_bottom"" style=""z-index: 3; grid-area: 1 / 9 / 15 / 13; animation-delay: -1.72994s; --wanim-intensity: 5;"" data-scroll-zone-start=""0"" data-scroll-zone-end=""100"">
+                        
+                        <div class=""card text-bg-white h-100 border"" style=""display: block; --box-shadow:0px"">
+                            <img class=""w-100"" src=""https://cdn.sanity.io/images/s6lu43cv/production-v4/13e33d2445cf4b666d78aa2a3c01b92711569585-4096x2156.png?rect=2110,0,1986,2021&amp;w=400&amp;h=407&amp;q=80&amp;auto=format"" loading=""eager""/><div class=""card-body h-50"">
+     <h6 class=""text-center"" style=""color:white"">Training<br/></h6>
+                            <p class=""text-center card-text"" style=""margin-bottom: 0px;"">Explore our Odoo training services with interactive virtual sessions and cutting-edge experimental modules. Our flexible programs empower your business to adapt quickly to market changes, driving growth and achieving success</p><a class=""learn-more-btn btn btn-link"" href=""/odoo-training"" data-bs-original-title="""" title="""">Learn More<span class=""material-icons arrow-icon"">arrow_right_alt</span></a></div></div></div>
+                    
+                <div class=""s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-14 col-lg-4 o_animate o_animate_on_scroll o_anim_slide_in o_anim_from_bottom"" style=""z-index: 3; grid-area: 1 / 5 / 15 / 9; animation-delay: -1.72994s; --wanim-intensity: 5;"" data-scroll-zone-start=""0"" data-scroll-zone-end=""100"">
+                        
+                        <div class=""card text-bg-white h-100 border"" style=""display: block; --box-shadow:0px"">
+                            <img class=""w-100"" src=""https://cdn.sanity.io/images/s6lu43cv/production-v4/13e33d2445cf4b666d78aa2a3c01b92711569585-4096x2156.png?rect=2110,0,1986,2021&amp;w=400&amp;h=407&amp;q=80&amp;auto=format"" loading=""eager""/><div class=""card-body h-50"">
+     <h6 class=""text-center"" style=""color:white"">Audit<br/></h6>
+                            <p class=""card-text text-center"" style=""margin-bottom: 0px;"">Get the most out of your Odoo investment with our professional audit services. From initial evaluations to comprehensive analysis, we uncover key insights and provide precise recommendations for strategic improvements.&amp;nbsp;</p><a class=""learn-more-btn btn btn-link"" href=""/odoo-audit"" data-bs-original-title="""" title="""">Learn More<span class=""material-icons arrow-icon"">arrow_right_alt</span></a></div></div></div><div class=""s_col_no_bgcolor o_grid_item g-col-lg-4 g-height-14 col-lg-4 o_animate o_animate_on_scroll o_anim_slide_in o_anim_from_bottom"" style=""z-index: 3; grid-area: 1 / 1 / 15 / 5; animation-delay: -1.72994s; --wanim-intensity: 5;"" data-scroll-zone-start=""0"" data-scroll-zone-end=""100"">
+                        
+                        <div class=""card text-bg-white h-100 border"" style=""display: block; --box-shadow:0px"">
+                            <img class=""w-100"" src=""https://cdn.sanity.io/images/s6lu43cv/production-v4/13e33d2445cf4b666d78aa2a3c01b92711569585-4096x2156.png?rect=2110,0,1986,2021&amp;w=400&amp;h=407&amp;q=80&amp;auto=format"" loading=""eager""/><div class=""card-body h-50"">
+     <h6 class=""text-center"" style=""color:white"">Support<br/></h6>
+                            <p class=""card-text text-center"" style=""margin-bottom: 0px;"">Optimise your business potential with our comprehensive Odoo support services. Our team of experts is dedicated to providing tailored solutions, training, and seamless implementation to support your growth and success.</p><a class=""learn-more-btn btn btn-link"" href=""/odoo-support"" data-bs-original-title="""" title="""">Learn More<span class=""material-icons arrow-icon"">arrow_right_alt</span></a></div></div></div></div>
+            </div>
+        </section><section class=""s_title pb40 o_colored_level pt152"" data-vcss=""001"" data-snippet=""s_title"" data-name=""Title"" style=""background-image: none;"">
+        <div class=""s_allow_columns container"">
+            <h2 class=""title2"" style=""text-align: left;"">Odoo&amp;nbsp;ERP Solutions</h2><p class=""title4"" style=""text-align: left;""> <em class=""fst-normal"">Empower your business with innovative cloud-based tools</em><br/></p>
+        </div>
+    </section><section class=""s_text_image pb32 o_colored_level pt0"" data-snippet=""s_image_text"" data-name=""Image - Text"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row align-items-center"">
+                <div class=""col-lg-6 pt16 pb16 o_colored_level"">
+                    <img src=""/web/image/website.s_image_text_default_image"" class=""img img-fluid mx-auto rounded-3"" alt="""" loading=""lazy"" data-mimetype=""image/jpeg"" data-original-id=""4913"" data-original-src=""/website/static/src/img/snippets_demo/s_image_text.jpg"" data-mimetype-before-conversion=""image/jpeg""/>
+                </div>
+                <div class=""col-lg-6 pt16 pb16 o_colored_level"">
+                    <ul class=""list-unstyled"">
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Ecommerce
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Accounting
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Inventory and Supply Chains
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Retail Sales
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Sales Management
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Team Collaboration
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Catalog Management
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Online Marketing
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Reporting
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Manufacturing
+  </li>
+</ul>
+                    <p><a href=""#"" class=""btn btn-secondary"" data-bs-original-title="""" title="""" aria-describedby=""popover108746"">Discover more</a></p>
+                </div>
+            </div>
+        </div>
+    </section><section class=""s_text_image pb32 o_colored_level pt0"" data-snippet=""s_image_text"" data-name=""Image - Text"" style=""background-image: none;"">
+        <div class=""container"">
+            <div class=""row align-items-center"">
+                <div class=""col-lg-6 o_colored_level pt0 pb4"">
+                    <img src=""https://cdn.sanity.io/images/s6lu43cv/production-v4/fe7f381afafbb5d21c8df34a29f22c35b4601c40-2880x1921.png?rect=668,317,1468,1584&amp;w=800&amp;h=863&amp;q=80&amp;auto=format"" class=""img img-fluid mx-auto rounded-3"" alt="""" loading=""lazy"" data-mimetype=""image/jpeg"" data-mimetype-before-conversion=""image/jpeg"" data-resize-width=""800"" data-quality=""28""/>
+                </div>
+                <div class=""col-lg-6 pt16 pb16 o_colored_level"">
+    <h2 class=""title2"">Business software solutions</h2><p class=""bodyMedium"">Empower your business with innovative cloud-based tools for managing operations,
+                                marketing, and sales.
+                                <br/>
+                            </p>                <ul class=""list-unstyled"">
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Ecommerce
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Accounting
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Inventory and Supply Chains
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Retail Sales
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Sales Management
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Team Collaboration
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Catalog Management
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Online Marketing
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Reporting
+  </li>
+  <li class=""mb-1"">
+    <span class=""fa fa-check-circle me-1 accent""/>
+    Manufacturing
+  </li>
+</ul>
+                    <p><a href=""#"" class=""btn btn-secondary"" data-bs-original-title="""" title="""" aria-describedby=""popover108746"">Discover more</a></p>
+                </div>
+            </div>
+        </div>
+    </section></div>
+    </t>
+</t>"

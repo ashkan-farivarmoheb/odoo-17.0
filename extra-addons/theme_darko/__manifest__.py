@@ -54,6 +54,7 @@
             'theme_darko/static/src/css/font-awesome.min.css',
             'theme_darko/static/src/scss/_variables.scss',
             'theme_darko/static/src/scss/_normalize.scss',
+            'theme_darko/static/src/scss/_typography.scss',
             'theme_darko/static/src/scss/_common.scss',
             'theme_darko/static/src/scss/components/_buttons.scss',
             'theme_darko/static/src/scss/layout/_header.scss',

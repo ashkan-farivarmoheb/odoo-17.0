@@ -166,6 +166,12 @@
     text-decoration: none;
 
   }
+
+  &:focus {
+    text-decoration: none;
+    box-shadow: none
+
+  }
 }
 
 .learn-more-btn {
@@ -181,12 +187,13 @@
   font-size: 20px;
   margin-left: 8px;
   transition: transform 0.3s ease;
+  text-decoration: none;
+
 }
 
 .learn-more-btn:hover .arrow-icon {
   transform: translateX(5px); /* Move the arrow to the right on hover */
   text-decoration: none;
-  //color: $color-link-hover; /* Keep button link color consistent */
 
 
 }

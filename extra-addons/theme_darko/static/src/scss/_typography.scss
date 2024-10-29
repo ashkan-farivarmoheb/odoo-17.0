@@ -1,0 +1,622 @@
+/* Font weights mapping, based on https: //developer.mozilla.org/en-US/docs/Web/CSS/font-weight#common_weight_name_mapping */
+$thin: 100;
+$extraLight: 200;
+$light: 300;
+$normal: 400;
+$medium: 500;
+$semiBold: 600;
+$bold: 700;
+$extraBold: 800;
+$black: 900;
+$heavy: 900;
+$extraBlack: 950;
+
+$sm: "(min-width: 576px)";
+$md: "(min-width: 768px)";
+$lg: "(min-width: 992px)";
+$xl: "(min-width: 1200px)";
+$xxl: "(min-width: 1400px)";
+//TODO {fix all variables instead of $xxx to --xxx}
+.thin {
+  font-weight: $thin;
+}
+
+.hairline {
+  composes: thin;
+}
+
+.extraLight {
+  font-weight: $extraLight;
+}
+
+.ultraLight {
+  composes: extraLight;
+}
+
+.light {
+  font-weight: $light;
+}
+
+.normal {
+  font-weight: $normal;
+}
+
+.regular {
+  composes: normal;
+}
+
+.medium {
+  font-weight: $medium;
+}
+
+.semiBold {
+  font-weight: $semiBold;
+}
+
+.demiBold {
+  composes: semiBold;
+}
+
+.bold {
+  font-weight: $bold;
+}
+
+.extraBold {
+  font-weight: $extraBold;
+}
+
+.ultraBold {
+  composes: extraBold;
+}
+
+.black {
+  font-weight: $black;
+}
+
+.heavy {
+  composes: black;
+}
+
+.extraBlack {
+  font-weight: $extraBlack;
+}
+
+.ultraBlack {
+  composes: extraBlack;
+}
+
+.title1 {
+  font-family: var(--font-main, sans-serif);
+  font-size: 4.4rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-wrap: var(--text-wrap, initial);
+
+  @media #{$md} {
+    font-size: 5.6rem;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+
+  @media #{$lg} {
+    font-size: 8rem;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+}
+
+.title2 {
+  font-family: var(--font-main, sans-serif);
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  text-wrap: var(--text-wrap, initial);
+
+  @media #{$md} {
+    font-size: 3.8rem;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+  }
+
+  @media #{$lg} {
+    font-size: 4.8rem;
+    line-height: 1.02;
+  }
+}
+
+.title3 {
+  font-family: var(--font-main, sans-serif);
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  text-wrap: var(--text-wrap, initial);
+
+  @media #{$md} {
+    font-size: 3rem;
+    letter-spacing: -0.035em;
+    line-height: 1.2;
+  }
+
+  @media #{$lg} {
+    font-size: 3.8rem;
+    line-height: 1.16;
+  }
+}
+
+.title4 {
+  font-family: var(--font-main, sans-serif);
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  text-wrap: var(--text-wrap, initial);
+
+  @media #{$md} {
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  @media #{$lg} {
+    font-size: 2.5rem;
+    line-height: 1.12;
+  }
+}
+
+.title5 {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.005em;
+  line-height: 1.33;
+  text-wrap: var(--text-wrap, initial);
+
+  @media #{$md} {
+    font-size: 1.7rem;
+    letter-spacing: -0.025em;
+    line-height: 1.23;
+  }
+
+  @media #{$lg} {
+    font-size: 2rem;
+    letter-spacing: -0.025em;
+    line-height: 1.23;
+  }
+}
+
+.title55 {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-wrap: var(--text-wrap, initial);
+
+  @media #{$md} {
+    font-size: 1.6rem;
+  }
+
+  @media #{$lg} {
+    font-size: 1.8rem;
+  }
+}
+
+.title6 {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: $medium;
+  letter-spacing: 0;
+  line-height: 1.3;
+  text-wrap: var(--text-wrap, initial);
+}
+
+.titleStatistic {
+  font-family: var(--font-main, sans-serif);
+  font-size: 7.2rem;
+  font-style: normal;
+  font-weight: $medium;
+  letter-spacing: 0;
+
+  /* needs to cap vertical top and bottom space - each font is different
+    and this font seems to cap at this relative measurement */
+  line-height: 0.72;
+
+  @media #{$md} {
+    font-size: 6rem;
+  }
+
+  @media #{$lg} {
+    font-size: 8rem;
+  }
+}
+
+.body {
+  color: var(--color-alpha-light-50);
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: $normal;
+  letter-spacing: 0;
+  line-height: 1.45;
+}
+
+.bodyMedium {
+  color: var(--color-alpha-light-50, $color-alpha-light-50);
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: $normal;
+  letter-spacing: 0.025em;
+  line-height: 1.35;
+
+  @media #{$md} {
+    font-size: 1.7rem;
+    letter-spacing: 0;
+    line-height: 1.45;
+  }
+
+  @media #{$lg} {
+    font-size: 1.8rem;
+    line-height: 1.45;
+  }
+}
+
+.bodyLarge {
+  color: var(--color-alpha-light-50);
+  font-family: var(--font-main, sans-serif);
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: $normal;
+  line-height: 1.4;
+
+  @media #{$md} {
+    font-size: 2.2rem;
+    line-height: 1.3;
+  }
+
+  @media #{$lg} {
+    font-size: 2.4rem;
+    letter-spacing: 0;
+  }
+}
+
+.bodyExtraLarge {
+  color: var(--color-alpha-light-50);
+  font-family: var(--font-main, sans-serif);
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+
+  @media #{$md} {
+    font-size: 2.8rem;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+
+  @media #{$lg} {
+    font-size: 3.2rem;
+    letter-spacing: 0;
+  }
+}
+
+.label {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.5rem;
+  font-style: normal;
+  font-weight: $normal;
+  letter-spacing: 0;
+  line-height: 1.25;
+
+  @media #{$lg} {
+    font-size: 1.6rem;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-secondary, monospace);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: $normal;
+  letter-spacing: 0.06em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.eyebrowSmall {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: 0;
+  line-height: 1.6;
+}
+
+.button {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: 0.01em;
+  line-height: 0.96;
+}
+
+.inputError {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: $normal;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.analyticsBanner {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: $normal;
+  line-height: 1.35;
+}
+
+.navigation {
+  composes: title2;
+  @media navShowDesktop {
+    font-family: var(--font-main, sans-serif);
+    font-size: 1.4rem;
+    font-style: normal;
+    font-weight: $semiBold;
+    letter-spacing: 0.01em;
+    line-height: 0.96;
+  }
+}
+
+.subnavigation {
+  composes: bodyLarge;
+}
+
+.reducedNavigation {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: $normal;
+  letter-spacing: 0;
+  line-height: 0.96;
+
+  @media navLg {
+    font-size: 1.4rem;
+    font-weight: $semiBold;
+    line-height: 0.96;
+  }
+}
+
+.announcementBanner {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.strong {
+  font-weight: $semiBold;
+}
+
+.stats {
+  font-family: var(--font-main, sans-serif);
+  font-size: 8.8rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+
+  @media #{$md} {
+    font-size: 5.4rem;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+  }
+
+  @media #{$lg} {
+    font-size: 7.2rem;
+    line-height: 1.02;
+  }
+}
+
+.hugeStats {
+  font-family: var(--font-main, sans-serif);
+  font-size: 8.8rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+
+  @media #{$md} {
+    font-size: 16rem;
+    letter-spacing: -0.04em;
+    line-height: 1.02;
+  }
+
+  @media #{$lg} {
+    font-size: 20rem;
+    line-height: 1.02;
+  }
+}
+
+.hugeStatsLabel {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: $normal;
+  letter-spacing: 0;
+  line-height: 1.35;
+
+  @media #{$md} {
+    font-size: 1.8rem;
+    letter-spacing: 0;
+  }
+
+  @media #{$lg} {
+    font-size: 2rem;
+    line-height: 1.45;
+  }
+}
+
+.statsSuffix {
+  /* title 2 */
+  font-family: var(--font-main, sans-serif);
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+
+  /* title 4 */
+  @media #{$md} {
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  @media #{$lg} {
+    font-size: 2.5rem;
+    line-height: 1.12;
+  }
+}
+
+.hugeStatsSuffix {
+  /* title 2 */
+  font-family: var(--font-main, sans-serif);
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+
+  /* title 1 */
+  @media #{$md} {
+    font-size: 5.6rem;
+    letter-spacing: -0.045em;
+    line-height: 1.04;
+  }
+
+  @media #{$lg} {
+    font-size: 8rem;
+  }
+}
+
+.pricingOverviewCardPrice {
+  font-family: var(--font-main, sans-serif);
+  font-size: 3rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.09rem;
+  line-height: 1.1;
+
+  @media #{$md} {
+    font-size: 3rem;
+    line-height: 1.06;
+  }
+
+  @media #{$lg} {
+    font-size: 3rem;
+    line-height: 1.02;
+  }
+}
+
+.pricingOverviewCardCustomLabel {
+  font-family: var(--font-main, sans-serif);
+  font-size: 4.8rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+
+  @media #{$md} {
+    font-size: 5.4rem;
+    letter-spacing: -0.04em;
+    line-height: 1.04;
+  }
+
+  @media #{$lg} {
+    font-size: 4.8rem;
+    line-height: 1.16;
+  }
+}
+
+.pricingCardBulletList {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.3rem;
+  font-style: normal;
+  font-weight: $medium;
+  line-height: 1.45;
+}
+
+.inlineLink {
+  display: inline-block;
+  color: var(--color-grey-88);
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.formLabel {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: $medium;
+  line-height: 1.25;
+}
+
+.ribbon {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: $semiBold;
+  line-height: 1.12;
+  @media #{$md} {
+    line-height: 0.96;
+  }
+}
+
+.formDisclaimer {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.1rem;
+  font-style: normal;
+  font-weight: $medium;
+  line-height: 1.25;
+}
+
+.footnote {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: $normal;
+  line-height: normal;
+}
+
+.buttonFab {
+  font-family: var(--font-main, sans-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 0.96;
+}
+
+.em {
+  color: var(--em-color, $color-alpha-light-50);
+}
+
+.accent {
+  color: var(--color-accent, $color-accent);
+}

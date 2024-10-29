@@ -12,7 +12,7 @@
   h2 {
     color: $nav-text-color !important;
     font-size: $font-size-h2;
-    font-family: $font-default;
+    font-family: $font-main;
     margin-top: 32px;
     margin-bottom: 32px;
   }
@@ -21,7 +21,7 @@
   //  color: $nav-text-color;
   //  font-size: $font-size-h4;
   //  text-transform: none;
-  //  font-family: $font-default;
+  //  font-family: $font-main;
   //}
 
   .link-with-image {
@@ -33,13 +33,13 @@
     padding-left: 1rem;
 
     font-size: $font-size-text;
-    font-family: $font-default;
+    font-family: $font-main;
 
     .link-text {
       text-decoration: none;
       position: relative;
       color: $nav-text-color !important;
-      font-family: $font-default;
+      font-family: $font-main;
     }
 
     .link-text:hover {
