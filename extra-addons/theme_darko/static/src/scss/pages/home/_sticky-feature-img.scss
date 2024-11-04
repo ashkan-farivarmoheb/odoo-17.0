@@ -1,0 +1,42 @@
+.sticky_feature_img {
+  .custom-left-column {
+    position: relative;
+  }
+
+  .custom-sticky-widget {
+    position: sticky;
+    top: 50px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .sticky-image {
+    width: 100%; /* Make images responsive */
+    max-width: 400px; /* Maximum width for larger screens */
+    height: auto; /* Maintain aspect ratio */
+    opacity: 0; /* Start hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+    position: absolute; /* Position images absolutely for overlay effect */
+
+    &.visible { /* Use a class to manage visibility */
+      opacity: 1; /* Make visible */
+    }
+  }
+
+  .custom-right-column {
+    .text-section {
+      min-height: 100vh; /* Ensure each section is full viewport height */
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 50px;
+
+      @media (max-width: 768px) { /* Responsive adjustments */
+        padding: 30px; /* Reduce padding on smaller screens */
+      }
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="sticky_feature_img" inherit_id="website.snippets" name="Sticky Feature Image">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_darko.sticky_feature_img_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg"/>
+        </xpath>
+    </template>
+
+    <template id="sticky_feature_img_snippet" name="Sticky Feature Image">
+        <section class="sticky_feature_img pt-md-5">
+            <div class="container position-relative">
+                <div class="row">
+                    <!-- Left Column: Sticky Images -->
+                    <div class="col-lg-6 col-md-12 custom-left-column d-none d-lg-block">
+                        <div class="custom-sticky-widget position-sticky" style="top: 100px;">
+                            <t t-foreach="range(1, 7)" t-as="i">
+                                <img t-att-src="'https://via.placeholder.com/400x300?text=Image+%d' % i"
+                                     t-att-alt="'Image %d' % i"
+                                     class="sticky-image img-fluid w-100 mb-3"
+                                     loading="lazy"
+                                     sizes="(max-width: 991px) 100vw, 50vw"/>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Scrolling Content -->
+                    <div class="col-lg-6 col-md-12 custom-right-column o_colored_level pb-8">
+                        <t t-foreach="[
+                            {'title': 'Leaking Revenue from Poor Data Decisions',
+                             'content': 'When your business leaders are not aligned on core data, poor decisions can lead to
+                                significant revenue loss. An integrated ERP system ensures that everyone is working with
+                                accurate, real-time information, enabling smarter, data-driven choices that positively
+                                impact your bottom line.'},
+                            {'title': 'The Headache of Legacy Systems',
+                             'content': 'Stuck with outdated software? Whether it takes seven clicks instead of two or ten days
+                                instead of one, the inefficiencies of legacy systems can hinder your growth.
+                                Transitioning to a modern ERP solution not only simplifies processes but also gives you
+                                the flexibility to innovate and thrive.'},
+                            {'title': 'Stagnation from Overwhelm',
+                             'content': 'Technical jargon and complex terms can leave businesses feeling overwhelmed. Many hesitate to embark on their digital transformation journey due to confusion or uncertainty. At Solwings, we prioritize understanding your unique needs, ensuring we recommend solutions that genuinely enhance your operations.'},
+                            {'title': 'Trust Issues with Solution Providers',
+                             'content': 'Finding a solution provider you can rely on is crucial. At Solwings, we prioritize
+                                listening, advising, and supporting our clients throughout their digital transformation
+                                journey. Our long-term partnerships speak to our commitment—many of our clients have
+                                been with us for over a decade.'},
+                            {'title': 'Ditching Spreadsheets for Precision',
+                             'content': 'While spreadsheets are useful, they can lead to costly errors as complexity increases. A
+                                single wrong entry can result in significant financial losses. Implementing a tailored
+                                ERP solution streamlines your finance, operations, planning, and analytics, minimizing
+                                risk and maximizing efficiency.'},
+                            {'title': 'Inefficient Communication and Collaboration',
+                             'content': 'Miscommunication can derail projects and frustrate teams. An ERP system fosters
+                                collaboration by breaking down silos and facilitating seamless communication across
+                                departments. Everyone stays informed and engaged, leading to enhanced productivity and
+                                innovation.'}
+                        ]" t-as="section">
+                            <div class="text-section d-flex flex-column justify-content-center align-items-start"
+                                 style="min-height: 74vh;">
+                                <h3 class="mb-4" t-esc="section['title']"/>
+                                <p t-esc="section['content']"/>
+                                <img t-att-src="'https://via.placeholder.com/400x300?text=Image+%d' % (section_index + 1)"
+                                     t-att-alt="'Image %d' % (section_index + 1)"
+                                     class="img-fluid d-lg-none w-100"
+                                     loading="lazy"
+                                     sizes="(max-width: 991px) 100vw, 50vw"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
