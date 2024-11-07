@@ -1,25 +1,33 @@
 .s_tabs {
-  background: o-color('o-color-1');
+  //background: var(--body-bg, white);
+
 
   .s_tabs_main {
 
-    border-radius: 0.4rem;
+    //border:2px solid grey;
     overflow: hidden;
-    box-shadow: 15px 15px 30px rgba(255, 255, 255, 0.3);
+    //box-shadow: 15px 15px 30px rgba(255, 255, 255, 0.3);
+    border: 2px solid var(--border-color, $color-grey-60);
+    border-radius: var(--border-radius-20, 2rem);
+    //background: var(--background-color, linear-gradient(var(--bento-gradient-angle, 162deg), #1b1b26 var(--bento-gradient-start, -70%), #09090d var(--bento-gradient-end, 92%)));
+    box-shadow: var(--box-shadow, -15px 15px 30px rgba(255, 255, 255, 0.3));
 
     .s_tabs_content {
-      background: o-color('o-color-4');
+      background: var(--bg-color, $color-grey-08);
     }
 
     .s_tabs_nav {
       padding-right: 0px !important;
       padding-left: 0px !important;
+      background: var(--body-bg, transparent);
+
 
       .nav-item {
         .nav-link {
           border-bottom-right-radius: 0px;
           border-top-right-radius: 0px;
-          color: o-color('o-color-2');
+          color: var(--color-bodies, $main-font-body-color);
+          border-right: 2px solid var(--border-color, $color-grey-60);
 
           //span {
           //  color: o-color('o-color-2');
@@ -43,10 +51,35 @@
         }
 
         .nav-link.active {
-          background: o-color('o-color-4');
-          border-left: 4px solid o-color('o-color-2');
-          color: o-color('o-color-2');
+          //background: var(--background-color, linear-gradient(var(--bento-gradient-angle, 162deg), #1b1b26 var(--bento-gradient-start, -70%), #09090d var(--bento-gradient-end, 92%)));
+          background: var(--bg-color, $color-grey-08);
+          border-left: none;
+          border-bottom: 2px solid var(--border-color, $color-grey-60);
+          border-top: 2px solid var(--border-color, $color-grey-60);
+          border-right: none;
+          color: $white;
         }
+
+        /* Remove border bottom on hover active nav-link */
+        .nav-link::after {
+          content: none;
+          color: $white;
+
+        }
+
+
+      }
+
+
+      /* Remove top border for the first nav-item's active nav-link */
+      .nav-item:first-child .nav-link.active {
+        border-top: none;
+      }
+
+      /* Remove bottom border for the last nav-item's active nav-link */
+      .nav-item:last-child .nav-link.active {
+        border-bottom: none;
+
       }
     }
   }

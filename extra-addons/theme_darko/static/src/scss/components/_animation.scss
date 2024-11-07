@@ -70,3 +70,43 @@
     opacity: 1 !important;
   }
 }
+
+
+@keyframes anim_float {
+	0% {
+		//box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(0px);
+	}
+	50% {
+		//box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+		transform: translatey(-20px);
+	}
+	100% {
+		//box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+		transform: translatey(0px);
+	}
+}
+.anim_float {
+
+  /* Specify the combined animation name */
+  animation-name: anim_float;
+
+  /* Specify duration for the animation */
+  animation-duration: 10s;
+
+  /* Specify fill mode for the animation */
+  animation-fill-mode: both;
+
+  /* Specify timing function for a smoother effect */
+  animation-timing-function: ease-in-out;
+
+  /* Specify delay for the animation */
+  animation-delay: 0s;
+
+  /* Ensure the element is visible before animations start */
+  visibility: visible;
+
+  animation-iteration-count: infinite;
+
+}
+
