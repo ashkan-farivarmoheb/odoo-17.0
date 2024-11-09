@@ -97,10 +97,17 @@ $o-color-palettes: map-merge($o-color-palettes,
                         'o-color-5': #ffffff,
                         'o-color-6': #fd9a0b,
                         'o-color-7': #00855F,
+                        'o-cc1-bg': #000000,
                         'o-cc1-link': #81859f, //$color-grey-60
                         'o-cc1-text': #81859f, //$color-grey-60
                         'o-cc1-headings':#fcfcfc, //$color-grey-100
+                        'o-cc1-h3':#ffffff,
                         'o-cc1-h4':#81859f, //$color-grey-60
+                        'o-cc5-bg': #ffffff,
+                        'o-cc5-text':#000000,
+                        'o-cc5-h3':#000000,
+                        'o-cc5-h4':#000000,
+                        'o-cc5-link': #000000,
                   //#c1c2d9
                 )
         )

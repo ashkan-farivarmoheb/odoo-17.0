@@ -1,23 +1,35 @@
-<section class="sticky_onScroll o_colored_level pt64" data-snippet="sticky_onScroll_snippet" data-name="Sticky On Scroll" style="background-image: none;">
-            <div class="container">
-                <div class="row o_grid_mode" data-row-count="33">
+      <template id="video_tab" inherit_id="website.snippets" name="Video Tab">
+                <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+                    <t t-snippet="theme_darko.video_tab_snippet"
+                       t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg"/>
+                </xpath>
+            </template>
 
-                    <div class="custom-left-column o_colored_level disable-animation-mobile o_animate o_animate_on_scroll o_anim_fade_zoom_in o_animate_out o_grid_item g-height-26 col-lg-6 g-col-lg-12 col-lg-12 o_animating" data-scroll-zone-start="0" data-scroll-zone-end="20" style="animation-delay: -5.31084s; --wanim-intensity: 100; grid-area: 1 / 1 / 27 / 13; z-index: 1; visibility: visible;">
-                        <div class="custom-sticky-widget" style="top:10%;">
-                            <h1 class="display-3 text-left text-md-center">Next generation<br>digital transformation.</h1>
-                            <h4 class="text-left text-md-center">Solwings is a skilled team specialising in Odoo, with expertise in IT, business analysis, and data. Our team understands numbers and Odoo. We streamline your operations, ecommerce, accounting processes, and change management</h4>
-                       <div class="text-left text-md-center mt-4"><a href="/contactus" class="btn btn-secondary btn-lg" data-bs-original-title="" title="">Schedule a free consultation</a></div>
-
+            <template id="video_tab_snippet" name="Video Tab">
+                <section class="video_tab pt-md-5">
+                    <div class="container">
+                        <!-- Titles Column -->
+                        <div class="titles">
+                            <t t-foreach="[{'title':'Design without limits','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/design.mp4','description':'This is a short description for the first feature tab.This is a short description for the first feature tab.This is a short description for the first feature tab'},
+                            {'title':'Create complex, rich interactions','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/build-on-brand-sites.mp4','description':'Here is a description for the second tab that showcases rich interactions.This is a short description for the first feature tab.This is a short description for the first feature tab.'}]"
+                               t-as="video">
+                                <div class="title-item" t-att-data-video="video['video_url']"
+                                     t-att-data-description="video['description']">
+                                    <div class="progress-bar-wrapper">
+                                        <div class="progress-bar"></div>
+                                    </div>
+                                    <span t-esc="video['title']"></span>
+                                    <p class="description" t-esc="video['description']"></p>
+                                </div>
+                            </t>
+                        </div>
+                        <!-- Video and Description Column -->
+                        <div class="video">
+                            <video id="feature-video" preload="none">
+                                <source id="video-source" t-att-src="''" type="video/mp4"/>
+                            </video>
+                            <p id="video-description"></p>
                         </div>
                     </div>
-
-
-
-                <div class="o_colored_level o_grid_item g-col-lg-12 g-height-14 col-lg-12" style="z-index: 2; grid-area: 20 / 1 / 34 / 13;">
-
-
-          <div class="media-element-wrapper rounded-3">
-        <img src="/theme_darko/static/src/img/banner/banner.png" class="mx-auto d-block bordered-image w-100" loading="auto" alt="Banner Image">
-    </div></div></div>
-            </div>
-        </section>
+                </section>
+            </template>
