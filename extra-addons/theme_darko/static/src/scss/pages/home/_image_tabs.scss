@@ -1,0 +1,114 @@
+.image_tabs_section {
+  --padding-base: 3rem;
+  --radius: 0rem;
+  --transition: all 0.1s ease, transform 0.9s cubic-bezier(.165, .84, .44, 1), background-color 0.3s cubic-bezier(.165, .84, .44, 1), opacity 0.1s ease, max-height 0.1s ease;
+  --bar-width: 2px;
+
+  padding: var(--padding-base) 0;
+
+  .feature-titles {
+    .title-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0;
+      //margin-bottom: 1rem;
+      background: transparent;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition); // Apply all transitions from the single variable
+
+
+
+      span {
+        padding: 0.5rem 0.75rem;
+        margin-left: var(--bar-width);
+        font-weight: 600;
+        opacity: 0.5;
+        transition: var(--transition);
+
+      }
+
+      .description {
+        margin: 0;
+        padding: 0 0.75rem 0 calc(var(--bar-width) + 0.75rem);
+
+        max-height: 0; // Start from height 0
+        opacity: 0;
+        overflow: hidden;
+        transition: var(--transition); // Apply all transitions from the single variable
+
+      }
+
+      &:hover {
+        span {
+          opacity: .8;
+        }
+      }
+
+      &.active {
+        padding: 1.5rem 0;
+        background: transparent;
+
+
+        &:hover {
+          opacity: 1;
+        }
+
+        .description {
+          //height: auto;
+          opacity: 1;
+          max-height: 1000px; // Set a large enough max-height for the transition
+
+          visibility: visible;
+          margin-top: 0.5rem;
+        }
+
+        span {
+          opacity: 1;
+          //color: var(--main-font-color, $main-font-color);
+
+        }
+      }
+    }
+  }
+
+  .feature-image {
+    image {
+      border-radius: var(--radius);
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+
+    #image-description {
+      margin-top: 1rem;
+      color: #6c757d;
+    }
+  }
+
+  //<!-- Donut Time Indicator -->
+
+  .time-donut {
+    position: absolute;
+    top: 5px;
+    right: 50px;
+    z-index: 10;
+  }
+
+  .donut-bg {
+    stroke-width: 2;
+    stroke: transparent; /* Background circle color */
+
+  }
+
+  .donut-progress {
+    stroke-width: 2;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-dasharray: 100; /* Circumference of a circle with radius 45 */
+    stroke: $color-accent; /* Progress circle color */
+
+
+  }
+
+}
+

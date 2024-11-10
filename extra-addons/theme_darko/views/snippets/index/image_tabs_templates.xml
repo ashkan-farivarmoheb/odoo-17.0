@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="image_tabs" inherit_id="website.snippets" name="Image Tabs">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_darko.image_tabs_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg"/>
+        </xpath>
+    </template>
+
+    <template id="image_tabs_snippet" name="Image Tabs">
+        <section class="feature-tabs image_tabs_section" data-name="Feature Tabs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 row justify-content-between o_colored_level">
+
+                        <p class="h5">Rethink the web dev cycle with Webflow. Give your design and
+                            marketing teams the power to launch sophisticated sites quickly — so your dev team can
+                            focus on more complex work, not pixel-perfect revisions.
+                        </p>
+
+
+                        <!-- Titles Column -->
+                        <div class="feature-titles">
+
+                            <t t-foreach="[{'title':'Design without limits','image_cta_href':'/odoo-implementation','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c9479a4195aa5026483b0_Control%20content%20visibility.webp','description':'This is a short description for the first feature tab.This is a short description for the first feature tab.This is a short description for the first feature tab'},
+                            {'title':'Create complex, rich interactions','image_cta_href':'/odoo-erp','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c947a9aa417b6ce4f1fe4_Organize%20dynamic%20content.webp','description':'Here is a description for the second tab that showcases rich interactions.This is a short description for the first feature tab.This is a short description for the first feature tab.'}]"
+                               t-as="image">
+<!--                                -->
+                                <div class="title-item rounded-0 border-bottom"
+                                     t-att-data-image="image['image_url']"
+                                     t-att-data-description="image['description']"
+                                     t-att-data-image_cta_href="image['image_cta_href']"
+                                     style="--progress: 0%;">
+                                    <span class="h3" t-esc="image['title']"></span>
+                                    <p class="description" t-esc="image['description']">
+                                    </p>
+                                </div>
+
+                            </t>
+
+                        </div>
+                    </div>
+                    <!-- image Column -->
+                    <div class="col-lg-6 feature-image">
+                        <img id="feature-image" style="--interval-duration: 5000ms;" class="w-100" src="" alt="Banner Image" loading="lazy">
+                        </img>
+                        <!--                        <p id="image-cta" class="mt-3"></p>-->
+                        <a id="image-cta" class="btn btn-link learn-more-btn px-1" href=""
+                           data-bs-original-title="" title="">Learn More
+                            <span class="material-icons arrow-icon">arrow_right_alt</span>
+                        </a>
+                        <!-- Donut Time Indicator -->
+                        <svg class="time-donut" width="25" height="25" viewBox="0 0 36 36">
+                            <circle class="donut-bg" cx="18" cy="18" r="15.9155" fill="none"/>
+                            <circle class="donut-progress" cx="18" cy="18" r="15.9155" fill="none"
+                                 />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>
