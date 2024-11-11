@@ -73,19 +73,20 @@
 
 
 @keyframes anim_float {
-	0% {
-		//box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-		transform: translatey(0px);
-	}
-	50% {
-		//box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
-		transform: translatey(-20px);
-	}
-	100% {
-		//box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
-		transform: translatey(0px);
-	}
+  0% {
+    //box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    transform: translatey(0px);
+  }
+  50% {
+    //box-shadow: 0 25px 15px 0px rgba(0,0,0,0.2);
+    transform: translatey(-20px);
+  }
+  100% {
+    //box-shadow: 0 5px 15px 0px rgba(0,0,0,0.6);
+    transform: translatey(0px);
+  }
 }
+
 .anim_float {
 
   /* Specify the combined animation name */
@@ -108,5 +109,29 @@
 
   animation-iteration-count: infinite;
 
+}
+
+//background gradiant
+.background_container {
+  // Set the repeating linear gradient background
+  background-size: 300% 300%;
+  background-image: repeating-linear-gradient(125deg, #1B162F, #0A0C19 10%, #171632 20%, #0D081D 60%,
+          #1D1A37 75%,
+          #171632 90%,);
+
+  animation: waveMove 10s ease-in-out infinite;
+}
+
+/* Keyframes for the base gradient movement */
+@keyframes waveMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
 }
 
