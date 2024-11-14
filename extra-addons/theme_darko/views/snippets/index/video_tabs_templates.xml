@@ -14,18 +14,29 @@
                     <div class="col-lg-6 row justify-content-between o_colored_level">
 
 
-                        <p class="h5">Rethink the web dev cycle with Webflow. Give your design and
-                            marketing teams the power to launch sophisticated sites quickly — so your dev team can
-                            focus on more complex work, not pixel-perfect revisions.
+                        <p class="h5">Rethink business management with Odoo. Empower your teams to streamline operations
+                            and manage workflows efficiently—all in one platform—so your IT team can focus on strategic
+                            innovations, not routine tasks.
                         </p>
 
 
-                        <!-- Titles Column -->
+                        <!-- Titles Column -->c
                         <div class="feature-titles">
 
-                            <t t-foreach="[{'title':'Design without limits','video_cta_href':'/odoo-implementation','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/design.mp4','description':'This is a short description for the first feature tab.This is a short description for the first feature tab.This is a short description for the first feature tab'},
-                            {'title':'Create complex, rich interactions','video_cta_href':'/odoo-erp','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/build-on-brand-sites.mp4','description':'Here is a description for the second tab that showcases rich interactions.This is a short description for the first feature tab.This is a short description for the first feature tab.'}]"
+                            <t t-foreach="[{'title':'Open Source','video_cta_href':'/odoo-implementation','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/design.mp4','description':'Supporting the technology is a global community of over +100K developers working together. 
+
+Community: Open Source and completely free.
+
+Enterprise: Includes additional apps, infrastructure, and professional services.'},
+                            {'title':'Cost-effectiveness','video_cta_href':'/odoo-erp','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/build-on-brand-sites.mp4','description':'No usage-based pricing, no upselling on features, no long-term contracts, no hosting limits, and no surprises—just one straightforward, all-inclusive price per user.'},
+                            {'title':'Highly Customizable &amp; Scalable','video_cta_href':'/odoo-erp','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/build-on-brand-sites.mp4','description':'Leverage Odoo Studio to automate tasks, design custom screens, generate tailored reports, and set up webhooks. Plus, enhance your experience by using our specialized services to customize it to your specific needs. Odoo adapts to any business size or industry, with the flexibility to add or remove features as needed.'},
+                            {'title':'User-friendly &amp; Accessible','video_cta_href':'/odoo-erp','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/build-on-brand-sites.mp4','description':'With an intuitive interface and mobile access, Odoo is easy to use anytime, anywhere.'},
+                            {'title':'Real-time Analytics &amp; Collaboration','video_cta_href':'/odoo-erp','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/build-on-brand-sites.mp4','description':'With an intuitive interface and mobile access, Odoo is easy to use anytime, anywhere.'},
+                            {'title':'Quick Implementation','video_cta_href':'/odoo-erp','video_url':'https://dhygzobemt712.cloudfront.net/Web/home/2024-wxp/features/build-on-brand-sites.mp4','description':'Odoo is straightforward to deploy, making setup a breeze.'},
+
+                            ]"
                                t-as="video">
+
                                 <div class="title-item"
                                      t-att-data-video="video['video_url']"
                                      t-att-data-description="video['description']"

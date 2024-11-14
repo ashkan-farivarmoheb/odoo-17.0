@@ -148,7 +148,7 @@ $nav-text-color-dark: $color-grey-60;
 $nav-text-color: $nav-text-color-dark;
 $nav-text-color-hover: $color-grey-100;
 
-$main-font-body-color: $color-grey-60;
+$main-font-body-color: $color-alpha-light-50;
 $main-font-color: $color-grey-100;
 $modal-body-color: $color-black;
 
@@ -179,4 +179,17 @@ $overlay-none: none;
 
 /* Bentos & Footer V4 bg */
 $card-background: linear-gradient(var(--bento-gradient-angle, 162deg), #1b1b26 var(--bento-gradient-start, -70%), #09090d var(--bento-gradient-end, 92%));
+
+//@function is-dark($color) {
+//    // Get the RGB values of the color
+//    $r: red($color);
+//    $g: green($color);
+//    $b: blue($color);
+//
+//    // Calculate the luminance
+//    $luminance: (0.299 * $r + 0.587 * $g + 0.114 * $b) / 255;
+//
+//    // Return true if luminance is less than 0.5 (darker colors)
+//    @return $luminance < 0.5;
+//}
 

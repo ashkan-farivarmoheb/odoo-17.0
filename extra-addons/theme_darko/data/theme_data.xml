@@ -24,11 +24,21 @@
         <!-- @formatter:on -->
         <field name="public" eval="True"/>
         <field name="res_model">ir.ui.view</field>
-    </record> <record id="s_cta_mockups" model="ir.attachment">
+    </record>
+    <record id="s_cta_mockups" model="ir.attachment">
         <field name="name">s_cta_mockups.jpg</field>
         <field name="type">url</field>
         <!-- @formatter:off -->
         <field name="url">/theme_darko/static/src/img/banner/s_cta_mockups.jpg</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="odoo_all_apps" model="ir.attachment">
+        <field name="name">odoo_all_apps.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/odoo_all_apps.png</field>
         <!-- @formatter:on -->
         <field name="public" eval="True"/>
         <field name="res_model">ir.ui.view</field>

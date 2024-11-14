@@ -44,7 +44,6 @@
                     <div class="col-lg-6 feature-image">
                         <img id="feature-image" style="--interval-duration: 5000ms;" class="w-100" src="" alt="Banner Image" loading="lazy">
                         </img>
-                        <!--                        <p id="image-cta" class="mt-3"></p>-->
                         <a id="image-cta" class="btn btn-link learn-more-btn px-1" href=""
                            data-bs-original-title="" title="">Learn More
                             <span class="material-icons arrow-icon">arrow_right_alt</span>
