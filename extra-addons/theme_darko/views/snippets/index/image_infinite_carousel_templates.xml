@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="image_infinit_carousel" inherit_id="website.snippets" name="Image Infinite Carousel">
+        <xpath expr="//div[@id='snippet_structure']/div[hasclass('o_panel_body')]" position="inside">
+            <t t-snippet="theme_darko.image_infinit_carousel_snippet"
+               t-thumbnail="/website/static/src/img/snippets_thumbs/s_three_columns.svg"/>
+        </xpath>
+    </template>
+
+    <template id="image_infinit_carousel_snippet" name="Image Infinite Carousel">
+        <section class="image_infinit_carousel_section" data-name="Image Infinite Carousel">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-12">
+                        <div class="text-center mb-4">
+                            <p class="h5">Rethink business management with Odoo. Empower your teams to streamline
+                                operations and manage workflows efficiently—all in one platform—so your IT team can
+                                focus on
+                                strategic innovations, not routine tasks.
+                            </p>
+                        </div>
+
+                        <div class="rc-carousel" data-rc-carousel="true">
+                            <div class="rc-carousel-strip" data-rc-carousel-strip="true">
+                                <!-- Flexbox -->
+                                <div class="rc-carousel-box" data-rc-carousel-box="true">
+                                    <t t-foreach="[
+                                    {
+                                        'id': '1',
+                                        'image_url': 'https://placehold.co/200x450?text=Image1',
+                                        'image_alt': 'Carousel Image 1',
+                                        'link_url': '/odoo-erp'
+                                    },
+                                    {
+                                        'id': '2',
+                                        'image_url': 'https://placehold.co/250x450?text=Image2',
+                                        'image_alt': 'Carousel Image 2',
+                                        'link_url': '/odoo-erp'
+                                    },  {
+                                        'id': '3',
+                                        'image_url': 'https://placehold.co/300x450?text=Image3',
+                                        'image_alt': 'Carousel Image 1',
+                                        'link_url': '/odoo-erp'
+                                    },
+                                    {
+                                        'id': '4',
+                                        'image_url': 'https://placehold.co/350x450?text=Image4',
+                                        'image_alt': 'Carousel Image 2',
+                                        'link_url': '/odoo-erp'
+                                    },  {
+                                        'id': '5',
+                                        'image_url': 'https://placehold.co/400x450?text=Image5',
+                                        'image_alt': 'Carousel Image 1',
+                                        'link_url': '/odoo-erp'
+                                    },
+                                    {
+                                        'id': '6',
+                                        'image_url': 'https://placehold.co/450x450?text=Image6',
+                                        'image_alt': 'Carousel Image 2',
+                                        'link_url': '/odoo-erp'
+                                    },  {
+                                        'id': '7',
+                                        'image_url': 'https://placehold.co/500x450?text=Image7',
+                                        'image_alt': 'Carousel Image 1',
+                                        'link_url': '/odoo-erp'
+                                    },
+                                    {
+                                        'id': '8',
+                                        'image_url': 'https://placehold.co/550x450?text=Image8',
+                                        'image_alt': 'Carousel Image 2',
+                                        'link_url': '/odoo-erp'
+                                    },
+                                    {
+                                        'id': '9',
+                                        'image_url': 'https://placehold.co/600x450?text=Image9',
+                                        'image_alt': 'Carousel Image 2',
+                                        'link_url': '/odoo-erp'
+                                    }
+                                ]" t-as="slide">
+                                        <div class="rc-carousel-item" t-att-data-rc-carousel-item="true">
+                                            <a t-att-href="slide['link_url']">
+                                                <img t-att-src="slide['image_url']"
+                                                     t-att-alt="slide['image_alt']"
+                                                     class="rc-carousel-item-image rounded-1"
+                                                     loading="lazy"
+
+                                                />
+                                            </a>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="btm_overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+</odoo>

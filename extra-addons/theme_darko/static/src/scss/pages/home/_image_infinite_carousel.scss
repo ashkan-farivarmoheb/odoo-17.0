@@ -1,0 +1,83 @@
+$o-carousel-box-gap: 0.5rem;
+//$o-carousel-tile-size: 25rem;
+$o-carousel-slide-duration: 50s;
+
+.image_infinit_carousel_section {
+  .rc-carousel {
+    --box-gap: #{$o-carousel-box-gap};
+    --slide-duration: #{$o-carousel-slide-duration};
+    //--tile-size: #{$o-carousel-tile-size};
+    width: 100%;
+    max-width: calc((var(--tile-size) + var(--box-gap)) * ((var(--tiles) / 2) - 1));
+    margin: var(--box-gap) auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .rc-carousel-box {
+    display: flex;
+    gap: var(--box-gap);
+    flex-wrap: nowrap;
+    animation: o_carousel_slideX var(--slide-duration) linear infinite;
+
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  .rc-carousel-item {
+    flex-shrink: 0;
+    height: 450px;
+    display: flex;
+    width: auto;
+    max-width: 100%;
+    justify-content: center;
+
+    //&.cloned::after {
+    //  content: "Cloned";
+    //  display: block;
+    //  position: absolute;
+    //  width: inherit;
+    //  bottom: 0;
+    //  padding: 0 0.5rem;
+    //  background: rgba(255, 255, 255, 0.75);
+    //  text-align: center;
+    //  font-weight: 600;
+    //  font-size: 0.75rem;
+    //  line-height: 1.4;
+    //  color: tomato;
+    //}
+  }
+
+  .rc-carousel-item-image {
+    width: auto;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .btm_overlay {
+    background-image: linear-gradient(180deg, #08080800, var(--black) 77%);
+    pointer-events: none;
+    position: absolute;
+    inset: 0%
+  }
+}
+
+@keyframes o_carousel_slideX {
+  0% {
+    transform: translateX(
+                    calc(-1 * (var(--tile-size) + var(--box-gap)) * (var(--tiles) / 2))
+    );
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image_infinit_carousel_section {
+    .rc-carousel-box {
+      animation: none;
+    }
+  }
+}
