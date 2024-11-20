@@ -8,9 +8,6 @@ docutils==0.17
 ebaysdk==2.1.5
 freezegun==1.1.0
 geoip2==2.9.0
-Cython>=0.29.28
-setuptools>=58.0.4
-wheel>=0.37.0
 gevent==21.8.0 ; python_version == '3.10'  # (Jammy)
 gevent==22.10.2; python_version > '3.10'
 greenlet==1.1.2 ; python_version == '3.10'  # (Jammy)
