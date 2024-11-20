@@ -206,8 +206,6 @@ jobs:
         && echo ${WKHTMLTOPDF_SHA} wkhtmltox.deb | sha1sum -c - \
         && sudo apt-get install -y --no-install-recommends ./wkhtmltox.deb \
         && sudo rm -rf /var/lib/apt/lists/* wkhtmltox.deb
-        pip install --upgrade pip setuptools wheel && \
-        pip install gevent==21.8.0
         pip install -r requirements.txt
 
     - name: Build Odoo Module
