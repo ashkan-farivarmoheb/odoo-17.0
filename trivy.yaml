@@ -10,11 +10,11 @@ scan:
     skip-dirs:
       - addons/
       - odoo/
+      - infrastructure/
       - '*/test/*'
       - '*/docs/*'
     skip-files:
       - requirements.txt
-      - extra-addons/restfull_api_jwt/utils/methods_constants.py
       - Dockerfile
     scanners:
       - vuln

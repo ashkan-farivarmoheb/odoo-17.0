@@ -61,7 +61,12 @@
               }
           ],
           "essential": false,
-          "environment": [],
+          "environment": [
+            {
+                "name": "ENVIRONMENT",
+                "value": "${environment}"
+            }
+          ],
           "mountPoints": [],
           "volumesFrom": [],
           "logConfiguration": {
