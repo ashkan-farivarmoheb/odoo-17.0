@@ -125,6 +125,16 @@ jobs:
         scan-ref: '.'
         trivy-config: 'trivy.yaml'
 
+    - name: Use Trivy to Scan Docker Image with Cache
+      uses: aquasecurity/trivy-action@0.20.0
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        trivy-config: 'trivy.yaml'
+        ignore-unfixed: true # Ignore vulnerabilities that don’t have a fix yet
+        format: 'table' # Output format can be adjusted (e.g., JSON or table)
+        arguments: '--skip-update --retry 5 --retry-delay 30s' # Add retry flags here  
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
