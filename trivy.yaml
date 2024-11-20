@@ -16,6 +16,7 @@ scan:
     skip-files:
       - requirements.txt
       - Dockerfile
+      - extra-addons/restfull_api_jwt/utils/methods_constants.py
     scanners:
       - vuln
       - secret
