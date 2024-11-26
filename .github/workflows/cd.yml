@@ -122,6 +122,7 @@ jobs:
           IMAGE_TAG: ${{ env.ecr_image_tag }}
         if: steps.ecr-image-exists.outputs.image_tag == ''
         run: |
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
