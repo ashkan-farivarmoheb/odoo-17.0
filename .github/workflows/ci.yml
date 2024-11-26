@@ -17,7 +17,7 @@ permissions:
 
 env:
   service_name: odoo
-  service_version: 17.0
+  service_version: "17.0"
 
 jobs:
   docker-login:
