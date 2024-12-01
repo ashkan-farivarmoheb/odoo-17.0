@@ -1,6 +1,6 @@
 resource "aws_ecs_service" "ecs_service" {
   name            = "${var.environment}-${var.project}-service"
-  cluster         = aws_ecs_cluster.ecs_cluster.id
+  cluster         = data.aws_ecs_cluster.ecs_cluster.id
   task_definition = aws_ecs_task_definition.ecs_task_definition.arn
   desired_count   = var.desired_task_count
   launch_type     = "EC2"
@@ -12,5 +12,5 @@ resource "aws_ecs_service" "ecs_service" {
     container_port   = 443 
   }
   
-  depends_on = [ aws_lb.aws_lb_nlb, aws_autoscaling_group.ecs_asg ]
+  depends_on = [ aws_lb.aws_lb_nlb ]
 }

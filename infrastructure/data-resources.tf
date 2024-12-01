@@ -60,3 +60,7 @@ data "aws_efs_file_system" "efs" {
     Name = "${var.environment}-${var.project}-efs"
   }
 }
+
+data "aws_ecs_cluster" "ecs_cluster" {
+  cluster_name = "${var.environment}-${var.project}"
+}
