@@ -82,7 +82,7 @@
                                                 <img t-att-src="slide['image_url']"
                                                      t-att-alt="slide['image_alt']"
                                                      class="rc-carousel-item-image rounded-1"
-                                                     loading="lazy"
+                                                     loading="eager"
 
                                                 />
                                             </a>

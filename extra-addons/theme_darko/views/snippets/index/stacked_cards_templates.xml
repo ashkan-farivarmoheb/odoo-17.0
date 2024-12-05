@@ -9,35 +9,44 @@
     </template>
 
     <template id="stacked_cards_snippet" name="Stacked Cards">
-        <section class="stacked_cards">
+        <section class="stacked_cards_snippet">
             <div class="container">
-                <t t-foreach="[
+                <div class="stacked-cards-header o_colored_level">
+                    <h2 class="title2 text-left">Why Choose Us?</h2>
+                    <p class="title4 text-left">showcasing our expertise
+                    </p>
+                </div>
+                <div class="stacked_cards">
+
+
+                    <t t-foreach="[
                     {'title':'Tailored Solutions for Every Business','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c9479a4195aa5026483b0_Control%20content%20visibility.webp','description':'From small businesses to global enterprises, we specialize in customizing Odoo solutions to meet your unique needs. Our team works closely with you to optimize every aspect of your operations, ensuring a perfect fit for your business, no matter the scale.'},
                     {'title':'Enhanced Security','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c947a9aa417b6ce4f1fe4_Organize%20dynamic%20content.webp','description':'Your data security is our priority. We implement additional safeguards to protect your information when hosting on Odoo servers, providing peace of mind and robust protection.'},
                     {'title':'Leading AI, Applications, and Data Expertise','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c947a9aa417b6ce4f1fe4_Organize%20dynamic%20content.webp','description':'Our experienced developers leverage cutting-edge AI and data solutions to streamline and elevate your business operations. Whether you’re aiming for greater efficiency or growth, we’re dedicated to helping you achieve your goals.'},
                     {'title':'Finance Expertise to Support Your Implementation','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c947a9aa417b6ce4f1fe4_Organize%20dynamic%20content.webp','description':'Our team of finance experts guides you through every step of the implementation journey, addressing your accounting needs and ensuring a smooth transition.'},
                     {'title':'Business Analysis and Change Management Support','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c947a9aa417b6ce4f1fe4_Organize%20dynamic%20content.webp','description':'With skilled business analysts and change management experts, we’re equipped to drive a successful and smooth transformation for your team and processes.'}
                 ]" t-as="card">
-                    <div class="card stacked_card o_colored_level"
-                         t-att-data-title="card['title']"
-                         t-att-data-description="card['description']"
-                         t-att-data-image_url="card['image_url']">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 d-flex flex-column justify-content-center">
-                                <div class="stacked-card-body o_colored_level">
-                                    <h2 class="title4 pb-4" t-esc="card['title']"></h2>
-                                    <p class="card-text" t-esc="card['description']"></p>
+                        <div class="card stacked_card o_colored_level"
+                             t-att-data-title="card['title']"
+                             t-att-data-description="card['description']"
+                             t-att-data-image_url="card['image_url']">
+                            <div class="row align-items-center">
+                                <div class="col-md-6 d-flex flex-column justify-content-center">
+                                    <div class="stacked-card-body o_colored_level">
+                                        <h2 class="title4 pb-4" t-esc="card['title']"></h2>
+                                        <p class="card-text" t-esc="card['description']"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <img t-att-src="card['image_url']"
+                                         alt="Image for card"
+                                         class="img img-fluid mx-auto rounded-3"
+                                         loading="lazy"/>
                                 </div>
                             </div>
-                            <div class="col-md-6">
-                                <img t-att-src="card['image_url']"
-                                     alt="Image for card"
-                                     class="img img-fluid mx-auto rounded-3"
-                                     loading="lazy"/>
-                            </div>
                         </div>
-                    </div>
-                </t>
+                    </t>
+                </div>
             </div>
         </section>
     </template>

@@ -50,7 +50,7 @@
     &::after {
       background: radial-gradient(
                       600px circle at var(--mouse-x) var(--mouse-y),
-                      rgba(255, 255, 255, 0.4), // Slightly more opaque gradient
+                      rgba(255, 255, 255, 0.2), // Slightly more opaque gradient
                       transparent 40%
       );
       z-index: 5; // Position in front of ::before but behind content
