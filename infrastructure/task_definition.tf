@@ -13,9 +13,10 @@ resource "aws_ecs_task_definition" "ecs_task_definition" {
             }
         }
     }
+    requires_compatibilities = ["EC2"]
     task_role_arn = "arn:aws:iam::${var.aws_account_id}:role/${var.environment}-${var.project}-task-exec-role"
     execution_role_arn = "arn:aws:iam::${var.aws_account_id}:role/${var.environment}-${var.project}-task-exec-role"
-    network_mode = "bridge"
+    network_mode = "awsvpc"
     cpu = "2048"
     memory = "4096"
 }
