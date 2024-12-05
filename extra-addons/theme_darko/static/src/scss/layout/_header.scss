@@ -69,7 +69,10 @@ main.full-page {
   display: flex;
   align-items: center; // Vertically centers the items within the navbar
   margin-right: 0 !important;
-
+}
+// unset height on mobile nav
+.navbar .o_navbar_mobile .nav.navbar-nav {
+  height: unset; // Fixed height for the navbar
 
 }
 
@@ -82,6 +85,12 @@ main.full-page {
   animation: shine 5s infinite linear;
   animation-fill-mode: forwards;
 }
+// hide telephone number on mobile nav
+.navbar .o_navbar_mobile .navbar-nav .s_text_block.border-top.o_border_contrast{
+  display: none;
+}
+
+
 
 .navbar-brand .img {
   width: 100%;
