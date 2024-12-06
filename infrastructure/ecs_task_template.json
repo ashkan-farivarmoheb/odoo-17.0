@@ -9,6 +9,10 @@
           "essential": true,
           "environment": [
             {
+                "name": "HOST",
+                "value": "0.0.0.0"
+            },
+            {
                 "name": "ODOO_RC",
                 "value": "/etc/odoo/odoo-${environment}.conf"
             }
@@ -49,9 +53,6 @@
           "cpu": 512,
           "memory": 512,
           "memoryReservation": 512,
-          "links": [
-              "odoo"
-          ],
           "portMappings": [
               {
                   "name": "nginx-443-tcp",
