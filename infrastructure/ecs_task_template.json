@@ -61,6 +61,27 @@
                   "protocol": "tcp"
               }
           ],
+          "dockerLabels": {
+                "traefik.enable": "true",
+                "traefik.http.middlewares.strip-odoo-prefix.stripPrefix.forceSlash": "true",
+                "traefik.http.middlewares.strip-odoo-prefix.stripPrefix.prefixes": "/odoo",
+                "traefik.http.routers.odoo-router.tls": "true",
+                "traefik.http.routers.odoo-router.entrypoints": "websecure",
+                "traefik.http.routers.odoo-router.middlewares": "strip-odoo-prefix",
+                "traefik.http.routers.odoo-router.rule": "Host(`erp.tisol.com.au`) && PathPrefix(`/odoo`)",
+                "traefik.http.services.develop-odoo-service.loadbalancer.server.port": "443",
+                "traefik.http.services.develop-odoo-service.loadbalancer.server.scheme": "https",
+                "traefik.http.services.develop-odoo-service.loadbalancer.server.url": "https://develop.odoo.awsnp.tisol.com.au",
+                "traefik.http.services.develop-odoo-service.loadbalancer.passHostHeader": "true",
+                "traefik.http.services.develop-odoo-service.loadbalancer.serversTransport": "odoo-transport",
+                "traefik.http.services.develop-odoo-service.loadbalancer.healthcheck.path": "/info",
+                "traefik.http.services.develop-odoo-service.loadbalancer.healthcheck.interval": "30s",
+                "traefik.http.services.develop-odoo-service.loadbalancer.healthcheck.timeout": "5s",
+                "traefik.http.services.develop-odoo-service.loadbalancer.healthcheck.scheme": "https",
+                "traefik.http.services.develop-odoo-service.loadbalancer.healthcheck.port": "443",
+                "traefik.tls.certificates.0.certFile": "/certs/nonprod/edge/erp.tisol.com.au.crt",
+                "traefik.tls.certificates.0.keyFile": "/certs/nonprod/edge/erp.tisol.com.au.key"
+            },
           "essential": false,
           "environment": [
             {
