@@ -6,8 +6,6 @@ on:
       target-env:
         required: true
         type: string
-      artifact-id:
-        type: number
       github_sha:
         required: true
         type: string
@@ -22,8 +20,6 @@ on:
       target-env:
         required: true
         type: string
-      artifact-id:
-        type: number
       github_sha:
         required: true
         type: string
