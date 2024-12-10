@@ -48,6 +48,8 @@ data "template_file" "ecs_task_template" {
     tag = "${var.tag}"
     nginx_repository_name = "${var.nginx_repository_name}"
     nginx_tag = "${var.nginx_tag}"
+    base_url = "${var.base_url}"
+    edge_url = "${var.edge_url}"
   })
 }
 

@@ -78,3 +78,14 @@ variable "nginx_tag" {
   description = "nginx tag"
   type        = string
 }
+
+
+variable "base_url" {
+  description = "base url"
+  type = string
+}
+
+variable "edge_url" {
+  description = "edge url"
+  type = string
+}
