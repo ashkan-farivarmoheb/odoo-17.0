@@ -57,9 +57,9 @@ jobs:
               working-directory: infrastructure
               
             - name: Plan Terraform changes
-              run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+              run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
               working-directory: infrastructure
 
             - name: Destroy Terraform changes
-              run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+              run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
               working-directory: infrastructure
