@@ -50,6 +50,8 @@ data "template_file" "ecs_task_template" {
     nginx_tag = "${var.nginx_tag}"
     base_url = "${var.base_url}"
     edge_url = "${var.edge_url}"
+    new_relic_license_key = "${var.new_relic_license_key}"
+    new_relic_app_name = "${var.repository_name}-${var.environment}"
   })
 }
 

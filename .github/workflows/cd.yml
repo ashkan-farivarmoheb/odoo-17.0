@@ -65,6 +65,14 @@ jobs:
             const { owner, repo } = context.repo;
             core.exportVariable('BRANCH', branch);
             core.exportVariable('ecr_repository', ecr_repository);
+      - name: Set Environment Variables for Secrets
+        id: secrets
+        run: |
+          echo "new_relic_license_key=$(jq -r .${{ inputs.target-env }} <<< '{
+            "develop": "${{ secrets.NEW_RELIC_LICENSE_KEY_DEVELOP }}",
+            "sit": "${{ secrets.NEW_RELIC_LICENSE_KEY_SIT }}",
+            "prod": "${{ secrets.NEW_RELIC_LICENSE_KEY_PROD }}"
+          }')" >> $GITHUB_ENV
 
       - name: Set ecr_image_tag
         id: set-ecr-image-tag
@@ -138,17 +146,17 @@ jobs:
       - name: Plan Terraform changes
         run: |
             if [ -n "${{ inputs.nfs_access_point_id }}" ]; then
-                terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="nfs_access_point_id=${{ inputs.nfs_access_point_id }}"
+                terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="nfs_access_point_id=${{ inputs.nfs_access_point_id }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
             else
-                terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+                terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
             fi
         working-directory: infrastructure
 
       - name: Apply Terraform changes
         run: |
             if [ -n "${{ inputs.nfs_access_point_id }}" ]; then
-                terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="nfs_access_point_id=${{ inputs.nfs_access_point_id }}"
+                terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="nfs_access_point_id=${{ inputs.nfs_access_point_id }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
             else
-                terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}"
+                terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
             fi
         working-directory: infrastructure

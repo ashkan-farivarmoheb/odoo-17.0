@@ -15,6 +15,14 @@
             {
                 "name": "ODOO_RC",
                 "value": "/etc/odoo/odoo-${environment}.conf"
+            },
+            {
+                "name": "NEW_RELIC_LICENSE_KEY",
+                "value": "${new_relic_license_key}"
+            },
+            {
+                "name": "NEW_RELIC_APP_NAME",
+                "value": "${new_relic_app_name}"
             }
           ],
           "mountPoints": [

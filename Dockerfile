@@ -16,6 +16,8 @@ ENV AMZ_ROOT_CA_4 AmazonRootCA4.pem
 ENV AMZ_ROOT_CA_1 AmazonRootCA1.pem
 ENV SFS_ROOT_CA_G2 SFSRootCAG2.pem
 ENV AMZ_TRUST_REPO https://www.amazontrust.com/repository
+ENV NEW_RELIC_LICENSE_KEY NEW_RELIC_LICENSE_KEY
+ENV NEW_RELIC_APP_NAME Odoo-17.0-local
 
 # Retrieve the target architecture to install the correct wkhtmltopdf package
 ARG TARGETARCH
@@ -23,7 +25,6 @@ ARG REPOSITORY
 ARG GITHUB_TOKEN
 ARG GITHUB_SHA
 ARG ARTIFACT_ID
-
 
 # Install pip for Python 3.10 and Upgrade pip and setuptools
 RUN apt-get update && \
@@ -98,6 +99,12 @@ RUN  apt-get update && \
 ADD requirements.txt /mnt/sources/requirements.txt
 RUN pip install -r /mnt/sources/requirements.txt
 
+# Install New Relic Python agent
+RUN pip install --no-cache-dir newrelic
+
+# Copy New Relic configuration
+COPY newrelic.ini /etc/newrelic/newrelic.ini
+
 # install latest postgresql-client
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
     && GNUPGHOME="$(mktemp -d)" \
@@ -167,4 +174,5 @@ EXPOSE 8069 8071 8072
 USER odoo
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["odoo"]
+# Command to start Odoo wrapped with New Relic
+CMD ["newrelic-admin", "run-program", "odoo"]

@@ -89,3 +89,8 @@ variable "edge_url" {
   description = "edge url"
   type = string
 }
+
+variable "new_relic_license_key" {
+  description = "new relic license key"
+  type = string
+}
