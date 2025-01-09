@@ -62,7 +62,7 @@ jobs:
         run: |
           pwd
           ls -la
-          
+
       - name: Variables
         id: vars
         uses: actions/github-script@v3
@@ -110,7 +110,7 @@ jobs:
           ECR_REPOSITORY: ${{ env.ecr_repository }}
           IMAGE_TAG: ${{ env.ecr_image_tag }}
         run: ./ecr_query.sh $ECR_REPOSITORY $IMAGE_TAG
-        working-directory: scripts
+        working-directory: odoo-infra/cd/${{ env.ecr_repository }}/scripts
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
@@ -145,11 +145,11 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
-        working-directory: infrastructure
+        working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
 
       - name: Validate Terraform configuration
         run: terraform validate
-        working-directory: infrastructure
+        working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
 
       - name: Plan Terraform changes
         run: |
@@ -158,7 +158,7 @@ jobs:
             else
                 terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
             fi
-        working-directory: infrastructure
+        working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
 
       - name: Apply Terraform changes
         run: |
@@ -167,4 +167,4 @@ jobs:
             else
                 terraform apply -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
             fi
-        working-directory: infrastructure
+        working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
