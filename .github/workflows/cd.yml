@@ -55,6 +55,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Clone Infrastructure Repo
+        run: git clone https://github.com/ashkan-farivarmoheb/odoo-infra.git
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+
       - name: Variables
         id: vars
         uses: actions/github-script@v3
