@@ -26,6 +26,11 @@ try:
                     _logger.info('NewRelic setting up from env variables')
                     newrelic.agent.initialize()
 
+            # Ensure we're loaded as a server-wide module
+            if hasattr(odoo, 'conf') and hasattr(odoo.conf, 'server_wide_modules'):
+                if 'newrelic' not in odoo.conf.server_wide_modules:
+                    odoo.conf.server_wide_modules.append('newrelic')
+
             def wrap_wsgi():
                 """Wrap WSGI application after server is fully initialized"""
                 import odoo.service.wsgi_server
@@ -36,17 +41,21 @@ try:
                     )
                     _logger.info('NewRelic WSGI application wrapped successfully')
 
-                    # Instrument bus controller
+                    # Instrument WebSocket handler
                     try:
-                        _logger.info('Attaching to bus controller')
-                        import odoo.addons.bus.controllers.main
-                        newrelic.agent.wrap_background_task(
-                            odoo.addons.bus.controllers.main, 
-                            'BusController._poll'
+                        _logger.info('Attaching to websocket handler')
+                        import odoo.addons.bus.controllers.websocket
+                        newrelic.agent.wrap_function_trace(
+                            odoo.addons.bus.controllers.websocket.WebsocketController,
+                            'websocket'
                         )
-                        _logger.info('Finished attaching to bus controller')
+                        newrelic.agent.wrap_function_trace(
+                            odoo.addons.bus.controllers.websocket.WebsocketController,
+                            'peek_notifications'
+                        )
+                        _logger.info('Finished attaching to websocket handler')
                     except Exception as e:
-                        _logger.warning('Failed to instrument bus controller: %s', e)
+                        _logger.warning('Failed to instrument websocket handler: %s', e)
 
             # Error handling
             def status_code(exc, value, tb):
