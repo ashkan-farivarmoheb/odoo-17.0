@@ -175,4 +175,4 @@ USER odoo
 
 ENTRYPOINT ["/entrypoint.sh"]
 # Command to start Odoo wrapped with New Relic
-CMD ["newrelic-admin", "run-program", "odoo"]
+CMD ["odoo"]
