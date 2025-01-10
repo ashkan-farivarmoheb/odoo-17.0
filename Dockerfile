@@ -102,9 +102,6 @@ RUN pip install -r /mnt/sources/requirements.txt
 # Install New Relic Python agent
 RUN pip install --no-cache-dir newrelic
 
-# Copy New Relic configuration
-COPY newrelic.ini /etc/newrelic/newrelic.ini
-
 # install latest postgresql-client
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
     && GNUPGHOME="$(mktemp -d)" \
@@ -135,8 +132,16 @@ RUN curl -LJO -H "Authorization: Bearer ${GITHUB_TOKEN}" \
 
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
-ADD resources /etc/odoo/
+COPY newrelic.ini /etc/newrelic/newrelic.ini
+COPY start_odoo.py /start_odoo.py
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
+
+ADD resources /etc/odoo/
+
+# Set permissions for New Relic and start script
+RUN chmod +x /start_odoo.py && \
+    chown -R odoo:odoo /etc/newrelic && \
+    chown odoo:odoo /start_odoo.py
 
 # Set permissions
 RUN chmod +x /entrypoint.sh && \

@@ -2,16 +2,6 @@
 
 set -e
 
-# Initialize New Relic if the configuration exists
-if [ -f "/etc/newrelic/newrelic.ini" ]; then
-    export NEW_RELIC_CONFIG_FILE=/etc/newrelic/newrelic.ini
-    export PYTHONPATH="${PYTHONPATH}:/usr/local/lib/python3.10/dist-packages"
-    python3 -c "
-import newrelic.agent
-newrelic.agent.initialize('/etc/newrelic/newrelic.ini')
-"
-fi
-
 if [ -v PASSWORD_FILE ]; then
     PASSWORD="$(< $PASSWORD_FILE)"
 fi
@@ -42,15 +32,15 @@ case "$1" in
     -- | odoo)
         shift
         if [[ "$1" == "scaffold" ]] ; then
-            exec newrelic-admin run-program odoo "$@"
+            exec python3 /start_odoo.py "$@"
         else
             wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-            exec newrelic-admin run-program odoo "$@" "${DB_ARGS[@]}"
+            exec python3 /start_odoo.py "$@" "${DB_ARGS[@]}"
         fi
         ;;
     -*)
         wait-for-psql.py ${DB_ARGS[@]} --timeout=30
-        exec newrelic-admin run-program odoo "$@" "${DB_ARGS[@]}"
+        exec python3 /start_odoo.py "$@" "${DB_ARGS[@]}"
         ;;
     *)
         exec "$@"
