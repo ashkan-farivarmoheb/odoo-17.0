@@ -1,7 +1,5 @@
 import os
 from .strtobool import strtobool
-from . import controllers
-
 import logging 
 _logger = logging.getLogger(__name__)
 
@@ -12,26 +10,13 @@ def is_true(strval):
 try:
     import odoo
     from odoo.tools import config
+    import newrelic.agent
 
     config_option = config.options
 
     if is_true(config_option.get("new_relic_enabled")):
-
-        target = odoo.service.server.server
-        if not target:
-            # we started too early, probably because of a server wide module issue...
-            _logger.error('Cannot run newrelic as a server wide module because it needs to patch the running server.')
-
         try:
-            instrumented = target._nr_instrumented
-        except AttributeError as e:
-            instrumented = target._nr_instrumented = False
-
-        if instrumented:
-            _logger.info("NewRelic instrumented already")
-        else:
-            import newrelic.agent
-
+            # Initialize New Relic first
             try:
                 newrelic.agent.initialize(config_option.get("new_relic_config_file"), config_option.get("new_relic_environment"))
             except KeyError:
@@ -41,95 +26,65 @@ try:
                     _logger.info('NewRelic setting up from env variables')
                     newrelic.agent.initialize()
 
-            # Main WSGI Application
-            target._nr_instrumented = True
-            nr_app = newrelic.agent.WSGIApplicationWrapper(target.app)
-            target.app = nr_app
+            def wrap_wsgi():
+                """Wrap WSGI application after server is fully initialized"""
+                import odoo.service.wsgi_server
+                if not hasattr(odoo.service.wsgi_server, '_nr_instrumented'):
+                    odoo.service.wsgi_server._nr_instrumented = True
+                    odoo.service.wsgi_server.application = newrelic.agent.WSGIApplicationWrapper(
+                        odoo.service.wsgi_server.application
+                    )
+                    _logger.info('NewRelic WSGI application wrapped successfully')
 
-            # Workers new WSGI Application
-            target = odoo.service.wsgi_server
-            target.application_unproxied = newrelic.agent.WSGIApplicationWrapper(target.application_unproxied)
+                    # Instrument bus controller
+                    try:
+                        _logger.info('Attaching to bus controller')
+                        import odoo.addons.bus.controllers.main
+                        newrelic.agent.wrap_background_task(
+                            odoo.addons.bus.controllers.main, 
+                            'BusController._poll'
+                        )
+                        _logger.info('Finished attaching to bus controller')
+                    except Exception as e:
+                        _logger.warning('Failed to instrument bus controller: %s', e)
+
+            # Register post-init hook
+            if hasattr(odoo, 'conf'):
+                odoo.conf.server_wide_modules.append('newrelic')
             
-            try:
-                _logger.info('attaching to bus controller')
-                import odoo.addons.bus.controllers.main
-                newrelic.agent.wrap_background_task(odoo.addons.bus.controllers.main, 'BusController._poll', application=nr_app)
-                _logger.info('finished attaching to bus controller')
-            except Exception as e:
-                _logger.exception(e)
-        
-            # Additional configurable hooks
-            # Can be comma separated like
-            # odoo.models.BaseModel:public,odoo.other.Something:limited
-            nr_odoo_trace = os.environ.get('NEW_RELIC_ODOO_TRACE', config_option.get("new_relic_odoo_trace"))
-            # will default to a limited set
-            if nr_odoo_trace is None:
-                # it is None because it got a default, lets provide one
-                nr_patches = ['odoo.models.BaseModel:limited']
-            else:
-                # the user specified, so they may intend for it to be unset
-                nr_patches = nr_odoo_trace.strip().split(',')
-            try:
-                _logger.info('Applying Tracing to %s' % (nr_patches))
-                for patch in nr_patches:
-                    patch_base, patch_type = patch.split(':')
-                    _module = None
-                    _paths = []
-                    if patch_base == 'odoo.models.BaseModel':
-                        import odoo.models
-                        _module = odoo.models
-                        if patch_type == 'all':
-                            _paths += ['BaseModel.%s' % (func, ) for func in dir(odoo.models.BaseModel) if callable(getattr(odoo.models.BaseModel, func)) and not func.startswith("__")]
-                        elif patch_type == 'public':
-                            _paths += ['BaseModel.%s' % (func, ) for func in dir(odoo.models.BaseModel) if callable(getattr(odoo.models.BaseModel, func)) and not func.startswith("_")]
-                        elif patch_type == 'limited':
-                            _paths += [
-                                # CRUD
-                                'BaseModel.create',
-                                'BaseModel.read',
-                                'BaseModel.read_group',
-                                'BaseModel.write',
-                                'BaseModel.unlink',
-                                # Search
-                                'BaseModel.search',
-                                'BaseModel.search_read',
-                                'BaseModel.search_count',
-                            ]
-                    if _module:
-                        for path in _paths:
-                            newrelic.agent.wrap_function_trace(_module, path)
-            except Exception as e:
-                _logger.exception(e)
-                    
-        
+            # Hook into Odoo's post-init
+            from odoo.modules.loading import post_init_hook_registry
+            post_init_hook_registry.append(wrap_wsgi)
+
             # Error handling
             def status_code(exc, value, tb):
                 from werkzeug.exceptions import HTTPException
-
-                # Werkzeug HTTPException can be raised internally by Odoo or in
-                # user code if they mix Odoo with Werkzeug. Filter based on the
-                # HTTP status code.
-
                 if isinstance(value, HTTPException):
                     return value.code
 
             def _nr_wrapper_handle_exception_(wrapped):
                 def _handle_exception(*args, **kwargs):
                     transaction = newrelic.agent.current_transaction()
-
                     if transaction is None:
                         return wrapped(*args, **kwargs)
-
                     transaction.notice_error(status_code=status_code)
-
                     name = newrelic.agent.callable_name(args[1])
                     with newrelic.agent.FunctionTrace(transaction, name):
                         return wrapped(*args, **kwargs)
-
                 return _handle_exception
 
-            target = odoo.http.WebRequest
-            target._handle_exception = _nr_wrapper_handle_exception_(target._handle_exception)
+            # Patch error handling after http module is loaded
+            def patch_error_handling():
+                import odoo.http
+                if hasattr(odoo.http, 'WebRequest'):
+                    odoo.http.WebRequest._handle_exception = _nr_wrapper_handle_exception_(
+                        odoo.http.WebRequest._handle_exception
+                    )
+
+            post_init_hook_registry.append(patch_error_handling)
+
+        except Exception as e:
+            _logger.error('Failed to initialize New Relic: %s', e, exc_info=True)
 
 except ImportError:
-    _logger.warn('newrelic python module not installed or other missing module')
+    _logger.warning('newrelic python module not installed or other missing module')
