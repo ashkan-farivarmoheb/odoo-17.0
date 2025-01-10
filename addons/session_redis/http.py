@@ -23,7 +23,7 @@ except ImportError:
 
 
 def is_true(strval):
-    _logger.debug("is trueee? %s",bool(strtobool(strval or "0".lower())))
+    _logger.debug("is true? %s",bool(strtobool(strval or "0".lower())))
     return bool(strtobool(strval or "0".lower()))
 
 
