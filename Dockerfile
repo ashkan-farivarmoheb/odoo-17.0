@@ -133,15 +133,12 @@ RUN curl -LJO -H "Authorization: Bearer ${GITHUB_TOKEN}" \
 # Copy entrypoint script and Odoo configuration file
 COPY ./entrypoint.sh /
 COPY newrelic.ini /etc/newrelic/newrelic.ini
-COPY start_odoo.py /start_odoo.py
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
 ADD resources /etc/odoo/
 
-# Set permissions for New Relic and start script
-RUN chmod +x /start_odoo.py && \
-    chown -R odoo:odoo /etc/newrelic && \
-    chown odoo:odoo /start_odoo.py
+# Set permissions for New Relic
+RUN chown -R odoo:odoo /etc/newrelic
 
 # Set permissions
 RUN chmod +x /entrypoint.sh && \
