@@ -14,6 +14,10 @@ on:
         default: false
         type: boolean
 
+env:
+  service_name: "odoo"
+  service_version: "17.0"
+
 jobs:
     delete_cluster:
         runs-on: ubuntu-latest
