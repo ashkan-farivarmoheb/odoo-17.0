@@ -48,14 +48,6 @@ try:
                     except Exception as e:
                         _logger.warning('Failed to instrument bus controller: %s', e)
 
-            # Register post-init hook
-            if hasattr(odoo, 'conf'):
-                odoo.conf.server_wide_modules.append('newrelic')
-            
-            # Hook into Odoo's post-init
-            from odoo.modules.loading import post_init_hook_registry
-            post_init_hook_registry.append(wrap_wsgi)
-
             # Error handling
             def status_code(exc, value, tb):
                 from werkzeug.exceptions import HTTPException
@@ -73,15 +65,15 @@ try:
                         return wrapped(*args, **kwargs)
                 return _handle_exception
 
-            # Patch error handling after http module is loaded
-            def patch_error_handling():
-                import odoo.http
-                if hasattr(odoo.http, 'WebRequest'):
-                    odoo.http.WebRequest._handle_exception = _nr_wrapper_handle_exception_(
-                        odoo.http.WebRequest._handle_exception
-                    )
+            # Initialize at module load
+            wrap_wsgi()
 
-            post_init_hook_registry.append(patch_error_handling)
+            # Patch error handling
+            import odoo.http
+            if hasattr(odoo.http, 'WebRequest'):
+                original_handle_exception = odoo.http.WebRequest._handle_exception
+                odoo.http.WebRequest._handle_exception = _nr_wrapper_handle_exception_(original_handle_exception)
+                _logger.info('NewRelic error handling patched successfully')
 
         except Exception as e:
             _logger.error('Failed to initialize New Relic: %s', e, exc_info=True)
