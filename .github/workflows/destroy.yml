@@ -1,5 +1,5 @@
 
-name: Delete Cluster
+name: Delete Odoo
 
 on:
   workflow_dispatch:
@@ -22,13 +22,23 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
+            - name: Clone Infrastructure Repo
+              run: git clone https://github.com/ashkan-farivarmoheb/odoo-infra.git
+
             - name: Configure AWS credentials
               uses: aws-actions/configure-aws-credentials@v1
               with:
                 aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
                 aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
                 aws-region: ${{ secrets.AWS_REGION }}
-      
+            - name: Variables
+              id: vars
+              uses: actions/github-script@v3
+              with:
+                script: |
+                  const ecr_repository = `${process.env.service_name}-${process.env.service_version}`;
+                  core.exportVariable('ecr_repository', ecr_repository);
+
             - name: Login to Amazon ECR
               id: login-ecr
               uses: aws-actions/amazon-ecr-login@v1
@@ -50,16 +60,16 @@ jobs:
         
             - name: Initialize Terraform
               run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
-              working-directory: infrastructure
+              working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
               
             - name: Validate Terraform configuration
               run: terraform validate
-              working-directory: infrastructure
+              working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
               
             - name: Plan Terraform changes
               run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
-              working-directory: infrastructure
+              working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
 
             - name: Destroy Terraform changes
               run: terraform destroy -auto-approve -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
-              working-directory: infrastructure
+              working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
