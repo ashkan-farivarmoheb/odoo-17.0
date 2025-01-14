@@ -99,9 +99,6 @@ RUN  apt-get update && \
 ADD requirements.txt /mnt/sources/requirements.txt
 RUN pip install -r /mnt/sources/requirements.txt
 
-# Install New Relic Python agent
-RUN pip install --no-cache-dir newrelic
-
 # install latest postgresql-client
 RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ jammy-pgdg main' > /etc/apt/sources.list.d/pgdg.list \
     && GNUPGHOME="$(mktemp -d)" \
