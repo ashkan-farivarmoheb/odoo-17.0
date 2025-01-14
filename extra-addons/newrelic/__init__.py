@@ -1,6 +1,6 @@
 import os
 from .strtobool import strtobool
-import logging 
+import logging
 _logger = logging.getLogger(__name__)
 
 def is_true(strval):
@@ -36,24 +36,28 @@ try:
                 import odoo.service.wsgi_server
                 if not hasattr(odoo.service.wsgi_server, '_nr_instrumented'):
                     odoo.service.wsgi_server._nr_instrumented = True
-                    odoo.service.wsgi_server.application = newrelic.agent.WSGIApplicationWrapper(
-                        odoo.service.wsgi_server.application
+                    odoo.http.root = newrelic.agent.WSGIApplicationWrapper(
+                    odoo.http.root
                     )
                     _logger.info('NewRelic WSGI application wrapped successfully')
 
                     # Instrument WebSocket handler
                     try:
                         _logger.info('Attaching to websocket handler')
-                        import odoo.addons.bus.controllers.websocket
-                        newrelic.agent.wrap_function_trace(
-                            odoo.addons.bus.controllers.websocket.WebsocketController,
-                            'websocket'
-                        )
-                        newrelic.agent.wrap_function_trace(
-                            odoo.addons.bus.controllers.websocket.WebsocketController,
-                            'peek_notifications'
-                        )
-                        _logger.info('Finished attaching to websocket handler')
+                        try:
+                            from odoo.addons.bus.controllers import websocket
+                        except ImportError as e:
+                            _logger.error(f"Import error: {e}")
+                        else:
+                            newrelic.agent.wrap_function_trace(
+                                odoo.addons.bus.controllers.websocket.WebsocketController,
+                                'websocket'
+                            )
+                            newrelic.agent.wrap_function_trace(
+                                odoo.addons.bus.controllers.websocket.WebsocketController,
+                                'peek_notifications'
+                            )
+                            _logger.info('Finished attaching to websocket handler')
                     except Exception as e:
                         _logger.warning('Failed to instrument websocket handler: %s', e)
 

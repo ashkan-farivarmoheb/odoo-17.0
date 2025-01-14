@@ -7,11 +7,11 @@
     'license': 'AGPL-3',
     'category': 'Tool',
     'depends': [
-        'web',
+        'web', 'bus'
     ],
     'external_dependencies': {
         "python": ["newrelic"],
-    },    
+    },
     "installable": True,
     "application": False,
 }
