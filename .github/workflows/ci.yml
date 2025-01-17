@@ -113,9 +113,9 @@ jobs:
       id: parse_config
       run: |
         config_file=".github/configs/app_conf.yml"
-        jwt_keystore_develop='$(yq eval ".keystores.develop" $config_file)'
-        jwt_keystore_sit='$(yq eval ".keystores.sit" $config_file)'
-        jwt_keystore_prod='$(yq eval ".keystores.prod" $config_file)'
+        jwt_keystore_develop=$(yq eval ".keystores.develop" $config_file)
+        jwt_keystore_sit=$(yq eval ".keystores.sit" $config_file)
+        jwt_keystore_prod=$(yq eval ".keystores.prod" $config_file)
         echo "jwt_keystore_develop=$jwt_keystore_develop" >> $GITHUB_ENV
         echo "jwt_keystore_sit=$jwt_keystore_sit" >> $GITHUB_ENV
         echo "jwt_keystore_prod=$jwt_keystore_prod" >> $GITHUB_ENV
@@ -166,17 +166,17 @@ jobs:
     - name: Download jks develop files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_develop"
-        aws s3 cp  $jwt_keystore_value ./jks/develop/$jwt_keystore_key --recursive
+        aws s3 cp "$jwt_keystore_value" "./jks/develop/$jwt_keystore_key" --recursive
 
     - name: Download jks sit files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_sit"
-        aws s3 cp  $jwt_keystore_value ./jks/sit/$jwt_keystore_key --recursive
+        aws s3 cp "$jwt_keystore_value" "./jks/sit/$jwt_keystore_key" --recursive
 
     - name: Download jks prod files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_prod"
-        aws s3 cp  $jwt_keystore_value ./jks/prod/$jwt_keystore_key --recursive
+        aws s3 cp "$jwt_keystore_value" "./jks/prod/$jwt_keystore_key" --recursive
 
     - name: Install dependencies
       run: |
