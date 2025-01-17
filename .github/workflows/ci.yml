@@ -161,11 +161,16 @@ jobs:
         AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
 
     - name: Create Download JKS Directory
-      run: mkdir -p jks/{develop,sit,prod}
+      run: |
+        mkdir -p jks/{develop,sit,prod}
+        pwd
+        ls
   
     - name: Download jks develop files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_develop"
+        echo "Key: $jwt_keystore_key"
+        echo "Value: $jwt_keystore_value"
         aws s3 cp "$jwt_keystore_value" "./jks/develop/$jwt_keystore_key" --recursive
 
     - name: Download jks sit files from S3
