@@ -169,6 +169,8 @@ jobs:
     - name: Download jks develop files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_develop"
+        # Remove quotes from the value 
+        jwt_keystore_value=$(echo $jwt_keystore_value | tr -d '"')
         echo "Key: $jwt_keystore_key"
         echo "Value: $jwt_keystore_value"
         aws s3 cp "$jwt_keystore_value" "./jks/develop/$jwt_keystore_key" --recursive
