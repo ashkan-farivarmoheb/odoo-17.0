@@ -113,9 +113,9 @@ jobs:
       id: parse_config
       run: |
         config_file=".github/configs/app_conf.yml"
-        jwt_keystore_develop="$(yq eval ".keystores.develop" $config_file)"
-        jwt_keystore_sit="$(yq eval ".keystores.sit" $config_file)"
-        jwt_keystore_prod="$(yq eval ".keystores.prod" $config_file)"
+        jwt_keystore_develop='$(yq eval ".keystores.develop" $config_file)'
+        jwt_keystore_sit='$(yq eval ".keystores.sit" $config_file)'
+        jwt_keystore_prod='$(yq eval ".keystores.prod" $config_file)'
         echo "jwt_keystore_develop=$jwt_keystore_develop" >> $GITHUB_ENV
         echo "jwt_keystore_sit=$jwt_keystore_sit" >> $GITHUB_ENV
         echo "jwt_keystore_prod=$jwt_keystore_prod" >> $GITHUB_ENV
