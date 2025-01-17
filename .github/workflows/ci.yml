@@ -103,6 +103,23 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: Install yq (YAML parser)
+      run: |
+        sudo apt-get update && sudo apt-get install -y jq
+        wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+        chmod +x /usr/local/bin/yq
+
+    - name: Parse Config File
+      id: parse_config
+      run: |
+        config_file=".github/configs/app_conf.yml"
+        jwt_keystore_develop=$(yq eval ".keystores.develop" $config_file)
+        jwt_keystore_sit=$(yq eval ".keystores.sit" $config_file)
+        jwt_keystore_prod=$(yq eval ".keystores.prod" $config_file)
+        echo "jwt_keystore_develop=$jwt_keystore_develop" >> $GITHUB_ENV
+        echo "jwt_keystore_sit=$jwt_keystore_sit" >> $GITHUB_ENV
+        echo "jwt_keystore_prod=$jwt_keystore_prod" >> $GITHUB_ENV
+
     - name: Variables
       id: vars
       uses: actions/github-script@v3
@@ -215,6 +232,17 @@ jobs:
     - name: Run Tests
       run: |
         ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --test-tags="post_install","-at_install" --stop-after-init
+
+    - name: Create Download JKS Directory
+      run: mkdir -p jks/{develop,sit,prod}
+  
+    - name: Download jks files from S3
+      run: |
+        aws s3 cp  ${{ env.jwt_keystore_develop }} ./jks/develop --recursive
+        aws s3 cp  ${{ env.jwt_keystore_sit }} ./jks/sit --recursive
+        aws s3 cp  ${{ env.jwt_keystore_prod }} ./jks/prod --recursive
+        pwd
+        ls -la
 
     - name: Create .deb Package
       id: deb_package_step

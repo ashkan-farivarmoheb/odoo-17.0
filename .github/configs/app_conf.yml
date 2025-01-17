@@ -1,0 +1,7 @@
+keystores:
+  develop:
+    jwt_keystore_develop.jks: "s3://keystores-service/develop/v1/1737128527160/jwt_keystore_develop_v1.jks"
+  sit:
+    jwt_keystore_sit.jks: "s3://keystores-service/develop/v1/1737128527160/jwt_keystore_develop_v1.jks"
+  prod:
+    jwt_keystore_prod.jks: "s3://keystores-service/develop/v1/1737128527160/jwt_keystore_develop_v1.jks"
