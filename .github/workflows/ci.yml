@@ -166,17 +166,17 @@ jobs:
     - name: Download jks develop files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_develop"
-        aws s3 cp  jwt_keystore_value ./jks/develop/jwt_keystore_key --recursive
+        aws s3 cp  $jwt_keystore_value ./jks/develop/$jwt_keystore_key --recursive
 
     - name: Download jks sit files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_sit"
-        aws s3 cp  jwt_keystore_value ./jks/sit/jwt_keystore_key --recursive
+        aws s3 cp  $jwt_keystore_value ./jks/sit/$jwt_keystore_key --recursive
 
     - name: Download jks prod files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_prod"
-        aws s3 cp  jwt_keystore_value ./jks/prod/jwt_keystore_key --recursive
+        aws s3 cp  $jwt_keystore_value ./jks/prod/$jwt_keystore_key --recursive
 
     - name: Install dependencies
       run: |
