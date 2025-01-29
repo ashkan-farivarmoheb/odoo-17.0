@@ -55,10 +55,12 @@ publicWidget.registry.ImageTab = publicWidget.Widget.extend({
         // Retrieve the image URL and CTA link from the data attributes
         const imageUrl = $item.data('image');
         const ctaHref = $item.data('image_cta_href');
+        const imageAlt = $item.data('image_alt');
         const $ctaButton = this.$el.find('#image-cta');
 
         // Update the image source to the new URL
         this.$imageElement.attr('src', imageUrl);
+        this.$imageElement.attr('alt', imageAlt);
 
         // If the CTA button exists and the link is available, update it
         if ($ctaButton.length && ctaHref) {

@@ -64,10 +64,12 @@
 }
 
 @media (max-width: 768px) {
-  .disable-animation-mobile {
-    animation: none !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+   .disable-animation-mobile {
+    animation: none !important; /* Disable all animations */
+    transition: none !important; /* Disable transitions */
+    opacity: 1 !important; /* Ensure full opacity */
+    transform: none !important; /* Reset scaling */
+    visibility: visible !important; /* Ensure visibility */
   }
 }
 

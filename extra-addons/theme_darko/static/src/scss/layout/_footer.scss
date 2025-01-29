@@ -151,6 +151,17 @@
     //}
   }
 
+  .backdrop {
+    position: absolute;
+    z-index: var(--z-index-neg);
+    top: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: saturate(150%) blur(100px);
+    background: var(--color-alpha-dark-80);
+    mask-image: var(--top-mask-md);
+  }
+
   .white_b, .red_b {
     width: auto;
   }

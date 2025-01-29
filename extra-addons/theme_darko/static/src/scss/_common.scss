@@ -275,47 +275,84 @@ a {
 }
 
 
-.img-thumbnail {
-  padding: 0.75rem;
-  background-color: var(--body-bg);
-  border: 0 solid var(--border-color);
-  border-radius: var(--border-radius);
+.img-thumbnail-xs {
+  padding: 0.25rem;
+  background-color: transparent;
   max-width: 100%;
   height: auto;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+
 }
 
-.img-thumbnail {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-}
 
 // video control progress bar
 .progressbar {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 2px;
+  border-radius: 5px;
+  background: #9D9D9D;
+  outline: none;
+  transition: opacity 0.2s;
+
+  &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    -moz-appearance: none;
     appearance: none;
-    height: 2px;
-    border-radius: 5px;
-    background: #9D9D9D;
-    outline: none;
-    transition: opacity 0.2s;
-
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background-color: $color-cobalt-light !important;
-      cursor: pointer;
-    }
-
-    &::-moz-range-thumb {
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background-color: $color-cobalt-light !important;
-      cursor: pointer;
-    }
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: $color-cobalt-light !important;
+    cursor: pointer;
   }
+
+  &::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: $color-cobalt-light !important;
+    cursor: pointer;
+  }
+}
+
+.shadowWrapper {
+  position: relative;
+
+  &.standalone {
+    position: absolute;
+    z-index: var(--z-index-neg);
+    inset: 0;
+  }
+
+  --default-shadow-scale: 1;
+  --shadow-bottom-height: calc(var(--shadow-scale, var(--default-shadow-scale)) * 250px);
+  --shadow-right-height: calc(var(--shadow-scale, var(--default-shadow-scale)) * 210px);
+  --shadow-bottom-width: calc(var(--shadow-scale, var(--default-shadow-scale)) * 195px);
+  --shadow-right-width: calc(var(--shadow-scale, var(--default-shadow-scale)) * 0px);
+  --shadow-bottom-left-offset: calc(var(--shadow-scale, var(--default-shadow-scale)) * -1px);
+  --shadow-bottom-top-offset: calc(30px + var(--shadow-radius, 0px) / 3);
+  --shadow-right-offset: calc(var(--shadow-scale, var(--default-shadow-scale)) * 55px - var(--shadow-radius, 0px) / 2);
+  --shadow-bottom-right-offset: calc(var(--shadow-right-width) - var(--shadow-scale, var(--default-shadow-scale)) * -140px + var(--shadow-radius, 0px) / 2);
+}
+
+.form-control {
+
+  background-color: transparent;
+  border: 1px solid o-color('o-color-1');
+  color: unset;
+}
+
+.form-control:focus {
+  background-color: transparent;
+  color: unset;
+}
+
+
+ //mobile-invisible
+ @media (max-width: 768px) {
+        .mobile-invisible {
+            display: none !important; /* Ensure it is completely hidden */
+        }
+    }
 
 

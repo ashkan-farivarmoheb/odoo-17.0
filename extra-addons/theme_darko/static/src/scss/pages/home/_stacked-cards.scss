@@ -1,32 +1,29 @@
 
 .stacked_cards_snippet {
-  --card-number: 5; //number of cards
-  $card-number: 5; //number of cards for loops should dbe equal to above
-  --card-height: 5; //number of cards
+  --card-number: 5; //default number of cards
+  //$card-number: 7; //number of cards for loops should dbe equal to above
+  --card-top: -11vh; //default top of cards
 
-  padding-top: 25vh;
   margin-top: 10vh;
   margin-bottom: 10vh;
 
   .container {
     position: relative;
-
-    height: calc(var(--card-number) * 100%);
-
+    //height: calc(var(--card-number) * 100%);
+    height: auto;
   }
 
   .stacked-cards-header {
     position: relative;
-    margin-bottom: 10%;
+    //margin-bottom: 10%;
     @media#{$md} {
       //position: -webkit-sticky; /* Safari compatibility */
       position: sticky;
-      top: 10%;
+      top: $navbar-height;
       z-index: 2;
       background-color: transparent; /* Background to avoid content overlap */
-      margin-bottom: 30%;
+      //margin-bottom: 30%;
     }
-
   }
 
   .stacked_card {
@@ -38,14 +35,14 @@
     /* For screens larger than $md (i.e., >= 768px) apply sticky behavior */
     @media  #{$md} {
       //margin-top: 200px;
-      @for $i from 1 through $card-number {
+      @for $i from 1 through 10 {
         &:nth-of-type(#{$i}) {
-          $translate-y: -45% + (3% * ($i - 1));
+          $translate-y: calc(var(--card-top) + (3% * (#{$i} - 1)));
           $z-index: $i + 1;
           transform: translateY($translate-y);
           z-index: $z-index;
           position: sticky;
-          top: 65%;
+          top: 35%;
           margin-top: 80px;
           padding: 30px;
 
@@ -57,6 +54,12 @@
     .stacked-card-body {
       @media #{$lg} { // Bootstrap breakpoint for lg and above
         padding-inline: 80px; // Apply 80px padding on the left and right
+      }
+      @media #{$md} { // Bootstrap breakpoint for lg and above
+        margin-bottom: 1rem;
+      }
+      @media #{$md} { // Bootstrap breakpoint for lg and above
+        margin-bottom: 1rem;
       }
       text-align: left; // Align text to the left inside the card-body
     }

@@ -111,42 +111,42 @@
   }
 
 
-  &-new {
-    color: #fff;
-    float: right;
-    background-color: $color-primary !important;
-    border-color: $color-primary;
-    padding: 9px 35px;
-    margin-top: 20px;
-
-    &:hover {
-      background-color: darken($color-primary, 30%) !important;
-      border: none;
-      color: #fff;
-    }
-  }
-
-  &-red {
-    background-color: $color-primary !important;
-    border-color: $color-primary;
-    padding: 1px 5px;
-
-    &:hover {
-      background-color: darken($color-primary, 30%) !important;
-      border: none;
-    }
-  }
-
-  &-white {
-    background-color: #fff !important;
-    border-color: #fff;
-    padding: 1px 5px;
-
-    &:hover {
-      background-color: darken($color-primary, 30%) !important;
-      border: none;
-    }
-  }
+  //&-new {
+  //  color: #fff;
+  //  float: right;
+  //  background-color: $color-primary !important;
+  //  border-color: $color-primary;
+  //  padding: 9px 35px;
+  //  margin-top: 20px;
+  //
+  //  &:hover {
+  //    background-color: darken($color-primary, 30%) !important;
+  //    border: none;
+  //    color: #fff;
+  //  }
+  //}
+  //
+  //&-red {
+  //  background-color: $color-primary !important;
+  //  border-color: $color-primary;
+  //  padding: 1px 5px;
+  //
+  //  &:hover {
+  //    background-color: darken($color-primary, 30%) !important;
+  //    border: none;
+  //  }
+  //}
+  //
+  //&-white {
+  //  background-color: #fff !important;
+  //  border-color: #fff;
+  //  padding: 1px 5px;
+  //
+  //  &:hover {
+  //    background-color: darken($color-primary, 30%) !important;
+  //    border: none;
+  //  }
+  //}
 
   &-more {
     color: $color-primary;
@@ -197,7 +197,34 @@
 
 
 }
+//to overwrite original colors
+.btn.oe_search_button.bg-o-color-4 {
+  background-color: $color-cobalt !important;
 
+
+}
+.btn.oe_search_button.bg-o-color-3 {
+  background-color: $color-cobalt !important;
+
+
+}
+
+.btn.oe_search_button:hover {
+  background-color: $color-cobalt-dark !important;
+
+}
+
+.btn-fill-light, .btn-light {
+  color: #FFFFFF;
+  background-color: $color-cobalt;
+  border-color: $color-cobalt;
+}
+
+.btn-fill-light:hover, .btn-light:hover {
+  color: #FFFFFF;
+  background-color: $color-cobalt-dark;
+  border-color: $color-cobalt-dark;
+}
 
 /* From Uiverse.io by neerajbaniwal */
 .btn-shine {

@@ -13,11 +13,11 @@
                 <div class="row">
                     <!-- Left Column: Sticky Images -->
                     <div class="col-lg-6 col-md-12 custom-left-column d-none d-lg-block">
-                        <div class="custom-sticky-widget position-sticky" style="top: 100px;">
+                        <div class="custom-sticky-widget position-sticky" style="top: 80px;">
                             <t t-foreach="range(1, 7)" t-as="i">
                                 <img t-att-src="'https://via.placeholder.com/400x300?text=Image+%d' % i"
                                      t-att-alt="'Image %d' % i"
-                                     class="sticky-image img-fluid w-100 mb-3"
+                                     class="sticky-image img-fluid mb-3 rounded-1 p-1"
                                      loading="lazy"
                                      sizes="(max-width: 991px) 100vw, 50vw"/>
                             </t>
@@ -61,7 +61,7 @@
                                 <p t-esc="section['content']"/>
                                 <img t-att-src="'https://via.placeholder.com/400x300?text=Image+%d' % (section_index + 1)"
                                      t-att-alt="'Image %d' % (section_index + 1)"
-                                     class="img-fluid d-lg-none w-100"
+                                     class="img-fluid d-lg-none w-100 rounded-1 p-1"
                                      loading="lazy"
                                      sizes="(max-width: 991px) 100vw, 50vw"/>
                             </div>

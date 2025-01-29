@@ -1,29 +1,77 @@
+//.sticky_feature_img {
+//  .custom-left-column {
+//    position: relative;
+//  }
+//
+//  .custom-sticky-widget {
+//    position: sticky;
+//    top: 50px;
+//    height: 100vh;
+//    display: flex;
+//    flex-direction: column;
+//    align-items: center;
+//    justify-content: center;
+//  }
+//
+//  .sticky-image {
+//    width: 100%; /* Make images responsive */
+//    //max-width: 400px; /* Maximum width for larger screens */
+//    height: auto; /* Maintain aspect ratio */
+//    max-height: 100%;
+//    opacity: 0; /* Start hidden */
+//    transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
+//    position: absolute; /* Position images absolutely for overlay effect */
+//
+//    &.visible { /* Use a class to manage visibility */
+//      opacity: 1; /* Make visible */
+//    }
+//  }
+//
+//  .custom-right-column {
+//    .text-section {
+//      min-height: 100vh; /* Ensure each section is full viewport height */
+//      display: flex;
+//      align-items: center;
+//      justify-content: flex-start;
+//      padding: 50px;
+//
+//      @media (max-width: 768px) { /* Responsive adjustments */
+//        padding: 30px; /* Reduce padding on smaller screens */
+//      }
+//    }
+//  }
+//}
 .sticky_feature_img {
+
+
   .custom-left-column {
     position: relative;
   }
 
   .custom-sticky-widget {
     position: sticky;
-    top: 50px;
-    height: 100vh;
+    top: $navbar-height; /* Use SCSS variable for navbar height */
+    height: calc(100vh - #{$navbar-height}); /* Subtract header height dynamically */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    border-radius: 2rem; /* Ensures rounded corners */
   }
 
   .sticky-image {
-    width: 100%; /* Make images responsive */
-    max-width: 400px; /* Maximum width for larger screens */
-    height: auto; /* Maintain aspect ratio */
-    opacity: 0; /* Start hidden */
-    transition: opacity 0.5s ease-in-out; /* Smooth transition for opacity */
-    position: absolute; /* Position images absolutely for overlay effect */
+    max-width: 100%;
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+    margin: 0 auto; /* Centers image */
+    opacity: 0;
+    position: absolute; /* Allows overlay effect */
+    transition: opacity 0.3s ease-in-out;
+  }
 
-    &.visible { /* Use a class to manage visibility */
-      opacity: 1; /* Make visible */
-    }
+  .sticky-image.visible {
+    opacity: 1; /* Makes the image visible */
   }
 
   .custom-right-column {

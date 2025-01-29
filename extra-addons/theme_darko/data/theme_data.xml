@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
+
     <record id="test" model="ir.attachment">
         <field name="name">optimized-1001.jpg</field>
         <field name="type">url</field>
@@ -7,6 +9,7 @@
         <field name="public" eval="True"/>
         <field name="res_model">ir.ui.view</field>
     </record>
+    <!--    videos//////////////////////////////////////////////////////////////////////////////////////-->
     <record id="apple_video" model="ir.attachment">
         <field name="name">apple-video.mp4</field>
         <field name="type">url</field>
@@ -16,7 +19,17 @@
         <field name="public" eval="True"/>
         <field name="res_model">ir.ui.view</field>
     </record>
-     <record id="s_cta_mockups_1" model="ir.attachment">
+    <record id="website-builder-video" model="ir.attachment">
+        <field name="name">website-builder-video.webm</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/video/website-builder-video.webm</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--    ///////////////////////////////////////////////////////////////////////////-->
+    <record id="s_cta_mockups_1" model="ir.attachment">
         <field name="name">s_cta_mockups_1.jpg</field>
         <field name="type">url</field>
         <!-- @formatter:off -->
@@ -39,6 +52,837 @@
         <field name="type">url</field>
         <!-- @formatter:off -->
         <field name="url">/theme_darko/static/src/img/odoo/odoo_all_apps.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="stripe_icon_small" model="ir.attachment">
+        <field name="name">stripe_icon_small.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/stripe_icon_small.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="stripe_logo" model="ir.attachment">
+        <field name="name">stripe_logo.svg</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/stripe_logo.svg</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="dhl_logo" model="ir.attachment">
+        <field name="name">dhl_logo.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/dhl_logo.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="Australia_Post_logo" model="ir.attachment">
+        <field name="name">Australia_Post_logo.svg</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/Australia_Post_logo.svg</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="paypal_logo" model="ir.attachment">
+        <field name="name">paypal_logo.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/paypal_logo.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="fedex_logo" model="ir.attachment">
+        <field name="name">fedex_logo.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/fedex_logo.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="mollie_logo" model="ir.attachment">
+        <field name="name">mollie_logo.svg</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/mollie_logo.svg</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="amazon_logo" model="ir.attachment">
+        <field name="name">amazon_logo.svg</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/amazon_logo.svg</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="ebay_logo" model="ir.attachment">
+        <field name="name">ebay_logo.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/icons_3/ebay_logo.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--  ///////  odoo icons/////////////////////////////////////////////-->
+    <record id="accountant-icon" model="ir.attachment">
+        <field name="name">accountant-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/accountant-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="crm-icon" model="ir.attachment">
+        <field name="name">crm-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/crm-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="livechat-icon" model="ir.attachment">
+        <field name="name">livechat-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/livechat-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="point_of_sale-icon" model="ir.attachment">
+        <field name="name">point_of_sale-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/point_of_sale-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="stock-icon" model="ir.attachment">
+        <field name="name">stock-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/stock-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="website_sale-icon" model="ir.attachment">
+        <field name="name">website_sale-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/website_sale-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="website-icon" model="ir.attachment">
+        <field name="name">website-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/website-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="purchase-icon" model="ir.attachment">
+        <field name="name">purchase-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/purchase-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="website_sale_loyalty-icon" model="ir.attachment">
+        <field name="name">website_sale_loyalty-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/website_sale_loyalty-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="mass_mailing-icon" model="ir.attachment">
+        <field name="name">mass_mailing-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/mass_mailing-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="marketing_automation-icon" model="ir.attachment">
+        <field name="name">marketing_automation-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/marketing_automation-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="social-icon" model="ir.attachment">
+        <field name="name">social-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/social-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="sale-icon" model="ir.attachment">
+        <field name="name">sale-icon.png</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo/sale-icon.png</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--    //////////////homepage/banner homepage//////////////-->
+    <record id="digital-transformation-banner" model="ir.attachment">
+        <field name="name">digital-transformation-banner.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/banner/digital-transformation-banner.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--    //////////////homepage/Why Choose Us?//////////////-->
+
+    <record id="tailored-solution" model="ir.attachment">
+        <field name="name">tailored-solution.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/tailored-solution.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="enhanced-security" model="ir.attachment">
+        <field name="name">enhanced-security.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/enhanced-security.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="ai-data-expertise" model="ir.attachment">
+        <field name="name">ai-data-expertise.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/ai-data-expertise.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="finance-expertise" model="ir.attachment">
+        <field name="name">finance-expertise.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/finance-expertise.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="business-analysis" model="ir.attachment">
+        <field name="name">business-analysis.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/business-analysis.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--    //////////////homepage/Why Choose Us?//////////////-->
+
+    <record id="consulting" model="ir.attachment">
+        <field name="name">consulting.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/consulting.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="implementation" model="ir.attachment">
+        <field name="name">implementation.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/implementation.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="upgrade" model="ir.attachment">
+        <field name="name">upgrade.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/upgrade.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="support" model="ir.attachment">
+        <field name="name">support.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/support.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="business-analysis-2" model="ir.attachment">
+        <field name="name">business-analysis-2.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/business-analysis-2.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="training" model="ir.attachment">
+        <field name="name">training.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/training.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--    //////////////homepage/sticky feature/common business challenges//////////////-->
+    <record id="leaking-revenue" model="ir.attachment">
+        <field name="name">leaking-revenue.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/sticky_feature/leaking-revenue.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="legacy" model="ir.attachment">
+        <field name="name">legacy.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/sticky_feature/legacy.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="stagnation-overwhelm" model="ir.attachment">
+        <field name="name">stagnation-overwhelm.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/sticky_feature/stagnation-overwhelm.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="trust-issue" model="ir.attachment">
+        <field name="name">trust-issue.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/sticky_feature/trust-issue.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="ditching-spreadsheets" model="ir.attachment">
+        <field name="name">ditching-spreadsheets.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/sticky_feature/ditching-spreadsheets.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="inefficient-communication" model="ir.attachment">
+        <field name="name">inefficient-communication.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/sticky_feature/inefficient-communication.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+
+    <!--    //////////////homepage/Your Industry//////////////-->
+    <record id="industry-ecommerce" model="ir.attachment">
+        <field name="name">industry-ecommerce.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/illustrator/industry-ecommerce.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="industry-professional-services" model="ir.attachment">
+        <field name="name">industry-professional-services.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/illustrator/industry-professional-services.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="industry-public" model="ir.attachment">
+        <field name="name">industry-public.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/illustrator/industry-public.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="industry-construction" model="ir.attachment">
+        <field name="name">industry-construction.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/illustrator/industry-construction.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--//////////////////////odoo-erp/Why you should choose Odoo ///////////////////////////////////////////////////////////////////////-->
+
+    <record id="open-source" model="ir.attachment">
+        <field name="name">open-source.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/open-source.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="cost-effective" model="ir.attachment">
+        <field name="name">cost-effective.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/cost-effective.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+
+    <record id="customizable-scalable" model="ir.attachment">
+        <field name="name">customizable-scalable.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/customizable-scalable.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="user-friendly" model="ir.attachment">
+        <field name="name">user-friendly.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/user-friendly.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="realtime-analytics" model="ir.attachment">
+        <field name="name">realtime-analytics.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/realtime-analytics.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="quick-implementation" model="ir.attachment">
+        <field name="name">quick-implementation.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/quick-implementation.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--//////////////////////odoo-erp/Expand as you grow ///////////////////////////////////////////////////////////////////////-->
+    <record id="sales-deal-closed" model="ir.attachment">
+        <field name="name">sales-deal-closed.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/sales-deal-closed.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="digital-marketing" model="ir.attachment">
+        <field name="name">digital-marketing.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/digital-marketing.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="docs-management" model="ir.attachment">
+        <field name="name">docs-management.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/docs-management.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="hr-interview" model="ir.attachment">
+        <field name="name">hr-interview.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/hr-interview.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="construction-project" model="ir.attachment">
+        <field name="name">construction-project.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/construction-project.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="helpdesk-phone" model="ir.attachment">
+        <field name="name">helpdesk-phone.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/helpdesk-phone.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="elearning" model="ir.attachment">
+        <field name="name">elearning.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/elearning.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="inventory-barcode" model="ir.attachment">
+        <field name="name">inventory-barcode.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo-erp/inventory-barcode.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+
+    <!--//////////////////////services/ ///////////////////////////////////////////////////////////////////////-->
+
+    <record id="services-banner" model="ir.attachment">
+        <field name="name">services-banner.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/services/services-banner.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+
+    <!--/////////////////////industries-ecommerce/ /////////////////////////////////////////////////////////////////-->
+    <record id="industries-ecommerce-banner" model="ir.attachment">
+        <field name="name">industries-ecommerce-banner.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/industries-ecommerce-banner.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--/////////////////////industries-construction/ ///////////////////////////////////////////////////////////////-->
+    <record id="industries-construction-banner" model="ir.attachment">
+        <field name="name">industries-construction-banner.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/industries-construction-banner.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record><!--/////////////////////industries-professional-services/ /////////////////////////////////////////////-->
+    <record id="industries-professional-services-banner" model="ir.attachment">
+        <field name="name">industries-professional-services-banner.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/industries-professional-services-banner.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!--/////////////////////industries-public-sector/ //////////////////////////////////////////////////////////////-->
+    <record id="industries-public-sector-banner" model="ir.attachment">
+        <field name="name">industries-public-sector-banner.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/industries-public-sector-banner.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="compliance-tabs" model="ir.attachment">
+        <field name="name">compliance-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/compliance-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="consulting-tabs" model="ir.attachment">
+        <field name="name">consulting-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/consulting-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="odoo-logo-tabs" model="ir.attachment">
+        <field name="name">odoo-logo-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/odoo-logo-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="material-inventory" model="ir.attachment">
+        <field name="name">material-inventory.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/material-inventory.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="project-manager" model="ir.attachment">
+        <field name="name">project-manager.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/project-manager.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="purchasing-finance" model="ir.attachment">
+        <field name="name">purchasing-finance.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/purchasing-finance.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="subcontractor" model="ir.attachment">
+        <field name="name">subcontractor.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/industries/subcontractor.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!-- ///////   feature-tabs-odoo-screenshots/////////////////////////////////////////////////////////////////////-->
+    <record id="accounting-report-tabs" model="ir.attachment">
+        <field name="name">accounting-report-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/accounting-report-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="hr-tabs" model="ir.attachment">
+        <field name="name">hr-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/hr-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="inventory-tabs" model="ir.attachment">
+        <field name="name">inventory-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/inventory-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="planning-tabs" model="ir.attachment">
+        <field name="name">planning-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/planning-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="crm-tabs" model="ir.attachment">
+        <field name="name">crm-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/crm-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="pos-tabs" model="ir.attachment">
+        <field name="name">pos-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/pos-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="project-tabs" model="ir.attachment">
+        <field name="name">project-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/project-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="loyalty-tabs" model="ir.attachment">
+        <field name="name">loyalty-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/loyalty-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="analytics-tabs" model="ir.attachment">
+        <field name="name">analytics-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/analytics-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="delivery-tabs" model="ir.attachment">
+        <field name="name">delivery-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/delivery-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="payment-tabs" model="ir.attachment">
+        <field name="name">payment-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/payment-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="product-tabs" model="ir.attachment">
+        <field name="name">product-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/product-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="upcross-selling-tabs" model="ir.attachment">
+        <field name="name">upcross-selling-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/upcross-selling-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="app-integration-tabs" model="ir.attachment">
+        <field name="name">app-integration-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/app-integration-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="multi-views-tabs" model="ir.attachment">
+        <field name="name">multi-views-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/multi-views-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="project-billing-tabs" model="ir.attachment">
+        <field name="name">project-billing-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/project-billing-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="studio-tabs" model="ir.attachment">
+        <field name="name">studio-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/studio-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="project-forcast-tabs" model="ir.attachment">
+        <field name="name">project-forcast-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/project-forcast-tabs.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="pos-screenshot" model="ir.attachment">
+        <field name="name">pos-screenshot.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/pos-screenshot.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="doc-knowledge-tabs" model="ir.attachment">
+        <field name="name">doc-knowledge-tabs.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/odoo_screenshots/doc-knowledge-tabs.webp</field>
         <!-- @formatter:on -->
         <field name="public" eval="True"/>
         <field name="res_model">ir.ui.view</field>

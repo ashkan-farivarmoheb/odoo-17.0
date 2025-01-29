@@ -22,14 +22,23 @@
                         <!-- Titles Column -->
                         <div class="feature-titles">
 
-                            <t t-foreach="[{'title':'Design without limits','image_cta_href':'/odoo-implementation','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c9479a4195aa5026483b0_Control%20content%20visibility.webp','description':'This is a short description for the first feature tab.This is a short description for the first feature tab.This is a short description for the first feature tab'},
-                            {'title':'Create complex, rich interactions','image_cta_href':'/odoo-erp','image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c947a9aa417b6ce4f1fe4_Organize%20dynamic%20content.webp','description':'Here is a description for the second tab that showcases rich interactions.This is a short description for the first feature tab.This is a short description for the first feature tab.'}]"
+                            <t t-foreach="[
+                            {'title':'Design without limits','image_cta_href':'/odoo-implementation',
+                            'image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c9479a4195aa5026483b0_Control%20content%20visibility.webp',
+                            'image_alt':'',
+                            'description':'This is a short description for the first feature tab.This is a short description for the first feature tab.This is a short description for the first feature tab'
+                            },
+                            {'title':'Create complex, rich interactions','image_cta_href':'/odoo-erp',
+                            'image_url':'https://cdn.prod.website-files.com/650311fc2ebc7fe34237a592/666c947a9aa417b6ce4f1fe4_Organize%20dynamic%20content.webp',
+                            'image_alt':'',
+                            'description':'Here is a description for the second tab that showcases rich interactions.This is a short description for the first feature tab.This is a short description for the first feature tab.'}]"
                                t-as="image">
-<!--                                -->
+                                <!--                                -->
                                 <div class="title-item rounded-0 border-bottom"
                                      t-att-data-image="image['image_url']"
                                      t-att-data-description="image['description']"
                                      t-att-data-image_cta_href="image['image_cta_href']"
+                                     t-att-data-image_alt="image['image_alt']"
                                      style="--progress: 0%;">
                                     <span class="h3" t-esc="image['title']"></span>
                                     <p class="description" t-esc="image['description']">
@@ -42,7 +51,8 @@
                     </div>
                     <!-- image Column -->
                     <div class="col-lg-6 feature-image">
-                        <img id="feature-image" style="--interval-duration: 5000ms;" class="w-100" src="" alt="Banner Image" loading="lazy">
+                        <img id="feature-image" style="--interval-duration: 5000ms;" class="w-100" src=""
+                             alt="" loading="lazy">
                         </img>
                         <a id="image-cta" class="btn btn-link learn-more-btn px-1" href=""
                            data-bs-original-title="" title="">Learn More
@@ -52,7 +62,7 @@
                         <svg class="time-donut" width="25" height="25" viewBox="0 0 36 36">
                             <circle class="donut-bg" cx="18" cy="18" r="15.9155" fill="none"/>
                             <circle class="donut-progress" cx="18" cy="18" r="15.9155" fill="none"
-                                 />
+                            />
                         </svg>
                     </div>
                 </div>
