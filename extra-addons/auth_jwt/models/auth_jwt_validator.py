@@ -37,15 +37,17 @@ class AuthJwtValidator(models.Model):
     signature_type = fields.Selection(
         [("secret", "Secret"), ("public_key", "Public key")], required=True
     )
-    secret_key = fields.Char()
     secret_algorithm = fields.Selection(
         [
             # https://pyjwt.readthedocs.io/en/stable/algorithms.html
             ("HS256", "HS256 - HMAC using SHA-256 hash algorithm"),
             ("HS384", "HS384 - HMAC using SHA-384 hash algorithm"),
             ("HS512", "HS512 - HMAC using SHA-512 hash algorithm"),
+            ("RS256", "RS256 - RSASSA-PKCS1-v1_5 using SHA-256"),
+            ("RS384", "RS384 - RSASSA-PKCS1-v1_5 using SHA-384"),
+            ("RS512", "RS512 - RSASSA-PKCS1-v1_5 using SHA-512"),
         ],
-        default="HS256",
+        default="RS256",
     )
     public_key_jwk_uri = fields.Char()
     public_key_algorithm = fields.Selection(
@@ -91,7 +93,7 @@ class AuthJwtValidator(models.Model):
     cookie_name = fields.Char(default="authorization")
     cookie_path = fields.Char(default="/")
     cookie_max_age = fields.Integer(
-        default=86400 * 365,
+        default=3600,
         help="Number of seconds until the cookie expires (Max-Age).",
     )
     cookie_secure = fields.Boolean(
@@ -176,13 +178,13 @@ class AuthJwtValidator(models.Model):
             aud=self.audience,
             iss=self.issuer,
         )
-        return jwt.encode(payload, key=secret, algorithm="HS256")
+        return jwt.encode(payload, key=secret, algorithm="RS256")
 
     def _decode(self, token, secret=None):
         """Validate and decode a JWT token, return the payload."""
         if secret:
             key = secret
-            algorithm = "HS256"
+            algorithm = "RS256"
         elif self.signature_type == "secret":
             key = self.secret_key
             algorithm = self.secret_algorithm

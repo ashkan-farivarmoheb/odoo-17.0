@@ -2,9 +2,6 @@
 import json
 import math
 import logging
-import requests
-import sys
-from functools import wraps
 
 from odoo import http, _, exceptions
 from odoo.http import request
@@ -15,7 +12,6 @@ from .exceptions import QueryFormatError
 
 from odoo.addons.restfull_api_jwt.service.auth_service import IAuthService
 from odoo.addons.restfull_api_jwt.service.dependency_container import dependency_container
-
 from odoo.addons.restfull_api_jwt.utils.custom_exception import ParamsErrorException
 
 
@@ -89,7 +85,6 @@ class OdooAPI(http.Controller):
         '/object/<string:model>/<string:function>',
         type='json', auth='jwt_portal_auth', methods=["POST"], csrf=False)
     def call_model_function(self, model, function, **post):
-        self.authService.validatorToken()
 
         args = []
         kwargs = {}
@@ -105,7 +100,6 @@ class OdooAPI(http.Controller):
         '/object/<string:model>/<int:rec_id>/<string:function>',
         type='json', auth='jwt_portal_auth', methods=["POST"], csrf=False)
     def call_obj_function(self, model, rec_id, function, **post):
-        self.authService.validatorToken()
 
         args = []
         kwargs = {}
@@ -122,7 +116,6 @@ class OdooAPI(http.Controller):
         type='http', auth='jwt_portal_auth', methods=['GET'], csrf=False)
     def get_model_data(self, model, **params):
         _logger.debug("get_model_data triggered")
-        self.authService.validatorToken()
 
         try:
             records = request.env[model].search([])
@@ -214,7 +207,6 @@ class OdooAPI(http.Controller):
         type='http', auth='jwt_portal_auth', methods=['GET'], csrf=False)
     def get_model_rec(self, model, rec_id, **params):
         _logger.debug("get_model_rec triggered")
-        self.authService.validatorToken()
         try:
             records = request.env[model].search([])
         except KeyError as e:
@@ -254,7 +246,6 @@ class OdooAPI(http.Controller):
         '/api/<string:model>/',
         type='json', auth="jwt_portal_auth", methods=['POST'], csrf=False)
     def post_model_data(self, model, **post):
-        self.authService.validatorToken()
         _logger.debug("post_model_data triggered for model: %s", model)
         # Extract and validate 'data' key from the params
         data = post.get('data', {})
@@ -308,7 +299,6 @@ class OdooAPI(http.Controller):
         '/api/<string:model>/<int:rec_id>/',
         type='json', auth="jwt_portal_auth", methods=['PUT'], csrf=False)
     def put_model_record(self, model, rec_id, **post):
-        self.authService.validatorToken()
         data = post.get('data', {})
         if not data:
             _logger.debug("put_model_record ['not data']: %s", data)
@@ -361,7 +351,6 @@ class OdooAPI(http.Controller):
         '/api/<string:model>/',
         type='json', auth="jwt_portal_auth", methods=['PUT'], csrf=False)
     def put_model_records(self, model, **post):
-        self.authService.validatorToken()
         data = post.get('data', {})
         if not data:
             _logger.debug("put_model_record ['not data']: %s", data)
@@ -422,7 +411,6 @@ class OdooAPI(http.Controller):
         '/api/<string:model>/<int:rec_id>/',
         type='http', auth="jwt_portal_auth", methods=['DELETE'], csrf=False)
     def delete_model_record(self, model,  rec_id, **post):
-        self.authService.validatorToken()
         try:
             model_to_del_rec = request.env[model]
 
@@ -460,7 +448,6 @@ class OdooAPI(http.Controller):
         '/api/<string:model>/',
         type='http', auth="jwt_portal_auth", methods=['DELETE'], csrf=False)
     def delete_model_records(self, model, **post):
-        self.authService.validatorToken()
         try:
             model_to_del_rec = request.env[model]
 
@@ -500,8 +487,6 @@ class OdooAPI(http.Controller):
         '/api/<string:model>/<int:rec_id>/<string:field>',
         type='http', auth="jwt_portal_auth", methods=['GET'], csrf=False)
     def get_binary_record(self, model,  rec_id, field, **post):
-        self.authService.validatorToken()
-
         try:
             request.env[model]
         except KeyError as e:

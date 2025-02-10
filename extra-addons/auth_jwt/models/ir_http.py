@@ -5,6 +5,7 @@ import logging
 
 from odoo import SUPERUSER_ID, api, models
 from odoo.http import request
+from odoo.addons.auth_jwt_jks.key_manager import KeyManager
 
 from ..exceptions import (
     ConfigurationError,
@@ -49,7 +50,7 @@ class IrHttpJwt(models.AbstractModel):
                 _logger.error(
                     "A route with auth='jwt' should not have a request.uid here."
                 )
-                raise UnauthorizedSessionMismatch() 
+                raise UnauthorizedSessionMismatch()
         return super()._authenticate(endpoint)
 
     @classmethod
@@ -59,7 +60,8 @@ class IrHttpJwt(models.AbstractModel):
         try:
             token = cls._get_bearer_token()
             assert token
-            return validator._decode(token)
+            public_key = cls._get_public_key_from_jks()
+            return validator._decode(token=token, secret=public_key)
         except UnauthorizedMissingAuthorizationHeader:
             print("///////////////////////////// UnauthorizedMissingAuthorizationHeader //////////////////////////////////////")
             if not validator.cookie_enabled:
@@ -145,3 +147,11 @@ class IrHttpJwt(models.AbstractModel):
             _logger.info("Missing cookie %s.", cookie_name)
             raise UnauthorizedMissingCookie()
         return token
+
+    @classmethod
+    def _get_public_key_from_jks(cls):
+        return KeyManager().get_public_key()
+
+    @classmethod
+    def _auth_method_jwt_reset_auth(cls):
+        return None
