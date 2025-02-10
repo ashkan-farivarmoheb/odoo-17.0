@@ -146,7 +146,7 @@ RUN chmod +x /entrypoint.sh && \
     mkdir -p ${APP_CONF} && \
     chmod -R 775 /mnt && \
     chown -R odoo:odoo /mnt && \
-    chown -R odoo:odoo ${APP_CONF} \
+    chown -R odoo:odoo ${APP_CONF} && \
     chown -R odoo:odoo ${JKS_CONF}
 
 # Download the individual PEM files
