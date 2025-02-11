@@ -5,6 +5,7 @@ _build/
 .*
 !.gitignore
 !.github
+!.devcontainer
 !.mailmap
 # compiled python files
 *.py[co]
