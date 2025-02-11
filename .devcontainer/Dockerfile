@@ -1,5 +1,7 @@
 FROM odoo:17
 
+USER root
+
 # Install Docker
 RUN apt-get update && \
     apt-get install -y \
@@ -36,5 +38,6 @@ RUN pip install -r /mnt/extra-addons/requirements.txt
 # Expose Odoo services
 EXPOSE 8069
 
+USER odoo
 # Set the default command to run Odoo
 CMD ["odoo"]
