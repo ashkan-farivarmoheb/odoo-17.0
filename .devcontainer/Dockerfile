@@ -4,10 +4,10 @@ FROM odoo:17
 WORKDIR /mnt/extra-addons
 
 # Copy your custom addons
-COPY ../extra-addons /mnt/extra-addons
+COPY ./extra-addons /mnt/extra-addons
 
 # Install any additional Python packages if needed
-RUN pip install -r ../requirements.txt  # Uncomment if you have a requirements.txt
+RUN pip install -r ../requirements.txt
 
 # Expose Odoo services
 EXPOSE 8069
