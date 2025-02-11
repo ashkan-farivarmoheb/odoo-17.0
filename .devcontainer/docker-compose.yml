@@ -1,5 +1,14 @@
 version: '3.1'
 services:
+
+  docker:
+    image: docker:dind
+    privileged: true
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    volumes:
+      - dind-var-lib-docker:/var/lib/docker
+
   odoo:
     build:
       context: ..
@@ -11,6 +20,7 @@ services:
       - PASSWORD=odoo
     depends_on:
       - db
+      - docker
     ports:
       - "8069:8069"
     volumes:
@@ -21,7 +31,7 @@ services:
     image: postgres:15
     container_name: db_container
     environment:
-      - POSTGRES_DB=odoo
+      - POSTGRES_DB=postgres
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo
     ports:
@@ -31,3 +41,4 @@ services:
 
 volumes:
   pg_data:
+  dind-var-lib-docker:
