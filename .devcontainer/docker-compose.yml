@@ -14,8 +14,8 @@ services:
     ports:
       - "8069:8069"
     volumes:
-      - ./extra-addons:/mnt/extra-addons
-      - ./resources/odoo-local.conf:/etc/odoo/odoo.conf
+      - ../extra-addons:/mnt/extra-addons
+      - ../resources/odoo-local.conf:/etc/odoo/odoo.conf
 
   db:
     image: postgres:15
