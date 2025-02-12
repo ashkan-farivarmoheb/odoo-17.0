@@ -23,7 +23,7 @@ RUN rm -f /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose
 
 # Verify installations
-RUN docker --version && docker-compose --version
+RUN docker --version
 
 # Set the working directory
 WORKDIR /mnt/extra-addons
