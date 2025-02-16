@@ -31,6 +31,16 @@
     }
   },
   "remoteUser": "odoo",
+  // Add these resource requirements
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "4gb",
+    "storage": "32gb"
+  },
+  // Add init process
+  "init": true,
+  // Add shutdown action
+  "shutdownAction": "stopCompose",
   "postCreateCommand": "pip install black pylint",
   "remoteEnv": {
     "PATH": "${containerEnv:PATH}:/usr/local/bin",
