@@ -61,4 +61,5 @@ terraform.tfstate.backup
 
 data
 
+# locust
 locust*.csv

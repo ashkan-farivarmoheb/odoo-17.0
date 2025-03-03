@@ -1,2 +1,0 @@
-Method,Name,Error,Occurrences
-POST,/web/session/authenticate,HTTPError('500 Server Error: INTERNAL SERVER ERROR for url: /web/session/authenticate'),10
