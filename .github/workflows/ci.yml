@@ -150,7 +150,7 @@ jobs:
         trivy-config: 'trivy.yaml'
         ignore-unfixed: true # Ignore vulnerabilities that don’t have a fix yet
         format: 'table' # Output format can be adjusted (e.g., JSON or table)
-        arguments: '--skip-update --retry 5 --retry-delay 30s' # Add retry flags here  
+        arguments: '--skip-update --retry 5 --retry-delay 30s' # Add retry flags here
 
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -165,11 +165,11 @@ jobs:
         mkdir -p jks/{develop,sit,prod}
         pwd
         ls
-  
+
     - name: Download jks develop files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_develop"
-        # Remove quotes from the value 
+        # Remove quotes from the value
         jwt_keystore_value=$(echo $jwt_keystore_value | tr -d '"')
         echo "Key: $jwt_keystore_key"
         echo "Value: $jwt_keystore_value"
@@ -234,6 +234,7 @@ jobs:
              python3-all \
              dpkg-dev \
              dh-python \
+             locust \
              xz-utils && \
         if [ -z "${TARGETARCH}" ]; then \
           TARGETARCH="$(dpkg --print-architecture)"; \
@@ -257,6 +258,11 @@ jobs:
     - name: Run Tests
       run: |
         ./odoo-bin -c resources/odoo-local.conf --test-enable --log-level=test --test-tags="post_install","-at_install" --stop-after-init
+
+    - name: Run Performance Tests
+      run: |
+        locust -f locustfile.py --host=http://localhost:8089
+      working-directory: performance
 
     - name: Create .deb Package
       id: deb_package_step
