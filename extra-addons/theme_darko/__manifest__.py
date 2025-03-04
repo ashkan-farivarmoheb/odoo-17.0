@@ -91,6 +91,8 @@
             'theme_darko/static/src/scss/pages/home/_video_tabs.scss',
             'theme_darko/static/src/scss/pages/home/_image_tabs.scss',
             'theme_darko/static/src/scss/pages/home/_image_infinite_carousel.scss',
+            'theme_darko/static/src/scss/pages/home/_custom_comparison.scss',
+
             'theme_darko/static/src/scss/pages/_maincontents.scss',
             'theme_darko/static/src/scss/pages/_product.scss',
             'theme_darko/static/src/scss/pages/_about.scss',

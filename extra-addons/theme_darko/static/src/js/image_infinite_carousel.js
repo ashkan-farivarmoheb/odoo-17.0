@@ -12,10 +12,10 @@ const InfiniteCarousel = publicWidget.Widget.extend({
          // Initialize the edit mode detector and pass the callback to handle mode change
         this.editModeDetector = new EditModeDetector((inEditMode) => {
             if (inEditMode) {
-                console.log("Editor mode detected. Carousel initialization skipped.");
+                // console.log("Editor mode detected. Carousel initialization skipped.");
                 this.destroy();  // Stop the carousel if in edit mode
             } else {
-                console.log("Not in editor mode. Initializing carousel.");
+                // console.log("Not in editor mode. Initializing carousel.");
                 this._initCarousel();  // Initialize carousel if not in edit mode
             }
         });

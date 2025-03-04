@@ -9,6 +9,13 @@
         <field name="public" eval="True"/>
         <field name="res_model">ir.ui.view</field>
     </record>
+    <record id="odoo-18-feature" model="ir.attachment">
+        <field name="name">odoo-18-feature.webp</field>
+        <field name="type">url</field>
+        <field name="url">/theme_darko/static/src/img/home/odoo-18-feature.webp</field>
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
     <!--    videos//////////////////////////////////////////////////////////////////////////////////////-->
     <record id="apple_video" model="ir.attachment">
         <field name="name">apple-video.mp4</field>
@@ -702,6 +709,25 @@
         <field name="type">url</field>
         <!-- @formatter:off -->
         <field name="url">/theme_darko/static/src/img/industries/subcontractor.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <!-- ///////   pricing/////////////////////////////////////////////////////////////////////-->
+ <record id="pricing-banner" model="ir.attachment">
+        <field name="name">pricing-banner.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/banner/pricing-banner.webp</field>
+        <!-- @formatter:on -->
+        <field name="public" eval="True"/>
+        <field name="res_model">ir.ui.view</field>
+    </record>
+    <record id="upgrade-version" model="ir.attachment">
+        <field name="name">upgrade-version.webp</field>
+        <field name="type">url</field>
+        <!-- @formatter:off -->
+        <field name="url">/theme_darko/static/src/img/card/upgrade-version.webp</field>
         <!-- @formatter:on -->
         <field name="public" eval="True"/>
         <field name="res_model">ir.ui.view</field>

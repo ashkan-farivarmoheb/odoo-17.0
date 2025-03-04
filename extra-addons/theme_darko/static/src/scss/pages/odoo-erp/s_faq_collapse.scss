@@ -17,6 +17,9 @@
   .accordion .card .card-header.collapsed::before {
     content: '\f078' !important;
   }
+  .accordion .card .card-header:not(.collapsed) {
+    color: #fcfcfc;
+}
 
 }
 

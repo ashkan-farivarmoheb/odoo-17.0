@@ -335,24 +335,67 @@ a {
   --shadow-bottom-right-offset: calc(var(--shadow-right-width) - var(--shadow-scale, var(--default-shadow-scale)) * -140px + var(--shadow-radius, 0px) / 2);
 }
 
+// searchbar and contact form
 .form-control {
-
   background-color: transparent;
   border: 1px solid o-color('o-color-1');
-  color: unset;
+  color: black;
 }
 
 .form-control:focus {
   background-color: transparent;
-  color: unset;
+  color: black;
+  box-shadow: 0 0 0 0.05rem o-color('o-color-1');
+
+
 }
 
 
- //mobile-invisible
- @media (max-width: 768px) {
-        .mobile-invisible {
-            display: none !important; /* Ensure it is completely hidden */
-        }
-    }
+//mobile-invisible
+@media (max-width: 768px) {
+  .mobile-invisible {
+    display: none !important; /* Ensure it is completely hidden */
+  }
+}
 
+.material-icons {
+  vertical-align: middle; /* Aligns the icon vertically with the text */
+
+}
+
+
+// searchbar dropdown item header
+.dropdown-menu .dropdown-item .o_search_result_item_detail {
+  .h6 {
+    color: black !important;
+  }
+}
+
+//Blog
+
+.website_blog {
+  h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+    color: unset;
+  }
+
+  background-color: $blog-bg;
+  color: $blog-body-text-color;
+}
+
+.website_blog .breadcrumb-item {
+  color: $blog-breadcrumb-item-active !important;
+
+  a {
+    color: $blog-breadcrumb-item !important;
+  }
+}
+
+.website_blog .navbar {
+    background-color: $blog-bg;
+    color: #EAEAFF80;
+    --o-cc-bg: #000000;
+}
+.website_blog .s_searchbar_input input{
+  border: 1px solid $color-cobalt !important;
+}
 

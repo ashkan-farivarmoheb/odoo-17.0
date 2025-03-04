@@ -1,0 +1,360 @@
+<section class="s_features_grid o_colored_level pt48 o_cc o_cc1 pb40" data-snippet="s_features_grid"
+         data-name="Features Grid" style="position: relative; background-image: none;">
+    <div class="container">
+        <div class="row">
+            <div class="s_col_no_bgcolor pb24 col-lg-4">
+                <div class="row">
+                    <div class="pt16 o_colored_level rounded col-lg-11 o_cc o_cc1 pb0" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">aspect_ratio
+                                    </span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Size of the business</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">The larger the businesses, the more complex the Odoo
+                                    configurations and functionalities are in managing employees, products, and
+                                    operational processes, leading to higher implementation costs.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pt32 pb32" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s_col_no_bgcolor pb24 col-lg-4">
+                <div class="row">
+                    <div class="pb16 o_colored_level rounded col-lg-11 pt16 o_cc o_cc1" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">search</span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Business scope &amp; functionalities required</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">The cost of an Odoo system will depend on the number of
+                                    modules and features needed. More modules and advanced or customized features lead
+                                    to higher costs.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pt32 pb32" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s_col_no_bgcolor pb24 col-lg-4">
+                <div class="row">
+                    <div class="pt16 o_colored_level rounded col-lg-11 o_cc o_cc1 pb0" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">people</span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Number of users</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">A higher number of users accessing Odoo will require more
+                                    Odoo licenses, infrastructure, and resources to implement, affecting overall costs.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pb32 pt56" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="s_col_no_bgcolor pb24 col-lg-4 pt16">
+                <div class="row">
+                    <div class="pb16 o_colored_level rounded col-lg-11 pt16 o_cc o_cc1" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">edit</span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Specific requirements</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">Additional implementation costs may apply depending on
+                                    the complexity of customizations beyond the Odoo base, localization solutions, and
+                                    integrations with other systems.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pt32 pb32" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s_col_no_bgcolor pb24 col-lg-4 pt16">
+                <div class="row">
+                    <div class="pt16 pb16 o_colored_level rounded col-lg-11 o_cc o_cc1" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">swap_horiz
+                                    </span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Data migration</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">If you require data migration from existing systems to
+                                    Odoo, the volume, complexity, and quality of the migrated data will affect the time,
+                                    effort, and tools needed, impacting implementation costs.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pt32 pb32" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s_col_no_bgcolor pb24 col-lg-4 pt16">
+                <div class="row">
+                    <div class="pt16 pb16 o_colored_level rounded col-lg-11 o_cc o_cc1" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">settings</span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Implementation approach</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">The chosen approach for implementing Odoo can affect
+                                    costs if you need additional technology consulting, business analysis, change
+                                    management, or fully tailored-made solutions.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pt32 pb32" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="s_col_no_bgcolor pb24 col-lg-6 pt16">
+                <div class="row">
+                    <div class="pt16 pb16 o_colored_level rounded col-lg-11 o_cc o_cc1" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">apps</span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Integration</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">The complexity level of integration required will
+                                    influence the cost, considering the number of integrations required, the need for
+                                    customization, and data synchronization.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pt32 pb32" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="s_col_no_bgcolor pb24 col-lg-6 pt16">
+                <div class="row">
+                    <div class="pt16 pb16 o_colored_level rounded col-lg-11 o_cc o_cc1" data-name="Box"
+                         style="border-radius: 10px !important;">
+                        <div class="s_features_grid_content">
+                            <h4>
+                                <strong>
+                                    <span class="material-icons text-o-color-1" style="font-size: 2rem;">storage</span>
+                                </strong>
+                            </h4>
+                            <h4>
+                                <strong>Hosting</strong>
+                            </h4>
+                            <p>
+                                <span style="font-size: 16px;">Factors such as scalability, high availability, and data
+                                    security, as well as IT infrastructure, influence the choice of hosting solutions,
+                                    affecting implementation costs.
+                                </span>
+                                <br>
+                            </p>
+                            <div class="s_hr text-start pt32 pb32" data-snippet="s_hr" data-name="Separator">
+                                <hr class="w-100 mx-auto" style="border-top-width: 1px; border-top-style: solid;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--  To change footer  -->
+    <template id="footer_default_sample" inherit_id="website.layout" name="Footer Sample">
+
+        <div class="card-footer">
+            <div class="footer_content">
+                <div class="container">
+                    <div class="row">
+                        <div class=" col-12 col-sm-6 col-lg-3">
+
+                            <div class="logo-footer">
+                                <a class="img img-fluid" href="/">
+                                    <img src="/theme_darko/static/src/img/logo/logo.svg"/>
+                                </a>
+                            </div>
+                            <!--                                    <div class="row">-->
+                            <!--                                        <div class="online_shop">-->
+                            <!--                                            <h5 class="footer_heading">ONLINE SHOPPING</h5>-->
+                            <!--                                            <div class="social_media">-->
+                            <!--                                                <ul>-->
+                            <!--                                                    <li>-->
+                            <!--                                                        <a class="" href="#">-->
+                            <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/facebook(1).svg"/>-->
+                            <!--                                                        </a>-->
+                            <!--                                                    </li>-->
+                            <!--                                                    <li>-->
+                            <!--                                                        <a class="" href="#">-->
+                            <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/twitter(1).svg"/>-->
+                            <!--                                                        </a>-->
+                            <!--                                                    </li>-->
+                            <!--                                                    <li>-->
+                            <!--                                                        <a class="" href="#">-->
+                            <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/linkedin.svg"/>-->
+                            <!--                                                        </a>-->
+                            <!--                                                    </li>-->
+                            <!--                                                    <li>-->
+                            <!--                                                        <a class="" href="#">-->
+                            <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/instagram(1).svg"/>-->
+                            <!--                                                        </a>-->
+                            <!--                                                    </li>-->
+
+                            <!--                                                </ul>-->
+                            <!--                                            </div>-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                        </div>
+
+                        <div class=" col-12 col-sm-6 col-lg-3">
+                            <h5 class="footer_heading">Explore</h5>
+                            <ul class=" footer_items text-muted">
+                                <li>
+                                    <a href="/services">Services</a>
+                                </li>
+                                <li>
+                                    <a href="/industries-ecommerce">Retail&amp; Ecommerce</a>
+                                </li>
+                                <li>
+                                    <a href="/industries-construction">Construction Industry</a>
+                                </li>
+                                <li>
+                                    <a href="/industries-professional-services">Professional Services Industry
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/industries-public-sector">Public Sector Industry</a>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                        <div class=" col-12 col-sm-6 col-lg-3">
+                            <h5 class="footer_heading">Resources</h5>
+                            <ul class="footer_items text-muted">
+                                <li>
+                                    <a href="/odoo-erp">Why Odoo?</a>
+                                </li>
+                                <li>
+                                    <a href="/privacy-policy">Privacy Policy</a>
+                                </li>
+                                <li>
+                                    <a href="/blog">Blog</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class=" col-12 col-sm-6 col-lg-3">
+                            <h5 class="footer_heading">Get in touch</h5>
+
+                            <ul class="footer_items text-muted">
+                                <li>
+                                    <i class="fa fa-comment fa-fw me-2 text-o-color-1" contenteditable="false">
+                                        ​
+                                    </i>
+                                    <a href="/contactus">Contact us</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope fa-fw me-2 text-o-color-1" contenteditable="false">
+                                        ​
+                                    </i>
+                                    <a href="mailto:info@oerp.ca">info@oerp.ca</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone fa-fw me-2 text-o-color-1" contenteditable="false">​
+                                    </i>
+                                    <span class="o_force_ltr">
+                                        <a href="tel:+1(833)377-6366">+1 (833) ERP ODOO</a>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="copy_right">
+                <small class="text-muted">
+                    Copy right © <a href="#">solwing.com.au</a>. All rights reserved 2024.
+                </small>
+            </div>
+        </div>
+    </template>
+</odoo>
+

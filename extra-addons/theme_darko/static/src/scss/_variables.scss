@@ -2,6 +2,7 @@
 //$font-main: "Roboto", sans-serif;
 $font-main: "Poppins", sans-serif;
 $font-offer: "Permanent Marker", cursive;
+$font-secondary: "Permanent Marker", cursive;
 //Greys
 $color-grey-100: #fcfcfc;
 $color-grey-97: #f5f5f8;
@@ -98,7 +99,10 @@ $color-primary: o-color('o-color-1');
 $color-secondary: o-color('o-color-2');
 $color-accent: o-color('o-color-3');
 $color-gradiant: linear-gradient(to right, o-color('o-color-1'), o-color('o-color-2'));
-
+$blog-bg:$color-white;
+$blog-body-text-color:$color-black;
+$blog-breadcrumb-item:$color-grey-60;
+$blog-breadcrumb-item-active:$color-grey-50;
 
 $font-size-subheading: 1.25rem; // 20px / 16
 $font-size-text: 0.875rem; // 14px / 16

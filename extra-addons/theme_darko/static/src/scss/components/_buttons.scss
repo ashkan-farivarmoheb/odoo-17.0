@@ -225,6 +225,21 @@
   background-color: $color-cobalt-dark;
   border-color: $color-cobalt-dark;
 }
+.btn-fill-light:focus, .btn-light:focus {
+  color: #FFFFFF;
+  background-color: $color-cobalt-dark;
+  border-color: $color-cobalt-dark;
+  box-shadow: 0 0 0 0.05rem $color-cobalt-dark;
+
+}
+//.btn-fill-light.active:focus, .btn-light.active:focus {
+//  color: #FFFFFF;
+//  background-color: $color-cobalt-dark;
+//  border-color: $color-cobalt-dark;
+//  box-shadow: 0 0 0 0.05rem $color-cobalt-dark;
+//
+//}
+
 
 /* From Uiverse.io by neerajbaniwal */
 .btn-shine {

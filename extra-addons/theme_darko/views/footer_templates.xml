@@ -9,137 +9,105 @@
                         <div class="container">
                             <div class="row">
                                 <div class=" col-12 col-sm-6 col-lg-3">
-                                    <h5 class="footer_heading">ABOUT US</h5>
-                                    <ul class=" footer_items text-muted">
-                                        <li>
-                                            <a href="#">Who we are</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Work with us</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Become a supplier</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Investor relations</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Our delivery</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Affiliate program</a>
-                                        </li>
 
-                                    </ul>
-                                </div>
-                                <div class=" col-12 col-sm-6 col-lg-3">
-                                    <h5 class="footer_heading">USEFUL LINKS</h5>
-                                    <ul class="footer_items text-muted">
-                                        <li>
-                                            <a href="#">Who we are</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Work with us</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Become a supplier</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Investor relations</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Our delivery</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Affiliate program</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class=" col-12 col-sm-6 col-lg-3">
-                                    <h5 class="footer_heading">ONLINE SHOPING</h5>
-                                    <ul class="footer_items text-muted">
-                                        <li>
-                                            <a href="#">Who we are</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Work with us</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Become a supplier</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Investor relations</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Our delivery</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Affiliate program</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class=" col-12 col-sm-6 col-lg-3">
-                                    <!--                                    <h5 class="footer_heading">EXPERIENCE APP ON MOBILE</h5>-->
-                                    <!--                                    <div class="footer_button">-->
-                                    <!--                                        <div class="container">-->
-                                    <!--                                            <div class="row">-->
-                                    <!--                                                <div class="white_b">-->
-                                    <!--                                                    <a href="#" class="btn btn-white">-->
-                                    <!--                                                        <img src="/theme_darko/static/src/img/button icon/android.svg"/>-->
-                                    <!--                                                        <p class="a_head">-->
-                                    <!--                                                            <span>Get it on</span>-->
-                                    <!--                                                            <strong>GOOGLE PLAY</strong>-->
-                                    <!--                                                        </p>-->
-                                    <!--                                                    </a>-->
-                                    <!--                                                </div>-->
-                                    <!--                                                <div class="red_b">-->
-                                    <!--                                                    <a href="#" class="btn btn-red ">-->
-                                    <!--                                                        <img src="/theme_darko/static/src/img/button icon/apple.svg"/>-->
-                                    <!--                                                        <p class="a_head">-->
-                                    <!--                                                            <span>-->
-                                    <!--                                                                Get it on-->
-                                    <!--                                                            </span>-->
-                                    <!--                                                            <strong>-->
-                                    <!--                                                                APP STORE-->
-                                    <!--                                                            </strong>-->
-                                    <!--                                                        </p>-->
-                                    <!--                                                    </a>-->
-                                    <!--                                                </div>-->
+                                    <div class="logo-footer">
+                                        <a class="img img-fluid" href="/">
+                                            <img src="/theme_darko/static/src/img/logo/logo.svg"/>
+                                        </a>
+                                    </div>
+                                    <!--                                    <div class="row">-->
+                                    <!--                                        <div class="online_shop">-->
+                                    <!--                                            <h5 class="footer_heading">ONLINE SHOPPING</h5>-->
+                                    <!--                                            <div class="social_media">-->
+                                    <!--                                                <ul>-->
+                                    <!--                                                    <li>-->
+                                    <!--                                                        <a class="" href="#">-->
+                                    <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/facebook(1).svg"/>-->
+                                    <!--                                                        </a>-->
+                                    <!--                                                    </li>-->
+                                    <!--                                                    <li>-->
+                                    <!--                                                        <a class="" href="#">-->
+                                    <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/twitter(1).svg"/>-->
+                                    <!--                                                        </a>-->
+                                    <!--                                                    </li>-->
+                                    <!--                                                    <li>-->
+                                    <!--                                                        <a class="" href="#">-->
+                                    <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/linkedin.svg"/>-->
+                                    <!--                                                        </a>-->
+                                    <!--                                                    </li>-->
+                                    <!--                                                    <li>-->
+                                    <!--                                                        <a class="" href="#">-->
+                                    <!--                                                            <img src="/theme_darko/static/src/img/scial media icon/instagram(1).svg"/>-->
+                                    <!--                                                        </a>-->
+                                    <!--                                                    </li>-->
 
-
+                                    <!--                                                </ul>-->
                                     <!--                                            </div>-->
                                     <!--                                        </div>-->
                                     <!--                                    </div>-->
-                                    <div class="row">
-                                        <div class="online_shop">
-                                            <!--                                            <h5 class="footer_heading">ONLINE SHOPPING</h5>-->
-                                            <div class="social_media">
-                                                <ul>
-                                                    <li>
-                                                        <a class="" href="#">
-                                                            <img src="/theme_darko/static/src/img/scial media icon/facebook(1).svg"/>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="" href="#">
-                                                            <img src="/theme_darko/static/src/img/scial media icon/twitter(1).svg"/>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="" href="#">
-                                                            <img src="/theme_darko/static/src/img/scial media icon/linkedin.svg"/>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a class="" href="#">
-                                                            <img src="/theme_darko/static/src/img/scial media icon/instagram(1).svg"/>
-                                                        </a>
-                                                    </li>
+                                </div>
 
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class=" col-12 col-sm-6 col-lg-3">
+                                    <h5 class="footer_heading">Explore</h5>
+                                    <ul class=" footer_items text-muted">
+                                        <li>
+                                            <a href="/services">Services</a>
+                                        </li>
+                                        <li>
+                                            <a href="/industries-ecommerce">Retail &amp; Ecommerce</a>
+                                        </li>
+                                        <li>
+                                            <a href="/industries-construction">Construction Industry</a>
+                                        </li>
+                                        <li>
+                                            <a href="/industries-professional-services">Professional Services Industry
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="/industries-public-sector">Public Sector Industry</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                                <div class=" col-12 col-sm-6 col-lg-3">
+                                    <h5 class="footer_heading">Resources</h5>
+                                    <ul class="footer_items text-muted">
+                                        <li>
+                                            <a href="/odoo-erp">Why Odoo?</a>
+                                        </li>
+                                        <li>
+                                            <a href="/privacy-policy">Privacy Policy</a>
+                                        </li>
+                                        <li>
+                                            <a href="/blog">Blog</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class=" col-12 col-sm-6 col-lg-3">
+                                    <h5 class="footer_heading">Get in touch</h5>
+
+                                    <ul class="footer_items text-muted">
+                                        <li>
+                                            <i class="fa fa-comment fa-fw me-2 text-o-color-1" contenteditable="false">
+                                                ​
+                                            </i>
+                                            <a href="/contactus">Contact us</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-envelope fa-fw me-2 text-o-color-1" contenteditable="false">
+                                                ​
+                                            </i>
+                                            <a href="mailto:info@oerp.ca">info@oerp.ca</a>
+                                        </li>
+                                        <li>
+                                            <i class="fa fa-phone fa-fw me-2 text-o-color-1" contenteditable="false">​
+                                            </i>
+                                            <span class="o_force_ltr">
+                                                <a href="tel:+1(833)377-6366">+1 (833) ERP ODOO</a>
+                                            </span>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +115,7 @@
 
                     <div class="copy_right">
                         <small class="text-muted">
-                            Copy right © <a href="#">darko.com</a>  All rights reserved
+                            Copy right © <a href="#">solwing.com.au</a>. All rights reserved 2024.
                         </small>
                     </div>
                 </div>

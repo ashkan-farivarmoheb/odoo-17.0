@@ -240,7 +240,7 @@ $xxl: "(min-width: 1400px)";
 }
 
 .body {
-  color: var(--color-alpha-light-50);
+  //color: var(--body-color, $color-alpha-light-50);
   font-family: var(--font-main, sans-serif);
   font-size: 1.5rem;
   font-style: normal;
@@ -250,7 +250,7 @@ $xxl: "(min-width: 1400px)";
 }
 
 .bodyMedium {
-  color: var(--color-alpha-light-50, $color-alpha-light-50);
+  //color: var(--body-color, $color-alpha-light-50);
   font-family: var(--font-main, sans-serif);
   font-size: 1.8rem;
   font-style: normal;
@@ -271,7 +271,7 @@ $xxl: "(min-width: 1400px)";
 }
 
 .bodyLarge {
-  color: var(--color-alpha-light-50);
+  //color: var(--body-color, $color-alpha-light-50);
   font-family: var(--font-main, sans-serif);
   font-size: 2rem;
   font-style: normal;
@@ -290,7 +290,7 @@ $xxl: "(min-width: 1400px)";
 }
 
 .bodyExtraLarge {
-  color: var(--color-alpha-light-50);
+  //color: var(--body-color, $color-alpha-light-50);
   font-family: var(--font-main, sans-serif);
   font-size: 2.4rem;
   font-style: normal;

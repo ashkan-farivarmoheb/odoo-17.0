@@ -1,0 +1,39 @@
+._custom_comparison {
+  .cardEyebrow {
+    height: 1lh;
+    margin-bottom: var(--spacer-8);
+    color: var(--color-accent, $color-accent);
+    text-align: left;
+  }
+
+  .list-group {
+    border-color: $color-alpha-hawkes-20
+
+  }
+
+  .card-body {
+    border-color: $color-alpha-hawkes-20
+
+  }
+
+  .list-group-item {
+    background: var(--list-group-item-bg, transparent);
+    border-color: $color-alpha-hawkes-20
+
+  }
+
+  //.list-group-item {
+  //  color: $color-alpha-light-70;
+  //}
+
+  .list-group-item strong {
+    color: $white;
+    margin-bottom: 0.1rem;
+    display: block;
+  }
+
+  .list-group-item:not([class*="list-group-item-"]):not(.active) {
+    color: $color-alpha-light-70;
+  }
+
+}

@@ -255,21 +255,32 @@
                                          data-mimetype-before-conversion="image/svg+xml" loading="lazy" style=""/>
                                 </li>
 
-                                <span style="font-size: 1.125rem;">
-                                    <i class="fa fa-fw fa-envelope me-2"></i>
-                                    <a href="mailto:info@yourcompany.example.com">info@yourcompany.example.com</a>
-                                </span>
-
                                 <li>
-                                    <i class="fa fa-phone fa-fw me-2"></i>
-                                    <span class="o_force_ltr">
-                                        <span style="font-size: 1.125rem;">+1 (650) 555-0111</span>
+                                    <span style="font-size: 1.125rem;">
+                                        <i class="fa fa-fw fa-envelope me-2"></i>
+                                        <a href="mailto:info@yourcompany.example.com">info@yourcompany.example.com</a>
                                     </span>
                                 </li>
-                                <span class="o_force_ltr">
-                                    <i class="fa fa-map-marker fa-fw me-2"></i>
-                                    <span style="font-size: 1.125rem;">3575 Fake Buena Vista Avenue</span>
-                                </span>
+
+                                <li>
+                                    <a href="tel:+1 (650) 555-0111">
+                                        <i class="fa fa-phone fa-fw me-2"></i>
+                                        <span class="o_force_ltr">
+                                            <span style="font-size: 1.125rem;">+1 (650) 555-0111</span>
+                                        </span>
+                                    </a>
+
+                                </li>
+                                <li>
+                                    <span class="o_force_ltr">
+                                        <i class="fa fa-map-marker fa-fw me-2"></i>
+                                        <a href="https://www.google.com/maps/search/3575+Fake+Buena+Vista+Avenue"
+                                           target="_blank"
+                                           style="font-size: 1.125rem; text-decoration: none; color: inherit;">
+                                            3575 Fake Buena Vista Avenue
+                                        </a>
+                                    </span>
+                                </li>
 
 
                             </ul>
