@@ -3,12 +3,12 @@
         {
             "request": {
                 "method": "POST",
-                "urlPath": "/shipping/v1/prices/shipments",
+                "urlPath": "/shipping/v1/labels",
                 "bodyPatterns": [
                     {
                         "matchesJsonPath": {
-                            "expression": "$.shipments[0].items[0].product_id",
-                            "matches": "^[A-Z0-9a-z]{1,10}"
+                            "expression": "$.shipments[0].shipment_reference",
+                            "matches": "XYZ-001-01"
                         }
                     }
                 ]
@@ -17,8 +17,8 @@
                 "headers": {
                     "Content-Type": "application/json"
                 },
-                "status": 200,
-                "bodyFileName": "austpost_get_service_shipment_price_success.json"
+                "status": 201,
+                "bodyFileName": "austpost_create_domestic_shipments_success.json"
             }
         }
     ]

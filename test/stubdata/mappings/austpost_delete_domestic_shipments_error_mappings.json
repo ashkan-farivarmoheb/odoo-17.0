@@ -1,0 +1,17 @@
+{
+    "mappings": [
+        {
+            "request": {
+                "method": "DELETE",
+                "urlPath": "/shipping/v1/shipments/[a-zA-Z0-9]+"
+            },
+            "response": {
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "status": 404,
+                "bodyFileName": "austpost_delete_domestic_shipments_404_error.json"
+            }
+        }
+    ]
+}

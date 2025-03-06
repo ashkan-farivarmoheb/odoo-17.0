@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_delivery_carrier_form_inherit_auspost" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.inherit.auspost</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form"/>
+        <field name="arch" type="xml">
+
+            <notebook position="inside">
+                <page name='extra' string="Extra Options" invisible="delivery_type in ('fixed', 'base_on_rule')">
+                    <group col="2">
+                        <group name="general_setting" string="Genral Setting">
+                            <field name="authority_leave"/>
+                            <field name="allow_part_delivery"/>
+                            <!-- <field name="stock_package_type_id"/> -->
+                        </group>
+
+                        <group name="Int_shipping_setting" string="International Shipping Setting">
+                            <field name="commercial_value"/>
+                            <field name="classification_type"/>
+                        </group>
+
+                    </group>
+                    <group name="label_setting" string="Label Setting">
+                        <field name="label_layout_type"/>
+                        <field name="branded"/>
+                        <field name="left_offset"/>
+                        <field name="top_offset"/>
+                    </group>
+
+                </page>
+
+            </notebook>
+
+        </field>
+    </record>
+</odoo>

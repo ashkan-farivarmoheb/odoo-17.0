@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Define a delivery product for Australia Post -->
+    <record id="product_delivery_australia_post" model="product.product">
+        <field name="name">Australia Post Shipping</field>
+        <field name="type">service</field>
+        <!-- Use an internal reference that makes sense for your organization -->
+        <field name="default_code">AUSPOST</field>
+        <!-- Link to the delivery category; adjust if your setup uses a different ID -->
+        <field name="categ_id" ref="delivery.product_category_deliveries"/>
+        <field name="list_price">0</field>
+        <field name="sale_ok">False</field>
+        <field name="purchase_ok">False</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <!-- Define Australia Post as a delivery carrier -->
+    <record id="delivery_carrier_australia_post" model="delivery.carrier">
+        <field name="name">Australia Post</field>
+        <!-- Link to the product defined above -->
+        <field name="product_id" ref="product_delivery_australia_post"/>
+        <field name="delivery_type">auspost</field>
+        <!-- Specify the integration code or method here -->
+        <!-- The price can be dynamically calculated based on rules or API responses -->
+        <field name="fixed_price">0</field>
+        <field name="margin">0</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>

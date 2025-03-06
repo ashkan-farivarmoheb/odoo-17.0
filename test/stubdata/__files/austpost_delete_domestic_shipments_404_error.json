@@ -1,0 +1,12 @@
+{
+    "errors": [
+        {
+            "code": "44013",
+            "name": "SHIPMENT_NOT_FOUND_ERROR",
+            "message": "The shipment with shipment id 54kjEFSvIo4759AJGsaaMNBE you requested can not be found. Please check the shipment id requested and submit the request again.",
+            "context": {
+                "shipment_id": "54kjEFSvIo4759AJGsaaMNBE"
+            }
+        }
+    ]
+}
