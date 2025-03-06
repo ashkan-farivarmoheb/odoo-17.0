@@ -6,6 +6,7 @@ ENV LANG en_US.UTF-8
 # Set the default config file
 ENV ODOO_RC /etc/odoo/odoo-local.conf
 ENV APP_CONF /opt/app/conf
+ENV JKS_CONF /opt/app/jks
 ENV AWS_RDS_CA_BUNDLE_URL https://truststore.pki.rds.amazonaws.com
 ENV AWS_REGION global
 ENV AWS_RDS_CA_BUNDLE global-bundle.pem
@@ -133,6 +134,7 @@ COPY newrelic.ini /etc/newrelic/newrelic.ini
 COPY wait-for-psql.py /usr/local/bin/wait-for-psql.py
 
 ADD resources /etc/odoo/
+ADD jks       ${JKS_CONF}
 
 # Set permissions for New Relic
 RUN chown -R odoo:odoo /etc/newrelic
@@ -144,7 +146,8 @@ RUN chmod +x /entrypoint.sh && \
     mkdir -p ${APP_CONF} && \
     chmod -R 775 /mnt && \
     chown -R odoo:odoo /mnt && \
-    chown -R odoo:odoo ${APP_CONF}
+    chown -R odoo:odoo ${APP_CONF} && \
+    chown -R odoo:odoo ${JKS_CONF}
 
 # Download the individual PEM files
 RUN curl -o ${APP_CONF}/${AMZ_ROOT_CA_1} ${AMZ_TRUST_REPO}/${AMZ_ROOT_CA_1} && \
