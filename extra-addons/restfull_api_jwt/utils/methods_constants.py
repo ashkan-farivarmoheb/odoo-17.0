@@ -4,7 +4,7 @@ import time
 import jwt
 
 from odoo.http import request
-secondsPerDay = 86400  
+secondsPerDay = 3600
 secondsPerMinute = 60
 secondPerHour = 3600
 
@@ -30,7 +30,7 @@ def check_data(data):
 #             if phone_number.startswith(key):
 #                 digits = phone_number[len(key):]
 #                 return digits
-#         return phone_number    
+#         return phone_number
 #     else:
 #       return None
 def check_and_remove_country_code_of_saudi_arabia(phone_number):
@@ -51,11 +51,11 @@ def fetchRequestLanguage():
         dictkey = dict(dictkey,lang= 'en_US')
       elif(lang.startswith("ar")):
 
-        dictkey = dict(dictkey,lang= 'ar_001') 
+        dictkey = dict(dictkey,lang= 'ar_001')
       else:
-        dictkey = dict(dictkey,lang= 'en_US') 
+        dictkey = dict(dictkey,lang= 'en_US')
       request.env.context = dictkey
- 
+
  # create Token
 def create_tokenSiginApple():
       private_key = """-----BEGIN PRIVATE KEY-----
@@ -75,7 +75,7 @@ QkZkNelz
       access_token = jwt.encode(
          payload, private_key, algorithm='ES256', headers= {"kid": "M4QGC6234"}
       )
-      return access_token 
+      return access_token
 #  # create Token
 # def create_tokenSiginApple():
 #       private_key = """-----BEGIN PRIVATE KEY-----
@@ -95,10 +95,10 @@ QkZkNelz
 #       access_token = jwt.encode(
 #          payload, private_key, algorithm='ES256', headers= {"kid": "M4QGC6234V"}
 #       )
-#       return access_token 
+#       return access_token
 
  # create Token
-def create_token(validator,expiresIn, aud=None, email=None, partner_id=None):
+def create_token(validator,expiresIn, aud=None, email=None, partner_id=None, secret=None):
       payload = {
             'aud': aud or validator.audience,
             'iss': validator.issuer,
@@ -109,9 +109,9 @@ def create_token(validator,expiresIn, aud=None, email=None, partner_id=None):
       if partner_id:
           payload['id'] = partner_id
       access_token = jwt.encode(
-         payload, key=validator.secret_key, algorithm=validator.secret_algorithm
+         payload, key=secret, algorithm="RS256"
       )
-      return access_token 
+      return access_token
 # get lValidator PortalAuth
 def getValidatorPortalAuth():
       portal_auth = request.env['auth.jwt.validator'].sudo().search([('name', '=', 'portal_auth')])
@@ -120,8 +120,7 @@ def getValidatorPortalAuth():
             dict(
                 name="portal_auth",
                 signature_type="secret",
-                secret_algorithm="HS256",
-                secret_key="self-service-key",
+                secret_algorithm="RS256",
                 audience='auth_jwt_portal_api',
                 issuer="portal issuer",
                 user_id_strategy="static",
@@ -139,8 +138,7 @@ def getValidatorRefreshAuth():
             dict(
                 name="refresh_auth",
                 signature_type="secret",
-                secret_algorithm="HS256",
-                secret_key="self-service-key",
+                secret_algorithm="RS256",
                 audience='auth_jwt_refresh_api',
                 issuer="refresh issuer",
                 user_id_strategy="static",
@@ -158,8 +156,8 @@ def getValidatorConfirmAuth():
             dict(
                 name="confirm_auth",
                 signature_type="secret",
-                secret_algorithm="HS256",
-                secret_key="self-service-key",
+                secret_algorithm="RS256",
+                public_key_algorithm="RS256",
                 audience='auth_jwt_confirm_api',
                 issuer="confirm issuer",
                 user_id_strategy="static",
@@ -177,8 +175,7 @@ def getValidatorResetAuth():
             dict(
                 name="reset_auth",
                 signature_type="secret",
-                secret_algorithm="HS256",
-                secret_key="self-service-key",
+                secret_algorithm="RS256",
                 audience='auth_jwt_rest_api',
                 issuer="Rest issuer",
                 user_id_strategy="static",
@@ -188,4 +185,3 @@ def getValidatorResetAuth():
             ))
           return request.env['auth.jwt.validator'].sudo().search([('name', '=', 'reset_auth')])
       return rest_auth
-      

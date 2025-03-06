@@ -7,7 +7,8 @@
     'author': "Mahmoud Developers",
     "maintainer": "Mahmoud Ltd.",
     'website': "http://www.mahmoud.com",
-    'depends': ['auth_jwt','base'],
+    'depends': ['auth_jwt','base', 'auth_jwt_jks'],
+    "external_dependencies": {"python": ["boto3", "cryptography"]},
     'data': [
         # # security
         # 'security/ir.model.access.csv',

@@ -17,13 +17,6 @@
                             <field name="audience" />
                             <field name="issuer" />
                             <field name="signature_type" />
-                            <field
-                                name="secret_key"
-                                string="Key"
-                                invisible="signature_type != 'secret'"
-                                required= "signature_type == 'secret'"
-                                
-                            />
                             <!--   attrs="{'invisible': [('signature_type', '!=', 'secret')],
                                     'required': [('signature_type', '=', 'secret')]}" -->
                             <field
@@ -31,7 +24,7 @@
                                 string="Algorithm"
                                 invisible="signature_type != 'secret'"
                                 required= "signature_type == 'secret'"
-                      
+
                             />
                                 <!--   attrs="{'invisible': [('signature_type', '!=', 'secret')],
                                     'required': [('signature_type', '=', 'secret')]}" -->
@@ -40,7 +33,7 @@
                                 string="JWK URI"
                                 invisible="signature_type != 'public_key'"
                                 required= "signature_type == 'public_key'"
-                           
+
                                 widget="url"
                             />
                             <!--      attrs="{'invisible': [('signature_type', '!=', 'public_key')],
@@ -50,7 +43,7 @@
                                 string="Algorithm"
                                 invisible="signature_type != 'public_key'"
                                 required= "signature_type == 'public_key'"
-                     
+
                             />
                             <!-- attrs="{'invisible': [('signature_type', '!=', 'public_key')],
                                     'required': [('signature_type', '=', 'public_key')]}" -->
@@ -61,7 +54,7 @@
                                 name="static_user_id"
                                 invisible="user_id_strategy != 'static'"
                                 required= "user_id_strategy == 'static'"
-                               
+
                             />
                             <!--  attrs="{'invisible': [('user_id_strategy', '!=', 'static')],
                                         'required': [('user_id_strategy', '=', 'static')]}" -->
@@ -76,7 +69,7 @@
                                 name="cookie_name"
                                 required="cookie_enabled == 'True'"
                                 invisible= "cookie_enabled == 'False'"
-                       
+
                             />
                             <!--          attrs="{'required': [('cookie_enabled', '=', True)],
                                         'invisible': [('cookie_enabled', '=', False)]}" -->
@@ -84,13 +77,13 @@
                                 name="cookie_path"
                                 invisible= "cookie_enabled == 'False'"
 
-                             
+
                             />
                             <!--  attrs="{'invisible': [('cookie_enabled', '=', False)]}" -->
                             <field
                                 name="cookie_max_age"
                                 invisible= "cookie_enabled == 'False'"
-                       
+
                             />
                             <!--    attrs="{'invisible': [('cookie_enabled', '=', False)]}" -->
                         </group>

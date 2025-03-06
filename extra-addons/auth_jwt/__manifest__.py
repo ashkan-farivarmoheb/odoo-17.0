@@ -9,7 +9,7 @@
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainers": ["sbidoul"],
     "website": "https://github.com/OCA/server-auth",
-    "depends": [],
+    "depends": ['auth_jwt_jks'],
     "external_dependencies": {"python": ["pyjwt", "cryptography"]},
     "data": ["security/ir.model.access.csv", "views/auth_jwt_validator_views.xml"],
     "demo": [],

@@ -26,12 +26,12 @@ class OdooLoadTest(HttpUser):
             "params": {
                 "db": DB_HOST,
                 "login": user["username"],
-                "password": user["password"]
+                "password": 'user["password"]'
             }
         }
 
         response = self.client.post(
-            url="/web/session/authenticate",
+            url="web/session/authenticate",
             headers=HEADERS,
             data=json.dumps(payload)
         )
@@ -67,38 +67,38 @@ class OdooLoadTest(HttpUser):
     #         else:
     #             response.failure("Login failed.")
     #
-    # @task(3)
-    # def create_sales_order(self):
-    #     payload = {
-    #         "jsonrpc": "2.0",
-    #         "params": {
-    #             "customer_id": 1,
-    #             "order_lines": [
-    #                 {"product_id": 10, "quantity": 2},
-    #                 {"product_id": 20, "quantity": 1}
-    #             ]
-    #         }
-    #     }
-    #
-    #     with self.client.post(
-    #         "/sale_order/create",
-    #         headers=self.headers,
-    #         data=json.dumps(payload),
-    #         catch_response=True
-    #     ) as response:
-    #         if response.status_code == 200:
-    #             response.success()
-    #         else:
-    #             response.failure("Failed to create sales order.")
-    #
-    # @task(2)
-    # def browse_products(self):
-    #     with self.client.get("/shop", headers=self.headers, catch_response=True) as response:
-    #         if response.status_code == 200:
-    #             response.success()
-    #         else:
-    #             response.failure("Failed to browse products.")
-    #
+    @task(3)
+    def create_sales_order(self):
+        payload = {
+            "jsonrpc": "2.0",
+            "params": {
+                "customer_id": 1,
+                "order_lines": [
+                    {"product_id": 10, "quantity": 2},
+                    {"product_id": 20, "quantity": 1}
+                ]
+            }
+        }
+
+        with self.client.post(
+            "sale_order/create",
+            headers=HEADERS,
+            data=json.dumps(payload),
+            catch_response=True
+        ) as response:
+            if response.status_code == 200:
+                response.success()
+            else:
+                response.failure("Failed to create sales order.")
+
+    @task(2)
+    def browse_products(self):
+        with self.client.get("shop", headers=HEADERS, catch_response=True) as response:
+            if response.status_code == 200:
+                response.success()
+            else:
+                response.failure("Failed to browse products.")
+
     # @task(2)
     # def view_product_details(self):
     #     with self.client.get("/shop/product/1", headers=self.headers, catch_response=True) as response:
@@ -128,16 +128,16 @@ class OdooLoadTest(HttpUser):
     #         else:
     #             response.failure("Checkout failed.")
 
-    @task(1)
-    def product_search(self):
-        with self.client.get(
-            "/shop/search?filter=category&query=electronics",
-            headers=self.headers,
-            catch_response=True
-        ) as response:
-            if response.status_code == 200:
-                response.success()
-            else:
-                response.failure("Search failed.")
+    # @task(1)
+    # def product_search(self):
+    #     with self.client.get(
+    #         "shop/search?filter=category&query=electronics",
+    #         # headers=HEADERS,
+    #         catch_response=True
+    #     ) as response:
+    #         if response.status_code == 200:
+    #             response.success()
+    #         else:
+    #             response.failure("Search failed.")
 
 

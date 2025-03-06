@@ -103,6 +103,13 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
     - name: Install yq (YAML parser)
       run: |
         sudo apt-get update && sudo apt-get install -y jq
@@ -130,7 +137,6 @@ jobs:
           const ecr_repository = `${process.env.service_name}-${process.env.service_version}`;
           const image_tag = branch === "develop" ? `develop-${context.sha}` : `snapshot-${context.sha}`;
           const { owner, repo } = context.repo;
-
           core.exportVariable('BRANCH', branch);
           core.exportVariable('ecr_repository', ecr_repository);
           core.exportVariable('image_tag', image_tag);
@@ -163,26 +169,26 @@ jobs:
     - name: Create Download JKS Directory
       run: |
         mkdir -p jks/{develop,sit,prod}
-        pwd
-        ls
 
     - name: Download jks develop files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_develop"
         # Remove quotes from the value
         jwt_keystore_value=$(echo $jwt_keystore_value | tr -d '"')
-        echo "Key: $jwt_keystore_key"
-        echo "Value: $jwt_keystore_value"
         aws s3 cp "$jwt_keystore_value" "./jks/develop/$jwt_keystore_key" --recursive
 
     - name: Download jks sit files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_sit"
+        # Remove quotes from the value
+        jwt_keystore_value=$(echo $jwt_keystore_value | tr -d '"')
         aws s3 cp "$jwt_keystore_value" "./jks/sit/$jwt_keystore_key" --recursive
 
     - name: Download jks prod files from S3
       run: |
         IFS=': ' read -r jwt_keystore_key jwt_keystore_value <<< "$jwt_keystore_prod"
+        # Remove quotes from the value
+        jwt_keystore_value=$(echo $jwt_keystore_value | tr -d '"')
         aws s3 cp "$jwt_keystore_value" "./jks/prod/$jwt_keystore_key" --recursive
 
     - name: Install dependencies
