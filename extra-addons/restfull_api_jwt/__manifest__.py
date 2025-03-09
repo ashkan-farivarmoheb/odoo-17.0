@@ -8,7 +8,7 @@
     "maintainer": "Mahmoud Ltd.",
     'website': "http://www.mahmoud.com",
     'depends': ['auth_jwt','base', 'auth_jwt_jks'],
-    "external_dependencies": {"python": ["boto3", "cryptography"]},
+    "external_dependencies": {"python": ["boto3", "cryptography", "simple-dependency-injection"]},
     'data': [
         # # security
         # 'security/ir.model.access.csv',
