@@ -1,5 +1,5 @@
 
-name: Delete Odoo
+name: Delete Odoo Service
 
 on:
   workflow_dispatch:
@@ -19,10 +19,9 @@ env:
   service_version: "17.0"
 
 jobs:
-    delete_cluster:
+    delete_service:
         runs-on: ubuntu-latest
         steps:
-            
             - name: Checkout code
               uses: actions/checkout@v4
 
@@ -61,15 +60,15 @@ jobs:
               uses: hashicorp/setup-terraform@v1
               with:
                 terraform_version: 1.1.0  # Specify the Terraform version to use
-        
+
             - name: Initialize Terraform
               run: terraform init -backend-config=hcl/backend_${{ inputs.target-env }}.hcl
               working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
-              
+
             - name: Validate Terraform configuration
               run: terraform validate
               working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
-              
+
             - name: Plan Terraform changes
               run: terraform plan -var-file=tfvars/${{ inputs.target-env }}.auto.tfvars -var="tag=${{ env.ecr_image_tag }}" -var="new_relic_license_key=${{ env.new_relic_license_key }}"
               working-directory: odoo-infra/cd/${{ env.ecr_repository }}/infrastructure
