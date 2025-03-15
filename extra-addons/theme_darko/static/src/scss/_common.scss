@@ -339,12 +339,12 @@ a {
 .form-control {
   background-color: transparent;
   border: 1px solid o-color('o-color-1');
-  color: black;
+  color: white;
 }
 
 .form-control:focus {
   background-color: transparent;
-  color: black;
+  color: white;
   box-shadow: 0 0 0 0.05rem o-color('o-color-1');
 
 
@@ -391,11 +391,16 @@ a {
 }
 
 .website_blog .navbar {
-    background-color: $blog-bg;
-    color: #EAEAFF80;
-    --o-cc-bg: #000000;
+  background-color: $blog-bg;
+  color: #EAEAFF80;
+  --o-cc-bg: #000000;
 }
-.website_blog .s_searchbar_input input{
+
+.website_blog .s_searchbar_input input {
   border: 1px solid $color-cobalt !important;
+}
+//add some tag
+.website_blog #edit-in-backend {
+  color: $blog-breadcrumb-item !important;
 }
 

@@ -620,3 +620,14 @@ $xxl: "(min-width: 1400px)";
 .accent {
   color: var(--color-accent, $color-accent);
 }
+
+
+.o_pricing16_price {
+  font-size: 4.125rem;
+  line-height: 1;
+}
+.o_pricing16_price_striked {
+  text-decoration: line-through;
+  text-decoration-color: $color-accent;
+}
+
