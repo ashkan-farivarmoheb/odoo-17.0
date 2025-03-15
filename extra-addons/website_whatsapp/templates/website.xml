@@ -21,6 +21,7 @@
                 title="WhatsApp Floating Icon"
             >
                 <i class="fa fa-whatsapp" />
+                <span class="tooltip">Chat with us on WhatsApp</span>
             </a>
         </xpath>
     </template>
